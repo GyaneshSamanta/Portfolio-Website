@@ -14,7 +14,7 @@ import {
 import { Section } from "@/components/ui/section";
 import { Layers, Mic, Github, ArrowRight } from "lucide-react";
 
-import newsletters from "@/data/newsletter.json";
+import extractedData from "@/data/extracted_content.json";
 import videos from "@/data/videos.json";
 
 const pillars = [
@@ -24,7 +24,7 @@ const pillars = [
     icon: Layers,
     href: "/newsletter",
     color: "text-blue-500",
-    previewData: newsletters.slice(0, 3).map(n => ({ title: n.title, date: n.date })),
+    previewData: extractedData.newsletter.slice(0, 3).map(n => ({ title: n.title, date: n.date })),
   },
   {
     title: "The Creator Journey",

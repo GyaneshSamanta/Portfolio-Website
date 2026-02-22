@@ -9,6 +9,7 @@ import { Menu, X } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { AudioToggle } from "@/components/ui/audio-toggle";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,8 +73,9 @@ export function Navbar() {
             </Link>
           ))}
           <div className="flex items-center gap-4">
-            <Button asChild variant="default" size="sm" className="hidden md:flex rounded-full px-6">
-              <Link href="/contact">
+            <AudioToggle />
+            <Button asChild variant="default" size="sm" className="hidden md:flex rounded-none px-6 tracking-wide font-medium bg-foreground text-background hover:bg-foreground/90">
+              <Link href={SITE_CONFIG.bookingUrl} target="_blank" rel="noopener noreferrer">
                 Get in Touch
               </Link>
             </Button>
@@ -82,6 +84,7 @@ export function Navbar() {
 
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-4 md:hidden">
+          <AudioToggle />
           <button
             className="p-2 text-foreground hover:text-primary transition-colors"
             onClick={() => setIsOpen(!isOpen)}

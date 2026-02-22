@@ -26,6 +26,11 @@
     --accent: 0 0% 95%;
     --accent-foreground: 0 0% 12%;
 
+    /* Newsletter Brand Accents */
+    --brand-accent: 180 18% 30%; /* Deep muted emerald/teal from the newsletter cover */
+    --brand-accent-light: 180 18% 40%; 
+    --brand-accent-foreground: 0 0% 98%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
@@ -33,7 +38,8 @@
     --input: 0 0% 90%;
     --ring: 0 0% 12%;
 
-    --radius: 0.75rem; /* Verris curve radius */
+    /* Verris enforces sharp minimal edges */
+    --radius: 0rem; 
   }
 }
 

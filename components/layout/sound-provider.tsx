@@ -1,35 +1,55 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import useSound from "use-sound";
 
+type SoundContextType = {
+  isPlaying: boolean;
+  toggleSound: () => void;
+};
+
+const SoundContext = createContext<SoundContextType | undefined>(undefined);
+
 export function SoundProvider({ children }: { children: React.ReactNode }) {
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   
-  // Base background track requested by user
-  const [playBgm, { stop: stopBgm }] = useSound("/sounds/Andrew-Applepie-Sweet-Tomorrow.mp3", { 
-    volume: 0.2, // Keep background music subtle
-    loop: true 
+  const [playBgm, { stop: stopBgm, pause: pauseBgm }] = useSound("/sounds/Andrew-Applepie-Sweet-Tomorrow.mp3", { 
+    volume: 0.2, // 20% limit enforced
+    loop: true,
   });
 
   useEffect(() => {
-    // Only start playing after user's first interaction with the document
-    const handleInteraction = () => {
-      if (!hasInteracted) {
-        setHasInteracted(true);
-        playBgm();
-      }
-    };
+    setHasMounted(true);
+  }, []);
 
-    window.addEventListener("click", handleInteraction, { once: true });
-    window.addEventListener("keydown", handleInteraction, { once: true });
-
+  useEffect(() => {
+    if (isPlaying) {
+      playBgm();
+    } else {
+      pauseBgm();
+    }
+    
     return () => {
-      window.removeEventListener("click", handleInteraction);
-      window.removeEventListener("keydown", handleInteraction);
       stopBgm();
     };
-  }, [hasInteracted, playBgm, stopBgm]);
+  }, [isPlaying, playBgm, pauseBgm, stopBgm]);
 
-  return <>{children}</>;
+  const toggleSound = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  return (
+    <SoundContext.Provider value={{ isPlaying, toggleSound }}>
+      {hasMounted ? children : null}
+    </SoundContext.Provider>
+  );
+}
+
+export function useAudio() {
+  const context = useContext(SoundContext);
+  if (context === undefined) {
+    throw new Error("useAudio must be used within a SoundProvider");
+  }
+  return context;
 }

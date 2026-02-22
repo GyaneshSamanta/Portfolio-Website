@@ -37,6 +37,6 @@ export const SITE_CONFIG = {
     { label: "Newsletter", href: "/newsletter" },
     { label: "Podcast", href: "/podcast" },
     { label: "Journey", href: "/journey" },
-    { label: "Contact", href: "/contact" },
   ],
+  bookingUrl: "https://calendly.com/gyaneshsamanta/15-minute-chat",
 };
