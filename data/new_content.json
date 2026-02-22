@@ -1,0 +1,135 @@
+{
+  "about": "I think in systems. I build in products. I write about both.\n\nI make sense of complex products. Whether it's building B2B experiences that actually scale, or helping teams navigate AI integration without losing sight of the user — that's where I add value.\n\n**Right now:** Building B2B product experiences at IBM (from Q2'26). Researching how AI reshapes the PM role (spoiler: it's not about replacing you, it's about elevating what you build).\n\n**Previously:** Built and scaled products in competitive spaces (e-commerce, Web3, ed-tech). Been in the rooms where teams panic about pivots, data quality crises, and AI roadmap chaos.\n\n**What I write about:** Product strategy that sticks. AI in realistic terms (not hype). How behavioral science actually changes user decisions. Case studies from the frontlines.",
+  "education": [
+    {
+      "university": "Xavier Institute of Management (XIM Bhubaneswar)",
+      "degree": "Master of Business Administration - MBA, Business management",
+      "dates": "Jun 2024 – Jun 2026",
+      "details": "Skills: Product Management."
+    },
+    {
+      "university": "SRM IST Chennai",
+      "degree": "Bachelor of Technology - BTech, Computer Science",
+      "dates": "Jan 2019 – May 2023",
+      "grade": "9.46",
+      "details": "Skills: Product Management and Product Development."
+    }
+  ],
+  "youtube": [
+    {
+      "id": "1",
+      "title": "Steelathon Submission 2025, Case 10",
+      "url": "https://www.youtube.com/watch?v=-8nYUkH8YSo",
+      "thumbnail": "https://i.ytimg.com/vi/-8nYUkH8YSo/hqdefault.jpg",
+      "views": "19 views",
+      "date": "4 months ago"
+    },
+    {
+      "id": "2",
+      "title": "SBI IdeationX 2.0 2024 Team Hades",
+      "url": "https://www.youtube.com/watch?v=o9A0HJjYtbw",
+      "thumbnail": "https://i.ytimg.com/vi/o9A0HJjYtbw/hqdefault.jpg",
+      "views": "31 views",
+      "date": "6 months ago"
+    },
+    {
+      "id": "3",
+      "title": "TPCODL Organizational Case Study",
+      "url": "https://www.youtube.com/watch?v=2pOGIDOJjVQ",
+      "thumbnail": "https://i.ytimg.com/vi/2pOGIDOJjVQ/hqdefault.jpg",
+      "views": "12 views",
+      "date": "1 year ago"
+    },
+    {
+      "id": "4",
+      "title": "Mondelez Video - Innovators in a Wrapper",
+      "url": "https://www.youtube.com/watch?v=kl6jp5y4pU0",
+      "thumbnail": "https://i.ytimg.com/vi/kl6jp5y4pU0/hqdefault.jpg",
+      "views": "36 views",
+      "date": "1 year ago"
+    },
+    {
+      "id": "5",
+      "title": "Reliance TUP 2024",
+      "url": "https://www.youtube.com/watch?v=L4m1RNrxiQE",
+      "thumbnail": "https://i.ytimg.com/vi/L4m1RNrxiQE/hqdefault.jpg",
+      "views": "16 views",
+      "date": "1 year ago"
+    },
+    {
+      "id": "6",
+      "title": "Cipla Ascend 3.0 Round 2",
+      "url": "https://www.youtube.com/watch?v=L9_h-Mf16pc",
+      "thumbnail": "https://i.ytimg.com/vi/L9_h-Mf16pc/hqdefault.jpg",
+      "views": "25 views",
+      "date": "1 year ago"
+    }
+  ],
+  "featuredProject": {
+    "title": "NotebookLM-for-Windows",
+    "url": "https://github.com/GyaneshSamanta/NotebookLM-for-Windows",
+    "problemStatement": "Users of Google's NotebookLM face workflow friction due to its web-bound nature, which lacks session persistence, system-level triggers, and native desktop integration. This results in 'browser clutter' and missing real-time notifications for long-running AI tasks like audio generation.",
+    "technicalStack": "Electron (Cross-platform runtime), Vanilla JavaScript/HTML/CSS (Zero-bloat architecture), auto-launch, and custom IPC-bridge.",
+    "strategicInsight": "Improving the research 'flow' by decoupling a power-user tool from the browser into a dedicated environment, shifting it from a destination website to a persistent productivity utility.",
+    "impact": "Delivers a seamless, low-latency research experience that actively notifies users of task completion without requiring an open browser tab.",
+    "downloads": 33
+  },
+  "otherProjects": [
+    {
+      "title": "Research-Papers",
+      "description": "All of my research papers (Published + Ongoing)",
+      "url": "https://github.com/GyaneshSamanta/Research-Papers",
+      "language": "Jupyter Notebook"
+    },
+    {
+      "title": "GyaneshSamanta",
+      "description": "Personal GitHub configuration and assets.",
+      "url": "https://github.com/GyaneshSamanta/GyaneshSamanta",
+      "language": "Markdown"
+    },
+    {
+      "title": "Tesla-Stock-Price-Prediction",
+      "description": "Prediction of stock price for the company Tesla.",
+      "url": "https://github.com/GyaneshSamanta/Tesla-Stock-Price-Prediction-Model",
+      "language": "Jupyter Notebook"
+    },
+    {
+      "title": "Guilt-free-binge",
+      "description": "Official submission of team SebastianVettel to Thehacktrical-2.",
+      "url": "https://github.com/GyaneshSamanta/Guilt-free-binge",
+      "language": "JavaScript"
+    },
+    {
+      "title": "NYC-Shootings-Research",
+      "description": "Submission to Youth-Data-Hackathon 2023.",
+      "url": "https://github.com/GyaneshSamanta/NYC-Shootings-Research-Paper",
+      "language": "Jupyter Notebook"
+    }
+  ],
+  "research": [
+    {
+      "title": "Pegasus spyware: A vulnerable behaviour-based attack system",
+      "authors": "S Chourasiya, G Samanta, DK Sardar, P Sharma, CNSV Kumar",
+      "journal": "2023 2nd international conference on edge computing and applications (ICECAA)",
+      "year": 2023,
+      "citations": 10,
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=KgKCj14AAAAJ&citation_for_view=KgKCj14AAAAJ:d1gkVwhDpl0C"
+    },
+    {
+      "title": "An NFT marketplace with predictive and analytical modeling on the industry trends and growth",
+      "authors": "E Bhardwaj, G Samanta, C Fancy",
+      "journal": "2023 International Conference on Networking and Communications (ICNWC)",
+      "year": 2023,
+      "citations": 5,
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=KgKCj14AAAAJ&citation_for_view=KgKCj14AAAAJ:u-x6o8ySG0sC"
+    },
+    {
+      "title": "DNAIoT-Dynamic Network Architecture for IoT",
+      "authors": "G Samanta, R Ramesh, R Saxena, DK Sardar, S Chourasiya",
+      "journal": "2022 Second International Conference on Interdisciplinary Cyber Physical Systems",
+      "year": 2022,
+      "citations": 0,
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=KgKCj14AAAAJ&citation_for_view=KgKCj14AAAAJ:u5HHmVD_uO8C"
+    }
+  ]
+}

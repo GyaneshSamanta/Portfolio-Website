@@ -1,0 +1,35 @@
+{
+  "otherRepos": [
+    {
+      "title": "Research-Papers",
+      "description": "All of my research papers ( Published + Ongoing)",
+      "url": "https://github.com/GyaneshSamanta/Research-Papers",
+      "language": "Jupyter Notebook"
+    },
+    {
+      "title": "GyaneshSamanta",
+      "description": null,
+      "url": "https://github.com/GyaneshSamanta/GyaneshSamanta",
+      "language": null
+    },
+    {
+      "title": "Tesla-Stock-Price-Prediction-Model",
+      "description": "Prediction of stock price for the company \"Tesla\"",
+      "url": "https://github.com/GyaneshSamanta/Tesla-Stock-Price-Prediction-Model",
+      "language": "Jupyter Notebook"
+    },
+    {
+      "title": "Guilt-free-binge",
+      "description": "Official submission of team SebastianVettel to Thehacktrical-2 ",
+      "url": "https://github.com/GyaneshSamanta/Guilt-free-binge",
+      "language": "JavaScript"
+    },
+    {
+      "title": "NYC-Shootings-Research-Paper",
+      "description": "Submission to Youth-Data-Hackathon 2023",
+      "url": "https://github.com/GyaneshSamanta/NYC-Shootings-Research-Paper",
+      "language": "Jupyter Notebook"
+    }
+  ],
+  "notebookLmDownloads": 33
+}

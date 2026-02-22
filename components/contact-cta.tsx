@@ -1,25 +1,48 @@
 "use client";
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Section } from "@/components/ui/section";
+import { motion } from "framer-motion";
+import { ArrowRight, Mail } from "lucide-react";
 
 export function ContactCTA() {
   return (
-    <Section className="border-t border-white/10 bg-gradient-to-b from-background to-secondary/5">
-      <div className="flex flex-col items-center text-center max-w-2xl mx-auto space-y-8">
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-          Ready to build something extraordinary?
-        </h2>
-        <p className="text-muted-foreground text-lg">
-          Whether you have a product idea, need product strategy, or just want to chat about the future of tech.
-        </p>
-        <Button asChild size="lg" className="rounded-full px-8 text-base">
-          <Link href="/contact">
-            Get in Touch
-          </Link>
-        </Button>
-      </div>
-    </Section>
+    <section className="py-32 px-4 md:px-12 max-w-5xl mx-auto text-center" id="contact">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="p-8 md:p-16 rounded-[2.5rem] bg-foreground text-background shadow-2xl shadow-foreground/10 overflow-hidden relative"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50" />
+        
+        <div className="relative z-10 flex flex-col items-center">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+            Let's build together.
+          </h2>
+          <p className="text-background/80 text-lg md:text-xl max-w-xl mx-auto mb-10 leading-relaxed font-medium">
+            Whether you're scaling a B2B platform, integrating GenAI, or need a strategic product sense, I'm open for conversations.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+            <a 
+              href="https://calendly.com/" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-background text-foreground hover:bg-white/90 font-semibold rounded-full hover:scale-105 transition-all duration-300 w-full sm:w-auto justify-center text-lg"
+            >
+              Book a Call
+              <ArrowRight className="w-5 h-5" />
+            </a>
+            <a 
+              href="mailto:mailgyanesh@gmail.com" 
+              className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-background/20 hover:bg-background/10 text-background font-semibold rounded-full transition-colors duration-300 w-full sm:w-auto justify-center text-lg"
+            >
+              <Mail className="w-5 h-5" />
+              Email Me
+            </a>
+          </div>
+        </div>
+      </motion.div>
+    </section>
   );
 }

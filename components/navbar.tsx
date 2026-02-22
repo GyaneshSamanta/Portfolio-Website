@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,8 +32,20 @@ export function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/10">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-xl font-bold tracking-tight hover:text-primary transition-colors">
-          GS<span className="text-primary">.</span>
+        <Link href="/" className="hover:opacity-80 transition-opacity">
+          {/* Placeholder for Logo - User to replace /public/logo.png */}
+          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold">
+            G
+          </div>
+          {/* Once you have the image, uncomment the following:
+          <Image 
+            src="/logo.png" 
+            alt="Logo" 
+            width={40} 
+            height={40} 
+            className="rounded-full"
+          /> 
+          */}
         </Link>
 
         {/* Desktop Navigation */}
@@ -57,22 +71,25 @@ export function Navbar() {
               )}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 rounded-full text-sm font-medium transition-colors"
-          >
-            Let&apos;s Talk
-          </Link>
+          <div className="flex items-center gap-4">
+            <Button asChild variant="default" size="sm" className="hidden md:flex rounded-full px-6">
+              <Link href="/contact">
+                Get in Touch
+              </Link>
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        <div className="flex items-center gap-4 md:hidden">
+          <button
+            className="p-2 text-foreground hover:text-primary transition-colors"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu Overlay */}

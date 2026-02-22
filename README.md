@@ -1,62 +1,50 @@
-# Gyanesh Samanta - Product Management Portfolio
+# Portfolio Website
 
-![Portfolio Preview](public/og.jpg)
+A premium, interactive portfolio website for a Product Manager, built with Next.js 14, Tailwind CSS, and Framer Motion.
 
-A premium, high-performance portfolio website built for Product Managers who code. Features a "Cyberpunk Product" aesthetic, seamless animations, and integrations with GitHub, YouTube, and LinkedIn.
+## Features
 
-## 🚀 Built With
+- **Modern Design**: 
+  - **Single Theme**: Cyberpunk Product (Dark Mode Only)
+  - **Premium Aesthetics**: Grainy textures, glassmorphism, and bold colors (Violet/Hot Pink).
+- **Interactivity**: 
+  - **Hover Previews**: Hover over content pillars to see latest items.
+  - **Micro-Interactions**: Amplified UI sound effects and smooth animations.
+- **Content Integration**:
+  - **GitHub**: Automatically fetches and displays repositories.
+  - **YouTube**: Displays video feed (Podcast).
+  - **Newsletter**: Curated list of articles.
+- **Performance**: Built on Next.js App Router for optimal speed and SEO.
 
-- **[Next.js 14](https://nextjs.org/)** (App Router)
-- **[Tailwind CSS](https://tailwindcss.com/)** (Styling)
-- **[Framer Motion](https://www.framer.com/motion/)** (Animations)
-- **TypeScript** (Type Safety)
-- **Lucide React** (Icons)
+## Tech Stack
 
-## ✨ Features
+- **Framework**: [Next.js 14](https://nextjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animation**: [Framer Motion](https://www.framer.com/motion/)
+- **Theming**: [next-themes](https://github.com/pacocoursey/next-themes)
+- **Typography**: [Geist](https://vercel.com/font)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-- **Home Page**: High-impact hero section with staggered animations.
-- **My Journey**: Interactive vertical timeline of professional experience.
-- **GitHub Integration**: Automatically fetches and displays repositories using the GitHub API.
-- **Content Hub**: Dedicated sections for Newsletter (LinkedIn) and Podcast (YouTube) content.
-- **Contact**: Integrated Calendly scheduling and quick-copy email.
-- **Responsive Design**: Fully optimized for mobile, tablet, and desktop.
-- **Dark Mode**: Cyberpunk-inspired dark theme by default.
+## Getting Started
 
-## 🛠️ Getting Started
+1.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/GyaneshSamanta/Portfolio-Website.git
-   cd Portfolio-Website
-   ```
+2.  **Run development server**:
+    ```bash
+    npm run dev
+    ```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+3.  **Build for production**:
+    ```bash
+    npm run build
+    ```
 
-3. **Run the development server**
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+## Customization
 
-## 📝 Customization
-
-- **Site Config**: Edit `lib/constants.ts` to update your name, links, SEO metadata, and experience timeline.
-- **Content**:
-  - `data/videos.json`: Add your YouTube video links.
-  - `data/newsletter.json`: Add your newsletter articles.
-- **Theme**: Modify `app/globals.css` CSS variables to change the cyberpunk color scheme.
-
-## 📦 Deployment
-
-This project is optimized for deployment on [Vercel](https://vercel.com).
-
-1. Push your code to a GitHub repository.
-2. Import the project into Vercel.
-3. Deploy! (No additional configuration required).
-
-## 📄 License
-
-MIT License. Feel free to use this as a template for your own portfolio!
+- **Site Info**: Edit `lib/constants.ts` to update your name, links, and content.
+- **Experience**: Update the `experience` array in `lib/constants.ts`.
+- **Data**: Add new videos or articles in `data/videos.json` and `data/newsletter.json`.
+- **Logo**: Replace `public/logo.png` with your own image.

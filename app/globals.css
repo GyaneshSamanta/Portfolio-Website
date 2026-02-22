@@ -4,36 +4,36 @@
 
 @layer base {
   :root {
-    /* Cyberpunk Theme (Always Dark) */
-    --background: 222.2 84% 4.9%; /* Deep Slate/Navy */
-    --foreground: 210 40% 98%;
+    /* Verris Premium Minimalist Theme */
+    --background: 0 0% 99%; /* High-end Off-white (#FCFCFC) */
+    --foreground: 0 0% 12%; /* Soft Charcoal rather than harsh black (#1F1F1F) */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 98%; /* Slightly darker white for subtle depth */
+    --card-foreground: 0 0% 15%; /* Accessible dark gray text */
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 12%;
 
-    --primary: 263.4 70% 50.4%; /* Violet */
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 0% 10%; /* Very dark gray for buttons/prominent elements */
+    --primary-foreground: 0 0% 98%; /* Almost white text on buttons */
 
-    --secondary: 322 81% 43%; /* Hot Pink */
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 95%; /* Elegant light gray for hover backgrounds */
+    --secondary-foreground: 0 0% 15%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 40%; /* Accessible muted text */
 
-    --accent: 263.4 70% 50.4%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 0 0% 95%;
+    --accent-foreground: 0 0% 12%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 263.4 70% 50.4%; /* Matched to Primary */
+    --border: 0 0% 90%; /* Very soft border for subtle structure */
+    --input: 0 0% 90%;
+    --ring: 0 0% 12%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem; /* Verris curve radius */
   }
 }
 
@@ -46,7 +46,7 @@
   }
 }
 
-/* Custom Scrollbar for Cyberpunk feel */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -58,4 +58,15 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-primary/50;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
