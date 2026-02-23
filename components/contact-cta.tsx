@@ -5,7 +5,8 @@ import { ArrowRight, Mail } from "lucide-react";
 
 export function ContactCTA() {
   return (
-    <section className="snap-section section-dark py-32 px-4 md:px-12 max-w-5xl mx-auto text-center" id="contact">
+    <section className="snap-section section-dark flex items-center" id="contact">
+      <div className="py-32 px-4 md:px-12 max-w-5xl mx-auto text-center w-full">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -34,7 +35,7 @@ export function ContactCTA() {
               <ArrowRight className="w-5 h-5" />
             </button>
             <a 
-              href="mailto:mailgyanesh@gmail.com" 
+              href="mailto:mail.gyaneshsamanta@gmail.com" 
               className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-background/20 hover:bg-background/10 text-background font-semibold rounded-full transition-colors duration-300 w-full sm:w-auto justify-center text-lg"
             >
               <Mail className="w-5 h-5" />
@@ -43,6 +44,7 @@ export function ContactCTA() {
           </div>
         </div>
       </motion.div>
+      </div>
     </section>
   );
 }

@@ -129,18 +129,25 @@
   }
 }
 
-/* Snap scroll container */
-.snap-container {
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-  height: 100vh;
-}
+/* Sticky-stack scroll: each section sticks and the next one slides over */
 .snap-section {
-  scroll-snap-align: start;
+  position: sticky;
+  top: 0;
   min-height: 100vh;
   overflow: hidden;
-  position: relative;
+  z-index: 1;
 }
+/* Each successive section gets a higher z-index so it stacks on top */
+.snap-section:nth-child(1) { z-index: 1; }
+.snap-section:nth-child(2) { z-index: 2; }
+.snap-section:nth-child(3) { z-index: 3; }
+.snap-section:nth-child(4) { z-index: 4; }
+.snap-section:nth-child(5) { z-index: 5; }
+.snap-section:nth-child(6) { z-index: 6; }
+.snap-section:nth-child(7) { z-index: 7; }
+.snap-section:nth-child(8) { z-index: 8; }
+.snap-section:nth-child(9) { z-index: 9; }
+.snap-section:nth-child(10) { z-index: 10; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
@@ -166,4 +173,15 @@
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Recommendation card: show truncated by default, full on hover */
+.rec-card .rec-full {
+  display: none;
+}
+.rec-card:hover .rec-truncated {
+  display: none;
+}
+.rec-card:hover .rec-full {
+  display: block;
 }

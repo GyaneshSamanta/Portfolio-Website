@@ -1,47 +1,56 @@
 # Gyanesh Samanta — Portfolio Website
 
-> Built with **Next.js 14**, **Tailwind CSS**, and **Framer Motion** · Palette: `#982598` `#15173D` `#E491C9` `#F1E9E9`
+> Personal portfolio website built with **Next.js 14**, **Tailwind CSS**, and **Framer Motion**
 
 ---
 
-## 🚀 Host for Free on Vercel (Recommended)
+## ✨ Features
 
-### Step 1: Push to GitHub
-Your code is already on GitHub at `GyaneshSamanta/Portfolio-Website`. If you've made local changes, commit and push:
+- **Sticky-Stack Scroll** — Sections stack on top of each other as you scroll, creating a card-like browsing experience
+- **Loading Screen** — Animated intro with rotating digits and loading counter
+- **Two-State Navbar** — Expanded on home, compact & blurred on scroll
+- **Alternating Themes** — Dark/light sections with smooth transitions
+- **Recommendation Marquee** — Auto-scrolling testimonials that pause on hover with expandable cards
+- **Gradient Design System** — Custom palette: `#982598` · `#15173D` · `#E491C9` · `#F1E9E9`
+- **Section Navigation** — Right-side dot indicators with labels on hover
+- **Cal.com Integration** — Embedded booking widget
+- **Security Headers** — CSP, X-Frame-Options, Referrer-Policy, Permissions-Policy
 
-```bash
-git add -A
-git commit -m "Final polish: design overhaul, security headers, mobile optimization"
-git push origin main
+---
+
+## 🛠 Tech Stack
+
+| Layer | Tech |
+|-------|------|
+| Framework | Next.js 14 (App Router) |
+| Styling | Tailwind CSS + custom CSS |
+| Animations | Framer Motion |
+| Booking | Cal.com embed |
+| Deployment | Vercel |
+
+---
+
+## 📁 Project Structure
+
+```
+├── app/                 # Next.js App Router pages
+│   ├── globals.css      # Brand palette & theme system
+│   ├── layout.tsx       # Root layout with Cal.com embed
+│   └── page.tsx         # Homepage with all sections
+├── components/
+│   ├── navbar.tsx        # Two-state navigation
+│   ├── footer.tsx        # LinkedIn, GitHub, Email
+│   ├── section-nav.tsx   # Right-side dot navigation
+│   ├── sections/         # Hero, Journey, Research, Projects, Writing, Recommendations
+│   └── ui/               # Loading screen, cursor, audio toggle
+├── data/                # Content JSON (experience, projects, research)
+├── lib/                 # Constants & utilities
+└── public/images/       # Static assets
 ```
 
-### Step 2: Deploy on Vercel
-1. Go to [vercel.com](https://vercel.com) and click **"Add New… → Project"**
-2. **Import** your `GyaneshSamanta/Portfolio-Website` repo
-3. Vercel auto-detects Next.js — leave all settings as default
-4. Click **"Deploy"** — done in ~60 seconds
-5. You'll get a free URL like `portfolio-website-xyz.vercel.app`
-
-### Step 3: Connect Custom Domain (Optional)
-1. In Vercel Dashboard → **Settings → Domains**
-2. Add your domain (e.g., `gyane.sh`)
-3. Point your DNS to Vercel's nameservers (Vercel provides exact records)
-4. SSL is automatic and free
-
 ---
 
-## 🆓 Alternative Free Hosting Options
-
-| Platform | Pros | Cons |
-|----------|------|------|
-| **Vercel** (recommended) | Auto deploys, free SSL, edge CDN, perfect Next.js support | — |
-| **Netlify** | Similar to Vercel, good free tier | Slightly less optimal for Next.js SSR |
-| **Cloudflare Pages** | Fast global CDN, free | Requires `@cloudflare/next-on-pages` adapter |
-| **GitHub Pages** | Free, integrated with repo | Static export only (`next export`), no SSR |
-
----
-
-## 🛠 Local Development
+## 🚀 Local Development
 
 ```bash
 # Install dependencies
@@ -59,41 +68,27 @@ npm start
 
 ---
 
-## 📁 Project Structure
-
-```
-├── app/                 # Next.js App Router pages
-│   ├── globals.css      # Brand palette & theme system
-│   ├── layout.tsx       # Root layout, Cal.com embed
-│   └── page.tsx         # Homepage sections
-├── components/
-│   ├── navbar.tsx        # Two-state nav (expanded/compact)
-│   ├── footer.tsx        # LinkedIn, GitHub, Email
-│   ├── section-nav.tsx   # Right-side dot navigation
-│   ├── sections/         # Hero, Journey, Research, Projects, Writing, etc.
-│   └── ui/               # Loading screen, cursor, audio toggle
-├── data/                # Content JSON (experience, projects, research)
-├── lib/                 # Constants, utilities
-└── public/images/       # Headshot, newsletter cover
-```
-
----
-
 ## 🔒 Security
 
-Production security headers are configured in `next.config.mjs`:
+Production security headers configured in `next.config.mjs`:
 - `X-Content-Type-Options: nosniff`
 - `X-Frame-Options: DENY`
 - `Referrer-Policy: strict-origin-when-cross-origin`
-- `Content-Security-Policy` (restricts scripts/styles/frames to trusted sources)
-- `Permissions-Policy` (disables camera/mic/geo)
+- `Content-Security-Policy` — Restricts scripts/styles/frames to trusted sources
+- `Permissions-Policy` — Disables camera, microphone, geolocation
 
 ---
 
-## 📱 Mobile Optimizations
+## 📱 Mobile
 
-- Responsive hero layout switches to vertical stack
-- Mobile hamburger menu with animated slide-in
+- Responsive hero layout (vertical stack on mobile)
+- Hamburger menu with animated slide-in
 - Touch-friendly card sizes and tap targets
-- Recommendation cards readable at `350px` width on mobile
-- Gradient fade edges optimized for smaller screens
+- Recommendation cards at 350px on mobile
+- Optimized gradient fade edges
+
+---
+
+## 📄 License
+
+© 2026 Gyanesh Samanta. All rights reserved.
