@@ -7,7 +7,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export function WritingSection() {
   return (
-    <section className="snap-section section-light flex items-center" id="writing">
+    <section className="snap-section section-light" id="writing">
       <div className="py-24 px-4 md:px-12 max-w-4xl mx-auto w-full">
       <motion.div
         initial={{ opacity: 0, y: 20 }}

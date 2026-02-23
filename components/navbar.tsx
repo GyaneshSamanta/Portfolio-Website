@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { AudioToggle } from "@/components/ui/audio-toggle";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -163,7 +162,7 @@ export function Navbar() {
             <span style={{ color: "#E491C9" }}>●</span>
             <span>{currentTime}</span>
           </div>
-          <AudioToggle />
+
           {/* Mobile Menu Button */}
           <button
             className="p-2 transition-colors md:hidden"

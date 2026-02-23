@@ -5,7 +5,7 @@ import { ArrowRight, Mail } from "lucide-react";
 
 export function ContactCTA() {
   return (
-    <section className="snap-section section-dark flex items-center" id="contact">
+    <section className="snap-section section-dark" id="contact">
       <div className="py-32 px-4 md:px-12 max-w-5xl mx-auto text-center w-full">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}

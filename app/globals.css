@@ -129,25 +129,16 @@
   }
 }
 
-/* Sticky-stack scroll: each section sticks and the next one slides over */
+/* Stack-style scroll: sections flow naturally with stacking shadow illusion */
 .snap-section {
-  position: sticky;
-  top: 0;
+  position: relative;
   min-height: 100vh;
-  overflow: hidden;
   z-index: 1;
+  box-shadow: 0 -20px 60px -10px rgba(0, 0, 0, 0.3);
 }
-/* Each successive section gets a higher z-index so it stacks on top */
-.snap-section:nth-child(1) { z-index: 1; }
-.snap-section:nth-child(2) { z-index: 2; }
-.snap-section:nth-child(3) { z-index: 3; }
-.snap-section:nth-child(4) { z-index: 4; }
-.snap-section:nth-child(5) { z-index: 5; }
-.snap-section:nth-child(6) { z-index: 6; }
-.snap-section:nth-child(7) { z-index: 7; }
-.snap-section:nth-child(8) { z-index: 8; }
-.snap-section:nth-child(9) { z-index: 9; }
-.snap-section:nth-child(10) { z-index: 10; }
+.snap-section:first-child {
+  box-shadow: none;
+}
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
