@@ -6,6 +6,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { CustomCursor } from "@/components/ui/custom-cursor";
 import { LoadingScreen } from "@/components/ui/loading-screen";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import "./globals.css";
 
@@ -72,6 +73,7 @@ export default function RootLayout({
           Cal("init", "15min", {origin:"https://app.cal.com"});
           Cal.ns["15min"]("ui", {"theme":"dark","hideEventTypeDetails":false,"layout":"month_view"});`}
         </Script>
+        <SpeedInsights />
       </body>
     </html>
   );
