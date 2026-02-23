@@ -11,13 +11,27 @@ export default function Home() {
   return (
     <>
       <SectionNav />
-      <HeroSection />
-      <ExperienceSection />
-      <ResearchSection />
-      <ProjectsSection />
-      <RecommendationsSection />
-      <WritingSection />
-      <ContactCTA />
+      <div className="section-pin">
+        <HeroSection />
+      </div>
+      <div className="section-pin">
+        <ExperienceSection />
+      </div>
+      <div className="section-pin">
+        <ResearchSection />
+      </div>
+      <div className="section-pin">
+        <ProjectsSection />
+      </div>
+      <div className="section-pin">
+        <RecommendationsSection />
+      </div>
+      <div className="section-pin">
+        <WritingSection />
+      </div>
+      <div className="section-pin">
+        <ContactCTA />
+      </div>
     </>
   );
 }

@@ -129,14 +129,28 @@
   }
 }
 
-/* Stack-style scroll: sections flow naturally with stacking shadow illusion */
-.snap-section {
+/* Sticky-stack with wrappers: scroll through content, then next section slides over */
+.section-pin {
   position: relative;
+}
+.section-pin:nth-child(1) { z-index: 1; }
+.section-pin:nth-child(2) { z-index: 2; }
+.section-pin:nth-child(3) { z-index: 3; }
+.section-pin:nth-child(4) { z-index: 4; }
+.section-pin:nth-child(5) { z-index: 5; }
+.section-pin:nth-child(6) { z-index: 6; }
+.section-pin:nth-child(7) { z-index: 7; }
+.section-pin:nth-child(8) { z-index: 8; }
+.section-pin:nth-child(9) { z-index: 9; }
+.section-pin:nth-child(10) { z-index: 10; }
+
+.snap-section {
+  position: sticky;
+  top: 0;
   min-height: 100vh;
-  z-index: 1;
   box-shadow: 0 -20px 60px -10px rgba(0, 0, 0, 0.3);
 }
-.snap-section:first-child {
+.section-pin:first-child .snap-section {
   box-shadow: none;
 }
 
