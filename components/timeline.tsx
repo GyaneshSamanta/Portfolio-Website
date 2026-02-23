@@ -32,9 +32,14 @@ export function Timeline() {
 
   const ColumnCard = ({ title, company, dates, details, roles }: { title?: string, company: string, dates?: string, details?: string, roles?: any[] }) => (
     <motion.div variants={item} className="mb-8 group">
-      <Card className="p-6 md:p-8 bg-transparent border-t border-b-0 border-x-0 border-border group-hover:border-primary/30 transition-colors">
+      <Card className="p-6 md:p-8 border border-border rounded-xl bg-brand-gradient-card group-hover:border-primary/40 transition-all duration-300">
         <div className="flex flex-col gap-2">
-          <h3 className="text-xl font-bold text-foreground">{company}</h3>
+          <div className="flex items-center gap-4 mb-2">
+            <div className="w-12 h-12 rounded-xl bg-secondary border border-border flex items-center justify-center text-foreground font-bold text-xl shrink-0 group-hover:bg-brand/10 group-hover:border-brand/40 group-hover:text-brand transition-all duration-300">
+               {company.charAt(0)}
+            </div>
+            <h3 className="text-xl font-bold text-foreground">{company}</h3>
+          </div>
           
           {roles ? (
             <div className="flex flex-col gap-4 mt-2">
@@ -75,9 +80,14 @@ export function Timeline() {
         <div className="flex flex-col">
           {newContent.education.map((edu, idx) => (
             <motion.div key={idx} variants={item} className="mb-8 group">
-              <Card className="p-6 md:p-8 bg-transparent border-t border-b-0 border-x-0 border-border group-hover:border-primary/30 transition-colors">
+              <Card className="p-6 md:p-8 border border-border rounded-xl bg-brand-gradient-card group-hover:border-primary/40 transition-all duration-300">
                 <div className="flex flex-col gap-2">
-                  <h3 className="text-xl font-bold text-foreground">{edu.university}</h3>
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="w-12 h-12 rounded-xl bg-secondary border border-border flex items-center justify-center text-foreground font-bold text-xl shrink-0 group-hover:bg-brand/10 group-hover:border-brand/40 group-hover:text-brand transition-all duration-300">
+                       {edu.university.charAt(0)}
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground">{edu.university}</h3>
+                  </div>
                   <span className="font-medium text-foreground/80">{edu.degree}</span>
                   <span className="text-sm font-mono text-muted-foreground">{edu.dates}</span>
                   {(edu.details || edu.grade) && (

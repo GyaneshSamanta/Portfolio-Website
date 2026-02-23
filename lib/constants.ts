@@ -5,12 +5,11 @@ export const SITE_CONFIG = {
   url: "https://gyane.sh", 
   ogImage: "https://gyane.sh/og.jpg", // Placeholder
   links: {
-    twitter: "https://twitter.com/gyanesh", // Placeholder
     github: "https://github.com/GyaneshSamanta",
-    linkedin: "https://linkedin.com/in/gyanesh-samanta", // Placeholder based on context
-    youtube: "https://youtube.com/@gyanesh", // Placeholder
-    newsletter: "https://www.linkedin.com/newsletters/placeholder", // Placeholder
-    email: "mail@gyane.sh", // Placeholder
+    linkedin: "https://linkedin.com/in/gyanesh-samanta",
+    youtube: "https://youtube.com/@gyanesh",
+    newsletter: "https://www.linkedin.com/newsletters/gyanesh-on-product-6979386586404651008/",
+    email: "mail.gyaneshsamanta@gmail.com",
   },
   experience: [
     {

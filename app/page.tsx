@@ -5,10 +5,12 @@ import { ProjectsSection } from "@/components/sections/projects";
 import { RecommendationsSection } from "@/components/sections/recommendations";
 import { WritingSection } from "@/components/sections/writing";
 import { ContactCTA } from "@/components/contact-cta";
+import { SectionNav } from "@/components/section-nav";
 
 export default function Home() {
   return (
     <>
+      <SectionNav />
       <HeroSection />
       <ExperienceSection />
       <ResearchSection />

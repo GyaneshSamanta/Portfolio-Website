@@ -104,6 +104,18 @@
       "description": "Submission to Youth-Data-Hackathon 2023.",
       "url": "https://github.com/GyaneshSamanta/NYC-Shootings-Research-Paper",
       "language": "Jupyter Notebook"
+    },
+    {
+      "title": "HopeVid-HackRx1.0",
+      "description": "2nd Runners-up @HackRx1.0 by Bajaj Finserv. Video consultation platform.",
+      "url": "https://github.com/GyaneshSamanta/HopeVid-HackRx1.0",
+      "language": "CSS"
+    },
+    {
+      "title": "EthIndia-23-CrossDrop",
+      "description": "Winner, ETHIndia 2023. Cross-chain airdrop distribution built on Arbitrum.",
+      "url": "https://github.com/GyaneshSamanta/EthIndia-23-CrossDrop",
+      "language": "JavaScript"
     }
   ],
   "research": [

@@ -4,42 +4,53 @@
 
 @layer base {
   :root {
-    /* Verris Premium Minimalist Theme */
-    --background: 0 0% 99%; /* High-end Off-white (#FCFCFC) */
-    --foreground: 0 0% 12%; /* Soft Charcoal rather than harsh black (#1F1F1F) */
+    /* 
+     * Brand Palette from user:
+     * Primary Purple: #982598 → HSL ~300 61% 37%
+     * Deep Navy:      #15173D → HSL ~238 47% 16%
+     * Soft Pink:      #E491C9 → HSL ~318 60% 73%
+     * Warm Cream:     #F1E9E9 → HSL ~0 18% 93%
+     */
 
-    --card: 0 0% 98%; /* Slightly darker white for subtle depth */
-    --card-foreground: 0 0% 15%; /* Accessible dark gray text */
+    --background: 238 47% 16%;         /* Deep Navy */
+    --foreground: 0 18% 93%;           /* Warm Cream */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 12%;
+    --card: 238 40% 20%;               /* Slightly lighter navy */
+    --card-foreground: 0 18% 93%;
 
-    --primary: 0 0% 10%; /* Very dark gray for buttons/prominent elements */
-    --primary-foreground: 0 0% 98%; /* Almost white text on buttons */
+    --popover: 238 47% 16%;
+    --popover-foreground: 0 18% 93%;
 
-    --secondary: 0 0% 95%; /* Elegant light gray for hover backgrounds */
-    --secondary-foreground: 0 0% 15%;
+    --primary: 300 61% 37%;            /* Purple */
+    --primary-foreground: 0 18% 93%;
 
-    --muted: 0 0% 94%;
-    --muted-foreground: 0 0% 40%; /* Accessible muted text */
+    --secondary: 238 35% 24%;          /* Navy mid */
+    --secondary-foreground: 0 18% 93%;
 
-    --accent: 0 0% 95%;
-    --accent-foreground: 0 0% 12%;
+    --muted: 238 30% 28%;
+    --muted-foreground: 318 20% 70%;   /* Pinkish muted */
 
-    /* Newsletter Brand Accents */
-    --brand-accent: 180 18% 30%; /* Deep muted emerald/teal from the newsletter cover */
-    --brand-accent-light: 180 18% 40%; 
-    --brand-accent-foreground: 0 0% 98%;
+    --accent: 300 40% 30%;             /* Dimmer purple */
+    --accent-foreground: 0 18% 93%;
+
+    /* Brand accent — the vivid purple */
+    --brand-accent: 300 61% 37%;
+    --brand-accent-light: 318 60% 73%;  /* Soft pink */
+    --brand-accent-foreground: 0 18% 93%;
+    --brand-accent-dim: 300 30% 50%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 0 18% 93%;
 
-    --border: 0 0% 90%; /* Very soft border for subtle structure */
-    --input: 0 0% 90%;
-    --ring: 0 0% 12%;
+    --border: 238 30% 30%;
+    --input: 238 30% 28%;
+    --ring: 300 61% 37%;
 
-    /* Verris enforces sharp minimal edges */
-    --radius: 0rem; 
+    --radius: 0rem;
+
+    /* Section alternating colors */
+    --section-dark: 238 47% 16%;        /* Deep Navy */
+    --section-light: 0 18% 93%;         /* Warm Cream */
   }
 }
 
@@ -52,18 +63,98 @@
   }
 }
 
+/* Branded gradient utilities */
+@layer utilities {
+  .bg-brand-gradient {
+    background: linear-gradient(
+      135deg,
+      #982598 0%,
+      #E491C9 50%,
+      #15173D 100%
+    );
+  }
+  .bg-brand-gradient-subtle {
+    background: linear-gradient(
+      135deg,
+      rgba(152, 37, 152, 0.15) 0%,
+      rgba(228, 145, 201, 0.1) 50%,
+      rgba(21, 23, 61, 0.2) 100%
+    );
+  }
+  .bg-brand-gradient-card {
+    background: linear-gradient(
+      145deg,
+      rgba(152, 37, 152, 0.12) 0%,
+      rgba(228, 145, 201, 0.08) 40%,
+      rgba(21, 23, 61, 0.05) 100%
+    );
+  }
+  .text-brand-gradient {
+    background: linear-gradient(
+      135deg,
+      #982598 0%,
+      #E491C9 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  /* Light section overrides */
+  .section-light {
+    --background: 0 18% 93%;
+    --foreground: 238 47% 16%;
+    --card: 0 15% 96%;
+    --card-foreground: 238 47% 16%;
+    --secondary: 318 30% 88%;
+    --secondary-foreground: 238 47% 16%;
+    --muted: 318 15% 85%;
+    --muted-foreground: 238 30% 40%;
+    --border: 318 15% 82%;
+    background-color: hsl(0 18% 93%);
+    color: hsl(238 47% 16%);
+  }
+  /* Dark section overrides */
+  .section-dark {
+    --background: 238 47% 16%;
+    --foreground: 0 18% 93%;
+    --card: 238 40% 20%;
+    --card-foreground: 0 18% 93%;
+    --secondary: 238 35% 24%;
+    --secondary-foreground: 0 18% 93%;
+    --muted: 238 30% 28%;
+    --muted-foreground: 318 20% 70%;
+    --border: 238 30% 30%;
+    background-color: hsl(238 47% 16%);
+    color: hsl(0 18% 93%);
+  }
+}
+
+/* Snap scroll container */
+.snap-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-background;
+  background: hsl(238 47% 16%);
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-muted rounded-full;
+  background: hsl(300 61% 37% / 0.4);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary/50;
+  background: hsl(300 61% 37% / 0.7);
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -73,6 +164,6 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

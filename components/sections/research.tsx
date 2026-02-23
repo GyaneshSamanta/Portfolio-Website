@@ -6,7 +6,7 @@ import data from "@/data/new_content.json";
 
 export function ResearchSection() {
   return (
-    <section className="py-24 px-4 md:px-12 max-w-5xl mx-auto" id="research">
+    <section className="snap-section section-dark py-24 px-4 md:px-12 max-w-5xl mx-auto" id="research">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

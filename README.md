@@ -1,50 +1,99 @@
-# Portfolio Website
+# Gyanesh Samanta — Portfolio Website
 
-A premium, interactive portfolio website for a Product Manager, built with Next.js 14, Tailwind CSS, and Framer Motion.
+> Built with **Next.js 14**, **Tailwind CSS**, and **Framer Motion** · Palette: `#982598` `#15173D` `#E491C9` `#F1E9E9`
 
-## Features
+---
 
-- **Modern Design**: 
-  - **Single Theme**: Cyberpunk Product (Dark Mode Only)
-  - **Premium Aesthetics**: Grainy textures, glassmorphism, and bold colors (Violet/Hot Pink).
-- **Interactivity**: 
-  - **Hover Previews**: Hover over content pillars to see latest items.
-  - **Micro-Interactions**: Amplified UI sound effects and smooth animations.
-- **Content Integration**:
-  - **GitHub**: Automatically fetches and displays repositories.
-  - **YouTube**: Displays video feed (Podcast).
-  - **Newsletter**: Curated list of articles.
-- **Performance**: Built on Next.js App Router for optimal speed and SEO.
+## 🚀 Host for Free on Vercel (Recommended)
 
-## Tech Stack
+### Step 1: Push to GitHub
+Your code is already on GitHub at `GyaneshSamanta/Portfolio-Website`. If you've made local changes, commit and push:
 
-- **Framework**: [Next.js 14](https://nextjs.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Animation**: [Framer Motion](https://www.framer.com/motion/)
-- **Theming**: [next-themes](https://github.com/pacocoursey/next-themes)
-- **Typography**: [Geist](https://vercel.com/font)
-- **Icons**: [Lucide React](https://lucide.dev/)
+```bash
+git add -A
+git commit -m "Final polish: design overhaul, security headers, mobile optimization"
+git push origin main
+```
 
-## Getting Started
+### Step 2: Deploy on Vercel
+1. Go to [vercel.com](https://vercel.com) and click **"Add New… → Project"**
+2. **Import** your `GyaneshSamanta/Portfolio-Website` repo
+3. Vercel auto-detects Next.js — leave all settings as default
+4. Click **"Deploy"** — done in ~60 seconds
+5. You'll get a free URL like `portfolio-website-xyz.vercel.app`
 
-1.  **Install dependencies**:
-    ```bash
-    npm install
-    ```
+### Step 3: Connect Custom Domain (Optional)
+1. In Vercel Dashboard → **Settings → Domains**
+2. Add your domain (e.g., `gyane.sh`)
+3. Point your DNS to Vercel's nameservers (Vercel provides exact records)
+4. SSL is automatic and free
 
-2.  **Run development server**:
-    ```bash
-    npm run dev
-    ```
+---
 
-3.  **Build for production**:
-    ```bash
-    npm run build
-    ```
+## 🆓 Alternative Free Hosting Options
 
-## Customization
+| Platform | Pros | Cons |
+|----------|------|------|
+| **Vercel** (recommended) | Auto deploys, free SSL, edge CDN, perfect Next.js support | — |
+| **Netlify** | Similar to Vercel, good free tier | Slightly less optimal for Next.js SSR |
+| **Cloudflare Pages** | Fast global CDN, free | Requires `@cloudflare/next-on-pages` adapter |
+| **GitHub Pages** | Free, integrated with repo | Static export only (`next export`), no SSR |
 
-- **Site Info**: Edit `lib/constants.ts` to update your name, links, and content.
-- **Experience**: Update the `experience` array in `lib/constants.ts`.
-- **Data**: Add new videos or articles in `data/videos.json` and `data/newsletter.json`.
-- **Logo**: Replace `public/logo.png` with your own image.
+---
+
+## 🛠 Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm start
+```
+
+---
+
+## 📁 Project Structure
+
+```
+├── app/                 # Next.js App Router pages
+│   ├── globals.css      # Brand palette & theme system
+│   ├── layout.tsx       # Root layout, Cal.com embed
+│   └── page.tsx         # Homepage sections
+├── components/
+│   ├── navbar.tsx        # Two-state nav (expanded/compact)
+│   ├── footer.tsx        # LinkedIn, GitHub, Email
+│   ├── section-nav.tsx   # Right-side dot navigation
+│   ├── sections/         # Hero, Journey, Research, Projects, Writing, etc.
+│   └── ui/               # Loading screen, cursor, audio toggle
+├── data/                # Content JSON (experience, projects, research)
+├── lib/                 # Constants, utilities
+└── public/images/       # Headshot, newsletter cover
+```
+
+---
+
+## 🔒 Security
+
+Production security headers are configured in `next.config.mjs`:
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: DENY`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `Content-Security-Policy` (restricts scripts/styles/frames to trusted sources)
+- `Permissions-Policy` (disables camera/mic/geo)
+
+---
+
+## 📱 Mobile Optimizations
+
+- Responsive hero layout switches to vertical stack
+- Mobile hamburger menu with animated slide-in
+- Touch-friendly card sizes and tap targets
+- Recommendation cards readable at `350px` width on mobile
+- Gradient fade edges optimized for smaller screens

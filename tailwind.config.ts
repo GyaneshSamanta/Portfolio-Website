@@ -59,6 +59,7 @@ const config: Config = {
         brand: {
           DEFAULT: "hsl(var(--brand-accent))",
           light: "hsl(var(--brand-accent-light))",
+          dim: "hsl(var(--brand-accent-dim))",
           foreground: "hsl(var(--brand-accent-foreground))",
         }
       },
@@ -79,6 +80,10 @@ const config: Config = {
         marquee: {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(calc(-100% - 2rem))" },
+        },
+        "marquee-reverse": {
+          from: { transform: "translateX(calc(-100% - 2rem))" },
+          to: { transform: "translateX(0)" },
         },
       },
       animation: {

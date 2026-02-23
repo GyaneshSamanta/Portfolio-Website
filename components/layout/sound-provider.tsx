@@ -15,12 +15,34 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
   const [hasMounted, setHasMounted] = useState(false);
   
   const [playBgm, { stop: stopBgm, pause: pauseBgm }] = useSound("/sounds/Andrew-Applepie-Sweet-Tomorrow.mp3", { 
-    volume: 0.2, // 20% limit enforced
+    volume: 0.05, // 5% – subtle background ambience
     loop: true,
   });
 
   useEffect(() => {
     setHasMounted(true);
+
+    const handleInteraction = () => {
+      setIsPlaying(p => {
+        if (!p) {
+          return true;
+        }
+        return p;
+      });
+      document.removeEventListener("click", handleInteraction);
+      document.removeEventListener("keydown", handleInteraction);
+      document.removeEventListener("scroll", handleInteraction);
+    };
+
+    document.addEventListener("click", handleInteraction);
+    document.addEventListener("keydown", handleInteraction);
+    document.addEventListener("scroll", handleInteraction);
+
+    return () => {
+      document.removeEventListener("click", handleInteraction);
+      document.removeEventListener("keydown", handleInteraction);
+      document.removeEventListener("scroll", handleInteraction);
+    };
   }, []);
 
   useEffect(() => {

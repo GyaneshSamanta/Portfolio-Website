@@ -16,14 +16,6 @@ export function Footer() {
 
         <div className="flex items-center gap-6">
           <a
-            href={SITE_CONFIG.links.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-primary transition-colors"
-          >
-            Twitter
-          </a>
-          <a
             href={SITE_CONFIG.links.linkedin}
             target="_blank"
             rel="noopener noreferrer"
@@ -38,6 +30,12 @@ export function Footer() {
             className="text-muted-foreground hover:text-primary transition-colors"
           >
             GitHub
+          </a>
+          <a
+            href={`mailto:${SITE_CONFIG.links.email}`}
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            Email
           </a>
         </div>
 

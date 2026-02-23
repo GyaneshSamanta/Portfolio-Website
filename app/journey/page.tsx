@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/section";
 export default function JourneyPage() {
   return (
     <Section>
-      <div className="max-w-3xl mx-auto">
+      <div className="w-full">
         <div className="mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">My Journey</h1>
           <p className="text-xl text-muted-foreground">
