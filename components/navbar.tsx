@@ -74,7 +74,7 @@ export function Navbar() {
         <div className="flex items-center gap-4 md:gap-6 shrink-0">
           <Link href="/" className="hover:opacity-80 transition-opacity shrink-0">
             <Image
-              src="/images/newsletter-cover.png"
+              src="/images/brand/newsletter-cover.png"
               alt="Logo"
               width={scrolled ? 36 : 48}
               height={scrolled ? 36 : 48}

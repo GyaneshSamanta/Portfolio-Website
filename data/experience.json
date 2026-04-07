@@ -1,0 +1,118 @@
+[
+  {
+    "company": "XSYS - The Systems Association of XIMB",
+    "title": "Coordinator",
+    "dates": "Mar 2025 - Present",
+    "type": "extracurricular",
+    "logo": "/images/logos/xsys.png",
+    "location": "Bhubaneswar, India",
+    "description": "Systems association coordination.",
+    "tags": [
+      "Systems",
+      "Leadership"
+    ]
+  },
+  {
+    "company": "XSYS - The Systems Association of XIMB",
+    "title": "Shadow Member",
+    "dates": "Aug 2024 - Feb 2025",
+    "type": "extracurricular",
+    "logo": "/images/logos/xsys.png",
+    "location": "Bhubaneswar, India",
+    "description": "Award: Best Shadow Award 2024-25.",
+    "tags": [
+      "Systems"
+    ]
+  },
+  {
+    "company": "IBM",
+    "title": "Product Manager Intern",
+    "dates": "Apr 2025 - Jun 2025",
+    "type": "internship",
+    "logo": "/images/logos/ibm.png",
+    "location": "India",
+    "description": "Focus: Sterling Order Management System. Skills: B2B, Product Management.",
+    "tags": [
+      "B2B",
+      "Product Management"
+    ]
+  },
+  {
+    "company": "Snapdeal (AceVector Group)",
+    "title": "Product",
+    "dates": "Oct 2023 - Jun 2024",
+    "type": "full_time",
+    "logo": "/images/logos/snapdeal.png",
+    "location": "Delhi, India",
+    "description": "Focus: Snapdeal VIP | Loyalty Subscription Program. Skills: Product Development, Product Management.",
+    "tags": [
+      "Product Development",
+      "Product Management"
+    ]
+  },
+  {
+    "company": "Wall",
+    "title": "Data Science Product Manager",
+    "dates": "Jan 2023 - Oct 2023",
+    "type": "full_time",
+    "logo": "/images/logos/wall.png",
+    "location": "Remote",
+    "description": "Skills: AWS, Product Development.",
+    "tags": [
+      "AWS",
+      "Product Development"
+    ]
+  },
+  {
+    "company": "TIH-IoT",
+    "title": "Research Fellowship",
+    "dates": "Aug 2022 - May 2023",
+    "type": "internship",
+    "logo": "/images/logos/tih.png",
+    "location": "India",
+    "description": "Research fellowship in IoT technologies.",
+    "tags": [
+      "IoT",
+      "Research"
+    ]
+  },
+  {
+    "company": "Tealfeed",
+    "title": "Data Scientist (Internship)",
+    "dates": "Jul 2022 - Nov 2022",
+    "type": "internship",
+    "logo": "/images/logos/tealfeed.png",
+    "location": "Remote",
+    "description": "Skills: AWS, Consumer Behavior.",
+    "tags": [
+      "AWS",
+      "Consumer Behavior"
+    ]
+  },
+  {
+    "company": "SRM Innovation and Incubation Centre",
+    "title": "Project Lead Developer",
+    "dates": "Jun 2020 - Aug 2022",
+    "type": "full_time",
+    "logo": "/images/logos/srm.png",
+    "location": "Chennai, India",
+    "description": "Skills: Product Development, Product Management.",
+    "tags": [
+      "Product Development",
+      "Product Management"
+    ]
+  },
+  {
+    "company": "iSchoolConnect",
+    "title": "Machine Learning Engineer (Internship)",
+    "dates": "Feb 2022 - May 2022",
+    "type": "internship",
+    "logo": "/images/logos/ischool.png",
+    "location": "Remote",
+    "description": "Skills: AI.",
+    "tags": [
+      "ML Engineering",
+      "AI"
+    ]
+  }
+]

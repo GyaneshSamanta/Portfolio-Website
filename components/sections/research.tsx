@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, BookOpen } from "lucide-react";
-import data from "@/data/new_content.json";
+import researchData from "@/data/research.json";
 
 export function ResearchSection() {
   return (
@@ -32,7 +32,7 @@ export function ResearchSection() {
       </motion.div>
 
       <div className="flex flex-col border-t border-border">
-        {data.research.map((paper, index) => (
+        {researchData.map((paper: any, index: number) => (
           <motion.a
             key={index}
             href={paper.link}

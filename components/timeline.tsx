@@ -1,20 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import extractedData from "@/data/extracted_content.json";
-import newContent from "@/data/new_content.json";
+import experienceData from "@/data/experience.json";
+import educationData from "@/data/education.json";
 import { Card } from "@/components/ui/card";
 
 export function Timeline() {
-  const allExperience = extractedData.profile.experience;
-
-  // Split logic based on data inference
-  const fullTimeRoles = allExperience.filter(
-    exp => !exp.title?.includes("Intern") && !exp.company.includes("Association") && !exp.title?.includes("Fellowship")
+  // Split based on type field from wiki data
+  const fullTimeRoles = experienceData.filter(
+    (exp: any) =>
+      exp.type === "full_time" ||
+      exp.type === "extracurricular"
   );
-  
-  const internships = allExperience.filter(
-    exp => exp.title?.includes("Intern") || exp.title?.includes("Fellowship")
+
+  const internships = experienceData.filter(
+    (exp: any) =>
+      exp.type === "internship"
   );
 
   const container = {
@@ -30,7 +31,7 @@ export function Timeline() {
     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "linear" as const } }
   };
 
-  const ColumnCard = ({ title, company, dates, details, roles }: { title?: string, company: string, dates?: string, details?: string, roles?: any[] }) => (
+  const ColumnCard = ({ title, company, dates, description, tags }: { title?: string, company: string, dates?: string, description?: string, tags?: string[] }) => (
     <motion.div variants={item} className="mb-8 group">
       <Card className="p-6 md:p-8 border border-border rounded-xl bg-brand-gradient-card group-hover:border-primary/40 transition-all duration-300">
         <div className="flex flex-col gap-2">
@@ -40,26 +41,17 @@ export function Timeline() {
             </div>
             <h3 className="text-xl font-bold text-foreground">{company}</h3>
           </div>
-          
-          {roles ? (
-            <div className="flex flex-col gap-4 mt-2">
-              {roles.map((role, idx) => (
-                <div key={idx} className="flex gap-4">
-                  <div className="w-px bg-border group-hover:bg-primary/20 shrink-0 ml-2 mt-2" />
-                  <div className="flex flex-col">
-                    <span className="font-medium text-foreground/80">{role.title}</span>
-                    <span className="text-sm font-mono text-muted-foreground">{role.dates}</span>
-                    {role.details && <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{role.details}</p>}
-                  </div>
-                </div>
+          <span className="font-medium text-foreground/80">{title}</span>
+          <span className="text-sm font-mono text-muted-foreground">{dates}</span>
+          {description && <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{description}</p>}
+          {tags && tags.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mt-2">
+              {tags.map((tag, idx) => (
+                <span key={idx} className="text-xs px-2 py-0.5 rounded-full bg-secondary text-muted-foreground">
+                  {tag}
+                </span>
               ))}
             </div>
-          ) : (
-            <>
-              <span className="font-medium text-foreground/80">{title}</span>
-              <span className="text-sm font-mono text-muted-foreground">{dates}</span>
-              {details && <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{details}</p>}
-            </>
           )}
         </div>
       </Card>
@@ -78,7 +70,7 @@ export function Timeline() {
       <div className="flex flex-col">
         <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-12 sticky top-24">Education</h2>
         <div className="flex flex-col">
-          {newContent.education.map((edu, idx) => (
+          {educationData.map((edu: any, idx: number) => (
             <motion.div key={idx} variants={item} className="mb-8 group">
               <Card className="p-6 md:p-8 border border-border rounded-xl bg-brand-gradient-card group-hover:border-primary/40 transition-all duration-300">
                 <div className="flex flex-col gap-2">
@@ -90,9 +82,9 @@ export function Timeline() {
                   </div>
                   <span className="font-medium text-foreground/80">{edu.degree}</span>
                   <span className="text-sm font-mono text-muted-foreground">{edu.dates}</span>
-                  {(edu.details || edu.grade) && (
+                  {(edu.description || edu.grade) && (
                     <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
-                      {edu.details} {edu.grade && `| Grade: ${edu.grade}`}
+                      {edu.description} {edu.grade && `| Grade: ${edu.grade}`}
                     </p>
                   )}
                 </div>
@@ -106,14 +98,14 @@ export function Timeline() {
       <div className="flex flex-col">
         <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-12 sticky top-24">Full-Time</h2>
         <div className="flex flex-col">
-          {fullTimeRoles.map((exp, idx) => (
+          {fullTimeRoles.map((exp: any, idx: number) => (
             <ColumnCard 
               key={idx}
               title={exp.title}
               company={exp.company}
               dates={exp.dates}
-              details={exp.details}
-              roles={exp.roles}
+              description={exp.description}
+              tags={exp.tags}
             />
           ))}
         </div>
@@ -123,13 +115,14 @@ export function Timeline() {
       <div className="flex flex-col">
         <h2 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-12 sticky top-24">Internships & Research</h2>
         <div className="flex flex-col">
-          {internships.map((exp, idx) => (
+          {internships.map((exp: any, idx: number) => (
             <ColumnCard 
               key={idx}
               title={exp.title}
               company={exp.company}
               dates={exp.dates}
-              details={exp.details}
+              description={exp.description}
+              tags={exp.tags}
             />
           ))}
         </div>

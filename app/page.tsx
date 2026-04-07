@@ -4,6 +4,8 @@ import { ResearchSection } from "@/components/sections/research";
 import { ProjectsSection } from "@/components/sections/projects";
 import { RecommendationsSection } from "@/components/sections/recommendations";
 import { WritingSection } from "@/components/sections/writing";
+import { HackathonsSection } from "@/components/sections/hackathons";
+import { SkillsSection } from "@/components/sections/skills";
 import { ContactCTA } from "@/components/contact-cta";
 import { SectionNav } from "@/components/section-nav";
 
@@ -25,10 +27,16 @@ export default function Home() {
           <ProjectsSection />
         </div>
         <div className="section-pin">
+          <HackathonsSection />
+        </div>
+        <div className="section-pin">
           <RecommendationsSection />
         </div>
         <div className="section-pin">
           <WritingSection />
+        </div>
+        <div className="section-pin">
+          <SkillsSection />
         </div>
         <div className="section-pin">
           <ContactCTA />

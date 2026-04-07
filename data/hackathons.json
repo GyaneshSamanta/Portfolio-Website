@@ -1,0 +1,54 @@
+[
+  {
+    "eventName": "ETHIndia 2023",
+    "result": "Winner",
+    "organizer": "Ethereum Foundation",
+    "date": "Nov 2023",
+    "prize": "Winner",
+    "projectName": "CrossDrop",
+    "projectDescription": "Cross-chain airdrop distribution built on Arbitrum.",
+    "teamSize": 3,
+    "techStack": "JavaScript | Solidity | Arbitrum",
+    "devpostUrl": "https://github.com/GyaneshSamanta/EthIndia-23-CrossDrop",
+    "logo": "/images/hackathons/ethindia.png"
+  },
+  {
+    "eventName": "ETHIndia 2022",
+    "result": "Winner",
+    "organizer": "Ethereum Foundation",
+    "date": "Dec 2022",
+    "prize": "Winner, Best use of Polygon ID",
+    "projectName": "SigmaZK",
+    "projectDescription": "Implemented a ZeroKnowledge-based system with collab.land and Polygon ID. Improved the Polygon ID API by working around one of its major limitations.",
+    "teamSize": 3,
+    "techStack": "Solidity | ZK Proofs | Polygon ID",
+    "devpostUrl": "",
+    "logo": "/images/hackathons/ethindia.png"
+  },
+  {
+    "eventName": "Data Day Grind III",
+    "result": "Winner",
+    "organizer": "MLH",
+    "date": "Aug 2022",
+    "prize": "Winner",
+    "projectName": "Air Pollution Analysis Pre-Covid and Post-Covid",
+    "projectDescription": "Data analytics on KPIs including air quality variations across cities and identifying cities with severe conditions.",
+    "teamSize": 2,
+    "techStack": "Python | Jupyter | Data Analytics",
+    "devpostUrl": "",
+    "logo": "/images/hackathons/mlh.png"
+  },
+  {
+    "eventName": "HackRx 1.0",
+    "result": "2nd Runners-up",
+    "organizer": "Bajaj Finserv",
+    "date": "2021",
+    "prize": "2nd Runners-up",
+    "projectName": "HopeVid",
+    "projectDescription": "Video consultation platform for healthcare.",
+    "teamSize": 3,
+    "techStack": "CSS | HTML | JavaScript",
+    "devpostUrl": "https://github.com/GyaneshSamanta/HopeVid-HackRx1.0",
+    "logo": "/images/hackathons/bajaj.png"
+  }
+]

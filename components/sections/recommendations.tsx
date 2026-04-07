@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import extractedData from "@/data/extracted_content.json";
+import Image from "next/image";
+import recommendations from "@/data/recommendations.json";
 
-function RecCard({ rec }: { rec: { name: string; text: string; designation: string } }) {
+function RecCard({ rec }: { rec: { name: string; text: string; designation: string; photo?: string; photoAlt?: string } }) {
   const isLong = rec.text.length > 200;
   const truncated = isLong ? rec.text.slice(0, 200) + "..." : rec.text;
 
@@ -33,17 +34,33 @@ function RecCard({ rec }: { rec: { name: string; text: string; designation: stri
           &ldquo;{rec.text}&rdquo;
         </p>
       </div>
-      <div className="pt-6 mt-auto" style={{ borderTop: "1px solid hsl(300 61% 37% / 0.2)" }}>
-        <p className="font-bold text-lg tracking-tight" style={{ color: "#F1E9E9" }}>{rec.name}</p>
-        <p className="text-sm font-medium mt-1 truncate" style={{ color: "#E491C9" }}>{rec.designation}</p>
+      <div className="pt-6 mt-auto flex items-center gap-4" style={{ borderTop: "1px solid hsl(300 61% 37% / 0.2)" }}>
+        {/* Avatar Photo or Monogram Fallback */}
+        {rec.photo ? (
+          <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#982598]/30">
+            <Image
+              src={rec.photo}
+              alt={rec.photoAlt || rec.name}
+              fill
+              className="object-cover"
+              sizes="40px"
+            />
+          </div>
+        ) : (
+          <div className="w-10 h-10 rounded-full flex-shrink-0 ring-2 ring-[#982598]/30 bg-gradient-to-br from-[#982598] to-[#15173D] flex items-center justify-center text-white text-sm font-semibold">
+            {rec.name.charAt(0)}
+          </div>
+        )}
+        <div>
+          <p className="font-bold text-lg tracking-tight" style={{ color: "#F1E9E9" }}>{rec.name}</p>
+          <p className="text-sm font-medium mt-0.5 truncate" style={{ color: "#E491C9" }}>{rec.designation}</p>
+        </div>
       </div>
     </div>
   );
 }
 
 export function RecommendationsSection() {
-  const recommendations = extractedData.profile.recommendations;
-
   return (
     <section className="snap-section section-dark py-24 overflow-hidden" id="recommendations">
       <div className="max-w-[1400px] mx-auto px-4 md:px-12 mb-16">

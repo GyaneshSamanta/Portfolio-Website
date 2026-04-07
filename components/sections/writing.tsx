@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import extractedData from "@/data/extracted_content.json";
+import writingData from "@/data/writing.json";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Clock } from "lucide-react";
 
 export function WritingSection() {
   return (
@@ -34,7 +34,7 @@ export function WritingSection() {
       </motion.div>
 
       <div className="flex flex-col border-t border-border">
-        {extractedData.newsletter.map((article, index) => (
+        {writingData.map((article: any, index: number) => (
           <motion.a
             key={index}
             href={article.url}
@@ -49,7 +49,7 @@ export function WritingSection() {
             <div className="flex items-center gap-6">
               <div className="w-16 h-16 shrink-0 relative rounded overflow-hidden shadow-sm hidden md:block">
                 <Image 
-                  src="/images/newsletter-cover.png" 
+                  src={article.coverImage || "/images/brand/newsletter-cover.png"} 
                   alt="Newsletter Logo" 
                   fill 
                   className="object-cover"
@@ -59,11 +59,20 @@ export function WritingSection() {
                 <h3 className="text-xl md:text-2xl font-medium max-w-2xl group-hover:text-primary transition-colors text-foreground mb-1">
                   {article.title}
                 </h3>
-                {article.date && (
-                  <span className="text-muted-foreground font-mono text-sm">
-                    {article.date} &bull; Read on LinkedIn
-                  </span>
-                )}
+                <div className="flex flex-wrap items-center gap-2">
+                  {article.date && (
+                    <span className="text-muted-foreground font-mono text-sm">
+                      {article.date} &bull; Read on LinkedIn
+                    </span>
+                  )}
+                  {/* Reading time badge — UX Enhancement 11.5 */}
+                  {article.readTime && (
+                    <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full bg-primary/10 text-primary">
+                      <Clock className="w-3 h-3" />
+                      {article.readTime}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
             

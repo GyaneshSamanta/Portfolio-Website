@@ -1,0 +1,33 @@
+{
+  "nameFirst": "Gyanesh",
+  "nameLast": "Samanta",
+  "headline": "PM at the intersection of",
+  "headlineHighlight": "Data, AI & Consumer Behaviour",
+  "subheadline": "I think in systems. I build in products. I write about both. I make sense of complex products. Whether it's building B2B experiences that actually scale, or helping teams navigate AI integration without losing sight of the user — that's where I add value.",
+  "ctaPrimaryLabel": "Book a Call",
+  "ctaPrimaryUrl": "https://cal.com/gyaneshsamanta",
+  "ctaSecondaryLabel": "Read my Newsletter",
+  "ctaSecondaryUrl": "https://www.linkedin.com/newsletters/gyanesh-on-product-6979386586404651008/",
+  "heroImage": "/images/hero/headshot.png",
+  "heroImageAlt": "Gyanesh Samanta — Product Manager",
+  "badges": [
+    "20+ Hackathon Wins",
+    "3 Published Papers",
+    "1,200 Newsletter Subscribers"
+  ],
+  "skills": [
+    "Product Management",
+    "Data Science",
+    "AI",
+    "Consumer Behaviour",
+    "Customer Research",
+    "Prototyping",
+    "Vibe Coding",
+    "Data Analytics",
+    "Stakeholder Management",
+    "Growth",
+    "Pitch Deck Design",
+    "Front-End Development"
+  ],
+  "scrollCtaLabel": "Scroll to explore"
+}

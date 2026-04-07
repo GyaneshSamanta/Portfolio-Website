@@ -1,0 +1,32 @@
+{
+  "sections": [
+    {
+      "id": "hero",
+      "label": "Home"
+    },
+    {
+      "id": "journey",
+      "label": "Journey"
+    },
+    {
+      "id": "research",
+      "label": "Research"
+    },
+    {
+      "id": "projects",
+      "label": "Projects"
+    },
+    {
+      "id": "recommendations",
+      "label": "Recs"
+    },
+    {
+      "id": "writing",
+      "label": "Writing"
+    },
+    {
+      "id": "contact",
+      "label": "Contact"
+    }
+  ]
+}

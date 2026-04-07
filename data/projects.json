@@ -1,0 +1,145 @@
+[
+  {
+    "title": "NotebookLM-for-Windows",
+    "year": "2024",
+    "tagline": "Native Windows wrapper for NotebookLM with session persistence and system-level triggers",
+    "status": "Active",
+    "techStack": "Electron | Vanilla JavaScript | HTML/CSS | auto-launch | IPC-bridge",
+    "githubUrl": "https://github.com/GyaneshSamanta/NotebookLM-for-Windows",
+    "liveUrl": "",
+    "coverImage": "/images/projects/notebooklm-cover.png",
+    "coverImageAlt": "NotebookLM for Windows screenshot",
+    "description": "Users of Google's NotebookLM face workflow friction due to its web-bound nature, which lacks session persistence, system-level triggers, and native desktop integration. This results in 'browser clutter' and missing real-time notifications for long-running AI tasks like audio generation.",
+    "strategicInsight": "Improving the research 'flow' by decoupling a power-user tool from the browser into a dedicated environment, shifting it from a destination website to a persistent productivity utility.",
+    "impact": "Delivers a seamless, low-latency research experience that actively notifies users of task completion without requiring an open browser tab.",
+    "downloads": 33,
+    "tags": [
+      "Electron",
+      "Desktop App",
+      "Developer Tools"
+    ],
+    "featured": true
+  },
+  {
+    "title": "Research-Papers",
+    "year": "2023",
+    "tagline": "All of my research papers (Published + Ongoing)",
+    "status": "Active",
+    "techStack": "Jupyter Notebook",
+    "githubUrl": "https://github.com/GyaneshSamanta/Research-Papers",
+    "liveUrl": "",
+    "coverImage": "",
+    "coverImageAlt": "",
+    "description": "All of my research papers (Published + Ongoing)",
+    "strategicInsight": "",
+    "impact": "",
+    "downloads": 0,
+    "tags": [
+      "Research",
+      "Jupyter Notebook"
+    ],
+    "featured": false
+  },
+  {
+    "title": "Tesla-Stock-Price-Prediction",
+    "year": "2022",
+    "tagline": "Prediction of stock price for the company Tesla.",
+    "status": "Completed",
+    "techStack": "Jupyter Notebook | Python",
+    "githubUrl": "https://github.com/GyaneshSamanta/Tesla-Stock-Price-Prediction-Model",
+    "liveUrl": "",
+    "coverImage": "",
+    "coverImageAlt": "",
+    "description": "Prediction of stock price for the company Tesla.",
+    "strategicInsight": "",
+    "impact": "",
+    "downloads": 0,
+    "tags": [
+      "ML",
+      "Finance"
+    ],
+    "featured": false
+  },
+  {
+    "title": "EthIndia-23-CrossDrop",
+    "year": "2023",
+    "tagline": "Winner, ETHIndia 2023. Cross-chain airdrop distribution built on Arbitrum.",
+    "status": "Completed",
+    "techStack": "JavaScript | Solidity | Arbitrum",
+    "githubUrl": "https://github.com/GyaneshSamanta/EthIndia-23-CrossDrop",
+    "liveUrl": "",
+    "coverImage": "",
+    "coverImageAlt": "",
+    "description": "Winner, ETHIndia 2023. Cross-chain airdrop distribution built on Arbitrum.",
+    "strategicInsight": "",
+    "impact": "",
+    "downloads": 0,
+    "tags": [
+      "Web3",
+      "Ethereum",
+      "Hackathon"
+    ],
+    "featured": false
+  },
+  {
+    "title": "Guilt-free-binge",
+    "year": "2022",
+    "tagline": "Official submission of team SebastianVettel to Thehacktrical-2.",
+    "status": "Completed",
+    "techStack": "JavaScript",
+    "githubUrl": "https://github.com/GyaneshSamanta/Guilt-free-binge",
+    "liveUrl": "",
+    "coverImage": "",
+    "coverImageAlt": "",
+    "description": "Official submission of team SebastianVettel to Thehacktrical-2.",
+    "strategicInsight": "",
+    "impact": "",
+    "downloads": 0,
+    "tags": [
+      "JavaScript",
+      "Hackathon"
+    ],
+    "featured": false
+  },
+  {
+    "title": "NYC-Shootings-Research",
+    "year": "2023",
+    "tagline": "Submission to Youth-Data-Hackathon 2023.",
+    "status": "Completed",
+    "techStack": "Jupyter Notebook | Python",
+    "githubUrl": "https://github.com/GyaneshSamanta/NYC-Shootings-Research-Paper",
+    "liveUrl": "",
+    "coverImage": "",
+    "coverImageAlt": "",
+    "description": "Submission to Youth-Data-Hackathon 2023.",
+    "strategicInsight": "",
+    "impact": "",
+    "downloads": 0,
+    "tags": [
+      "Data Analysis",
+      "Research"
+    ],
+    "featured": false
+  },
+  {
+    "title": "HopeVid-HackRx1.0",
+    "year": "2021",
+    "tagline": "2nd Runners-up @HackRx1.0 by Bajaj Finserv. Video consultation platform.",
+    "status": "Completed",
+    "techStack": "CSS | HTML | JavaScript",
+    "githubUrl": "https://github.com/GyaneshSamanta/HopeVid-HackRx1.0",
+    "liveUrl": "",
+    "coverImage": "",
+    "coverImageAlt": "",
+    "description": "2nd Runners-up @HackRx1.0 by Bajaj Finserv. Video consultation platform.",
+    "strategicInsight": "",
+    "impact": "",
+    "downloads": 0,
+    "tags": [
+      "Healthcare",
+      "Video",
+      "Hackathon"
+    ],
+    "featured": false
+  }
+]

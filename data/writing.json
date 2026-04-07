@@ -1,0 +1,77 @@
+[
+  {
+    "title": "The Validation Gap: Why Teams Build Features Nobody Can Use",
+    "date": "Jan 7, 2026",
+    "publication": "Gyanesh on Product (LinkedIn Newsletter)",
+    "coAuthor": "",
+    "url": "https://www.linkedin.com/pulse/validation-gap-why-teams-build-features-nobody-can-use-samanta-kz3lf",
+    "coverImage": "/images/brand/newsletter-cover.png",
+    "description": "Deep dive into why product teams consistently ship features that users can't effectively use.",
+    "readTime": "8 min read",
+    "tags": [
+      "Product Management",
+      "Validation"
+    ],
+    "featured": true
+  },
+  {
+    "title": "When VCs dictate product decisions, an ex-employee perspective on Snapdeal VIP",
+    "date": "Nov 21, 2025",
+    "publication": "Gyanesh on Product (LinkedIn Newsletter)",
+    "coAuthor": "",
+    "url": "https://www.linkedin.com/pulse/why-snapdeal-failed-my-ex-employee-perspective-its-loyalty-samanta-doijc",
+    "coverImage": "/images/newsletter-cover.png",
+    "description": "When VCs dictate product decisions, an ex-employee perspective on Snapdeal VIP.",
+    "readTime": "10 min read",
+    "tags": [
+      "Product Strategy",
+      "E-commerce"
+    ],
+    "featured": true
+  },
+  {
+    "title": "National Pride Can't Fix a Broken Product: My Month trying Zoho's WhatsApp Clone",
+    "date": "Nov 16, 2025",
+    "publication": "Gyanesh on Product (LinkedIn Newsletter)",
+    "coAuthor": "",
+    "url": "https://www.linkedin.com/pulse/national-pride-cant-fix-broken-product-my-month-trying-samanta-zs9bc",
+    "coverImage": "/images/newsletter-cover.png",
+    "description": "National Pride Can't Fix a Broken Product: My Month trying Zoho's WhatsApp Clone.",
+    "readTime": "7 min read",
+    "tags": [
+      "Product Review",
+      "UX"
+    ],
+    "featured": true
+  },
+  {
+    "title": "Password Sharing Tax: The Most Brilliant Revenue Move Nobody Admits Was Genius",
+    "date": "Nov 7, 2025",
+    "publication": "Gyanesh on Product (LinkedIn Newsletter)",
+    "coAuthor": "",
+    "url": "https://www.linkedin.com/pulse/password-sharing-tax-most-brilliant-revenue-move-nobody-samanta-yjzec",
+    "coverImage": "/images/newsletter-cover.png",
+    "description": "Password Sharing Tax: The Most Brilliant Revenue Move Nobody Admits Was Genius.",
+    "readTime": "6 min read",
+    "tags": [
+      "Revenue Strategy",
+      "Consumer Behaviour"
+    ],
+    "featured": true
+  },
+  {
+    "title": "Spotify's 6-Skip Rule: How One Behavioral Constraint Generated $15B",
+    "date": "2025",
+    "publication": "Gyanesh on Product (LinkedIn Newsletter)",
+    "coAuthor": "",
+    "url": "https://www.linkedin.com/pulse/spotifys-6-skip-rule-how-one-behavioral-constraint-15b-samanta-mqc8c",
+    "coverImage": "/images/newsletter-cover.png",
+    "description": "Spotify's 6-Skip Rule: How One Behavioral Constraint Generated $15B.",
+    "readTime": "5 min read",
+    "tags": [
+      "Behavioral Economics",
+      "Monetization"
+    ],
+    "featured": true
+  }
+]

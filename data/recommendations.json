@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Adamya Singh",
+    "designation": "Product Management Intern Team Lead",
+    "company": "IBM",
+    "relationship": "Manager",
+    "photo": "/images/recommendations/adamya-singh.jpg",
+    "photoAlt": "Adamya Singh headshot",
+    "linkedinUrl": "https://linkedin.com/in/adamya-singh",
+    "shortQuote": "Outstanding intern — proactive, responsive, and high-impact contributor.",
+    "fullText": "It is my pleasure to recommend Gyanesh for his outstanding contributions as an intern on the IBM Sterling Order Management Product Management team. During his two-month tenure, Gyanesh quickly distinguished himself as a proactive, responsive, and high-impact contributor. His ability to rapidly grasp complex concepts, identify opportunities to add value, and deliver high-quality solutions was remarkable. Gyanesh took ownership of in-depth competitive analyses for strategic deals, providing actionable insights that strengthened our go-to-market strategy. He also collaborated cross-functionally to streamline over 1,200 business-critical RFP questions, showcasing his strong research skills and ability to drive efficiency...",
+    "text": "It is my pleasure to recommend Gyanesh for his outstanding contributions as an intern on the IBM Sterling Order Management Product Management team. During his two-month tenure, Gyanesh quickly distinguished himself as a proactive, responsive, and high-impact contributor. His ability to rapidly grasp complex concepts, identify opportunities to add value, and deliver high-quality solutions was remarkable. Gyanesh took ownership of in-depth competitive analyses for strategic deals, providing actionable insights that strengthened our go-to-market strategy. He also collaborated cross-functionally to streamline over 1,200 business-critical RFP questions, showcasing his strong research skills and ability to drive efficiency...",
+    "date": "Jun 2025"
+  },
+  {
+    "name": "Shreya Gupta",
+    "designation": "Engineering @Circle",
+    "company": "Backend Engineering",
+    "relationship": "Colleague",
+    "photo": "/images/recommendations/shreya-gupta.jpg",
+    "photoAlt": "Shreya Gupta headshot",
+    "linkedinUrl": "https://linkedin.com/in/shreya-gupta",
+    "shortQuote": "Exceptional data and backend skills that truly set him apart.",
+    "fullText": "Gyanesh possesses exceptional data and backend skills that truly set him apart. His ability to navigate complex data structures and backend systems with ease is commendable... He approaches every task with enthusiasm and a positive mindset, making him a valuable addition to any team... his excellent communication skills have been instrumental in facilitating effective collaboration.",
+    "text": "Gyanesh possesses exceptional data and backend skills that truly set him apart. His ability to navigate complex data structures and backend systems with ease is commendable... He approaches every task with enthusiasm and a positive mindset, making him a valuable addition to any team... his excellent communication skills have been instrumental in facilitating effective collaboration.",
+    "date": "2023"
+  },
+  {
+    "name": "Kamaldeep Singh",
+    "designation": "Senior Manager Advanced Analytics",
+    "company": "Walmart Marketplace",
+    "relationship": "Manager",
+    "photo": "/images/recommendations/kamaldeep-singh.jpg",
+    "photoAlt": "Kamaldeep Singh headshot",
+    "linkedinUrl": "https://linkedin.com/in/kamaldeep-singh",
+    "shortQuote": "Seamlessly transitioned into a role focused on data and product.",
+    "fullText": "He played a crucial role in managing our AWS infrastructure, making sure everything ran smoothly. His work on our RDS databases and ETL pipelines was top-notch... He dove into complex tasks like crafting queries in subgraphs and conducting in-depth analytics using Dune... what really impressed me was how he seamlessly transitioned into a role focused on data and product.",
+    "text": "He played a crucial role in managing our AWS infrastructure, making sure everything ran smoothly. His work on our RDS databases and ETL pipelines was top-notch... He dove into complex tasks like crafting queries in subgraphs and conducting in-depth analytics using Dune... what really impressed me was how he seamlessly transitioned into a role focused on data and product.",
+    "date": "2023"
+  },
+  {
+    "name": "Shakir Wani",
+    "designation": "Head - Data Science",
+    "company": "TCNS ABFRL",
+    "relationship": "Mentor",
+    "photo": "/images/recommendations/shakir-wani.jpg",
+    "photoAlt": "Shakir Wani headshot",
+    "linkedinUrl": "https://linkedin.com/in/shakir-wani",
+    "shortQuote": "Sound knowledge of ML and a great asset to any team.",
+    "fullText": "Gyanesh has sound knowledge of ML and is a great asset to any team, having mentored him for last 1 year it has been a great pleasure to work with him.",
+    "text": "Gyanesh has sound knowledge of ML and is a great asset to any team, having mentored him for last 1 year it has been a great pleasure to work with him.",
+    "date": "2022"
+  }
+]

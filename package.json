@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "sync": "node scripts/sync-wiki.mjs",
+    "dev": "node scripts/sync-wiki.mjs && next dev",
+    "build": "node scripts/sync-wiki.mjs && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "node scripts/sync-wiki.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
