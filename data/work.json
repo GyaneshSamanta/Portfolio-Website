@@ -1,0 +1,95 @@
+[
+  {
+    "id": "notebooklm-windows",
+    "category": "product",
+    "size": "hero",
+    "title": "NotebookLM for Windows",
+    "subtitle": "Native desktop wrapper for Google's NotebookLM",
+    "description": "Power users of NotebookLM lose context every time they leave the browser. I shipped an Electron-based desktop wrapper with session persistence, system-level shortcuts, and native notifications for long-running audio generation tasks. The product converts a research-heavy web app into a persistent, OS-integrated workspace.",
+    "coverImage": "/images/projects/notebooklm-cover.png",
+    "tags": ["Electron", "Desktop App", "Developer Tools", "AI"],
+    "metrics": [
+      { "label": "Downloads", "value": "33+" },
+      { "label": "Year", "value": "2024" }
+    ],
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/GyaneshSamanta/NotebookLM-for-Windows" }
+    ]
+  },
+  {
+    "id": "snapdeal-vip",
+    "category": "product",
+    "size": "standard",
+    "title": "Snapdeal VIP",
+    "subtitle": "Loyalty subscription programme",
+    "description": "Owned the Snapdeal VIP loyalty programme end-to-end. Drove acquisition and retention through funnel analytics and behavioural cohorts. The first paid-loyalty motion at the brand.",
+    "coverImage": "",
+    "tags": ["Loyalty", "Retention", "Analytics", "E-commerce"],
+    "metrics": [
+      { "label": "Tenure", "value": "9 months" },
+      { "label": "Org", "value": "Snapdeal" }
+    ],
+    "links": []
+  },
+  {
+    "id": "ibm-sterling-oms",
+    "category": "product",
+    "size": "standard",
+    "title": "Sterling OMS competitive intel",
+    "subtitle": "B2B GTM acceleration at IBM",
+    "description": "Built competitive analyses for strategic enterprise deals on IBM's Sterling Order Management team. Streamlined 1,200+ RFP questions into a reusable knowledge base — measurable lift in pre-sales velocity.",
+    "coverImage": "",
+    "tags": ["B2B", "Product Management", "GTM"],
+    "metrics": [
+      { "label": "RFPs reduced", "value": "1.2k+" },
+      { "label": "Org", "value": "IBM" }
+    ],
+    "links": []
+  },
+  {
+    "id": "pegasus-spyware",
+    "category": "research",
+    "size": "feature",
+    "title": "Pegasus spyware: a vulnerable behaviour-based attack system",
+    "subtitle": "ICECAA 2023 · 10 citations",
+    "description": "Co-authored analysis of Pegasus spyware attack vectors and behavioural vulnerability patterns. Most-cited of my published work. Looks at the human side of advanced state-grade malware — why people click, why systems trust.",
+    "coverImage": "",
+    "tags": ["Cybersecurity", "Behavioral Analysis", "Spyware"],
+    "metrics": [
+      { "label": "Citations", "value": "10" },
+      { "label": "Venue", "value": "ICECAA" }
+    ],
+    "links": [
+      {
+        "label": "Read on Scholar",
+        "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=KgKCj14AAAAJ&citation_for_view=KgKCj14AAAAJ:d1gkVwhDpl0C"
+      }
+    ]
+  },
+  {
+    "id": "ethindia-2023",
+    "category": "hackathon",
+    "size": "compact",
+    "title": "ETHIndia 2023 — CrossDrop",
+    "subtitle": "Winner · Ethereum Foundation",
+    "description": "Cross-chain airdrop distribution platform built on Arbitrum. Won at ETHIndia 2023, the largest Ethereum hackathon globally.",
+    "coverImage": "",
+    "tags": ["Web3", "Ethereum", "Hackathon"],
+    "metrics": [{ "label": "Result", "value": "Winner" }],
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/GyaneshSamanta/EthIndia-23-CrossDrop" }
+    ]
+  },
+  {
+    "id": "ethindia-2022",
+    "category": "hackathon",
+    "size": "compact",
+    "title": "ETHIndia 2022 — SigmaZK",
+    "subtitle": "Winner · Best use of Polygon ID",
+    "description": "Zero-knowledge identity flows wired into Collab.Land using Polygon ID. We worked around a known Polygon ID API limitation and won the dedicated track prize.",
+    "coverImage": "",
+    "tags": ["Web3", "ZK Proofs", "Hackathon"],
+    "metrics": [{ "label": "Track", "value": "Polygon ID" }],
+    "links": []
+  }
+]

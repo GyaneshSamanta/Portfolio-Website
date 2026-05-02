@@ -11,6 +11,15 @@ const nextConfig = {
       }
     ],
   },
+  // Old standalone routes folded into home anchors (DESIGN.md §4).
+  async redirects() {
+    return [
+      { source: "/journey",    destination: "/#journey",      permanent: true },
+      { source: "/podcast",    destination: "/#podcast",      permanent: true },
+      { source: "/github",     destination: "/#now-shipping", permanent: true },
+      { source: "/newsletter", destination: "/#writing",      permanent: true },
+    ];
+  },
   // Security headers
   async headers() {
     return [

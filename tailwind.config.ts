@@ -12,17 +12,19 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1.25rem",
       screens: {
         "2xl": "1400px",
       },
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "monospace"],
+        sans: ["var(--font-inter)", "var(--font-geist-sans)", "ui-sans-serif", "system-ui"],
+        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+        serif: ["var(--font-instrument-serif)", "Iowan Old Style", "Palatino Linotype", "Times New Roman", "serif"],
       },
       colors: {
+        // shadcn-compatible aliases (kept for existing components)
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -56,17 +58,56 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Portfolio v2 semantic tokens (DESIGN.md §3.1)
+        bg: {
+          base: "hsl(var(--bg-base))",
+          elevated: "hsl(var(--bg-elevated))",
+          card: "hsl(var(--bg-card))",
+          "card-hover": "hsl(var(--bg-card-hover))",
+        },
+        fg: {
+          primary: "hsl(var(--fg-primary))",
+          secondary: "hsl(var(--fg-secondary))",
+          tertiary: "hsl(var(--fg-tertiary))",
+        },
         brand: {
-          DEFAULT: "hsl(var(--brand-accent))",
+          DEFAULT: "hsl(var(--brand-purple))",
+          purple: "hsl(var(--brand-purple))",
+          pink: "hsl(var(--brand-pink))",
+          violet: "hsl(var(--brand-violet))",
+          magenta: "hsl(var(--brand-magenta))",
+          // legacy aliases used by existing components
           light: "hsl(var(--brand-accent-light))",
           dim: "hsl(var(--brand-accent-dim))",
           foreground: "hsl(var(--brand-accent-foreground))",
-        }
+        },
+        signal: {
+          live: "hsl(var(--signal-live))",
+          warn: "hsl(var(--signal-warn))",
+          info: "hsl(var(--signal-info))",
+        },
+        "border-subtle": "hsl(var(--border-subtle))",
+        "border-strong": "hsl(var(--border-strong))",
+        "border-glow": "hsl(var(--border-glow))",
       },
       borderRadius: {
+        // 24px / 16px / 8px — DESIGN.md §3.4
+        "3xl": "1.5rem",
+        "2xl": "1rem",
+        xl: "0.75rem",
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      transitionTimingFunction: {
+        // DESIGN.md §3.6 motion tokens
+        "out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "swift": "cubic-bezier(0.32, 0.72, 0, 1)",
+      },
+      transitionDuration: {
+        "motion-fast": "200ms",
+        "motion-base": "400ms",
+        "motion-slow": "800ms",
       },
       keyframes: {
         "accordion-down": {
@@ -85,11 +126,22 @@ const config: Config = {
           from: { transform: "translateX(calc(-100% - 2rem))" },
           to: { transform: "translateX(0)" },
         },
+        "gradient-flow": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "pulse-dot": {
+          "0%, 100%": { opacity: "1", transform: "scale(1)" },
+          "50%": { opacity: "0.6", transform: "scale(1.4)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "marquee": "marquee 40s linear infinite",
+        marquee: "marquee 40s linear infinite",
+        "marquee-reverse": "marquee-reverse 40s linear infinite",
+        "gradient-flow": "gradient-flow 6s ease-in-out infinite",
+        "pulse-dot": "pulse-dot 2s ease-in-out infinite",
       },
     },
   },

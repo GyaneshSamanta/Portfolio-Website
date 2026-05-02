@@ -4,53 +4,64 @@
 
 @layer base {
   :root {
-    /* 
-     * Brand Palette from user:
-     * Primary Purple: #982598 → HSL ~300 61% 37%
-     * Deep Navy:      #15173D → HSL ~238 47% 16%
-     * Soft Pink:      #E491C9 → HSL ~318 60% 73%
-     * Warm Cream:     #F1E9E9 → HSL ~0 18% 93%
+    /*
+     * Portfolio v2 — dark-only palette (DESIGN.md §3.1).
+     * Source of truth for color tokens. Tailwind reads these via CSS vars.
      */
 
-    --background: 238 47% 16%;         /* Deep Navy */
-    --foreground: 0 18% 93%;           /* Warm Cream */
+    /* SURFACES */
+    --bg-base: 240 47% 7%;            /* #0A0820 */
+    --bg-elevated: 238 47% 12%;       /* #11103A */
+    --bg-card: 238 40% 16%;           /* #1A1A3A */
+    --bg-card-hover: 238 36% 22%;     /* #25254A */
 
-    --card: 238 40% 20%;               /* Slightly lighter navy */
-    --card-foreground: 0 18% 93%;
+    /* TEXT */
+    --fg-primary: 0 18% 96%;          /* #F5EFEF */
+    --fg-secondary: 320 12% 78%;      /* #C9BCC4 */
+    --fg-tertiary: 240 10% 55%;       /* #828397 */
 
-    --popover: 238 47% 16%;
-    --popover-foreground: 0 18% 93%;
+    /* BRAND ACCENTS */
+    --brand-purple: 300 61% 37%;      /* #982598 */
+    --brand-pink: 318 60% 73%;        /* #E491C9 */
+    --brand-violet: 270 76% 60%;      /* #8E3DEF */
+    --brand-magenta: 315 88% 56%;     /* #ED2EBA */
 
-    --primary: 300 61% 37%;            /* Purple */
-    --primary-foreground: 0 18% 93%;
+    /* SIGNAL COLORS */
+    --signal-live: 142 71% 45%;       /* #1FBA5C */
+    --signal-warn: 38 92% 60%;        /* #F4B23F */
+    --signal-info: 195 88% 60%;       /* #38C5F4 */
 
-    --secondary: 238 35% 24%;          /* Navy mid */
-    --secondary-foreground: 0 18% 93%;
+    /* BORDERS */
+    --border-subtle: 240 30% 22%;
+    --border-strong: 300 40% 35%;
+    --border-glow: 300 80% 60%;
 
-    --muted: 238 30% 28%;
-    --muted-foreground: 318 20% 70%;   /* Pinkish muted */
-
-    --accent: 300 40% 30%;             /* Dimmer purple */
-    --accent-foreground: 0 18% 93%;
-
-    /* Brand accent — the vivid purple */
-    --brand-accent: 300 61% 37%;
-    --brand-accent-light: 318 60% 73%;  /* Soft pink */
-    --brand-accent-foreground: 0 18% 93%;
+    /* shadcn-compatible aliases — map old names onto new tokens so existing
+       components (Button, Card, Badge, etc.) keep working until rewritten. */
+    --background: var(--bg-base);
+    --foreground: var(--fg-primary);
+    --card: var(--bg-card);
+    --card-foreground: var(--fg-primary);
+    --popover: var(--bg-elevated);
+    --popover-foreground: var(--fg-primary);
+    --primary: var(--brand-purple);
+    --primary-foreground: var(--fg-primary);
+    --secondary: var(--bg-card);
+    --secondary-foreground: var(--fg-primary);
+    --muted: 238 30% 18%;
+    --muted-foreground: var(--fg-secondary);
+    --accent: var(--brand-violet);
+    --accent-foreground: var(--fg-primary);
+    --brand-accent: var(--brand-purple);
+    --brand-accent-light: var(--brand-pink);
+    --brand-accent-foreground: var(--fg-primary);
     --brand-accent-dim: 300 30% 50%;
-
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 18% 93%;
-
-    --border: 238 30% 30%;
-    --input: 238 30% 28%;
-    --ring: 300 61% 37%;
-
-    --radius: 0rem;
-
-    /* Section alternating colors */
-    --section-dark: 238 47% 16%;        /* Deep Navy */
-    --section-light: 0 18% 93%;         /* Warm Cream */
+    --destructive-foreground: var(--fg-primary);
+    --border: var(--border-subtle);
+    --input: var(--bg-card);
+    --ring: var(--brand-magenta);
+    --radius: 1.5rem;
   }
 }
 
@@ -61,75 +72,69 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Hide native cursor on fine pointers; CursorCircle takes over.
+     Touch / coarse pointers retain default browser cursor. */
+  @media (pointer: fine) {
+    html,
+    body,
+    a,
+    button,
+    [role="button"],
+    input,
+    select,
+    textarea,
+    .interactive {
+      cursor: none;
+    }
+  }
+
+  /* Editorial italic — Instrument Serif moments (DESIGN.md §3.2). */
+  .font-serif {
+    font-family: var(--font-instrument-serif), "Iowan Old Style", "Apple Garamond",
+      "Palatino Linotype", "Times New Roman", serif;
+  }
+
+  /* Focus rings — WCAG (DESIGN.md §9). */
+  :focus-visible {
+    outline: 2px solid hsl(var(--brand-magenta));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
 }
 
-/* Branded gradient utilities */
 @layer utilities {
+  /* Brand gradient utilities — kept for legacy components; new sections should
+     use semantic tokens directly. */
   .bg-brand-gradient {
     background: linear-gradient(
       135deg,
-      #982598 0%,
-      #E491C9 50%,
-      #15173D 100%
+      hsl(var(--brand-purple)) 0%,
+      hsl(var(--brand-magenta)) 50%,
+      hsl(var(--brand-violet)) 100%
     );
   }
   .bg-brand-gradient-subtle {
     background: linear-gradient(
       135deg,
-      rgba(152, 37, 152, 0.15) 0%,
-      rgba(228, 145, 201, 0.1) 50%,
-      rgba(21, 23, 61, 0.2) 100%
-    );
-  }
-  .bg-brand-gradient-card {
-    background: linear-gradient(
-      145deg,
-      rgba(152, 37, 152, 0.12) 0%,
-      rgba(228, 145, 201, 0.08) 40%,
-      rgba(21, 23, 61, 0.05) 100%
+      hsl(var(--brand-purple) / 0.15) 0%,
+      hsl(var(--brand-pink) / 0.10) 50%,
+      hsl(var(--bg-elevated) / 0.20) 100%
     );
   }
   .text-brand-gradient {
     background: linear-gradient(
       135deg,
-      #982598 0%,
-      #E491C9 100%
+      hsl(var(--brand-magenta)) 0%,
+      hsl(var(--brand-pink)) 100%
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  /* Light section overrides */
-  .section-light {
-    --background: 0 18% 93%;
-    --foreground: 238 47% 16%;
-    --card: 0 15% 96%;
-    --card-foreground: 238 47% 16%;
-    --secondary: 318 30% 88%;
-    --secondary-foreground: 238 47% 16%;
-    --muted: 318 15% 85%;
-    --muted-foreground: 238 30% 40%;
-    --border: 318 15% 82%;
-    background-color: hsl(0 18% 93%);
-    color: hsl(238 47% 16%);
-  }
-  /* Dark section overrides */
-  .section-dark {
-    --background: 238 47% 16%;
-    --foreground: 0 18% 93%;
-    --card: 238 40% 20%;
-    --card-foreground: 0 18% 93%;
-    --secondary: 238 35% 24%;
-    --secondary-foreground: 0 18% 93%;
-    --muted: 238 30% 28%;
-    --muted-foreground: 318 20% 70%;
-    --border: 238 30% 30%;
-    background-color: hsl(238 47% 16%);
-    color: hsl(0 18% 93%);
-  }
 }
 
-/* Sticky-stack with wrappers: scroll through content, then next section slides over */
+/* Sticky-stack layout (existing pattern, preserved through Phase 1). */
 .section-pin {
   position: relative;
 }
@@ -149,7 +154,6 @@
   top: 0;
   min-height: 100vh;
   box-shadow: 0 -20px 60px -10px rgba(0, 0, 0, 0.3);
-  /* Performance Tier 1: GPU compositing hints */
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -158,33 +162,30 @@
   box-shadow: none;
 }
 
-/* Custom Scrollbar */
+/* Custom scrollbar — purple-tinted to match brand. */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(238 47% 16%);
+  background: hsl(var(--bg-base));
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(300 61% 37% / 0.4);
+  background: hsl(var(--brand-purple) / 0.4);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(300 61% 37% / 0.7);
+  background: hsl(var(--brand-purple) / 0.7);
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
-
-/* Hide scrollbar for IE, Edge and Firefox */
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-/* Recommendation card: show truncated by default, full on hover */
+/* Recommendation card hover-expand (legacy — replaced by marquee in Phase 4). */
 .rec-card .rec-full {
   display: none;
 }
@@ -193,4 +194,16 @@
 }
 .rec-card:hover .rec-full {
   display: block;
+}
+
+/* Reduced motion fallback: kill expensive transforms, keep opacity. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

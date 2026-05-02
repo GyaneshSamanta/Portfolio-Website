@@ -1,46 +1,47 @@
 "use client";
 
+/**
+ * Navbar — DESIGN.md §4 / handoff PNGs
+ * Two states: floating-glassy on top, compact-pill on scroll. Anchor-based
+ * navigation matching the new IA. Mobile collapses behind a sheet.
+ */
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { SITE_CONFIG } from "@/lib/constants";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+const NAV_ITEMS: { label: string; href: string }[] = [
+  { label: "Now Shipping", href: "/#now-shipping" },
+  { label: "Journey", href: "/#journey" },
+  { label: "Work", href: "/#work" },
+  { label: "Writing", href: "/#writing" },
+  { label: "Podcast", href: "/#podcast" },
+];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentTime, setCurrentTime] = useState("");
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
+  const [currentTime, setCurrentTime] = useState("");
 
-  // Close mobile menu on route change
   useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
-
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  }, [isOpen]);
-
-  // Detect scroll for state change
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 80);
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Live clock
   useEffect(() => {
-    const update = () => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const update = () =>
       setCurrentTime(
         new Date().toLocaleTimeString("en-US", {
           hour: "numeric",
@@ -49,173 +50,142 @@ export function Navbar() {
           timeZone: "Asia/Kolkata",
         })
       );
-    };
     update();
-    const id = setInterval(update, 10000);
-    return () => clearInterval(id);
+    const id = window.setInterval(update, 30_000);
+    return () => window.clearInterval(id);
   }, []);
 
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        scrolled
-          ? "bg-[#15173D]/95 backdrop-blur-md border-b border-white/10"
-          : "bg-transparent"
-      )}
-    >
-      <div
+    <>
+      <nav
+        aria-label="Primary"
         className={cn(
-          "w-full px-4 md:px-8 flex items-center justify-between transition-all duration-500",
-          scrolled ? "h-14" : "h-20"
+          "fixed inset-x-0 top-0 z-50 transition-[padding,background-color,backdrop-filter] duration-500",
+          scrolled ? "px-3 pt-3 md:px-6 md:pt-4" : "px-3 pt-3 md:px-8 md:pt-6"
         )}
       >
-        {/* Left: Logo + Contact Info */}
-        <div className="flex items-center gap-4 md:gap-6 shrink-0">
-          <Link href="/" className="hover:opacity-80 transition-opacity shrink-0">
-            <Image
-              src="/images/brand/newsletter-cover.png"
-              alt="Logo"
-              width={scrolled ? 36 : 48}
-              height={scrolled ? 36 : 48}
-              className="rounded-lg object-cover transition-all duration-500"
-            />
+        <div
+          className={cn(
+            "mx-auto flex items-center gap-3 transition-all duration-500",
+            scrolled
+              ? "h-12 max-w-3xl rounded-full border border-border-subtle bg-bg-elevated/85 px-3 backdrop-blur-md md:h-14 md:px-4"
+              : "h-16 max-w-[1400px] rounded-full border border-border-subtle/40 bg-bg-elevated/40 px-4 backdrop-blur-md md:h-20 md:px-6"
+          )}
+        >
+          {/* Logo */}
+          <Link
+            href="/"
+            data-cursor="Home"
+            className="flex shrink-0 items-center gap-2"
+          >
+            <span className="relative inline-flex h-8 w-8 overflow-hidden rounded-full ring-1 ring-border-strong">
+              <Image
+                src="/images/brand/newsletter-cover.png"
+                alt="Gyanesh Samanta"
+                fill
+                sizes="32px"
+                className="object-cover"
+              />
+            </span>
+            <span className="hidden font-mono text-xs uppercase tracking-[0.2em] text-fg-secondary md:inline">
+              gyanesh.s
+            </span>
           </Link>
-          <div className="hidden lg:flex items-center gap-6 text-sm font-mono" style={{ color: "hsl(318 60% 73% / 0.7)" }}>
-            <span>(91) 8763048771</span>
-            <span>mail.gyaneshsamanta@gmail.com</span>
-          </div>
-        </div>
 
-        {/* Center-Right: Nav Links */}
-        <div className="hidden md:flex items-center gap-8">
-          {/* On home (not scrolled): show expanded nav across rows */}
-          {!scrolled ? (
-            <div className="flex flex-col items-end gap-1">
-              <div className="flex items-center gap-8">
-                {SITE_CONFIG.navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      "text-sm font-medium transition-colors relative py-1",
-                      pathname === item.href
-                        ? "text-[#E491C9]"
-                        : "text-[#F1E9E9]/60 hover:text-[#E491C9]"
-                    )}
-                  >
-                    {item.label}
-                    {pathname === item.href && (
-                      <motion.div
-                        layoutId="navbar-indicator"
-                        className="absolute -bottom-0.5 left-0 right-0 h-[2px]"
-                        style={{ background: "linear-gradient(90deg, #982598, #E491C9)" }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.2 }}
-                      />
-                    )}
-                  </Link>
-                ))}
-              </div>
-              <div className="flex items-center gap-8">
-                <Link href={SITE_CONFIG.links.linkedin} target="_blank" className="text-sm font-medium text-[#F1E9E9]/40 hover:text-[#E491C9] transition-colors">
-                  LinkedIn
-                </Link>
-                <Link href="https://scholar.google.com/citations?user=KgKCj14AAAAJ" target="_blank" className="text-sm font-medium text-[#F1E9E9]/40 hover:text-[#E491C9] transition-colors">
-                  Scholar
-                </Link>
-              </div>
-            </div>
-          ) : (
-            /* On scroll: compact single row */
-            <div className="flex items-center gap-7">
-              {SITE_CONFIG.navItems.map((item) => (
+          {/* Desktop links */}
+          <ul className="ml-auto hidden items-center gap-1 md:flex">
+            {NAV_ITEMS.map((item) => (
+              <li key={item.href}>
                 <Link
-                  key={item.href}
                   href={item.href}
-                  className={cn(
-                    "text-sm font-medium transition-colors relative",
-                    pathname === item.href
-                      ? "text-[#E491C9]"
-                      : "text-[#F1E9E9]/60 hover:text-[#E491C9]"
-                  )}
+                  data-cursor={item.label}
+                  className="rounded-full px-3 py-1.5 text-sm font-medium text-fg-secondary transition-colors hover:bg-bg-card hover:text-fg-primary"
                 >
                   {item.label}
-                  {pathname === item.href && (
-                    <motion.div
-                      layoutId="navbar-indicator"
-                      className="absolute -bottom-1 left-0 right-0 h-[2px]"
-                      style={{ background: "linear-gradient(90deg, #982598, #E491C9)" }}
-                    />
-                  )}
                 </Link>
-              ))}
+              </li>
+            ))}
+          </ul>
+
+          {/* Time pill — desktop only, on top state. */}
+          {!scrolled && (
+            <div className="ml-3 hidden items-center gap-2 rounded-full border border-border-subtle bg-bg-card/60 px-3 py-1 font-mono text-[11px] text-fg-tertiary backdrop-blur md:flex">
+              <span className="h-1.5 w-1.5 rounded-full bg-signal-live" aria-hidden />
+              India · {currentTime}
             </div>
           )}
-        </div>
 
-        {/* Far Right: Location, Time, Audio */}
-        <div className="flex items-center gap-4 shrink-0">
-          <div className="hidden md:flex items-center gap-2 text-sm font-mono" style={{ color: "hsl(0 18% 93% / 0.6)" }}>
-            <span>India</span>
-            <span style={{ color: "#E491C9" }}>●</span>
-            <span>{currentTime}</span>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="p-2 transition-colors md:hidden"
-            style={{ color: "#F1E9E9" }}
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
+          {/* CTA */}
+          <Link
+            href="/#contact"
+            data-cursor="Contact"
+            className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-brand-magenta to-brand-violet px-4 py-1.5 text-sm font-semibold text-white transition-transform duration-200 ease-swift hover:scale-[1.03] md:ml-2"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            Let's talk
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </Link>
+
+          {/* Mobile menu */}
+          <button
+            type="button"
+            onClick={() => setIsOpen((v) => !v)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+            data-cursor="Menu"
+            className="ml-1 flex h-9 w-9 items-center justify-center rounded-full border border-border-subtle bg-bg-card/40 text-fg-primary md:hidden"
+          >
+            {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile sheet */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            id="mobile-menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-14 z-40 backdrop-blur-md md:hidden flex flex-col p-8 gap-6 border-t"
-            style={{
-              backgroundColor: "hsl(238 47% 16% / 0.95)",
-              borderColor: "hsl(300 61% 37% / 0.2)",
-            }}
+            className="fixed inset-0 z-40 bg-bg-base/95 backdrop-blur-xl md:hidden"
           >
-            <div className="flex flex-col gap-6">
-              {SITE_CONFIG.navItems.map((item, index) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link
-                    href={item.href}
-                    className={cn(
-                      "text-2xl font-semibold transition-colors block",
-                      pathname === item.href ? "text-[#E491C9]" : "text-[#F1E9E9]/70 hover:text-[#E491C9]"
-                    )}
+            <div className="flex h-full flex-col px-6 pb-10 pt-24">
+              <ul className="flex flex-col gap-2">
+                {NAV_ITEMS.map((item, idx) => (
+                  <motion.li
+                    key={item.href}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.04 }}
                   >
-                    {item.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-            <div className="mt-auto pt-8 border-t text-sm font-mono space-y-2" style={{ borderColor: "hsl(300 61% 37% / 0.2)", color: "#E491C9" }}>
-              <p>(91) 8763048771</p>
-              <p>mail.gyaneshsamanta@gmail.com</p>
+                    <Link
+                      href={item.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block rounded-2xl border border-border-subtle bg-bg-card/50 px-4 py-4 text-2xl font-semibold text-fg-primary"
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+              <div className="mt-auto flex items-center justify-between font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+                <span>
+                  <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-signal-live align-middle" />
+                  India · {currentTime}
+                </span>
+                <Link
+                  href="/#contact"
+                  onClick={() => setIsOpen(false)}
+                  className="text-fg-primary"
+                >
+                  Contact →
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }

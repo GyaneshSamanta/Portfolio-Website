@@ -1,47 +1,23 @@
 import { HeroSection } from "@/components/sections/hero";
-import { ExperienceSection } from "@/components/sections/experience";
-import { ResearchSection } from "@/components/sections/research";
-import { ProjectsSection } from "@/components/sections/projects";
-import { RecommendationsSection } from "@/components/sections/recommendations";
+import { NowShippingSection } from "@/components/sections/now-shipping";
+import { JourneySection } from "@/components/sections/journey";
+import { SelectedWorkSection } from "@/components/sections/selected-work";
 import { WritingSection } from "@/components/sections/writing";
-import { HackathonsSection } from "@/components/sections/hackathons";
-import { SkillsSection } from "@/components/sections/skills";
-import { ContactCTA } from "@/components/contact-cta";
-import { SectionNav } from "@/components/section-nav";
+import { PodcastSection } from "@/components/sections/podcast";
+import { WallOfLoveSection } from "@/components/sections/wall-of-love";
+import { ContactSection } from "@/components/sections/contact";
 
 export default function Home() {
   return (
     <>
-      <SectionNav />
-      <div className="stacking-sections">
-        <div className="section-pin">
-          <HeroSection />
-        </div>
-        <div className="section-pin">
-          <ExperienceSection />
-        </div>
-        <div className="section-pin">
-          <ResearchSection />
-        </div>
-        <div className="section-pin">
-          <ProjectsSection />
-        </div>
-        <div className="section-pin">
-          <HackathonsSection />
-        </div>
-        <div className="section-pin">
-          <RecommendationsSection />
-        </div>
-        <div className="section-pin">
-          <WritingSection />
-        </div>
-        <div className="section-pin">
-          <SkillsSection />
-        </div>
-        <div className="section-pin">
-          <ContactCTA />
-        </div>
-      </div>
+      <HeroSection />
+      <NowShippingSection />
+      <JourneySection />
+      <SelectedWorkSection />
+      <WritingSection />
+      <PodcastSection />
+      <WallOfLoveSection />
+      <ContactSection />
     </>
   );
 }

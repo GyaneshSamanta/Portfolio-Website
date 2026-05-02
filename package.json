@@ -3,30 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "sync": "node scripts/sync-wiki.mjs",
-    "dev": "node scripts/sync-wiki.mjs && next dev",
-    "build": "node scripts/sync-wiki.mjs && next build",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "node scripts/sync-wiki.mjs"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.2.4",
     "@studio-freight/lenis": "^1.0.42",
     "@vercel/speed-insights": "^1.3.1",
-    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.34.3",
     "geist": "^1.7.0",
     "lenis": "^1.3.17",
+    "lite-youtube-embed": "^0.3.3",
     "lucide-react": "^0.563.0",
     "next": "14.2.35",
-    "next-themes": "^0.4.6",
     "react": "^18",
-    "react-calendly": "^4.4.0",
     "react-dom": "^18",
-    "tailwind-merge": "^3.5.0",
-    "use-sound": "^5.0.0"
+    "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
     "@types/node": "^20",

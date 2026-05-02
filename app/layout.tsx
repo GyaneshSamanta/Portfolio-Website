@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Instrument_Serif } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { SITE_CONFIG } from "@/lib/constants";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
-import { CustomCursor } from "@/components/ui/custom-cursor";
+import { CursorCircle } from "@/components/ui/cursor-circle";
+import { NoiseTexture } from "@/components/ui/noise-texture";
+import { ProgressRail } from "@/components/ui/progress-rail";
 import { LoadingScreen } from "@/components/ui/loading-screen";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
@@ -12,9 +14,15 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
-import { ThemeProvider } from "@/components/theme-provider";
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+});
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_CONFIG.url),
   title: {
     default: SITE_CONFIG.title,
     template: `%s | ${SITE_CONFIG.name}`,
@@ -50,25 +58,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased bg-background text-foreground min-h-screen flex flex-col selection:bg-primary/30 selection:text-primary-foreground`}>
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem={false}
-            disableTransitionOnChange
-          >
-          <SmoothScroll>
-              <CustomCursor />
-              <LoadingScreen>
-                <Navbar />
-                <main className="flex-1 selection:bg-primary/30">
-                  {children}
-                </main>
-                <Footer />
-              </LoadingScreen>
-            </SmoothScroll>
-        </ThemeProvider>
-        {/* Cal.com embed — lazy loaded for better Core Web Vitals (Enhancement 11.8) */}
+      <body
+        className={`${inter.variable} ${instrumentSerif.variable} font-sans antialiased bg-bg-base text-fg-primary min-h-screen flex flex-col selection:bg-brand-magenta/40 selection:text-fg-primary`}
+      >
+        {/* Skip link — keyboard users land here first (DESIGN.md §9). */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-brand-magenta focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
+        >
+          Skip to content
+        </a>
+
+        <NoiseTexture />
+        <ProgressRail />
+        <CursorCircle />
+        <SmoothScroll>
+          <LoadingScreen>
+            <Navbar />
+            <main id="main" className="flex-1 selection:bg-brand-magenta/40">
+              {children}
+            </main>
+            <Footer />
+          </LoadingScreen>
+        </SmoothScroll>
+
+        {/* Cal.com embed — lazy loaded for better Core Web Vitals. */}
         <Script id="cal-embed" strategy="lazyOnload">
           {`(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
           Cal("init", "15min", {origin:"https://app.cal.com"});
