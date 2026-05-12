@@ -18,7 +18,7 @@ import { ReleaseTile } from "@/components/now-shipping/release-tile";
 import { ProofTile } from "@/components/now-shipping/proof-tile";
 import { NewsletterTile } from "@/components/now-shipping/newsletter-tile";
 import heroData from "@/data/hero.json";
-import writingData from "@/data/writing.json";
+import { getAllPosts } from "@/lib/blog";
 
 const USERNAME = "GyaneshSamanta";
 
@@ -40,7 +40,7 @@ export async function NowShippingSection() {
     .filter((r) => !r.name.toLowerCase().endsWith(".github.io"))
     .slice(0, 2);
   const badges = (heroData as any).badges as string[] | undefined;
-  const featuredEssay = (writingData as any[]).find((w) => w.featured) ?? (writingData as any[])[0];
+  const featuredEssay = getAllPosts()[0] ?? null;
 
   return (
     <section
@@ -83,9 +83,9 @@ export async function NowShippingSection() {
           {featuredEssay && (
             <NewsletterTile
               title={featuredEssay.title}
-              date={featuredEssay.date}
-              url={featuredEssay.url}
-              coverImage={featuredEssay.coverImage}
+              date={featuredEssay.dateDisplay}
+              url={`/blog/${featuredEssay.slug}`}
+              coverImage={featuredEssay.cover}
               readTime={featuredEssay.readTime}
               spanClass="lg:col-span-3"
             />

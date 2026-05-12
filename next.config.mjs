@@ -5,19 +5,18 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "i.ytimg.com",
-      }
+      { protocol: "https", hostname: "i.ytimg.com" },
+      { protocol: "https", hostname: "media.licdn.com" },
     ],
   },
-  // Old standalone routes folded into home anchors (DESIGN.md §4).
+  // Old standalone routes folded into home anchors / canonical /blog.
   async redirects() {
     return [
       { source: "/journey",    destination: "/#journey",      permanent: true },
       { source: "/podcast",    destination: "/#podcast",      permanent: true },
       { source: "/github",     destination: "/#now-shipping", permanent: true },
-      { source: "/newsletter", destination: "/#writing",      permanent: true },
+      { source: "/newsletter", destination: "/blog",          permanent: true },
+      { source: "/writing",    destination: "/blog",          permanent: true },
     ];
   },
   // Security headers

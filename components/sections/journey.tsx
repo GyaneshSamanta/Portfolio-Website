@@ -136,9 +136,9 @@ function JourneyWalk() {
               />
             </svg>
 
-            {/* Walking figure — pinned to viewport center. */}
+            {/* Traveler — pinned to viewport center, sits ON the path. */}
             <div
-              className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-[80px]"
+              className="absolute left-1/2 top-1/2 z-10 h-4 w-4 -translate-x-1/2 -translate-y-1/2"
               aria-hidden
             >
               <WalkingFigure walking={walking} />

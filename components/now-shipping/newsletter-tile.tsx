@@ -24,14 +24,14 @@ export function NewsletterTile({
   return (
     <BentoTile
       href={url}
-      external
+      external={/^https?:\/\//.test(url)}
       spanClass={spanClass}
       rowSpan={rowSpan}
       cursorLabel="Read"
       showArrow
       className="!p-0"
     >
-      {coverImage && (
+      {coverImage ? (
         <div className="relative aspect-[16/9] w-full overflow-hidden">
           <Image
             src={coverImage}
@@ -39,9 +39,12 @@ export function NewsletterTile({
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover"
+            unoptimized={/^https?:\/\//.test(coverImage)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-bg-card/40 to-transparent" />
         </div>
+      ) : (
+        <div className="relative aspect-[16/9] w-full bg-gradient-to-br from-brand-magenta/20 via-brand-violet/15 to-bg-card" />
       )}
       <div className="flex flex-1 flex-col p-5 md:p-6">
         <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-fg-tertiary">

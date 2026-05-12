@@ -4,17 +4,15 @@
     "category": "product",
     "size": "hero",
     "title": "NotebookLM for Windows",
-    "subtitle": "Native desktop wrapper for Google's NotebookLM",
-    "description": "Power users of NotebookLM lose context every time they leave the browser. I shipped an Electron-based desktop wrapper with session persistence, system-level shortcuts, and native notifications for long-running audio generation tasks. The product converts a research-heavy web app into a persistent, OS-integrated workspace.",
+    "subtitle": "Native desktop wrapper · 2,000+ downloads",
+    "description": "Power users of NotebookLM lose context every time they leave the browser. I shipped an Electron-based desktop wrapper with session persistence, system-level shortcuts, and native notifications for long-running audio generation tasks. The product converts a research-heavy web app into a persistent, OS-integrated workspace. Crossed 2,000 downloads organically.",
     "coverImage": "/images/projects/notebooklm-cover.png",
-    "tags": ["Electron", "Desktop App", "Developer Tools", "AI"],
+    "tags": ["Electron", "Desktop App", "AI"],
     "metrics": [
-      { "label": "Downloads", "value": "33+" },
+      { "label": "Downloads", "value": "2,000+" },
       { "label": "Year", "value": "2024" }
     ],
-    "links": [
-      { "label": "GitHub", "url": "https://github.com/GyaneshSamanta/NotebookLM-for-Windows" }
-    ]
+    "links": [{ "label": "GitHub", "url": "https://github.com/GyaneshSamanta/NotebookLM-for-Windows" }]
   },
   {
     "id": "snapdeal-vip",
@@ -22,14 +20,16 @@
     "size": "standard",
     "title": "Snapdeal VIP",
     "subtitle": "Loyalty subscription programme",
-    "description": "Owned the Snapdeal VIP loyalty programme end-to-end. Drove acquisition and retention through funnel analytics and behavioural cohorts. The first paid-loyalty motion at the brand.",
+    "description": "Owned Snapdeal VIP end-to-end. Integrated Mixpanel across the checkout funnel, ran ad-hoc RCAs, and drove retention improvements through behavioural cohort analysis. Wrote about the lessons in the most-read Snapdeal post-mortem on my newsletter.",
     "coverImage": "",
-    "tags": ["Loyalty", "Retention", "Analytics", "E-commerce"],
+    "tags": ["Loyalty", "Retention", "Mixpanel"],
     "metrics": [
       { "label": "Tenure", "value": "9 months" },
       { "label": "Org", "value": "Snapdeal" }
     ],
-    "links": []
+    "links": [
+      { "label": "Read the post-mortem", "url": "/blog/why-snapdeal-failed-my-ex-employee-perspective-its-loyalty-samanta-doijc" }
+    ]
   },
   {
     "id": "ibm-sterling-oms",
@@ -37,7 +37,7 @@
     "size": "standard",
     "title": "Sterling OMS competitive intel",
     "subtitle": "B2B GTM acceleration at IBM",
-    "description": "Built competitive analyses for strategic enterprise deals on IBM's Sterling Order Management team. Streamlined 1,200+ RFP questions into a reusable knowledge base — measurable lift in pre-sales velocity.",
+    "description": "Built competitive analyses for strategic enterprise deals on IBM's Sterling Order Management team. Streamlined 1,200+ RFP questions into a reusable knowledge base using Qvidian automation. Outcome: measurable lift in pre-sales velocity. Received a PPO.",
     "coverImage": "",
     "tags": ["B2B", "Product Management", "GTM"],
     "metrics": [
@@ -50,46 +50,42 @@
     "id": "pegasus-spyware",
     "category": "research",
     "size": "feature",
-    "title": "Pegasus spyware: a vulnerable behaviour-based attack system",
-    "subtitle": "ICECAA 2023 · 10 citations",
-    "description": "Co-authored analysis of Pegasus spyware attack vectors and behavioural vulnerability patterns. Most-cited of my published work. Looks at the human side of advanced state-grade malware — why people click, why systems trust.",
+    "title": "Pegasus Spyware: An attack system artemis",
+    "subtitle": "IEEE · Aug 2023",
+    "description": "Co-authored study examining the technical intricacies of Pegasus spyware. Explores propagation methods, zero-day vulnerability exploitation, and HTTPS command-and-control channels. Reveals the elusive nature of Pegasus and the minimal traces it leaves.",
     "coverImage": "",
-    "tags": ["Cybersecurity", "Behavioral Analysis", "Spyware"],
+    "tags": ["Cybersecurity", "Behavioral Analysis", "Research"],
     "metrics": [
-      { "label": "Citations", "value": "10" },
-      { "label": "Venue", "value": "ICECAA" }
+      { "label": "Venue", "value": "IEEE" },
+      { "label": "Year", "value": "2023" }
     ],
-    "links": [
-      {
-        "label": "Read on Scholar",
-        "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=KgKCj14AAAAJ&citation_for_view=KgKCj14AAAAJ:d1gkVwhDpl0C"
-      }
-    ]
+    "links": [{ "label": "Read on IEEE", "url": "https://ieeexplore.ieee.org/document/10212163" }]
   },
   {
     "id": "ethindia-2023",
     "category": "hackathon",
     "size": "compact",
     "title": "ETHIndia 2023 — CrossDrop",
-    "subtitle": "Winner · Ethereum Foundation",
-    "description": "Cross-chain airdrop distribution platform built on Arbitrum. Won at ETHIndia 2023, the largest Ethereum hackathon globally.",
+    "subtitle": "Winner · Arbitrum Track",
+    "description": "Cross-chain airdrop distribution built on Arbitrum. Won the Arbitrum track at ETHIndia 2023 — the largest Ethereum hackathon globally.",
     "coverImage": "",
-    "tags": ["Web3", "Ethereum", "Hackathon"],
+    "tags": ["Web3", "Hackathon"],
     "metrics": [{ "label": "Result", "value": "Winner" }],
     "links": [
-      { "label": "GitHub", "url": "https://github.com/GyaneshSamanta/EthIndia-23-CrossDrop" }
+      { "label": "GitHub", "url": "https://github.com/GyaneshSamanta/EthIndia-23-CrossDrop" },
+      { "label": "Read the story", "url": "/blog/how-we-won-ethindia23-gyanesh-samanta-mplcc" }
     ]
   },
   {
-    "id": "ethindia-2022",
+    "id": "prodalytics",
     "category": "hackathon",
     "size": "compact",
-    "title": "ETHIndia 2022 — SigmaZK",
-    "subtitle": "Winner · Best use of Polygon ID",
-    "description": "Zero-knowledge identity flows wired into Collab.Land using Polygon ID. We worked around a known Polygon ID API limitation and won the dedicated track prize.",
+    "title": "Prodalytics by XLRI",
+    "subtitle": "National Winner · Dec 2024",
+    "description": "National-level case competition on Data Analytics and Product Management hosted by XLRI Jamshedpur. Won at the national finals.",
     "coverImage": "",
-    "tags": ["Web3", "ZK Proofs", "Hackathon"],
-    "metrics": [{ "label": "Track", "value": "Polygon ID" }],
+    "tags": ["Case Comp", "Analytics"],
+    "metrics": [{ "label": "Result", "value": "National Winner" }],
     "links": []
   }
 ]

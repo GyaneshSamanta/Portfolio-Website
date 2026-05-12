@@ -14,11 +14,11 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS: { label: string; href: string }[] = [
-  { label: "Now Shipping", href: "/#now-shipping" },
   { label: "Journey", href: "/#journey" },
   { label: "Work", href: "/#work" },
-  { label: "Writing", href: "/#writing" },
+  { label: "Blog", href: "/blog" },
   { label: "Podcast", href: "/#podcast" },
+  { label: "Recs", href: "/#recommendations" },
 ];
 
 export function Navbar() {

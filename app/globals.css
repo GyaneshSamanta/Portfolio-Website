@@ -196,6 +196,157 @@
   display: block;
 }
 
+/* Editorial article body — DESIGN.md §5.5. Styles LinkedIn-imported HTML
+   inside .article-prose. Centered narrow column, Geist Sans body, Instrument
+   Serif headings, proper hierarchy for h2/h3/blockquote/figure. */
+.article-prose {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: hsl(var(--fg-secondary));
+}
+.article-prose > * + * {
+  margin-top: 1.25em;
+}
+.article-prose p {
+  margin: 1.25em 0;
+}
+.article-prose strong {
+  color: hsl(var(--fg-primary));
+  font-weight: 600;
+}
+.article-prose em {
+  font-style: italic;
+}
+.article-prose a {
+  color: hsl(var(--brand-pink));
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--brand-magenta) / 0.4);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 200ms ease;
+}
+.article-prose a:hover {
+  text-decoration-color: hsl(var(--brand-magenta));
+}
+.article-prose h1 {
+  font-family: var(--font-instrument-serif), serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.05;
+  color: hsl(var(--fg-primary));
+  margin: 2em 0 0.75em;
+  letter-spacing: -0.01em;
+}
+.article-prose h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+  font-weight: 700;
+  color: hsl(var(--fg-primary));
+  margin: 2em 0 0.75em;
+  letter-spacing: -0.01em;
+}
+.article-prose h3 {
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  line-height: 1.3;
+  font-weight: 600;
+  color: hsl(var(--fg-primary));
+  margin: 2em 0 0.5em;
+}
+.article-prose blockquote {
+  position: relative;
+  margin: 2em 0;
+  padding: 1.5em 1.5em 1.5em 2em;
+  border-left: 3px solid hsl(var(--brand-magenta));
+  background: hsl(var(--bg-card) / 0.5);
+  border-radius: 0 1rem 1rem 0;
+  font-family: var(--font-instrument-serif), serif;
+  font-style: italic;
+  font-size: 1.25em;
+  line-height: 1.55;
+  color: hsl(var(--fg-primary));
+}
+.article-prose blockquote p {
+  margin: 0;
+}
+.article-prose blockquote p + p {
+  margin-top: 0.75em;
+}
+.article-prose ul,
+.article-prose ol {
+  margin: 1.25em 0;
+  padding-left: 1.5em;
+}
+.article-prose ul {
+  list-style: disc;
+}
+.article-prose ol {
+  list-style: decimal;
+}
+.article-prose li {
+  margin: 0.5em 0;
+}
+.article-prose li::marker {
+  color: hsl(var(--brand-magenta));
+}
+.article-prose li > p {
+  margin: 0.25em 0;
+}
+.article-prose figure {
+  margin: 2em 0;
+}
+.article-prose figure img,
+.article-prose > img {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  border: 1px solid hsl(var(--border-subtle));
+}
+.article-prose figcaption {
+  margin-top: 0.75em;
+  text-align: center;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.75rem;
+  color: hsl(var(--fg-tertiary));
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.article-prose pre {
+  margin: 1.5em 0;
+  padding: 1.25em;
+  border-radius: 1rem;
+  background: hsl(var(--bg-card));
+  border: 1px solid hsl(var(--border-subtle));
+  overflow-x: auto;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: hsl(var(--fg-secondary));
+}
+.article-prose code {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.875em;
+  padding: 0.15em 0.4em;
+  border-radius: 0.4em;
+  background: hsl(var(--bg-card));
+  color: hsl(var(--brand-pink));
+}
+.article-prose hr {
+  margin: 3em auto;
+  width: 4rem;
+  border: 0;
+  border-top: 2px solid hsl(var(--border-strong));
+}
+.article-prose br {
+  display: block;
+  content: "";
+  margin: 0.5em 0;
+}
+/* Series header (the "Gyanesh on Product" intro pill at the top of each post). */
+.article-prose .series-logo,
+.article-prose img.series-logo {
+  display: none; /* we render our own header */
+}
+
 /* Reduced motion fallback: kill expensive transforms, keep opacity. */
 @media (prefers-reduced-motion: reduce) {
   *,
