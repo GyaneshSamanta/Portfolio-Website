@@ -1,43 +1,37 @@
 "use client";
 
 /**
- * SelectedWork — DESIGN.md §5.4
- * 12-col bento, 6 hand-picked tiles spanning Product / Research / Hackathons.
- * Filter chips re-flow the grid via Framer's `layout` animation. Click opens
- * a slide-over modal with full case-study content.
+ * SelectedWork — DESIGN.md §5.4 (rev v2.1)
+ * Curated 6-tile grid (3×2 on desktop, 2×3 on tablet, 1×6 on mobile).
+ * No filter chips. Tile categories tell the story by ordering:
+ *   1. GitHub repo (NotebookLM)
+ *   2. GitHub repo (cue)
+ *   3. Newsletter pointer
+ *   4. Research paper (Pegasus)
+ *   5. Research paper (NFT)
+ *   6. Research paper (IoT)
+ *
+ * Each tile uses its `category` for a small label badge. The hero/feature/
+ * standard/compact size mapping is gone; every tile is uniform.
  */
 
-import Image from "next/image";
-import { useMemo, useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Layers, X } from "lucide-react";
+import { ArrowUpRight, Github, Layers, Newspaper, X, FileText } from "lucide-react";
 import workData from "@/data/work.json";
 
 type Work = (typeof workData)[number];
-type Category = "all" | "product" | "research" | "hackathon";
 
-const FILTERS: { id: Category; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "product", label: "Product" },
-  { id: "research", label: "Research" },
-  { id: "hackathon", label: "Hackathons" },
-];
-
-const SIZE_SPAN: Record<string, string> = {
-  hero: "lg:col-span-8 lg:row-span-2",
-  feature: "lg:col-span-8",
-  standard: "lg:col-span-4 lg:row-span-2",
-  compact: "lg:col-span-4",
+const CATEGORY_META: Record<string, { label: string; Icon: any }> = {
+  repo: { label: "Open source", Icon: Github },
+  research: { label: "Research", Icon: FileText },
+  newsletter: { label: "Newsletter", Icon: Newspaper },
+  product: { label: "Product", Icon: Layers },
+  hackathon: { label: "Hackathon", Icon: Layers },
 };
 
 export function SelectedWorkSection() {
-  const [filter, setFilter] = useState<Category>("all");
   const [open, setOpen] = useState<Work | null>(null);
-
-  const items = useMemo(
-    () => (filter === "all" ? workData : workData.filter((w) => w.category === filter)),
-    [filter]
-  );
 
   return (
     <section
@@ -45,51 +39,24 @@ export function SelectedWorkSection() {
       className="relative bg-bg-base px-5 py-24 md:px-8 lg:px-12 lg:py-32"
     >
       <div className="mx-auto max-w-[1400px]">
-        <header className="mb-8 flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-              <Layers className="h-3.5 w-3.5" />
-              Selected work
-            </div>
-            <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-[-0.02em] text-fg-primary">
-              Six things I'm <span className="font-serif italic">proud</span> of.
-            </h2>
-            <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
-              Curated, not exhaustive. Tap any tile for the full story.
-            </p>
+        <header className="mb-10">
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+            <Layers className="h-3.5 w-3.5" />
+            Selected work
           </div>
-
-          {/* Filter chips. */}
-          <div role="tablist" aria-label="Filter work by category" className="flex flex-wrap gap-2">
-            {FILTERS.map((f) => (
-              <button
-                key={f.id}
-                role="tab"
-                aria-selected={filter === f.id}
-                onClick={() => setFilter(f.id)}
-                data-cursor={`Filter: ${f.label}`}
-                className={`rounded-full border px-4 py-1.5 font-mono text-xs uppercase tracking-wider transition-colors duration-200 ease-swift ${
-                  filter === f.id
-                    ? "border-border-glow bg-brand-magenta/15 text-fg-primary"
-                    : "border-border-subtle bg-bg-card/40 text-fg-secondary hover:border-border-strong hover:text-fg-primary"
-                }`}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
+          <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-[-0.02em] text-fg-primary">
+            Six things I'm <span className="font-serif italic">proud</span> of.
+          </h2>
+          <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
+            Two shipped repos. One newsletter. Three peer-reviewed papers. Tap any tile for the full story.
+          </p>
         </header>
 
-        <motion.div
-          layout
-          className="grid auto-rows-[minmax(180px,auto)] grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-12"
-        >
-          <AnimatePresence mode="popLayout">
-            {items.map((w) => (
-              <WorkTile key={w.id} work={w} onOpen={() => setOpen(w)} />
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
+          {workData.map((w) => (
+            <WorkTile key={w.id} work={w} onOpen={() => setOpen(w)} />
+          ))}
+        </div>
       </div>
 
       <WorkModal work={open} onClose={() => setOpen(null)} />
@@ -100,56 +67,62 @@ export function SelectedWorkSection() {
 /* -------------------------------------------------------------------------- */
 
 function WorkTile({ work, onOpen }: { work: Work; onOpen: () => void }) {
-  const span = SIZE_SPAN[work.size] ?? SIZE_SPAN.compact;
+  const meta = CATEGORY_META[work.category] ?? { label: work.category, Icon: Layers };
+  const Icon = meta.Icon;
 
   return (
-    <motion.button
+    <button
       type="button"
-      layout
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       onClick={onOpen}
       data-cursor="Open"
-      className={`group relative flex flex-col overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/60 p-5 text-left backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-swift hover:-translate-y-0.5 hover:border-border-strong hover:bg-bg-card-hover/70 md:p-6 ${span}`}
+      className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/60 text-left backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-swift hover:-translate-y-0.5 hover:border-border-strong hover:bg-bg-card-hover/70"
     >
-      {work.coverImage && (
-        <div className="relative -mx-5 -mt-5 mb-4 aspect-[16/9] overflow-hidden md:-mx-6 md:-mt-6">
-          <Image
+      {/* Thumbnail / cover. */}
+      <div className="relative aspect-[16/9] overflow-hidden bg-bg-elevated">
+        {work.coverImage ? (
+          /* GitHub OG hashes / local images / external — use a plain img since
+             these change frequently (OG hash) or come from /public unoptimized. */
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
             src={work.coverImage}
             alt=""
-            fill
-            sizes="(max-width: 1024px) 100vw, 60vw"
-            className="object-cover transition-transform duration-500 ease-swift group-hover:scale-[1.03]"
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-swift group-hover:scale-[1.03]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-bg-card/30 to-transparent" />
-        </div>
-      )}
-
-      <div className="flex items-center justify-between font-mono text-xs uppercase tracking-[0.18em] text-fg-tertiary">
-        <span>{work.category}</span>
-        <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg-primary" />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-violet/25 via-brand-purple/15 to-bg-card" />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-bg-card/20 to-transparent" />
       </div>
 
-      <h3 className="mt-3 text-lg font-semibold leading-snug text-fg-primary md:text-xl">
-        {work.title}
-      </h3>
-      {work.subtitle && (
-        <p className="mt-1 text-sm text-fg-secondary">{work.subtitle}</p>
-      )}
-
-      <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
-        {work.tags.slice(0, 4).map((tag) => (
-          <span
-            key={tag}
-            className="rounded-full bg-bg-elevated px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-fg-secondary"
-          >
-            {tag}
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
+          <span className="inline-flex items-center gap-1.5">
+            <Icon className="h-3 w-3" />
+            {meta.label}
           </span>
-        ))}
+          <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg-primary" />
+        </div>
+
+        <h3 className="mt-3 line-clamp-2 text-base font-semibold leading-snug text-fg-primary md:text-lg">
+          {work.title}
+        </h3>
+        {work.subtitle && (
+          <p className="mt-1 line-clamp-1 text-xs text-fg-secondary md:text-sm">{work.subtitle}</p>
+        )}
+
+        <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
+          {work.tags.slice(0, 3).map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full bg-bg-elevated px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-fg-secondary"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
-    </motion.button>
+    </button>
   );
 }
 
@@ -203,7 +176,7 @@ function WorkModal({ work, onClose }: { work: Work | null; onClose: () => void }
             </button>
 
             <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-              {work.category}
+              {CATEGORY_META[work.category]?.label ?? work.category}
             </div>
             <h3
               id="work-title"
@@ -217,12 +190,11 @@ function WorkModal({ work, onClose }: { work: Work | null; onClose: () => void }
 
             {work.coverImage && (
               <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-2xl border border-border-subtle">
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={work.coverImage}
                   alt=""
-                  fill
-                  sizes="(max-width: 768px) 100vw, 700px"
-                  className="object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
               </div>
             )}
@@ -264,7 +236,7 @@ function WorkModal({ work, onClose }: { work: Work | null; onClose: () => void }
                   <a
                     key={l.url}
                     href={l.url}
-                    target="_blank"
+                    target={l.url.startsWith("http") ? "_blank" : undefined}
                     rel="noopener noreferrer"
                     data-cursor={l.label}
                     className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-magenta to-brand-violet px-5 py-2.5 text-sm font-semibold text-white transition-transform duration-200 ease-swift hover:scale-[1.03]"

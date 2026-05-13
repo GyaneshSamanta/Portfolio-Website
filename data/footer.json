@@ -1,23 +1,49 @@
 {
   "footerName": "Gyanesh Samanta",
   "footerTagline": "Building products, communities, and narratives.",
-  "copyrightText": "© 2026 Gyanesh Samanta.",
+  "copyrightText": "© 2026 Gyanesh Samanta. Built in public.",
   "links": [
     {
+      "label": "Blog",
+      "url": "/blog"
+    },
+    {
+      "label": "Journey",
+      "url": "/#journey"
+    },
+    {
+      "label": "Work",
+      "url": "/#work"
+    },
+    {
+      "label": "Contact",
+      "url": "/#contact"
+    }
+  ],
+  "socials": [
+    {
       "label": "LinkedIn",
-      "url": "https://linkedin.com/in/gyanesh-samanta"
+      "icon": "linkedin",
+      "url": "https://linkedin.com/in/gyanesh-samanta",
+      "handle": "@gyaneshsamanta"
     },
     {
       "label": "GitHub",
-      "url": "https://github.com/GyaneshSamanta"
+      "icon": "github",
+      "url": "https://github.com/GyaneshSamanta",
+      "handle": "@GyaneshSamanta"
+    },
+    {
+      "label": "YouTube",
+      "icon": "youtube",
+      "url": "https://www.youtube.com/channel/UCWga4RrqehgwPS-MUvT4w4g",
+      "handle": "Gyanesh on Product"
     },
     {
       "label": "Email",
-      "url": "mailto:mail.gyaneshsamanta@gmail.com"
-    },
-    {
-      "label": "Newsletter",
-      "url": "https://www.linkedin.com/newsletters/gyanesh-on-product-6979386586404651008/"
+      "icon": "mail",
+      "url": "mailto:mail.gyaneshsamanta@gmail.com",
+      "handle": "mail.gyaneshsamanta@gmail.com"
     }
   ]
 }

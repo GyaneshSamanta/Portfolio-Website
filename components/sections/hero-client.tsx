@@ -1,28 +1,27 @@
 "use client";
 
 /**
- * HeroClient — DESIGN.md §5.1
- * - Display XL name (gradient).
- * - Editorial italic Instrument Serif tagline with flowing magenta gradient.
- * - Dual CTA pills (primary magenta, secondary ghost).
- * - Headshot in a soft blob mask with a "Shipping now" pill anchored above.
- * - Skill marquee at the bottom.
- *
- * Layout: 2-col on desktop (text left, headshot right), stacked on mobile.
+ * HeroClient — DESIGN.md §5.1 (rev v2.1)
+ * - Kinetic "PM with T-shaped skills" headline (per-letter blur-in on highlight)
+ * - Followed by static elaboration line "in Data Storytelling, Consumer Behaviour & AI."
+ * - Verbatim LinkedIn About first paragraph as subheadline
+ * - Dual CTA pills + headshot with live-commit pill
  */
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { KineticHeading } from "@/components/kinetic-heading";
 import { SkillMarquee } from "@/components/ui/skill-marquee";
 import { LiveCommitPill } from "@/components/hero/live-commit-pill";
+import type { PushEvent } from "@/lib/github";
 
 type HeroData = {
   nameFirst: string;
   nameLast: string;
   headline: string;
   headlineHighlight: string;
+  headlineFollowup?: string;
   subheadline: string;
   ctaPrimaryLabel: string;
   ctaPrimaryUrl: string;
@@ -36,10 +35,10 @@ type HeroData = {
 
 type Props = {
   hero: HeroData;
-  lastCommitAt: string | null;
+  latestPushEvent: PushEvent | null;
 };
 
-export function HeroClient({ hero, lastCommitAt }: Props) {
+export function HeroClient({ hero, latestPushEvent }: Props) {
   const reduced = useReducedMotion();
   const skills = hero.skills ?? [];
 
@@ -48,7 +47,7 @@ export function HeroClient({ hero, lastCommitAt }: Props) {
       id="hero"
       className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-bg-base px-5 pt-28 pb-12 md:px-8 lg:px-12 lg:pt-40 lg:pb-16"
     >
-      {/* Atmospheric gradient wash behind the hero (DESIGN.md §3.1). */}
+      {/* Atmospheric gradient wash. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-[1] bg-[radial-gradient(ellipse_at_top_right,hsl(var(--brand-magenta)/0.18),transparent_55%),radial-gradient(ellipse_at_bottom_left,hsl(var(--brand-violet)/0.15),transparent_55%)]"
@@ -57,37 +56,52 @@ export function HeroClient({ hero, lastCommitAt }: Props) {
       <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16 lg:items-center">
         {/* LEFT — text */}
         <div className="order-2 lg:order-1">
-          <KineticHeading
-            text={`${hero.nameFirst} ${hero.nameLast}`}
-            as="h1"
-            className="text-fg-primary font-bold tracking-[-0.02em] leading-[0.95] text-[clamp(3rem,12vw,7.5rem)]"
-          />
-
-          {/* Editorial tagline. */}
-          <p className="mt-5 max-w-[36ch] text-[clamp(1.5rem,3.5vw,2.75rem)] leading-[1.1] tracking-[-0.01em] text-fg-secondary">
-            <span className="block text-fg-secondary">{hero.headline}</span>
-            <span
-              className="font-serif italic text-transparent bg-clip-text"
+          {/* Display heading: "PM with" + kinetic italic "T-shaped skills" */}
+          <h1 className="font-bold tracking-[-0.02em] leading-[0.95] text-[clamp(2.75rem,9vw,6.5rem)] text-fg-primary">
+            <span className="block">{hero.headline}</span>
+            <KineticHeading
+              text={hero.headlineHighlight}
+              as="span"
+              serif
+              delay={0.15}
+              className="block font-serif italic bg-clip-text text-transparent"
               style={{
                 backgroundImage:
                   "linear-gradient(90deg, hsl(var(--brand-magenta)) 0%, hsl(var(--brand-pink)) 35%, hsl(var(--brand-violet)) 70%, hsl(var(--brand-magenta)) 100%)",
                 backgroundSize: "200% 100%",
                 animation: reduced ? undefined : "gradient-flow 6s ease-in-out infinite",
+                WebkitBackgroundClip: "text",
               }}
-            >
-              {hero.headlineHighlight}.
-            </span>
-          </p>
+            />
+          </h1>
 
-          <p className="mt-6 max-w-[60ch] text-base leading-relaxed text-fg-secondary md:text-lg">
+          {/* Followup line that ties the T-shape claim back to specifics. */}
+          {hero.headlineFollowup && (
+            <motion.p
+              initial={reduced ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-4 max-w-[36ch] text-[clamp(1.1rem,2.5vw,1.5rem)] leading-snug tracking-[-0.005em] text-fg-secondary"
+            >
+              {hero.headlineFollowup}
+            </motion.p>
+          )}
+
+          {/* Verbatim LinkedIn About paragraph. */}
+          <motion.p
+            initial={reduced ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6 max-w-[60ch] text-base leading-relaxed text-fg-secondary md:text-lg"
+          >
             {hero.subheadline}
-          </p>
+          </motion.p>
 
           {/* Dual CTA. */}
           <motion.div
             initial={reduced ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 1.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8 flex flex-wrap items-center gap-3"
           >
             <button
@@ -120,10 +134,9 @@ export function HeroClient({ hero, lastCommitAt }: Props) {
           transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="order-1 mx-auto flex w-full max-w-[420px] flex-col items-center gap-4 lg:order-2"
         >
-          <LiveCommitPill lastCommitAt={lastCommitAt} />
+          <LiveCommitPill event={latestPushEvent} />
 
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[3rem] border border-border-subtle bg-bg-card">
-            {/* Soft brand glow behind headshot. */}
             <div
               aria-hidden
               className="absolute inset-0 -z-[1] bg-[radial-gradient(circle_at_center,hsl(var(--brand-magenta)/0.35),transparent_65%)]"
@@ -140,7 +153,7 @@ export function HeroClient({ hero, lastCommitAt }: Props) {
         </motion.div>
       </div>
 
-      {/* Skill marquee — full bleed. */}
+      {/* Skill marquee — multi-row at hero bottom. */}
       {skills.length > 0 && (
         <div className="mt-12 lg:mt-20">
           <SkillMarquee items={skills} />

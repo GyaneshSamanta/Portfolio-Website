@@ -57,19 +57,23 @@ function JourneyWalk() {
     offset: ["start start", "end end"],
   });
 
-  // Travel distance: roughly the natural width of all polaroids minus one
-  // viewport. We estimate generously so the last polaroid fully clears.
-  const travelPercent = useMemo(() => {
-    // Each card ~280px + 64px gap = ~344px. Plus the path padding.
-    return Math.max(60, MILESTONES.length * 18);
-  }, []);
+  // Travel distance — tuned so the last polaroid lands under the figure at
+  // scrollYProgress=1. Each card ~280px + 64px gap = ~344px on desktop.
+  // We translate the whole track by N-1 slots roughly equivalent to ~22% per
+  // card. Slightly conservative so the last polaroid stays in view.
+  const travelPercent = useMemo(() => Math.max(60, MILESTONES.length * 22), []);
 
   const x = useTransform(scrollYProgress, [0, 1], ["0%", `-${travelPercent}%`]);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    // Active = milestone closest to the viewport center.
-    const fraction = Math.max(0, Math.min(1, latest));
-    const idx = Math.round(fraction * (MILESTONES.length - 1));
+    // Map scroll progress to the milestone under the figure. We use floor +
+    // clamp + a tiny dead zone so the trailing card doesn't read as "active"
+    // when the user is only partway into the section's tail.
+    const fraction = Math.max(0, Math.min(0.999, latest));
+    const idx = Math.min(
+      Math.floor(fraction * MILESTONES.length),
+      MILESTONES.length - 1
+    );
     setActiveIdx((prev) => (prev === idx ? prev : idx));
   });
 
@@ -93,7 +97,7 @@ function JourneyWalk() {
         id="journey"
         ref={sectionRef}
         className="relative bg-bg-base"
-        style={{ height: `${MILESTONES.length * 70}vh` }}
+        style={{ height: `${MILESTONES.length * 55}vh` }}
       >
         {/* Sticky viewport — the actual scene the user sees. */}
         <div className="sticky top-0 flex h-screen flex-col overflow-hidden">
@@ -105,7 +109,7 @@ function JourneyWalk() {
               <span className="font-serif italic">A walk</span> through the years.
             </h2>
             <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
-              Scroll to walk forward. Active milestone is whichever the figure is standing on.
+              Scroll to walk forward.
             </p>
           </header>
 
@@ -136,9 +140,10 @@ function JourneyWalk() {
               />
             </svg>
 
-            {/* Traveler — pinned to viewport center, sits ON the path. */}
+            {/* Traveler — pinned to viewport center. The path sits just under
+                the figure's feet. */}
             <div
-              className="absolute left-1/2 top-1/2 z-10 h-4 w-4 -translate-x-1/2 -translate-y-1/2"
+              className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-[calc(50%+8px)]"
               aria-hidden
             >
               <WalkingFigure walking={walking} />

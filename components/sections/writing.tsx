@@ -25,14 +25,13 @@ export function WritingSection() {
         <header className="mb-10">
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
             <Newspaper className="h-3.5 w-3.5" />
-            Writing · {posts.length} editions
+            Newsletter · {posts.length} editions
           </div>
           <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-[-0.02em] text-fg-primary">
             <span className="font-serif italic">Gyanesh on Product</span>
           </h2>
           <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
-            Weekly essays on product, AI, behavioural economics, and consumer behaviour.
-            Mirrored in-site from LinkedIn — no jump-out.
+            Weekly newsletter on product, AI, behavioural economics, and consumer behaviour. Pick one, settle in.
           </p>
         </header>
 

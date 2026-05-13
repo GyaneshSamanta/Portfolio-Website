@@ -1,32 +1,22 @@
-"use client";
-
 /**
- * Podcast — DESIGN.md §5.6
- * Featured episode at top (16:9 lite-youtube). 3-col grid below. Each card
- * plays in-place via lite-youtube-embed. No friction-laden link-out.
+ * Podcast — DESIGN.md §5.6 (rev v2.1)
+ * Server component. Fully dynamic: scrapes the YouTube playlist HTML at
+ * request time via lib/youtube.ts (ISR 6h). No static array; no Rick Rolls.
  */
 
 import { ArrowUpRight, Play } from "lucide-react";
 import { LiteYouTube } from "@/components/ui/lite-youtube";
-import videosData from "@/data/videos.json";
+import { getPlaylistVideos } from "@/lib/youtube";
 
-type Video = {
-  id: string;
-  title: string;
-  description?: string;
-  url: string;
-  date: string;
-  duration?: string;
-  featured?: boolean;
-};
+const PLAYLIST_ID = "PLDmP2FTmWmITaid4WWbpfantPMnafuu0q";
+const CHANNEL_URL = "https://www.youtube.com/channel/UCWga4RrqehgwPS-MUvT4w4g";
+const PLAYLIST_URL = `https://www.youtube.com/playlist?list=${PLAYLIST_ID}`;
 
-export function PodcastSection() {
-  const data = videosData as { channelUrl: string; youtube: Video[] };
-  const videos = data.youtube ?? [];
-  if (videos.length === 0) return null;
-
-  const featured = videos.find((v) => v.featured) ?? videos[0];
-  const rest = videos.filter((v) => v.id !== featured.id || v !== featured);
+export async function PodcastSection() {
+  const videos = await getPlaylistVideos(PLAYLIST_ID);
+  const hasVideos = videos.length > 0;
+  const featured = videos[0];
+  const rest = videos.slice(1, 7); // up to 6 more in grid
 
   return (
     <section
@@ -38,56 +28,68 @@ export function PodcastSection() {
           <div>
             <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
               <Play className="h-3.5 w-3.5" />
-              Podcast & video
+              Podcast
             </div>
             <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-[-0.02em] text-fg-primary">
-              Long-form, on tap.
+              <span className="font-serif italic">Long-form,</span> on tap.
             </h2>
             <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
-              Clicking play loads YouTube; the page stays light until then.
+              Episodes auto-load from my YouTube playlist. Click play, the iframe loads — until then the page stays light.
             </p>
           </div>
-          {data.channelUrl && (
-            <a
-              href={data.channelUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="Channel"
-              className="group inline-flex items-center gap-2 rounded-full border border-border-strong bg-bg-card/50 px-5 py-2.5 text-sm font-semibold text-fg-primary transition-colors duration-200 ease-swift hover:border-border-glow hover:bg-bg-card-hover"
-            >
-              Visit channel
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
-          )}
+          <a
+            href={CHANNEL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="Visit channel"
+            className="group inline-flex items-center gap-2 rounded-full border border-border-strong bg-bg-card/50 px-5 py-2.5 text-sm font-semibold text-fg-primary transition-colors duration-200 ease-swift hover:border-border-glow hover:bg-bg-card-hover"
+          >
+            Visit channel
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
         </header>
 
-        {/* Featured episode. */}
-        <div className="overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/40">
-          <div className="aspect-video w-full">
-            <LiteYouTube videoId={featured.id} title={featured.title} className="h-full w-full" />
-          </div>
-          <div className="p-6 md:p-8">
-            <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-              Latest episode · {featured.date}
-              {featured.duration && ` · ${featured.duration}`}
-            </div>
-            <h3 className="mt-3 text-2xl font-semibold leading-snug text-fg-primary md:text-3xl">
-              {featured.title}
-            </h3>
-            {featured.description && (
-              <p className="mt-2 max-w-[80ch] text-base text-fg-secondary md:text-lg">
-                {featured.description}
-              </p>
-            )}
-          </div>
-        </div>
+        {!hasVideos && <PodcastEmptyState />}
 
-        {/* Episode grid. */}
-        {rest.length > 0 && (
+        {hasVideos && featured && (
+          <div className="overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/40">
+            <div className="aspect-video w-full">
+              <LiteYouTube videoId={featured.id} title={featured.title} className="h-full w-full" />
+            </div>
+            <div className="p-6 md:p-8">
+              <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+                <span>Latest episode</span>
+                {featured.publishedText && (
+                  <>
+                    <span aria-hidden>·</span>
+                    <span>{featured.publishedText}</span>
+                  </>
+                )}
+                {featured.durationText && (
+                  <>
+                    <span aria-hidden>·</span>
+                    <span>{featured.durationText}</span>
+                  </>
+                )}
+                {featured.viewsText && (
+                  <>
+                    <span aria-hidden>·</span>
+                    <span>{featured.viewsText}</span>
+                  </>
+                )}
+              </div>
+              <h3 className="mt-3 text-2xl font-semibold leading-snug text-fg-primary md:text-3xl">
+                {featured.title}
+              </h3>
+            </div>
+          </div>
+        )}
+
+        {hasVideos && rest.length > 0 && (
           <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {rest.map((v, i) => (
+            {rest.map((v) => (
               <article
-                key={`${v.id}-${i}`}
+                key={v.id}
                 className="overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/40"
               >
                 <div className="aspect-video w-full">
@@ -95,8 +97,7 @@ export function PodcastSection() {
                 </div>
                 <div className="p-5">
                   <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
-                    {v.date}
-                    {v.duration && ` · ${v.duration}`}
+                    {[v.publishedText, v.durationText].filter(Boolean).join(" · ")}
                   </div>
                   <h4 className="mt-2 line-clamp-2 text-base font-semibold leading-snug text-fg-primary">
                     {v.title}
@@ -108,5 +109,29 @@ export function PodcastSection() {
         )}
       </div>
     </section>
+  );
+}
+
+function PodcastEmptyState() {
+  return (
+    <div className="overflow-hidden rounded-3xl border border-dashed border-border-subtle bg-bg-card/40 px-6 py-12 text-center md:py-16">
+      <Play className="mx-auto h-8 w-8 text-fg-tertiary" />
+      <p className="mt-4 font-serif text-2xl italic text-fg-primary">
+        Episodes loading…
+      </p>
+      <p className="mt-2 text-sm text-fg-secondary">
+        We refresh from YouTube every few hours. If this lingers, head over to the playlist directly.
+      </p>
+      <a
+        href={PLAYLIST_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-cursor="Open playlist"
+        className="mt-6 inline-flex items-center gap-2 rounded-full border border-border-strong bg-bg-card/60 px-5 py-2.5 text-sm font-semibold text-fg-primary transition-colors duration-200 ease-swift hover:border-border-glow hover:bg-bg-card-hover"
+      >
+        Watch on YouTube
+        <ArrowUpRight className="h-4 w-4" />
+      </a>
+    </div>
   );
 }

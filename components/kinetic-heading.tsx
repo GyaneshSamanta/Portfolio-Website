@@ -4,13 +4,17 @@
  * KineticHeading — DESIGN.md §5.1
  * Per-letter blur-and-fade-in animation. Stagger 60ms, blur(8px) → 0,
  * opacity 0 → 1, 600ms total. Honors prefers-reduced-motion.
+ *
+ * Now accepts a `style` prop so callers can compose a gradient-flow background.
  */
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import type { CSSProperties } from "react";
 
 type Props = {
   text: string;
   className?: string;
+  style?: CSSProperties;
   as?: "h1" | "h2" | "h3" | "span";
   /** Delay before stagger starts (s). */
   delay?: number;
@@ -38,6 +42,7 @@ const letterVariants: Variants = {
 export function KineticHeading({
   text,
   className,
+  style,
   as = "h1",
   delay = 0,
   serif = false,
@@ -45,23 +50,27 @@ export function KineticHeading({
   const reduced = useReducedMotion();
   const Component = motion[as] as typeof motion.h1;
 
+  const composedStyle: CSSProperties = {
+    ...(serif ? { fontStyle: "italic" } : {}),
+    ...(style ?? {}),
+  };
+
   if (reduced) {
     const Static: "h1" | "h2" | "h3" | "span" = as;
     return (
-      <Static className={className} {...(serif && { style: { fontStyle: "italic" } })}>
+      <Static className={className} style={composedStyle}>
         {text}
       </Static>
     );
   }
 
-  // Words split into tokens, each character a span. Whitespace preserved as
-  // its own non-animated span so wrapping behaves correctly.
+  // Whitespace preserved as its own non-animated span so wrapping behaves.
   const words = text.split(/(\s+)/);
 
   return (
     <Component
       className={className}
-      style={serif ? { fontStyle: "italic" } : undefined}
+      style={composedStyle}
       initial="hidden"
       animate="visible"
       variants={containerVariants}

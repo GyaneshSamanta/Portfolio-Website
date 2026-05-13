@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%" gradientTransform="rotate(49)">
+      <stop offset="0%" stop-color="#0A0820"/>
+      <stop offset="55%" stop-color="#1A1A3A"/>
+      <stop offset="100%" stop-color="#11103A"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="20%" cy="0%" r="60%">
+      <stop offset="0%" stop-color="#ED2EBA" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ED2EBA" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="100%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#8E3DEF" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#8E3DEF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <rect width="100%" height="100%" fill="url(#glowA)"/>
+  <rect width="100%" height="100%" fill="url(#glowB)"/>
+
+  <!-- Stars -->
+  <g fill="#F5EFEF">
+    <circle cx="1192" cy="466" r="0.84" opacity="0.70"/><circle cx="988" cy="578" r="0.50" opacity="0.78"/><circle cx="891" cy="330" r="0.58" opacity="0.34"/><circle cx="340" cy="265" r="0.60" opacity="0.42"/><circle cx="449" cy="334" r="1.16" opacity="0.26"/><circle cx="963" cy="120" r="1.54" opacity="0.61"/><circle cx="54" cy="457" r="0.82" opacity="0.21"/><circle cx="895" cy="72" r="0.58" opacity="0.54"/><circle cx="944" cy="592" r="1.23" opacity="0.61"/><circle cx="1172" cy="14" r="0.80" opacity="0.59"/><circle cx="114" cy="239" r="0.95" opacity="0.30"/><circle cx="716" cy="282" r="1.42" opacity="0.41"/><circle cx="1088" cy="327" r="1.20" opacity="0.35"/><circle cx="174" cy="351" r="1.37" opacity="0.67"/><circle cx="684" cy="400" r="1.01" opacity="0.31"/><circle cx="837" cy="113" r="0.51" opacity="0.57"/><circle cx="312" cy="432" r="1.56" opacity="0.33"/><circle cx="957" cy="523" r="0.54" opacity="0.65"/><circle cx="1039" cy="241" r="0.61" opacity="0.68"/><circle cx="885" cy="348" r="1.49" opacity="0.58"/><circle cx="597" cy="112" r="1.60" opacity="0.64"/><circle cx="907" cy="254" r="1.03" opacity="0.56"/><circle cx="765" cy="321" r="0.42" opacity="0.69"/><circle cx="171" cy="354" r="0.94" opacity="0.58"/><circle cx="1119" cy="152" r="1.26" opacity="0.37"/><circle cx="1180" cy="1" r="0.62" opacity="0.68"/><circle cx="83" cy="59" r="1.48" opacity="0.63"/><circle cx="966" cy="203" r="0.48" opacity="0.30"/><circle cx="885" cy="222" r="1.13" opacity="0.60"/><circle cx="492" cy="324" r="0.64" opacity="0.50"/><circle cx="294" cy="135" r="0.87" opacity="0.46"/><circle cx="639" cy="156" r="1.32" opacity="0.58"/><circle cx="464" cy="481" r="0.73" opacity="0.54"/><circle cx="137" cy="569" r="1.00" opacity="0.24"/><circle cx="501" cy="258" r="1.56" opacity="0.30"/><circle cx="612" cy="89" r="1.20" opacity="0.59"/><circle cx="681" cy="88" r="0.51" opacity="0.74"/><circle cx="707" cy="127" r="0.80" opacity="0.69"/><circle cx="663" cy="313" r="0.53" opacity="0.66"/><circle cx="246" cy="583" r="0.62" opacity="0.73"/><circle cx="3" cy="354" r="1.09" opacity="0.66"/><circle cx="137" cy="611" r="1.53" opacity="0.57"/><circle cx="181" cy="359" r="1.31" opacity="0.73"/><circle cx="1090" cy="405" r="0.76" opacity="0.76"/><circle cx="1080" cy="101" r="1.40" opacity="0.44"/><circle cx="790" cy="588" r="1.36" opacity="0.30"/><circle cx="290" cy="399" r="0.54" opacity="0.32"/><circle cx="1004" cy="397" r="0.74" opacity="0.37"/><circle cx="383" cy="127" r="0.84" opacity="0.47"/><circle cx="623" cy="158" r="1.16" opacity="0.33"/><circle cx="799" cy="154" r="1.29" opacity="0.24"/><circle cx="801" cy="332" r="1.58" opacity="0.71"/><circle cx="207" cy="63" r="1.06" opacity="0.73"/><circle cx="389" cy="213" r="1.12" opacity="0.41"/><circle cx="75" cy="34" r="0.43" opacity="0.80"/><circle cx="539" cy="2" r="0.83" opacity="0.32"/><circle cx="481" cy="427" r="1.25" opacity="0.69"/><circle cx="249" cy="486" r="0.98" opacity="0.29"/><circle cx="513" cy="566" r="0.81" opacity="0.54"/><circle cx="79" cy="129" r="0.52" opacity="0.31"/>
+  </g>
+
+  <!-- Edition label -->
+  <text x="60" y="80" font-family="'Geist Mono', ui-monospace, monospace" font-size="20" letter-spacing="4" fill="#C9BCC4" text-transform="uppercase">GYANESH ON PRODUCT · #22</text>
+
+  <!-- Title block -->
+  <text x="60" y="258.3333333333333" font-family="'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif" font-style="italic" font-weight="400" font-size="64" fill="#F5EFEF">The Elevated Professional:</text><text x="60" y="336.3333333333333" font-family="'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif" font-style="italic" font-weight="400" font-size="64" fill="#F5EFEF">Navigating the Next Era of</text><text x="60" y="414.3333333333333" font-family="'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif" font-style="italic" font-weight="400" font-size="64" fill="#F5EFEF">Product Management (2025-2030)</text>
+
+  <!-- Date footer -->
+  <text x="60" y="570" font-family="'Geist Mono', ui-monospace, monospace" font-size="20" letter-spacing="4" fill="#828397">JUL 27, 2025</text>
+
+  <!-- Brand mark -->
+  <text x="1140" y="570" text-anchor="end" font-family="'Geist Mono', ui-monospace, monospace" font-size="20" letter-spacing="4" fill="#828397">GYANESH.S</text>
+
+  <!-- Bottom-right brand line -->
+  <line x1="1000" y1="590" x2="1140" y2="590" stroke="#ED2EBA" stroke-width="2"/>
+</svg>

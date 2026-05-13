@@ -11,7 +11,7 @@ import heroData from "@/data/hero.json";
 export async function HeroSection() {
   const username = "GyaneshSamanta";
   const events = await getRecentPushEvents(username);
-  const lastCommitAt = events[0]?.createdAt ?? null;
+  const latestPushEvent = events[0] ?? null;
 
-  return <HeroClient hero={heroData as any} lastCommitAt={lastCommitAt} />;
+  return <HeroClient hero={heroData as any} latestPushEvent={latestPushEvent} />;
 }

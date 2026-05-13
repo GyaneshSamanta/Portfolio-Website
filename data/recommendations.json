@@ -1,10 +1,12 @@
 [
   {
+    "slug": "soumya-sarkar",
     "name": "Soumya Sarkar",
     "designation": "Associate Professor",
     "company": "XIM Bhubaneswar",
+    "companyLogo": "/images/logos/ximb.png",
     "relationship": "Faculty",
-    "photo": "",
+    "photo": "/images/recommendations/soumya-sarkar.jpg",
     "photoAlt": "Soumya Sarkar headshot",
     "linkedinUrl": "https://www.linkedin.com/in/soumya-sarkar",
     "shortQuote": "Just another intelligent MBA student turned out to be brilliant in all respects. Will take up challenging tasks with aplomb and pull those off in style.",
@@ -12,11 +14,13 @@
     "date": "Apr 2026"
   },
   {
+    "slug": "sumitra-mishra",
     "name": "Dr. Sumitra Mishra",
     "designation": "Asst. Professor — Strategy & General Management",
     "company": "XIM Bhubaneswar",
+    "companyLogo": "/images/logos/ximb.png",
     "relationship": "Faculty",
-    "photo": "",
+    "photo": "/images/recommendations/sumitra-mishra.jpg",
     "photoAlt": "Dr. Sumitra Mishra headshot",
     "linkedinUrl": "https://www.linkedin.com/in/sumitra-mishra",
     "shortQuote": "He balances team accountability with genuine empathy. The rare leader who thinks of others first but still gets the job done.",
@@ -24,11 +28,13 @@
     "date": "Apr 2026"
   },
   {
+    "slug": "ajit-kumar",
     "name": "Dr Ajit Kumar",
     "designation": "Associate Professor",
     "company": "XIM Bhubaneswar",
+    "companyLogo": "/images/logos/ximb.png",
     "relationship": "Faculty",
-    "photo": "",
+    "photo": "/images/recommendations/ajit-kumar.jpg",
     "photoAlt": "Dr Ajit Kumar headshot",
     "linkedinUrl": "https://www.linkedin.com/in/ajit-kumar",
     "shortQuote": "A forward-thinking professional who combines technical depth with a collaborative spirit.",
@@ -36,11 +42,13 @@
     "date": "Apr 2026"
   },
   {
+    "slug": "francis-castelino",
     "name": "Francis Castelino",
     "designation": "Professor & Associate Dean — Career Advisory",
     "company": "XIM Bhubaneswar",
+    "companyLogo": "/images/logos/ximb.png",
     "relationship": "Faculty",
-    "photo": "",
+    "photo": "/images/recommendations/francis-castelino.jpg",
     "photoAlt": "Francis Castelino headshot",
     "linkedinUrl": "https://www.linkedin.com/in/francis-castelino",
     "shortQuote": "A rare blend of technical acuity and genuine product sensibility.",
@@ -48,10 +56,12 @@
     "date": "Apr 2026"
   },
   {
+    "slug": "adamya-singh",
     "name": "Adamya Singh",
     "designation": "Product Manager",
     "company": "IBM",
-    "relationship": "Manager",
+    "companyLogo": "/images/logos/ibm.png",
+    "relationship": "Manager at IBM",
     "photo": "/images/recommendations/adamya-singh.jpg",
     "photoAlt": "Adamya Singh headshot",
     "linkedinUrl": "https://www.linkedin.com/in/adamya-singh",
@@ -60,9 +70,11 @@
     "date": "Jun 2025"
   },
   {
+    "slug": "shreya-gupta",
     "name": "Shreya Gupta",
     "designation": "Software Engineer",
     "company": "Circle",
+    "companyLogo": "/images/logos/circle.png",
     "relationship": "Colleague at Wall",
     "photo": "/images/recommendations/shreya-gupta.jpg",
     "photoAlt": "Shreya Gupta headshot",
@@ -72,9 +84,11 @@
     "date": "Oct 2023"
   },
   {
+    "slug": "kamaldeep-singh",
     "name": "Kamaldeep Singh",
     "designation": "Senior Manager — Advanced Analytics",
     "company": "Walmart",
+    "companyLogo": "/images/logos/walmart.png",
     "relationship": "Manager at Wall",
     "photo": "/images/recommendations/kamaldeep-singh.jpg",
     "photoAlt": "Kamaldeep Singh headshot",
@@ -84,11 +98,13 @@
     "date": "Oct 2023"
   },
   {
+    "slug": "shakir-wani",
     "name": "Shakir Wani",
     "designation": "Head of Analytics, W & Aurelia",
     "company": "Aditya Birla Fashion & Retail",
+    "companyLogo": "",
     "relationship": "Mentor",
-    "photo": "",
+    "photo": "/images/recommendations/shakir-wani.jpg",
     "photoAlt": "Shakir Wani headshot",
     "linkedinUrl": "https://www.linkedin.com/in/shakir-wani",
     "shortQuote": "Sound knowledge of ML and a great asset to any team.",
@@ -96,11 +112,13 @@
     "date": "Sep 2023"
   },
   {
+    "slug": "namita-khande",
     "name": "Namita Khande",
     "designation": "BD & Partnerships",
     "company": "Transak",
+    "companyLogo": "",
     "relationship": "Colleague at Wall",
-    "photo": "",
+    "photo": "/images/recommendations/namita-khande.jpg",
     "photoAlt": "Namita Khande headshot",
     "linkedinUrl": "https://www.linkedin.com/in/namita-khande",
     "shortQuote": "Levelled up quickly. Will gravitate to bigger, more complex problems.",
@@ -108,11 +126,13 @@
     "date": "Sep 2023"
   },
   {
+    "slug": "daniel-rattanamahattana",
     "name": "Daniel Rattanamahattana",
     "designation": "Data & Technology Lead",
     "company": "WPP Media Thailand",
+    "companyLogo": "",
     "relationship": "Mentor (Adplist)",
-    "photo": "",
+    "photo": "/images/recommendations/daniel-rattanamahattana.jpg",
     "photoAlt": "Daniel Rattanamahattana headshot",
     "linkedinUrl": "https://www.linkedin.com/in/daniel-rattanamahattana",
     "shortQuote": "Keen learner. Questions demonstrated technical expertise and business sense.",
@@ -120,11 +140,13 @@
     "date": "Sep 2023"
   },
   {
+    "slug": "collins-abudu",
     "name": "Collins Abudu",
     "designation": "Product Designer",
     "company": "Brucira",
+    "companyLogo": "",
     "relationship": "Collaborator",
-    "photo": "",
+    "photo": "/images/recommendations/collins-abudu.jpg",
     "photoAlt": "Collins Abudu headshot",
     "linkedinUrl": "https://www.linkedin.com/in/collins-abudu",
     "shortQuote": "World-class work rate and great human being.",
@@ -132,11 +154,13 @@
     "date": "Sep 2023"
   },
   {
+    "slug": "anuj-kodam",
     "name": "Anuj Kodam",
     "designation": "Vice President — Operations",
     "company": "Zostel",
+    "companyLogo": "",
     "relationship": "Leadership at Wall",
-    "photo": "",
+    "photo": "/images/recommendations/anuj-kodam.jpg",
     "photoAlt": "Anuj Kodam headshot",
     "linkedinUrl": "https://www.linkedin.com/in/anuj-kodam",
     "shortQuote": "The combination of technical capabilities, learning attitude, meticulousness and responsibility makes him an immensely valuable team member.",
@@ -144,11 +168,13 @@
     "date": "Sep 2023"
   },
   {
+    "slug": "priyadarsh-ss",
     "name": "Priyadarsh S S",
     "designation": "Senior Software Engineer",
     "company": "Emissium",
+    "companyLogo": "",
     "relationship": "Colleague at Wall",
-    "photo": "",
+    "photo": "/images/recommendations/priyadarsh-ss.jpg",
     "photoAlt": "Priyadarsh headshot",
     "linkedinUrl": "https://www.linkedin.com/in/priyadarsh",
     "shortQuote": "Whenever metrics dropped or anomalies occurred, he was quick to do a thorough RCA and rectify them ASAP.",
@@ -156,11 +182,13 @@
     "date": "Sep 2023"
   },
   {
+    "slug": "amarnath-jayanti",
     "name": "Amarnath Jayanti",
     "designation": "Co-Founder",
     "company": "Turiya",
+    "companyLogo": "",
     "relationship": "Founder at Wall",
-    "photo": "",
+    "photo": "/images/recommendations/amarnath-jayanti.jpg",
     "photoAlt": "Amarnath Jayanti headshot",
     "linkedinUrl": "https://www.linkedin.com/in/amarnath-jayanti",
     "shortQuote": "Translates complex data into actionable insights pivotal for our product cycle.",

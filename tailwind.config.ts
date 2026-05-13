@@ -126,6 +126,18 @@ const config: Config = {
           from: { transform: "translateX(calc(-100% - 2rem))" },
           to: { transform: "translateX(0)" },
         },
+        // Clean -50% loop. Assumes the list is rendered exactly TWICE as
+        // siblings of equal width (no gap between the two copies). A -50%
+        // translate puts the second copy exactly where the first started,
+        // so the visible window sees a seamless infinite scroll.
+        "marquee-clean": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        "marquee-clean-reverse": {
+          from: { transform: "translateX(-50%)" },
+          to: { transform: "translateX(0)" },
+        },
         "gradient-flow": {
           "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
@@ -140,6 +152,10 @@ const config: Config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         marquee: "marquee 40s linear infinite",
         "marquee-reverse": "marquee-reverse 40s linear infinite",
+        "marquee-clean": "marquee-clean 90s linear infinite",
+        "marquee-clean-reverse": "marquee-clean-reverse 90s linear infinite",
+        "marquee-clean-slow": "marquee-clean 80s linear infinite",
+        "marquee-clean-slow-reverse": "marquee-clean-reverse 80s linear infinite",
         "gradient-flow": "gradient-flow 6s ease-in-out infinite",
         "pulse-dot": "pulse-dot 2s ease-in-out infinite",
       },

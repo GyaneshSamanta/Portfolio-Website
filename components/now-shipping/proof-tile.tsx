@@ -33,23 +33,22 @@ export function ProofTile({ text, spanClass, rowSpan }: Props) {
 
   return (
     <BentoTile spanClass={spanClass} rowSpan={rowSpan}>
-      <div ref={ref} className="flex h-full flex-col">
-        <div className="font-mono text-xs uppercase tracking-wider text-fg-tertiary">Proof</div>
+      <div ref={ref} className="flex h-full flex-col justify-center py-2">
         {number !== null ? (
-          <div className="mt-auto">
-            <div className="text-[clamp(2.5rem,5vw,4rem)] font-bold leading-none tracking-tight text-fg-primary">
+          <>
+            <div className="text-[clamp(2.25rem,4.5vw,3.5rem)] font-bold leading-none tracking-tight text-fg-primary">
               {prefix}
               <span className="tabular-nums text-transparent bg-clip-text bg-gradient-to-r from-brand-magenta to-brand-pink">
                 {formatted}
               </span>
               {suffix.match(/^[+×x]/)?.[0] ?? ""}
             </div>
-            <div className="mt-1 text-sm text-fg-secondary">
+            <div className="mt-2 text-sm text-fg-secondary">
               {suffix.replace(/^[+×x]\s*/, "")}
             </div>
-          </div>
+          </>
         ) : (
-          <div className="mt-auto text-base text-fg-primary">{text}</div>
+          <div className="text-base text-fg-primary">{text}</div>
         )}
       </div>
     </BentoTile>

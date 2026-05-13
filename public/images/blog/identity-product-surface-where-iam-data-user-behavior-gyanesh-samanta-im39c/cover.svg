@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%" gradientTransform="rotate(54)">
+      <stop offset="0%" stop-color="#0A0820"/>
+      <stop offset="55%" stop-color="#1A1A3A"/>
+      <stop offset="100%" stop-color="#11103A"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="20%" cy="0%" r="60%">
+      <stop offset="0%" stop-color="#ED2EBA" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ED2EBA" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="100%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#8E3DEF" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#8E3DEF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <rect width="100%" height="100%" fill="url(#glowA)"/>
+  <rect width="100%" height="100%" fill="url(#glowB)"/>
+
+  <!-- Stars -->
+  <g fill="#F5EFEF">
+    <circle cx="561" cy="22" r="0.45" opacity="0.22"/><circle cx="551" cy="276" r="1.10" opacity="0.63"/><circle cx="523" cy="244" r="1.49" opacity="0.67"/><circle cx="268" cy="7" r="1.55" opacity="0.75"/><circle cx="753" cy="602" r="1.02" opacity="0.41"/><circle cx="774" cy="574" r="0.99" opacity="0.69"/><circle cx="483" cy="582" r="0.44" opacity="0.21"/><circle cx="582" cy="423" r="0.98" opacity="0.70"/><circle cx="928" cy="251" r="1.35" opacity="0.46"/><circle cx="1071" cy="586" r="1.53" opacity="0.48"/><circle cx="700" cy="190" r="0.61" opacity="0.48"/><circle cx="1087" cy="565" r="0.82" opacity="0.62"/><circle cx="282" cy="375" r="0.47" opacity="0.77"/><circle cx="55" cy="466" r="0.90" opacity="0.40"/><circle cx="733" cy="223" r="1.35" opacity="0.71"/><circle cx="6" cy="140" r="1.05" opacity="0.25"/><circle cx="186" cy="225" r="1.05" opacity="0.23"/><circle cx="1156" cy="402" r="1.41" opacity="0.33"/><circle cx="1172" cy="161" r="0.61" opacity="0.28"/><circle cx="329" cy="175" r="1.41" opacity="0.28"/><circle cx="1125" cy="218" r="0.47" opacity="0.50"/><circle cx="401" cy="390" r="1.07" opacity="0.51"/><circle cx="249" cy="570" r="0.59" opacity="0.62"/><circle cx="1080" cy="391" r="0.72" opacity="0.48"/><circle cx="198" cy="619" r="0.57" opacity="0.57"/><circle cx="605" cy="173" r="1.16" opacity="0.33"/><circle cx="715" cy="229" r="1.33" opacity="0.46"/><circle cx="377" cy="281" r="1.45" opacity="0.60"/><circle cx="1148" cy="513" r="1.24" opacity="0.62"/><circle cx="232" cy="42" r="0.97" opacity="0.60"/><circle cx="243" cy="28" r="0.58" opacity="0.43"/><circle cx="1103" cy="264" r="1.05" opacity="0.37"/><circle cx="73" cy="262" r="1.60" opacity="0.31"/><circle cx="937" cy="269" r="0.86" opacity="0.22"/><circle cx="42" cy="507" r="1.32" opacity="0.54"/><circle cx="210" cy="364" r="1.60" opacity="0.20"/><circle cx="918" cy="481" r="0.78" opacity="0.40"/><circle cx="1002" cy="530" r="1.60" opacity="0.53"/><circle cx="53" cy="20" r="1.09" opacity="0.23"/><circle cx="181" cy="552" r="1.39" opacity="0.37"/><circle cx="747" cy="30" r="0.86" opacity="0.35"/><circle cx="589" cy="422" r="1.31" opacity="0.25"/><circle cx="487" cy="351" r="1.25" opacity="0.79"/><circle cx="736" cy="579" r="1.25" opacity="0.28"/><circle cx="213" cy="78" r="1.21" opacity="0.36"/><circle cx="532" cy="434" r="0.85" opacity="0.73"/><circle cx="727" cy="582" r="0.87" opacity="0.73"/><circle cx="1014" cy="545" r="1.19" opacity="0.76"/><circle cx="292" cy="213" r="0.85" opacity="0.37"/><circle cx="155" cy="403" r="1.45" opacity="0.61"/><circle cx="201" cy="476" r="0.79" opacity="0.22"/><circle cx="771" cy="210" r="1.01" opacity="0.52"/><circle cx="638" cy="388" r="1.02" opacity="0.61"/><circle cx="111" cy="204" r="1.41" opacity="0.34"/><circle cx="1002" cy="589" r="1.40" opacity="0.53"/><circle cx="383" cy="318" r="1.09" opacity="0.65"/><circle cx="680" cy="572" r="0.64" opacity="0.33"/><circle cx="633" cy="86" r="0.94" opacity="0.22"/><circle cx="356" cy="209" r="1.12" opacity="0.73"/><circle cx="734" cy="185" r="1.08" opacity="0.71"/>
+  </g>
+
+  <!-- Edition label -->
+  <text x="60" y="80" font-family="'Geist Mono', ui-monospace, monospace" font-size="20" letter-spacing="4" fill="#C9BCC4" text-transform="uppercase">GYANESH ON PRODUCT · #11</text>
+
+  <!-- Title block -->
+  <text x="60" y="258.3333333333333" font-family="'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif" font-style="italic" font-weight="400" font-size="64" fill="#F5EFEF">Identity as a Product Surface:</text><text x="60" y="336.3333333333333" font-family="'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif" font-style="italic" font-weight="400" font-size="64" fill="#F5EFEF">Where IAM, Data, and User</text><text x="60" y="414.3333333333333" font-family="'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif" font-style="italic" font-weight="400" font-size="64" fill="#F5EFEF">Behavior Converge</text>
+
+  <!-- Date footer -->
+  <text x="60" y="570" font-family="'Geist Mono', ui-monospace, monospace" font-size="20" letter-spacing="4" fill="#828397">MAR 6, 2026</text>
+
+  <!-- Brand mark -->
+  <text x="1140" y="570" text-anchor="end" font-family="'Geist Mono', ui-monospace, monospace" font-size="20" letter-spacing="4" fill="#828397">GYANESH.S</text>
+
+  <!-- Bottom-right brand line -->
+  <line x1="1000" y1="590" x2="1140" y2="590" stroke="#ED2EBA" stroke-width="2"/>
+</svg>

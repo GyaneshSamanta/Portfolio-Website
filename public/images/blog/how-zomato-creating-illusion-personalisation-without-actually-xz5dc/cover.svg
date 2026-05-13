@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%" gradientTransform="rotate(11)">
+      <stop offset="0%" stop-color="#0A0820"/>
+      <stop offset="55%" stop-color="#1A1A3A"/>
+      <stop offset="100%" stop-color="#11103A"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="20%" cy="0%" r="60%">
+      <stop offset="0%" stop-color="#ED2EBA" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ED2EBA" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="100%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#8E3DEF" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#8E3DEF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <rect width="100%" height="100%" fill="url(#glowA)"/>
+  <rect width="100%" height="100%" fill="url(#glowB)"/>
+
+  <!-- Stars -->
+  <g fill="#F5EFEF">
+    <circle cx="721" cy="200" r="1.51" opacity="0.50"/><circle cx="1102" cy="358" r="1.00" opacity="0.40"/><circle cx="428" cy="555" r="0.91" opacity="0.62"/><circle cx="698" cy="494" r="1.23" opacity="0.80"/><circle cx="1026" cy="382" r="1.08" opacity="0.26"/><circle cx="728" cy="201" r="1.21" opacity="0.39"/><circle cx="134" cy="587" r="1.30" opacity="0.22"/><circle cx="698" cy="158" r="1.44" opacity="0.60"/><circle cx="498" cy="431" r="0.66" opacity="0.76"/><circle cx="1177" cy="185" r="0.93" opacity="0.68"/><circle cx="524" cy="178" r="0.98" opacity="0.71"/><circle cx="374" cy="378" r="1.17" opacity="0.36"/><circle cx="729" cy="366" r="0.79" opacity="0.29"/><circle cx="759" cy="5" r="1.03" opacity="0.51"/><circle cx="918" cy="335" r="0.71" opacity="0.69"/><circle cx="629" cy="301" r="0.97" opacity="0.32"/><circle cx="210" cy="307" r="1.20" opacity="0.66"/><circle cx="62" cy="561" r="0.98" opacity="0.73"/><circle cx="537" cy="309" r="1.18" opacity="0.21"/><circle cx="13" cy="362" r="0.56" opacity="0.48"/><circle cx="14" cy="308" r="0.72" opacity="0.21"/><circle cx="857" cy="8" r="1.43" opacity="0.26"/><circle cx="148" cy="168" r="0.60" opacity="0.61"/><circle cx="168" cy="0" r="1.33" opacity="0.52"/><circle cx="404" cy="8" r="0.55" opacity="0.79"/><circle cx="647" cy="226" r="0.75" opacity="0.65"/><circle cx="192" cy="625" r="1.12" opacity="0.25"/><circle cx="810" cy="229" r="0.72" opacity="0.56"/><circle cx="512" cy="68" r="1.00" opacity="0.30"/><circle cx="1172" cy="60" r="1.11" opacity="0.22"/><circle cx="697" cy="296" r="1.54" opacity="0.71"/><circle cx="387" cy="205" r="0.77" opacity="0.51"/><circle cx="76" cy="388" r="0.92" opacity="0.48"/><circle cx="1104" cy="138" r="0.65" opacity="0.43"/><circle cx="384" cy="330" r="1.56" opacity="0.36"/><circle cx="875" cy="433" r="1.09" opacity="0.57"/><circle cx="871" cy="175" r="0.55" opacity="0.37"/><circle cx="407" cy="341" r="1.44" opacity="0.35"/><circle cx="610" cy="233" r="0.81" opacity="0.71"/><circle cx="474" cy="303" r="0.67" opacity="0.23"/><circle cx="481" cy="167" r="0.65" opacity="0.70"/><circle cx="233" cy="327" r="0.86" opacity="0.50"/><circle cx="1108" cy="560" r="0.76" opacity="0.22"/><circle cx="474" cy="326" r="1.52" opacity="0.58"/><circle cx="266" cy="519" r="0.88" opacity="0.23"/><circle cx="622" cy="271" r="0.87" opacity="0.53"/><circle cx="1183" cy="220" r="1.54" opacity="0.46"/><circle cx="570" cy="11" r="0.54" opacity="0.64"/><circle cx="124" cy="400" r="0.82" opacity="0.47"/><circle cx="624" cy="63" r="1.55" opacity="0.33"/><circle cx="806" cy="547" r="0.75" opacity="0.65"/><circle cx="825" cy="391" r="1.17" opacity="0.54"/><circle cx="456" cy="170" r="0.51" opacity="0.43"/><circle cx="467" cy="57" r="1.38" opacity="0.26"/><circle cx="729" cy="141" r="1.17" opacity="0.76"/><circle cx="1009" cy="408" r="0.42" opacity="0.63"/><circle cx="969" cy="466" r="0.70" opacity="0.23"/><circle cx="912" cy="434" r="1.31" opacity="0.47"/><circle cx="620" cy="597" r="1.45" opacity="0.27"/><circle cx="502" cy="11" r="1.26" opacity="0.60"/>
+  </g>
+
+  <!-- Edition label -->
+  <text x="60" y="80" font-family="'Geist Mono', ui-monospace, monospace" font-size="20" letter-spacing="4" fill="#C9BCC4" text-transform="uppercase">GYANESH ON PRODUCT · #08</text>
+
+  <!-- Title block -->
+  <text x="60" y="258.3333333333333" font-family="'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif" font-style="italic" font-weight="400" font-size="64" fill="#F5EFEF">How Zomato is creating the</text><text x="60" y="336.3333333333333" font-family="'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif" font-style="italic" font-weight="400" font-size="64" fill="#F5EFEF">illusion of personalisation —</text><text x="60" y="414.3333333333333" font-family="'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif" font-style="italic" font-weight="400" font-size="64" fill="#F5EFEF">without actually knowing you</text>
+
+  <!-- Date footer -->
+  <text x="60" y="570" font-family="'Geist Mono', ui-monospace, monospace" font-size="20" letter-spacing="4" fill="#828397">MAR 25, 2026</text>
+
+  <!-- Brand mark -->
+  <text x="1140" y="570" text-anchor="end" font-family="'Geist Mono', ui-monospace, monospace" font-size="20" letter-spacing="4" fill="#828397">GYANESH.S</text>
+
+  <!-- Bottom-right brand line -->
+  <line x1="1000" y1="590" x2="1140" y2="590" stroke="#ED2EBA" stroke-width="2"/>
+</svg>
