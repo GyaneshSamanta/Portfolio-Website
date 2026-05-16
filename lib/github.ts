@@ -55,6 +55,22 @@ if (process.env.GITHUB_TOKEN) {
   GH_HEADERS.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
 }
 
+/** Total public repository count from the user's profile endpoint. */
+export async function getPublicRepoCount(username: string): Promise<number | null> {
+  try {
+    const res = await fetch(`https://api.github.com/users/${username}`, {
+      headers: GH_HEADERS,
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    return typeof json.public_repos === "number" ? json.public_repos : null;
+  } catch (err) {
+    console.error("[github] getPublicRepoCount failed:", err);
+    return null;
+  }
+}
+
 export async function getRepos(username: string): Promise<Repo[]> {
   try {
     const res = await fetch(

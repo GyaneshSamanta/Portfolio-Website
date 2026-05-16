@@ -86,10 +86,14 @@ export function ShortsPhone({ videoIds, rotateAfterMs = 18000 }: Props) {
             className="pointer-events-none absolute left-1/2 top-2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-black"
           />
 
-          {/* Video screen — overscale to crop the 16:9 YouTube player into a
-              9:16 phone shape. We swap the iframe key on idx change to force a
-              reload (so autoplay actually fires on each new video). */}
-          <div className="absolute inset-0">
+          {/* Video screen — phone is 9:16. YouTube embed is a 16:9 player.
+              Inside that player a vertical Short (9:16 native) is centered with
+              black bars left/right. To make the Short *fill* the 9:16 phone
+              perfectly, we size the iframe to be 16:9 with HEIGHT matching the
+              phone (so the iframe is 1.78× as wide as the phone) and center it
+              horizontally — the centered 9:16 Short content then sits exactly
+              within the phone bezel. No CSS transform needed. */}
+          <div className="absolute inset-0 overflow-hidden">
             {visible ? (
               <iframe
                 key={currentId}
@@ -98,10 +102,15 @@ export function ShortsPhone({ videoIds, rotateAfterMs = 18000 }: Props) {
                 allow="autoplay; encrypted-media; picture-in-picture"
                 allowFullScreen
                 loading="lazy"
-                className="h-full w-full border-0"
+                className="absolute top-0 border-0"
                 style={{
-                  transform: "scale(1.8)",
-                  transformOrigin: "center center",
+                  /* 16/9 of phone width = 177.78% — iframe overflows left+right
+                     by 39% each side. The Short content is centered within and
+                     ends up exactly filling the phone width. */
+                  width: "177.78%",
+                  height: "100%",
+                  left: "50%",
+                  transform: "translateX(-50%)",
                   pointerEvents: "none",
                 }}
               />
@@ -110,8 +119,12 @@ export function ShortsPhone({ videoIds, rotateAfterMs = 18000 }: Props) {
               <img
                 src={poster}
                 alt=""
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{ transform: "scale(1.8)" }}
+                className="absolute top-0 h-full object-cover"
+                style={{
+                  width: "177.78%",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                }}
                 loading="lazy"
               />
             )}

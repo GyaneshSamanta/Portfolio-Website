@@ -1,28 +1,30 @@
 /**
- * NowShipping — DESIGN.md §5.2 (rev v2.1)
- * Server component. Live signals only. Drops static repo tiles + release tile.
+ * NowShipping — DESIGN.md §5.2 (rev v2.6)
+ * Server component. Live signals only.
  *
- * Layout (desktop, 12-col):
- *   row 1: LiveCommitTile (6) | SnakeChart (6)
- *   row 2: NewsletterTile (12 wide, 1 tall)
- *   row 3: 4× ProofTile (3 each) — "Achievements at a glance"
+ * Layout (top-to-bottom):
+ *   1. Achievements at a glance — 4 ProofTiles (counter pills)
+ *   2. Snake contribution graph — full-width animated SVG
+ *   3. Newsletter + YouTube — two side-by-side cards
  */
 
 import { Activity } from "lucide-react";
-import { getRecentPushEvents } from "@/lib/github";
-import { LiveCommitTile } from "@/components/now-shipping/live-commit-tile";
 import { SnakeChart } from "@/components/now-shipping/snake-chart";
 import { ProofTile } from "@/components/now-shipping/proof-tile";
 import { NewsletterTile } from "@/components/now-shipping/newsletter-tile";
+import { YouTubeTile } from "@/components/now-shipping/youtube-tile";
 import heroData from "@/data/hero.json";
 import { getAllPosts } from "@/lib/blog";
+import { getPlaylistVideos } from "@/lib/youtube";
 
-const USERNAME = "GyaneshSamanta";
+const PLAYLIST_ID = "PLDmP2FTmWmITaid4WWbpfantPMnafuu0q";
+const CHANNEL_URL = "https://www.youtube.com/channel/UCWga4RrqehgwPS-MUvT4w4g";
 
 export async function NowShippingSection() {
-  const events = await getRecentPushEvents(USERNAME);
   const badges = (heroData as any).badges as string[] | undefined;
   const featuredEssay = getAllPosts()[0] ?? null;
+  const videos = await getPlaylistVideos(PLAYLIST_ID);
+  const featuredVideo = videos.find((v) => !v.isShort) ?? videos[0] ?? null;
 
   return (
     <section
@@ -43,28 +45,9 @@ export async function NowShippingSection() {
           </p>
         </header>
 
-        {/* Row 1 — live commit + snake chart (6 + 6) */}
-        <div className="grid auto-rows-[minmax(180px,auto)] grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-12">
-          <LiveCommitTile events={events} spanClass="lg:col-span-6" rowSpan="lg:row-span-1" />
-          <SnakeChart spanClass="lg:col-span-6" rowSpan="lg:row-span-1" />
-        </div>
-
-        {/* Row 2 — wide newsletter tile */}
-        {featuredEssay && (
-          <div className="mt-3 md:mt-4">
-            <NewsletterTile
-              title={featuredEssay.title}
-              date={featuredEssay.dateDisplay}
-              url={`/blog/${featuredEssay.slug}`}
-              coverImage={featuredEssay.cover}
-              readTime={featuredEssay.readTime}
-            />
-          </div>
-        )}
-
-        {/* Row 3 — Achievements at a glance */}
+        {/* Row 1 — Achievements at a glance */}
         {badges && badges.length > 0 && (
-          <div className="mt-12">
+          <div className="mb-6">
             <h3 className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
               Achievements at a glance
             </h3>
@@ -75,6 +58,43 @@ export async function NowShippingSection() {
             </div>
           </div>
         )}
+
+        {/* Row 2 — GitHub contribution snake (full-width) */}
+        <div className="mb-6">
+          <SnakeChart />
+        </div>
+
+        {/* Row 3 — Newsletter card + YouTube channel card (2-col) */}
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
+          {featuredEssay && (
+            <NewsletterTile
+              title={featuredEssay.title}
+              date={featuredEssay.dateDisplay}
+              url={`/blog/${featuredEssay.slug}`}
+              coverImage={featuredEssay.cover}
+              readTime={featuredEssay.readTime}
+            />
+          )}
+
+          {featuredVideo ? (
+            <YouTubeTile
+              title={featuredVideo.title}
+              channelUrl={CHANNEL_URL}
+              videoUrl={`https://www.youtube.com/watch?v=${featuredVideo.id}`}
+              thumbnail={featuredVideo.thumbnail}
+              durationText={featuredVideo.durationText}
+              publishedText={featuredVideo.publishedText}
+              viewsText={featuredVideo.viewsText}
+            />
+          ) : (
+            <YouTubeTile
+              title="Gyanesh on Product — full playlist"
+              channelUrl={CHANNEL_URL}
+              videoUrl={CHANNEL_URL}
+              thumbnail="/images/brand/newsletter-cover.png"
+            />
+          )}
+        </div>
       </div>
     </section>
   );

@@ -11,12 +11,17 @@
  */
 
 import { Github, Layers, FileText } from "lucide-react";
-import { getRepos } from "@/lib/github";
+import { getRepos, getPublicRepoCount } from "@/lib/github";
 import { ReposMarquee } from "@/components/work/repos-marquee";
 import { ResearchGrid } from "@/components/work/research-grid";
 
 export async function SelectedWorkSection() {
-  const repos = await getRepos("GyaneshSamanta");
+  const [repos, repoCount] = await Promise.all([
+    getRepos("GyaneshSamanta"),
+    getPublicRepoCount("GyaneshSamanta"),
+  ]);
+  // Display the real public repo count (e.g., 60+). Falls back to visible repos length.
+  const displayCount = repoCount ?? repos.length;
 
   return (
     <section
@@ -41,7 +46,7 @@ export async function SelectedWorkSection() {
         <div className="mb-16">
           <div className="mb-5 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
             <Github className="h-3.5 w-3.5" />
-            Open source · {repos.length} repos
+            Open source · {displayCount}+ repos
           </div>
           <ReposMarquee repos={repos} />
         </div>

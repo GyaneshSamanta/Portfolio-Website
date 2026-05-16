@@ -38,7 +38,7 @@ export function WritingSection() {
         <FeaturedCard post={featured} />
 
         {grid.length > 0 && (
-          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {grid.map((p) => (
               <CompactCard key={p.slug} post={p} />
             ))}
@@ -132,15 +132,14 @@ function CompactCard({ post }: { post: BlogPostMeta }) {
       data-cursor="Read"
       className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/60 backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-swift hover:-translate-y-0.5 hover:border-border-strong hover:bg-bg-card-hover/70"
     >
-      {/* Full-width 16:9 cover — banners are 1200×630, so this aspect lets
-          them render without cropping. */}
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-bg-elevated">
+      {/* Cinemascope-ish cover so cards stay compact vertically. */}
+      <div className="relative aspect-[21/9] w-full overflow-hidden bg-bg-elevated">
         {post.cover ? (
           <Image
             src={post.cover}
             alt=""
             fill
-            sizes="(max-width: 768px) 100vw, 600px"
+            sizes="(max-width: 768px) 100vw, 400px"
             className="object-cover"
             unoptimized={/^https?:\/\//.test(post.cover)}
           />
@@ -148,14 +147,13 @@ function CompactCard({ post }: { post: BlogPostMeta }) {
           <div className="absolute inset-0 bg-gradient-to-br from-brand-violet/25 via-brand-purple/10 to-bg-card" />
         )}
       </div>
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-4">
         <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
           {post.dateDisplay}
         </div>
-        <h4 className="mt-2 line-clamp-2 text-base font-semibold leading-snug text-fg-primary">
+        <h4 className="mt-1.5 line-clamp-2 text-sm font-semibold leading-snug text-fg-primary md:text-base">
           {post.title}
         </h4>
-        <p className="mt-2 line-clamp-2 text-sm text-fg-secondary">{post.excerpt}</p>
         <div className="mt-auto inline-flex items-center gap-1 pt-3 font-mono text-[10px] uppercase tracking-wider text-fg-tertiary">
           <Clock className="h-3 w-3" />
           {post.readTime}

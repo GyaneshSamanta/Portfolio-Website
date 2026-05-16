@@ -114,7 +114,10 @@ export async function getPlaylistVideos(playlistId: string): Promise<Video[]> {
 
       const durationText: string | null = r.lengthText?.simpleText ?? null;
       const durationSeconds = parseDuration(durationText);
-      const isShort = durationSeconds > 0 && durationSeconds <= 90;
+      // ≤ 3 minutes counts as "Short" — captures OpusClip-style vertical reels
+      // that are technically longer than YouTube's strict 60s Shorts limit but
+      // are clearly clipped/portrait-format content.
+      const isShort = durationSeconds > 0 && durationSeconds <= 180;
 
       // videoInfo.runs is usually [{ text: "1.2K views" }, { text: " • " }, { text: "3 days ago" }]
       const infoRuns: any[] = r.videoInfo?.runs ?? [];
