@@ -21,7 +21,6 @@ const USERNAME = "GyaneshSamanta";
 
 export async function NowShippingSection() {
   const events = await getRecentPushEvents(USERNAME);
-  const latestEvent = events[0] ?? null;
   const badges = (heroData as any).badges as string[] | undefined;
   const featuredEssay = getAllPosts()[0] ?? null;
 
@@ -46,7 +45,7 @@ export async function NowShippingSection() {
 
         {/* Row 1 — live commit + snake chart (6 + 6) */}
         <div className="grid auto-rows-[minmax(180px,auto)] grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-12">
-          <LiveCommitTile event={latestEvent} spanClass="lg:col-span-6" rowSpan="lg:row-span-1" />
+          <LiveCommitTile events={events} spanClass="lg:col-span-6" rowSpan="lg:row-span-1" />
           <SnakeChart spanClass="lg:col-span-6" rowSpan="lg:row-span-1" />
         </div>
 
