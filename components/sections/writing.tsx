@@ -14,7 +14,8 @@ export function WritingSection() {
   if (posts.length === 0) return null;
 
   const [featured, ...rest] = posts;
-  const grid = rest.slice(0, 4);
+  // 1 featured + 6 grid cards = exactly 2 rows of 3 on lg (no orphan tile).
+  const grid = rest.slice(0, 6);
 
   return (
     <section
