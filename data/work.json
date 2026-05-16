@@ -1,52 +1,11 @@
 [
   {
-    "id": "notebooklm-windows",
-    "category": "repo",
-    "title": "NotebookLM for Windows",
-    "subtitle": "Native desktop wrapper · 2,000+ downloads",
-    "description": "Power users of NotebookLM lose context every time they leave the browser. I shipped an Electron-based desktop wrapper with session persistence, system-level shortcuts, and native notifications for long-running audio generation tasks. The product converts a research-heavy web app into a persistent, OS-integrated workspace. Crossed 2,000 downloads organically.",
-    "coverImage": "https://opengraph.githubassets.com/1/GyaneshSamanta/NotebookLM-for-Windows",
-    "tags": ["Electron", "Desktop App", "AI"],
-    "metrics": [
-      { "label": "Downloads", "value": "2,000+" },
-      { "label": "Year", "value": "2024" }
-    ],
-    "links": [
-      { "label": "GitHub", "url": "https://github.com/GyaneshSamanta/NotebookLM-for-Windows" }
-    ]
-  },
-  {
-    "id": "cue",
-    "category": "repo",
-    "title": "cue",
-    "subtitle": "Zero-dependency dev environment CLI",
-    "description": "A zero-dependency, ultra-lightweight CLI utility. Replaces the need to memorise OS-specific package-manager syntax, manually handle install lock conflicts, or babysit downloads over flaky networks. Provisions developer environment stacks and integrates Claude Code with local Ollama via LiteLLM proxy.",
-    "coverImage": "https://opengraph.githubassets.com/1/GyaneshSamanta/cue",
-    "tags": ["Go", "CLI", "Developer Tools", "AI"],
-    "metrics": [{ "label": "Stack", "value": "Go · Cobra · Bubbletea" }],
-    "links": [{ "label": "GitHub", "url": "https://github.com/GyaneshSamanta/cue" }]
-  },
-  {
-    "id": "newsletter",
-    "category": "newsletter",
-    "title": "Gyanesh on Product",
-    "subtitle": "48 editions · 1000+ subscribers",
-    "description": "Weekly newsletter on product, AI, behavioural economics, and consumer behaviour. Published on LinkedIn, mirrored in-site. Covers everything from validation gaps to behavioural pricing to building AI features that actually ship.",
-    "coverImage": "/images/brand/newsletter-cover.png",
-    "tags": ["Writing", "Newsletter"],
-    "metrics": [
-      { "label": "Editions", "value": "48" },
-      { "label": "Subscribers", "value": "1k+" }
-    ],
-    "links": [{ "label": "Read", "url": "/blog" }]
-  },
-  {
     "id": "pegasus-spyware",
     "category": "research",
-    "title": "Pegasus Spyware: Attack System Artemis",
+    "title": "Pegasus Spyware: An Attack System Artemis",
     "subtitle": "IEEE ICECAA · Aug 2023",
     "description": "Co-authored study examining the technical intricacies of Pegasus spyware. Explores propagation methods, zero-day vulnerability exploitation, and HTTPS command-and-control channels. Reveals the elusive nature of Pegasus and the minimal traces it leaves on infected systems.",
-    "coverImage": "",
+    "coverImage": "/images/papers/pegasus-spyware.svg",
     "tags": ["Cybersecurity", "Behavioral Analysis", "Research"],
     "metrics": [
       { "label": "Venue", "value": "IEEE" },
@@ -62,7 +21,7 @@
     "title": "NFT Analytical Modelling on Blockchain Data",
     "subtitle": "IEEE ICNWC · May 2023",
     "description": "ETL pipelines transforming EVM-node data into a centralized database for analytical modelling. Recommends potential uprising high-value NFTs via SparkSQL visualization and a cross-platform Flutter front-end.",
-    "coverImage": "",
+    "coverImage": "/images/papers/nft-modeling.svg",
     "tags": ["Web3", "NFT", "Data Science"],
     "metrics": [
       { "label": "Venue", "value": "IEEE" },
@@ -78,7 +37,7 @@
     "title": "Dynamic Network Architecture for IoT",
     "subtitle": "IEEE ICICCS · Dec 2022",
     "description": "Proposed an architecture for connecting 200+ IoT devices seamlessly without bandwidth degradation. Uses the Arduino Uno WiFi REV2 as a bridge between WiFi and Zigbee communication.",
-    "coverImage": "",
+    "coverImage": "/images/papers/iot-network.svg",
     "tags": ["IoT", "Network Architecture", "Research"],
     "metrics": [
       { "label": "Venue", "value": "IEEE" },

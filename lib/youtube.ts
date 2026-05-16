@@ -15,11 +15,29 @@ export type Video = {
   title: string;
   thumbnail: string;
   durationText: string | null;
+  /** Parsed total seconds — used to split shorts from full episodes. */
+  durationSeconds: number;
   /** Human-readable like "3 days ago" — directly from YouTube. */
   publishedText: string | null;
   /** Human-readable view count like "1.2K views". */
   viewsText: string | null;
+  /** True if duration ≤ 90s — likely a YouTube Short. */
+  isShort: boolean;
 };
+
+/**
+ * Parse YouTube duration strings like "0:34" / "12:43" / "1:02:11" → seconds.
+ * Returns 0 for unparseable input.
+ */
+function parseDuration(text: string | null | undefined): number {
+  if (!text) return 0;
+  const parts = text.split(":").map((p) => parseInt(p, 10));
+  if (parts.some((p) => isNaN(p))) return 0;
+  if (parts.length === 1) return parts[0];
+  if (parts.length === 2) return parts[0] * 60 + parts[1];
+  if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+  return 0;
+}
 
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
@@ -85,13 +103,24 @@ export async function getPlaylistVideos(playlistId: string): Promise<Video[]> {
         thumbs[thumbs.length - 1]?.url ?? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 
       const durationText: string | null = r.lengthText?.simpleText ?? null;
+      const durationSeconds = parseDuration(durationText);
+      const isShort = durationSeconds > 0 && durationSeconds <= 90;
 
       // videoInfo.runs is usually [{ text: "1.2K views" }, { text: " • " }, { text: "3 days ago" }]
       const infoRuns: any[] = r.videoInfo?.runs ?? [];
       const viewsText: string | null = infoRuns?.[0]?.text ?? null;
       const publishedText: string | null = infoRuns?.[2]?.text ?? null;
 
-      videos.push({ id, title, thumbnail, durationText, publishedText, viewsText });
+      videos.push({
+        id,
+        title,
+        thumbnail,
+        durationText,
+        durationSeconds,
+        publishedText,
+        viewsText,
+        isShort,
+      });
     }
 
     return videos;

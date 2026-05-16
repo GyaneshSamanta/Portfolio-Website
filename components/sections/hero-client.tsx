@@ -58,21 +58,28 @@ export function HeroClient({ hero, latestPushEvent }: Props) {
         <div className="order-2 lg:order-1">
           {/* Display heading: "PM with" + kinetic italic "T-shaped skills" */}
           <h1 className="font-bold tracking-[-0.02em] leading-[0.95] text-[clamp(2.75rem,9vw,6.5rem)] text-fg-primary">
-            <span className="block">{hero.headline}</span>
-            <KineticHeading
-              text={hero.headlineHighlight}
-              as="span"
-              serif
-              delay={0.15}
-              className="block font-serif italic bg-clip-text text-transparent"
+            {/* Line 1 — "PM with" with kinetic per-letter blur-in */}
+            <KineticHeading text={hero.headline} as="span" delay={0} className="block" />
+            {/* Line 2 — italic gradient phrase. Single element so the gradient
+                actually paints. Reveal-on-mount via motion + opacity. */}
+            <motion.span
+              initial={reduced ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="block font-serif italic"
               style={{
                 backgroundImage:
                   "linear-gradient(90deg, hsl(var(--brand-magenta)) 0%, hsl(var(--brand-pink)) 35%, hsl(var(--brand-violet)) 70%, hsl(var(--brand-magenta)) 100%)",
                 backgroundSize: "200% 100%",
-                animation: reduced ? undefined : "gradient-flow 6s ease-in-out infinite",
+                backgroundClip: "text",
                 WebkitBackgroundClip: "text",
+                color: "transparent",
+                WebkitTextFillColor: "transparent",
+                animation: reduced ? undefined : "gradient-flow 6s ease-in-out infinite",
               }}
-            />
+            >
+              {hero.headlineHighlight}
+            </motion.span>
           </h1>
 
           {/* Followup line that ties the T-shape claim back to specifics. */}

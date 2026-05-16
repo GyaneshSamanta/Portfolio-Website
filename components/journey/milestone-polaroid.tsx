@@ -83,11 +83,11 @@ export function MilestonePolaroid({ milestone, rotateDeg = 0, active, onClick }:
 
       <div className="flex items-center gap-3">
         {milestone.logo ? (
-          <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-bg-elevated ring-1 ring-border-subtle">
-            <Image src={milestone.logo} alt="" fill sizes="40px" className="object-contain p-1.5" />
+          <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-xl bg-white/95 ring-1 ring-border-subtle">
+            <Image src={milestone.logo} alt="" fill sizes="40px" className="object-contain" />
           </div>
         ) : (
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-magenta to-brand-violet text-sm font-semibold text-white">
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-magenta to-brand-violet text-sm font-semibold text-white">
             {milestone.org.charAt(0)}
           </div>
         )}

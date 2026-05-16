@@ -171,11 +171,6 @@ function JourneyWalk() {
             </motion.div>
           </div>
 
-          {/* Progress hint at the bottom. */}
-          <div className="mx-auto w-full max-w-[1400px] px-12 pb-10 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-            {String(activeIdx + 1).padStart(2, "0")} / {String(MILESTONES.length).padStart(2, "0")} ·{" "}
-            <span className="text-fg-secondary">{MILESTONES[activeIdx]?.org}</span>
-          </div>
         </div>
       </section>
 
@@ -308,8 +303,8 @@ function MilestoneModal({
 
         <div className="flex items-start gap-4">
           {milestone.logo ? (
-            <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-2xl bg-bg-card ring-1 ring-border-subtle">
-              <Image src={milestone.logo} alt="" fill sizes="56px" className="object-contain p-2" />
+            <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-2xl bg-white/95 ring-1 ring-border-subtle">
+              <Image src={milestone.logo} alt="" fill sizes="56px" className="object-contain" />
             </div>
           ) : (
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-magenta to-brand-violet text-lg font-semibold text-white">

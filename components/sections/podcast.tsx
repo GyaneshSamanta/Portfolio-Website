@@ -1,11 +1,16 @@
 /**
- * Podcast — DESIGN.md §5.6 (rev v2.1)
- * Server component. Fully dynamic: scrapes the YouTube playlist HTML at
- * request time via lib/youtube.ts (ISR 6h). No static array; no Rick Rolls.
+ * Podcast — DESIGN.md §5.6 (rev v2.2)
+ * Two parts:
+ *   1. Long-form episodes (>90s) — featured + 2-col grid
+ *   2. YT Shorts (≤90s) — iPhone-frame strip, no per-video titles
+ *
+ * Both populated dynamically from a single YouTube playlist via lib/youtube.ts
+ * (ISR 6h, no API key).
  */
 
-import { ArrowUpRight, Play } from "lucide-react";
+import { ArrowUpRight, Play, Smartphone } from "lucide-react";
 import { LiteYouTube } from "@/components/ui/lite-youtube";
+import { IPhoneFrame } from "@/components/podcast/iphone-frame";
 import { getPlaylistVideos } from "@/lib/youtube";
 
 const PLAYLIST_ID = "PLDmP2FTmWmITaid4WWbpfantPMnafuu0q";
@@ -14,9 +19,12 @@ const PLAYLIST_URL = `https://www.youtube.com/playlist?list=${PLAYLIST_ID}`;
 
 export async function PodcastSection() {
   const videos = await getPlaylistVideos(PLAYLIST_ID);
-  const hasVideos = videos.length > 0;
-  const featured = videos[0];
-  const rest = videos.slice(1, 7); // up to 6 more in grid
+  const hasAny = videos.length > 0;
+  const episodes = videos.filter((v) => !v.isShort);
+  const shorts = videos.filter((v) => v.isShort).slice(0, 5);
+
+  const featured = episodes[0];
+  const restEpisodes = episodes.slice(1, 5);
 
   return (
     <section
@@ -34,7 +42,7 @@ export async function PodcastSection() {
               <span className="font-serif italic">Long-form,</span> on tap.
             </h2>
             <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
-              Episodes auto-load from my YouTube playlist. Click play, the iframe loads — until then the page stays light.
+              Episodes auto-load from YouTube. Click play, the iframe loads — until then the page stays light.
             </p>
           </div>
           <a
@@ -49,9 +57,10 @@ export async function PodcastSection() {
           </a>
         </header>
 
-        {!hasVideos && <PodcastEmptyState />}
+        {!hasAny && <PodcastEmptyState />}
 
-        {hasVideos && featured && (
+        {/* Episodes */}
+        {featured && (
           <div className="overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/40">
             <div className="aspect-video w-full">
               <LiteYouTube videoId={featured.id} title={featured.title} className="h-full w-full" />
@@ -85,9 +94,9 @@ export async function PodcastSection() {
           </div>
         )}
 
-        {hasVideos && rest.length > 0 && (
-          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {rest.map((v) => (
+        {restEpisodes.length > 0 && (
+          <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">
+            {restEpisodes.map((v) => (
               <article
                 key={v.id}
                 className="overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/40"
@@ -105,6 +114,34 @@ export async function PodcastSection() {
                 </div>
               </article>
             ))}
+          </div>
+        )}
+
+        {/* Shorts — iPhone frame strip */}
+        {shorts.length > 0 && (
+          <div className="mt-20">
+            <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+                  <Smartphone className="h-3.5 w-3.5" />
+                  Shorts
+                </div>
+                <h3 className="mt-3 text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-tight tracking-[-0.01em] text-fg-primary">
+                  <span className="font-serif italic">Gyanesh on Product</span> · on YT Shorts
+                </h3>
+                <p className="mt-2 max-w-[60ch] text-sm text-fg-secondary md:text-base">
+                  Bite-sized takes on product, AI, and consumer behaviour. Tap any phone to play.
+                </p>
+              </div>
+            </div>
+
+            <div className="hide-scrollbar -mx-5 flex gap-5 overflow-x-auto px-5 pb-4 md:mx-0 md:px-0">
+              {shorts.map((v) => (
+                <div key={v.id} className="w-[200px] flex-shrink-0 md:w-[240px]">
+                  <IPhoneFrame videoId={v.id} title={v.title} />
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
