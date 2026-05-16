@@ -130,17 +130,19 @@ function CompactCard({ post }: { post: BlogPostMeta }) {
     <Link
       href={`/blog/${post.slug}`}
       data-cursor="Read"
-      className="group flex flex-col overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/60 backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-swift hover:-translate-y-0.5 hover:border-border-strong hover:bg-bg-card-hover/70 sm:flex-row"
+      className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/60 backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-swift hover:-translate-y-0.5 hover:border-border-strong hover:bg-bg-card-hover/70"
     >
-      <div className="relative aspect-[16/10] flex-shrink-0 sm:aspect-auto sm:w-48">
+      {/* Full-width 16:9 cover — banners are 1200×630, so this aspect lets
+          them render without cropping. */}
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-bg-elevated">
         {post.cover ? (
           <Image
             src={post.cover}
             alt=""
             fill
-            sizes="(max-width: 768px) 100vw, 200px"
+            sizes="(max-width: 768px) 100vw, 600px"
             className="object-cover"
-            unoptimized
+            unoptimized={/^https?:\/\//.test(post.cover)}
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-brand-violet/25 via-brand-purple/10 to-bg-card" />

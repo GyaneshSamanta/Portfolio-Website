@@ -47,7 +47,7 @@ export default function BlogIndex() {
             data-cursor="Read"
             className="group mt-12 grid overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/60 backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-swift hover:-translate-y-0.5 hover:border-border-strong hover:bg-bg-card-hover/70 lg:grid-cols-[1.2fr_1fr]"
           >
-            <div className="relative aspect-[16/10] lg:aspect-auto lg:min-h-[380px]">
+            <div className="relative aspect-[16/9] overflow-hidden bg-bg-elevated lg:aspect-auto lg:min-h-[380px]">
               {featured.cover ? (
                 <Image
                   src={featured.cover}
@@ -55,12 +55,11 @@ export default function BlogIndex() {
                   fill
                   sizes="(max-width: 1024px) 100vw, 60vw"
                   className="object-cover transition-transform duration-500 ease-swift group-hover:scale-[1.02]"
-                  unoptimized
+                  unoptimized={/^https?:\/\//.test(featured.cover)}
                 />
               ) : (
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-magenta/30 via-brand-violet/20 to-bg-card" />
               )}
-              <div className="absolute inset-0 bg-gradient-to-tr from-bg-card via-transparent to-transparent" />
             </div>
 
             <div className="flex flex-col p-6 md:p-10">
@@ -98,7 +97,7 @@ export default function BlogIndex() {
                 data-cursor="Read"
                 className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/60 backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-swift hover:-translate-y-0.5 hover:border-border-strong hover:bg-bg-card-hover/70"
               >
-                <div className="relative aspect-[16/9]">
+                <div className="relative aspect-[16/9] overflow-hidden bg-bg-elevated">
                   {post.cover ? (
                     <Image
                       src={post.cover}
@@ -106,7 +105,7 @@ export default function BlogIndex() {
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover"
-                      unoptimized
+                      unoptimized={/^https?:\/\//.test(post.cover)}
                     />
                   ) : (
                     <div className="absolute inset-0 bg-gradient-to-br from-brand-violet/25 via-brand-purple/10 to-bg-card" />

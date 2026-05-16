@@ -13,8 +13,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { KineticHeading } from "@/components/kinetic-heading";
 import { SkillMarquee } from "@/components/ui/skill-marquee";
-import { LiveCommitPill } from "@/components/hero/live-commit-pill";
-import type { PushEvent } from "@/lib/github";
 
 type HeroData = {
   nameFirst: string;
@@ -35,10 +33,9 @@ type HeroData = {
 
 type Props = {
   hero: HeroData;
-  latestPushEvent: PushEvent | null;
 };
 
-export function HeroClient({ hero, latestPushEvent }: Props) {
+export function HeroClient({ hero }: Props) {
   const reduced = useReducedMotion();
   const skills = hero.skills ?? [];
 
@@ -141,8 +138,6 @@ export function HeroClient({ hero, latestPushEvent }: Props) {
           transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="order-1 mx-auto flex w-full max-w-[460px] flex-col items-center gap-5 lg:order-2"
         >
-          <LiveCommitPill event={latestPushEvent} />
-
           {/* Atmospheric stage — photo dissolves into the page via radial mask.
               No hard card edge, no flat fill. The photo's own purple background
               extends as a glow that reads as ambient site atmosphere. */}
@@ -196,18 +191,6 @@ export function HeroClient({ hero, latestPushEvent }: Props) {
               />
             </div>
 
-            {/* Floating accent chip — small "currently" pill anchored to the
-                photo so it feels integrated, not posed. */}
-            <motion.div
-              aria-hidden
-              initial={reduced ? false : { opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute -left-3 bottom-8 hidden rounded-full border border-border-strong bg-bg-elevated/90 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-secondary backdrop-blur md:inline-flex"
-            >
-              <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-signal-live" />
-              Currently · Ginesys
-            </motion.div>
           </div>
         </motion.div>
       </div>

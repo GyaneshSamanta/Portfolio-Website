@@ -1,16 +1,19 @@
 /**
- * Podcast — DESIGN.md §5.6 (rev v2.2)
- * Two parts:
- *   1. Long-form episodes (>90s) — featured + 2-col grid
- *   2. YT Shorts (≤90s) — iPhone-frame strip, no per-video titles
+ * Podcast — DESIGN.md §5.6 (rev v2.5)
  *
- * Both populated dynamically from a single YouTube playlist via lib/youtube.ts
- * (ISR 6h, no API key).
+ * Layout — single section, two halves:
+ *   LEFT  (8 cols): featured long-form episode + 2-col grid of more episodes
+ *   RIGHT (4 cols): single iPhone bezel auto-cycling through Shorts
+ *
+ * Mobile: stacks (long-form on top, shorts phone below).
+ *
+ * Data: fully dynamic via lib/youtube.ts (scrapes the playlist HTML server-side,
+ * ISR 6h, no API key).
  */
 
 import { ArrowUpRight, Play, Smartphone } from "lucide-react";
 import { LiteYouTube } from "@/components/ui/lite-youtube";
-import { IPhoneFrame } from "@/components/podcast/iphone-frame";
+import { ShortsPhone } from "@/components/podcast/shorts-phone";
 import { getPlaylistVideos } from "@/lib/youtube";
 
 const PLAYLIST_ID = "PLDmP2FTmWmITaid4WWbpfantPMnafuu0q";
@@ -19,12 +22,12 @@ const PLAYLIST_URL = `https://www.youtube.com/playlist?list=${PLAYLIST_ID}`;
 
 export async function PodcastSection() {
   const videos = await getPlaylistVideos(PLAYLIST_ID);
-  const hasAny = videos.length > 0;
   const episodes = videos.filter((v) => !v.isShort);
-  const shorts = videos.filter((v) => v.isShort).slice(0, 5);
+  const shorts = videos.filter((v) => v.isShort);
 
   const featured = episodes[0];
   const restEpisodes = episodes.slice(1, 5);
+  const hasAny = episodes.length > 0 || shorts.length > 0;
 
   return (
     <section
@@ -42,7 +45,7 @@ export async function PodcastSection() {
               <span className="font-serif italic">Long-form,</span> on tap.
             </h2>
             <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
-              Episodes auto-load from YouTube. Click play, the iframe loads — until then the page stays light.
+              Full episodes + bite-sized takes — auto-loaded from my YouTube playlist.
             </p>
           </div>
           <a
@@ -59,89 +62,38 @@ export async function PodcastSection() {
 
         {!hasAny && <PodcastEmptyState />}
 
-        {/* Episodes */}
-        {featured && (
-          <div className="overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/40">
-            <div className="aspect-video w-full">
-              <LiteYouTube videoId={featured.id} title={featured.title} className="h-full w-full" />
-            </div>
-            <div className="p-6 md:p-8">
-              <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-                <span>Latest episode</span>
-                {featured.publishedText && (
-                  <>
-                    <span aria-hidden>·</span>
-                    <span>{featured.publishedText}</span>
-                  </>
-                )}
-                {featured.durationText && (
-                  <>
-                    <span aria-hidden>·</span>
-                    <span>{featured.durationText}</span>
-                  </>
-                )}
-                {featured.viewsText && (
-                  <>
-                    <span aria-hidden>·</span>
-                    <span>{featured.viewsText}</span>
-                  </>
-                )}
-              </div>
-              <h3 className="mt-3 text-2xl font-semibold leading-snug text-fg-primary md:text-3xl">
-                {featured.title}
-              </h3>
-            </div>
-          </div>
-        )}
-
-        {restEpisodes.length > 0 && (
-          <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">
-            {restEpisodes.map((v) => (
-              <article
-                key={v.id}
-                className="overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/40"
-              >
-                <div className="aspect-video w-full">
-                  <LiteYouTube videoId={v.id} title={v.title} className="h-full w-full" />
+        {hasAny && (
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
+            {/* LEFT — long-form (8 cols on desktop) */}
+            <div className="lg:col-span-8">
+              {featured && <FeaturedEpisode video={featured} />}
+              {restEpisodes.length > 0 && (
+                <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">
+                  {restEpisodes.map((v) => (
+                    <EpisodeCard key={v.id} video={v} />
+                  ))}
                 </div>
-                <div className="p-5">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
-                    {[v.publishedText, v.durationText].filter(Boolean).join(" · ")}
+              )}
+            </div>
+
+            {/* RIGHT — single shorts phone (4 cols on desktop) */}
+            {shorts.length > 0 && (
+              <aside className="lg:col-span-4">
+                <div className="lg:sticky lg:top-32">
+                  <div className="mb-5 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+                    <Smartphone className="h-3.5 w-3.5" />
+                    Shorts
                   </div>
-                  <h4 className="mt-2 line-clamp-2 text-base font-semibold leading-snug text-fg-primary">
-                    {v.title}
-                  </h4>
+                  <h3 className="mb-2 font-serif text-2xl italic leading-tight text-fg-primary md:text-3xl">
+                    Gyanesh on YT Shorts
+                  </h3>
+                  <p className="mb-6 text-sm text-fg-secondary">
+                    {shorts.length} bite-sized takes auto-rotating on a phone. Silent — tap to skip.
+                  </p>
+                  <ShortsPhone videoIds={shorts.map((s) => s.id)} />
                 </div>
-              </article>
-            ))}
-          </div>
-        )}
-
-        {/* Shorts — iPhone frame strip */}
-        {shorts.length > 0 && (
-          <div className="mt-20">
-            <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-                  <Smartphone className="h-3.5 w-3.5" />
-                  Shorts
-                </div>
-                <h3 className="mt-3 text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-tight tracking-[-0.01em] text-fg-primary">
-                  <span className="font-serif italic">Gyanesh on Product</span> · on YT Shorts
-                </h3>
-                <p className="mt-2 max-w-[60ch] text-sm text-fg-secondary md:text-base">
-                  Bite-sized takes on product, AI, and consumer behaviour. Tap any phone to play.
-                </p>
-              </div>
-            </div>
-
-            <div className="hide-scrollbar -mx-5 flex gap-5 overflow-x-auto px-5 pb-4 md:mx-0 md:px-0">
-              {shorts.map((v) => (
-                <div key={v.id} className="w-[200px] flex-shrink-0 md:w-[240px]">
-                  <IPhoneFrame videoId={v.id} title={v.title} />
-                </div>
-              ))}
-            </div>
+              </aside>
+            )}
           </div>
         )}
       </div>
@@ -149,13 +101,67 @@ export async function PodcastSection() {
   );
 }
 
+/* -------------------------------------------------------------------------- */
+
+function FeaturedEpisode({ video }: { video: Awaited<ReturnType<typeof getPlaylistVideos>>[number] }) {
+  return (
+    <div className="overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/40">
+      <div className="aspect-video w-full">
+        <LiteYouTube videoId={video.id} title={video.title} className="block h-full w-full" />
+      </div>
+      <div className="p-6 md:p-7">
+        <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+          <span>Latest episode</span>
+          {video.publishedText && (
+            <>
+              <span aria-hidden>·</span>
+              <span>{video.publishedText}</span>
+            </>
+          )}
+          {video.durationText && (
+            <>
+              <span aria-hidden>·</span>
+              <span>{video.durationText}</span>
+            </>
+          )}
+          {video.viewsText && (
+            <>
+              <span aria-hidden>·</span>
+              <span>{video.viewsText}</span>
+            </>
+          )}
+        </div>
+        <h3 className="mt-3 text-xl font-semibold leading-snug text-fg-primary md:text-2xl">
+          {video.title}
+        </h3>
+      </div>
+    </div>
+  );
+}
+
+function EpisodeCard({ video }: { video: Awaited<ReturnType<typeof getPlaylistVideos>>[number] }) {
+  return (
+    <article className="overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/40">
+      <div className="aspect-video w-full">
+        <LiteYouTube videoId={video.id} title={video.title} className="block h-full w-full" />
+      </div>
+      <div className="p-5">
+        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
+          {[video.publishedText, video.durationText].filter(Boolean).join(" · ")}
+        </div>
+        <h4 className="mt-2 line-clamp-2 text-base font-semibold leading-snug text-fg-primary">
+          {video.title}
+        </h4>
+      </div>
+    </article>
+  );
+}
+
 function PodcastEmptyState() {
   return (
     <div className="overflow-hidden rounded-3xl border border-dashed border-border-subtle bg-bg-card/40 px-6 py-12 text-center md:py-16">
       <Play className="mx-auto h-8 w-8 text-fg-tertiary" />
-      <p className="mt-4 font-serif text-2xl italic text-fg-primary">
-        Episodes loading…
-      </p>
+      <p className="mt-4 font-serif text-2xl italic text-fg-primary">Episodes loading…</p>
       <p className="mt-2 text-sm text-fg-secondary">
         We refresh from YouTube every few hours. If this lingers, head over to the playlist directly.
       </p>
