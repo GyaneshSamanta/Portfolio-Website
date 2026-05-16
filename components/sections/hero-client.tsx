@@ -85,7 +85,7 @@ export function HeroClient({ hero }: Props) {
               initial={reduced ? false : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-4 max-w-[36ch] text-[clamp(1.1rem,2.5vw,1.5rem)] leading-snug tracking-[-0.005em] text-fg-secondary"
+              className="mt-4 max-w-[52ch] text-[clamp(1.1rem,2.5vw,1.5rem)] leading-snug tracking-[-0.005em] text-fg-secondary [text-wrap:balance]"
             >
               {hero.headlineFollowup}
             </motion.p>
