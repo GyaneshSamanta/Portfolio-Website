@@ -7,7 +7,7 @@
  * Mobile / reduced-motion: vertical timeline, polaroids alternate sides.
  */
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useMotionValueEvent,
@@ -52,18 +52,34 @@ function JourneyWalk() {
   const [walking, setWalking] = useState(false);
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
+  // Measured pixel travel — set after the track mounts. We compute it as the
+  // exact distance needed for the LAST polaroid to land under the figure when
+  // scrollYProgress=1. No more overshoot into a black void.
+  const [travelPx, setTravelPx] = useState(0);
+
+  useEffect(() => {
+    const measure = () => {
+      const track = trackRef.current;
+      if (!track) return;
+      // Track is positioned so its FIRST card sits centered at scroll=0 (see
+      // the `left:calc(50% - 140px)` style below). To then center the LAST
+      // card at scroll=1, we translate the track left by (trackWidth - 2*halfCard).
+      // Card width is ~280px; halfCard = 140px.
+      const trackWidth = track.scrollWidth;
+      const px = Math.max(0, trackWidth - 280);
+      setTravelPx(px);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   });
 
-  // Travel distance — tuned so the last polaroid lands under the figure at
-  // scrollYProgress=1. Each card ~280px + 64px gap = ~344px on desktop.
-  // We translate the whole track by N-1 slots roughly equivalent to ~22% per
-  // card. Slightly conservative so the last polaroid stays in view.
-  const travelPercent = useMemo(() => Math.max(60, MILESTONES.length * 22), []);
-
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", `-${travelPercent}%`]);
+  const x = useTransform(scrollYProgress, [0, 1], [0, -travelPx]);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     // Map scroll progress to the milestone under the figure. We use floor +
@@ -77,13 +93,14 @@ function JourneyWalk() {
     setActiveIdx((prev) => (prev === idx ? prev : idx));
   });
 
-  // Walking flag toggles on for ~250ms each time the scroll progress changes.
+  // Walking flag stays on for ~800ms after the last scroll tick so the leg
+  // cycle has time to complete naturally before snapping to idle.
   useEffect(() => {
     let timer: number | undefined;
     const unsub = scrollYProgress.on("change", () => {
       setWalking(true);
       if (timer) window.clearTimeout(timer);
-      timer = window.setTimeout(() => setWalking(false), 250);
+      timer = window.setTimeout(() => setWalking(false), 800);
     });
     return () => {
       unsub();
@@ -97,7 +114,7 @@ function JourneyWalk() {
         id="journey"
         ref={sectionRef}
         className="relative bg-bg-base"
-        style={{ height: `${MILESTONES.length * 55}vh` }}
+        style={{ height: `${MILESTONES.length * 45}vh` }}
       >
         {/* Sticky viewport — the actual scene the user sees. */}
         <div className="sticky top-0 flex h-screen flex-col overflow-hidden">
@@ -149,11 +166,13 @@ function JourneyWalk() {
               <WalkingFigure walking={walking} />
             </div>
 
-            {/* Polaroid track — translates horizontally with scroll. */}
+            {/* Polaroid track — translates horizontally with scroll.
+                left: calc(50% - 140px) puts the first card's center (assuming
+                ~280px card width) exactly at viewport center at scroll=0. */}
             <motion.div
               ref={trackRef}
-              style={{ x }}
-              className="absolute left-1/2 top-1/2 flex -translate-y-1/2 items-center gap-16 will-change-transform"
+              style={{ x, left: "calc(50% - 140px)" }}
+              className="absolute top-1/2 flex -translate-y-1/2 items-center gap-16 will-change-transform"
             >
               {MILESTONES.map((m, i) => (
                 <div key={m.id} className="flex flex-col items-center">

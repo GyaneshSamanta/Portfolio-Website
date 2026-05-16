@@ -134,28 +134,80 @@ export function HeroClient({ hero, latestPushEvent }: Props) {
           </motion.div>
         </div>
 
-        {/* RIGHT — headshot */}
+        {/* RIGHT — headshot, immersive */}
         <motion.div
           initial={reduced ? false : { opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="order-1 mx-auto flex w-full max-w-[420px] flex-col items-center gap-4 lg:order-2"
+          className="order-1 mx-auto flex w-full max-w-[460px] flex-col items-center gap-5 lg:order-2"
         >
           <LiveCommitPill event={latestPushEvent} />
 
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[3rem] border border-border-subtle bg-bg-card">
+          {/* Atmospheric stage — photo dissolves into the page via radial mask.
+              No hard card edge, no flat fill. The photo's own purple background
+              extends as a glow that reads as ambient site atmosphere. */}
+          <div className="relative w-full">
+            {/* Aura — large soft brand glow behind the figure. Tinted to match
+                the photo's purple wall so the two read as one. */}
             <div
               aria-hidden
-              className="absolute inset-0 -z-[1] bg-[radial-gradient(circle_at_center,hsl(var(--brand-magenta)/0.35),transparent_65%)]"
+              className="pointer-events-none absolute -inset-12 -z-[1] rounded-full opacity-80 blur-3xl"
+              style={{
+                background:
+                  "radial-gradient(ellipse 70% 60% at 50% 35%, hsl(var(--brand-violet) / 0.55), transparent 70%), radial-gradient(ellipse 60% 50% at 30% 80%, hsl(var(--brand-magenta) / 0.35), transparent 70%)",
+              }}
             />
-            <Image
-              src={hero.heroImage}
-              alt={hero.heroImageAlt}
-              fill
-              priority
-              sizes="(max-width: 1024px) 80vw, 420px"
-              className="object-cover"
+
+            {/* Decorative orbital ring */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-[1] rounded-[3rem] border border-brand-magenta/15"
+              style={{
+                maskImage:
+                  "radial-gradient(ellipse at center, black 0%, black 60%, transparent 95%)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse at center, black 0%, black 60%, transparent 95%)",
+              }}
             />
+
+            {/* Photo — masked to fade into page on the bottom edge so it
+                doesn't read as "placed in a box". */}
+            <div
+              className="relative aspect-[4/5] w-full overflow-hidden"
+              style={{
+                maskImage:
+                  "radial-gradient(ellipse 95% 95% at 50% 45%, black 0%, black 60%, transparent 100%)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 95% 95% at 50% 45%, black 0%, black 60%, transparent 100%)",
+              }}
+            >
+              <Image
+                src={hero.heroImage}
+                alt={hero.heroImageAlt}
+                fill
+                priority
+                sizes="(max-width: 1024px) 80vw, 460px"
+                className="object-cover"
+              />
+              {/* Subtle inner gradient — extra atmosphere from photo's own purple. */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg-base/85"
+              />
+            </div>
+
+            {/* Floating accent chip — small "currently" pill anchored to the
+                photo so it feels integrated, not posed. */}
+            <motion.div
+              aria-hidden
+              initial={reduced ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute -left-3 bottom-8 hidden rounded-full border border-border-strong bg-bg-elevated/90 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-secondary backdrop-blur md:inline-flex"
+            >
+              <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-signal-live" />
+              Currently · Ginesys
+            </motion.div>
           </div>
         </motion.div>
       </div>

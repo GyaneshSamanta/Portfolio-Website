@@ -45,13 +45,23 @@ const UA =
 
 export async function getPlaylistVideos(playlistId: string): Promise<Video[]> {
   try {
-    const res = await fetch(`https://www.youtube.com/playlist?list=${playlistId}`, {
-      headers: {
-        "User-Agent": UA,
-        "Accept-Language": "en-US,en;q=0.9",
-      },
-      next: { revalidate: 21600 },
-    });
+    // hl=en + gl=US force the English playlist page; ucbcb=1 in the consent
+    // cookie skips YouTube's consent interstitial (otherwise EU-region Vercel
+    // builds get the "Accept all" wall instead of the playlist HTML).
+    const res = await fetch(
+      `https://www.youtube.com/playlist?list=${playlistId}&hl=en&gl=US`,
+      {
+        headers: {
+          "User-Agent": UA,
+          "Accept-Language": "en-US,en;q=0.9",
+          "Accept":
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+          // Consent cookie — bypass the "Before you continue to YouTube" gate.
+          "Cookie": "CONSENT=YES+cb; SOCS=CAESEwgDEgk0ODE3Nzk3MjQaAmVuIAEaBgiA_LyaBg",
+        },
+        next: { revalidate: 21600 },
+      }
+    );
     if (!res.ok) {
       console.warn(`[youtube] playlist fetch ${res.status} for ${playlistId}`);
       return [];
