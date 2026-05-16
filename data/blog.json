@@ -6,7 +6,7 @@
     "date": "2026-05-06T05:00:00.000Z",
     "dateDisplay": "May 6, 2026",
     "excerpt": "Watch the full podcast here: YouTube This episode tackles one of the most consequential — and underappreciated — shifts in enterprise software: the transition from human users to AI agents as the primary consumers of B2B SaaS products.…",
-    "cover": "/images/blog/when-ai-agents-become-your-users-what-b2b-saas-gets-wrong-samanta-9mkgc/cover.svg",
+    "cover": "/images/blog/when-ai-agents-become-your-users-what-b2b-saas-gets-wrong-samanta-9mkgc/cover.webp",
     "readTime": "1 min read",
     "wordCount": 289
   },
@@ -17,7 +17,7 @@
     "date": "2026-05-02T06:38:00.000Z",
     "dateDisplay": "May 2, 2026",
     "excerpt": "Your PM shipped a prototype in 4 hours. Your analyst is still waiting for a data request to be approved. Congratulations: AI just made your org even more imbalanced. Welcome back to Gyanesh on Product . Let's get down to business. This…",
-    "cover": "/images/blog/ai-product-vs-analytics-who-actually-benefits-gyanesh-samanta-9jqvc/cover.svg",
+    "cover": "/images/blog/ai-product-vs-analytics-who-actually-benefits-gyanesh-samanta-9jqvc/cover.webp",
     "readTime": "5 min read",
     "wordCount": 1043
   },
@@ -28,7 +28,7 @@
     "date": "2026-04-25T05:28:00.000Z",
     "dateDisplay": "Apr 25, 2026",
     "excerpt": "Last week I ran a proper AI evaluation across four models — Mistral AI OCR3, Gemini Flash, Gemini Flash Lite, and Sarvam Vision — on a document vision and extraction workflow I've been building. Nothing groundbreaking, just the kind of…",
-    "cover": "/images/blog/benchmarks-didnt-ship-atleast-sarvam-gyanesh-samanta-t3hlc/cover.svg",
+    "cover": "/images/blog/benchmarks-didnt-ship-atleast-sarvam-gyanesh-samanta-t3hlc/cover.webp",
     "readTime": "3 min read",
     "wordCount": 625
   },
@@ -39,7 +39,7 @@
     "date": "2026-04-10T04:30:00.000Z",
     "dateDisplay": "Apr 10, 2026",
     "excerpt": "AI didn't make your 0→1 faster. It made your mistakes cheaper to ship. Welcome back to Gyanesh on Product — the newsletter where we skip the AI hype and go straight to what it means for the people actually building things. Gyanesh on…",
-    "cover": "/images/blog/how-ai-compressing-01-pm-timeline-what-gets-skipped-gyanesh-samanta-qsvwe/cover.svg",
+    "cover": "/images/blog/how-ai-compressing-01-pm-timeline-what-gets-skipped-gyanesh-samanta-qsvwe/cover.webp",
     "readTime": "6 min read",
     "wordCount": 1428
   },
@@ -50,7 +50,7 @@
     "date": "2026-04-05T08:30:00.000Z",
     "dateDisplay": "Apr 5, 2026",
     "excerpt": "Why the first hour with any AI dev tool is broken for most product people -- and what I built to fix it. A personal story, of how I'd rather build whatever I need to keep myself unblocked. A story of how I'm becoming a manager of AI…",
-    "cover": "/images/blog/use-claude-code-without-spending-time-setup-pm-version-samanta-koiuc/cover.svg",
+    "cover": "/images/blog/use-claude-code-without-spending-time-setup-pm-version-samanta-koiuc/cover.webp",
     "readTime": "6 min read",
     "wordCount": 1365
   },
@@ -61,7 +61,7 @@
     "date": "2026-04-02T04:30:00.000Z",
     "dateDisplay": "Apr 2, 2026",
     "excerpt": "Why brands are spending real money on ads that send you to a sold-out page — and the product dysfunction silently enabling it. I was scrolling Instagram last week when an H&M story ad stopped my thumb dead. Dark beige resort shirt,…",
-    "cover": "/images/blog/broken-pipeline-nobodys-fixing-gyanesh-samanta-c1hgc/cover.svg",
+    "cover": "/images/blog/broken-pipeline-nobodys-fixing-gyanesh-samanta-c1hgc/cover.webp",
     "readTime": "4 min read",
     "wordCount": 965
   },
@@ -72,7 +72,7 @@
     "date": "2026-03-29T07:30:00.000Z",
     "dateDisplay": "Mar 29, 2026",
     "excerpt": "Let me start with something I've been meaning to say for a while. This newsletter isn't going behind a paywall. Not next month, not next year, not ever. No Substack migration, no \"premium tier,\" no sponsored editions. And yes — a couple…",
-    "cover": "/images/blog/share-knowledge-sell-personalization-gyanesh-samanta-hjv5c/cover.svg",
+    "cover": "/images/blog/share-knowledge-sell-personalization-gyanesh-samanta-hjv5c/cover.webp",
     "readTime": "3 min read",
     "wordCount": 685
   },
@@ -83,7 +83,7 @@
     "date": "2026-03-25T03:30:00.000Z",
     "dateDisplay": "Mar 25, 2026",
     "excerpt": "There’s a very specific moment — usually somewhere between 1:10 PM and the existential dread of another workday — when Zomato pops up with “Your usual?” And for a second, you think: impressive, this app has a better grip on my life than…",
-    "cover": "/images/blog/how-zomato-creating-illusion-personalisation-without-actually-xz5dc/cover.svg",
+    "cover": "/images/blog/how-zomato-creating-illusion-personalisation-without-actually-xz5dc/cover.webp",
     "readTime": "2 min read",
     "wordCount": 532
   },
@@ -94,7 +94,7 @@
     "date": "2026-03-17T16:30:00.000Z",
     "dateDisplay": "Mar 17, 2026",
     "excerpt": "And if that made you uncomfortable, good. Keep reading. Welcome back to Gyanesh on Product, This week we uncover the latest trend in the AI space, \"spec-coding\" over what we know today as \"vibe-coding\". I share such insights for free…",
-    "cover": "/images/blog/designers-pms-should-learn-spec-code-over-vibe-coding-gyanesh-samanta-guxpc/cover.svg",
+    "cover": "/images/blog/designers-pms-should-learn-spec-code-over-vibe-coding-gyanesh-samanta-guxpc/cover.webp",
     "readTime": "4 min read",
     "wordCount": 891
   },
@@ -105,7 +105,7 @@
     "date": "2026-03-09T16:30:00.000Z",
     "dateDisplay": "Mar 9, 2026",
     "excerpt": "Welcome back to Gyanesh on Product . Let me play into the cognitive economy and get your attention before this starts: Here's the workflow I used to build NotebookLM as a windows app, yes the one you keep refreshing to check if it's…",
-    "cover": "/images/blog/antigravity-has-my-heart-im-gatekeeping-from-you-gyanesh-samanta-uiuac/cover.svg",
+    "cover": "/images/blog/antigravity-has-my-heart-im-gatekeeping-from-you-gyanesh-samanta-uiuac/cover.webp",
     "readTime": "3 min read",
     "wordCount": 774
   },
@@ -116,7 +116,7 @@
     "date": "2026-03-06T16:45:00.000Z",
     "dateDisplay": "Mar 6, 2026",
     "excerpt": "YouTube Link for full version: https://youtu.be/x4U3zJl4aRc What we cover: When do you see Identity move from a backend integration to core product strategy? Login friction vs activation rate Role-based access vs feature-tier…",
-    "cover": "/images/blog/identity-product-surface-where-iam-data-user-behavior-gyanesh-samanta-im39c/cover.svg",
+    "cover": "/images/blog/identity-product-surface-where-iam-data-user-behavior-gyanesh-samanta-im39c/cover.webp",
     "readTime": "1 min read",
     "wordCount": 217
   },
@@ -127,7 +127,7 @@
     "date": "2026-02-28T16:45:00.000Z",
     "dateDisplay": "Feb 28, 2026",
     "excerpt": "View the full podcast here: https://youtu.be/TSDl1FCvgYI Key Discussion Points: AI adoption without losing customer focus : Teams face analysis paralysis with too many AI-generated options, making convergence difficult. The real…",
-    "cover": "/images/blog/beyond-automation-designing-purposeful-work-within-genai-samanta-hm0nc/cover.svg",
+    "cover": "/images/blog/beyond-automation-designing-purposeful-work-within-genai-samanta-hm0nc/cover.webp",
     "readTime": "3 min read",
     "wordCount": 740
   },
@@ -138,7 +138,7 @@
     "date": "2026-02-26T16:45:00.000Z",
     "dateDisplay": "Feb 26, 2026",
     "excerpt": "Welcome back to Gyanesh on Product . This week I’m joined by Prashant Kumar , a product and GTM leader with 17+ years of experience building and scaling products across high-growth and enterprise environments. Prashant has spent years…",
-    "cover": "/images/blog/ai-roadmap-actually-sells-pmo-gtm-alignment-gyanesh-samanta-a6klf/cover.svg",
+    "cover": "/images/blog/ai-roadmap-actually-sells-pmo-gtm-alignment-gyanesh-samanta-a6klf/cover.webp",
     "readTime": "8 min read",
     "wordCount": 1932
   },
@@ -149,7 +149,7 @@
     "date": "2026-01-22T16:30:00.000Z",
     "dateDisplay": "Jan 22, 2026",
     "excerpt": "Welcome back to Gyanesh on Product. This week I'm joined by Sreeram Narayan , Director of Product at Pine Labs. Sreeram has spent years building and scaling products in high-pressure, fast-moving environments where the cost of getting…",
-    "cover": "/images/blog/validation-gap-why-teams-build-features-nobody-can-use-samanta-kz3lf/cover.svg",
+    "cover": "/images/blog/validation-gap-why-teams-build-features-nobody-can-use-samanta-kz3lf/cover.webp",
     "readTime": "10 min read",
     "wordCount": 2376
   },
@@ -160,7 +160,7 @@
     "date": "2026-01-07T07:00:00.000Z",
     "dateDisplay": "Jan 7, 2026",
     "excerpt": "Gyanesh on Product If you're a first time reader, I post detailed insights on product management that isn't your typical brain-rot content in the form of shorts on other platforms, consider subscribing and be a part of a community that…",
-    "cover": "/images/blog/why-snapdeal-failed-my-ex-employee-perspective-its-loyalty-samanta-doijc/cover.svg",
+    "cover": "/images/blog/why-snapdeal-failed-my-ex-employee-perspective-its-loyalty-samanta-doijc/cover.webp",
     "readTime": "5 min read",
     "wordCount": 1205
   },
@@ -171,7 +171,7 @@
     "date": "2025-11-21T12:30:00.000Z",
     "dateDisplay": "Nov 21, 2025",
     "excerpt": "I wanted to believe. Really. When Arattira—sorry, Arattai —hit the App Store top spot in late September, riding a wave of ministerial tweets and swadeshi sentiment, I downloaded it like half the country did. Indian-made, privacy-first,…",
-    "cover": "/images/blog/national-pride-cant-fix-broken-product-my-month-trying-samanta-zs9bc/cover.svg",
+    "cover": "/images/blog/national-pride-cant-fix-broken-product-my-month-trying-samanta-zs9bc/cover.webp",
     "readTime": "6 min read",
     "wordCount": 1336
   },
@@ -182,7 +182,7 @@
     "date": "2025-11-16T16:30:00.000Z",
     "dateDisplay": "Nov 16, 2025",
     "excerpt": "Netflix had a leak. Not the kind that tanks stock prices immediately. The slow kind. The kind that ruins your growth narrative and makes Wall Street wonder if you've peaked. Most companies would've nuked it from orbit. Netflix did…",
-    "cover": "/images/blog/password-sharing-tax-most-brilliant-revenue-move-nobody-samanta-yjzec/cover.svg",
+    "cover": "/images/blog/password-sharing-tax-most-brilliant-revenue-move-nobody-samanta-yjzec/cover.webp",
     "readTime": "4 min read",
     "wordCount": 824
   },
@@ -193,7 +193,7 @@
     "date": "2025-11-07T16:30:00.000Z",
     "dateDisplay": "Nov 7, 2025",
     "excerpt": "Here's the thing about Spotify that keeps me up at night: they didn't engineer a product. They engineered a psychological trap. And the trap works so well that 40% of their free users voluntarily pay to escape it. Not because the…",
-    "cover": "/images/blog/spotifys-6-skip-rule-how-one-behavioral-constraint-15b-samanta-mqc8c/cover.svg",
+    "cover": "/images/blog/spotifys-6-skip-rule-how-one-behavioral-constraint-15b-samanta-mqc8c/cover.webp",
     "readTime": "9 min read",
     "wordCount": 2042
   },
@@ -215,7 +215,7 @@
     "date": "2025-10-22T04:30:00.000Z",
     "dateDisplay": "Oct 22, 2025",
     "excerpt": "Welcome back to the ongoing saga of AI-powered search. Last edition, we peeled back the velvet curtain on AI bias—the secret ingredient quietly steering what answers you see and don’t see. That story wasn’t just about technical…",
-    "cover": "/images/blog/why-companies-should-focus-chatgpt-perplexity-over-seo-samanta-jcmyc/cover.svg",
+    "cover": "/images/blog/why-companies-should-focus-chatgpt-perplexity-over-seo-samanta-jcmyc/cover.webp",
     "readTime": "4 min read",
     "wordCount": 1010
   },
@@ -237,7 +237,7 @@
     "date": "2025-07-27T13:34:00.000Z",
     "dateDisplay": "Jul 27, 2025",
     "excerpt": "Or, how to survive the culling. Let's cut the corporate jargon. Open your LinkedIn feed. It’s a graveyard of \"open to work\" banners from people who, six months ago, were posting about their team's incredible velocity. The tech job…",
-    "cover": "/images/blog/elevated-professional-navigating-next-era-product-gyanesh-samanta-qlmsc/cover.svg",
+    "cover": "/images/blog/elevated-professional-navigating-next-era-product-gyanesh-samanta-qlmsc/cover.webp",
     "readTime": "6 min read",
     "wordCount": 1464
   },
@@ -248,7 +248,7 @@
     "date": "2025-06-09T12:59:00.000Z",
     "dateDisplay": "Jun 9, 2025",
     "excerpt": "Or how I stopped worrying and learned to love supply chain architecture, RFP hell, and stakeholder roulette. I arrived in Bangalore not as a tourist. Not for ETHIndia this time. No hotel check-ins, no hackathon medals, no short sprints…",
-    "cover": "/images/blog/my-steps-from-b2c-b2b-product-management-gyanesh-samanta-tmtec/cover.svg",
+    "cover": "/images/blog/my-steps-from-b2c-b2b-product-management-gyanesh-samanta-tmtec/cover.webp",
     "readTime": "6 min read",
     "wordCount": 1341
   },
@@ -270,7 +270,7 @@
     "date": "2025-04-23T06:30:00.000Z",
     "dateDisplay": "Apr 23, 2025",
     "excerpt": "In the dynamic realm of Product Management, we constantly operate at the confluence of vision and execution. We are tasked with charting a course towards a future state – often ambitious, disruptive, and transformative – while…",
-    "cover": "/images/blog/product-managers-tightrope-balancing-idealistic-workable-samanta-objvc/cover.svg",
+    "cover": "/images/blog/product-managers-tightrope-balancing-idealistic-workable-samanta-objvc/cover.webp",
     "readTime": "6 min read",
     "wordCount": 1358
   },
@@ -303,7 +303,7 @@
     "date": "2025-02-02T06:02:00.000Z",
     "dateDisplay": "Feb 2, 2025",
     "excerpt": "In an era dominated by digital experiences, consumer expectations have evolved. Users no longer settle for generic messaging or one‑size‑fits‑all content. Instead, they demand hyper personalized experiences that speak directly to their…",
-    "cover": "/images/blog/personalisation-scale-product-led-growth-hyper-targeted-samanta-ghazc/cover.svg",
+    "cover": "/images/blog/personalisation-scale-product-led-growth-hyper-targeted-samanta-ghazc/cover.webp",
     "readTime": "11 min read",
     "wordCount": 2561
   },
@@ -314,7 +314,7 @@
     "date": "2024-10-25T16:30:00.000Z",
     "dateDisplay": "Oct 25, 2024",
     "excerpt": "In today's digital age, effective online advertising is crucial for businesses seeking to reach their target audience and achieve their marketing objectives. Meta Platforms (formerly Facebook Inc.) offers a robust advertising ecosystem…",
-    "cover": "/images/blog/digital-marketing-bids-strategising-campaigns-gyanesh-samanta-wo7yc/cover.svg",
+    "cover": "/images/blog/digital-marketing-bids-strategising-campaigns-gyanesh-samanta-wo7yc/cover.webp",
     "readTime": "12 min read",
     "wordCount": 2763
   },
@@ -325,7 +325,7 @@
     "date": "2024-10-18T04:30:00.000Z",
     "dateDisplay": "Oct 18, 2024",
     "excerpt": "Product-Market Fit (PMF) is the elusive holy grail for every startup—the moment when a product truly starts to resonate with its target audience, the moment when things just \"click.\" Yet, getting to that point is often a journey filled…",
-    "cover": "/images/blog/how-achieving-product-market-fit-case-studies-gyanesh-samanta-avujc/cover.svg",
+    "cover": "/images/blog/how-achieving-product-market-fit-case-studies-gyanesh-samanta-avujc/cover.webp",
     "readTime": "10 min read",
     "wordCount": 2226
   },
@@ -336,7 +336,7 @@
     "date": "2024-06-24T05:10:00.000Z",
     "dateDisplay": "Jun 24, 2024",
     "excerpt": "Highlights of the week Advertising Space- Advertising Request Form News Corner (Not your typical news headlines, opinions are my own) WWDC24: Apple released iPadOS 18, macOS Sequoia, and watchOS 11. The feature that got the most eyes…",
-    "cover": "/images/blog/how-building-kpi-trees-data-story-telling-gyanesh-samanta-twqmc/cover.svg",
+    "cover": "/images/blog/how-building-kpi-trees-data-story-telling-gyanesh-samanta-twqmc/cover.webp",
     "readTime": "4 min read",
     "wordCount": 1016
   },
@@ -347,7 +347,7 @@
     "date": "2024-03-24T09:34:00.000Z",
     "dateDisplay": "Mar 24, 2024",
     "excerpt": "One of the key aspects of Product development is designing for Behaviour change. A few questions every PM should ask themself when developing a product: How can I increase uptake of a new feature / program? Why are people dropping off…",
-    "cover": "/images/blog/behavioural-science-101-3b-framework-gyanesh-samanta-qjj0c/cover.svg",
+    "cover": "/images/blog/behavioural-science-101-3b-framework-gyanesh-samanta-qjj0c/cover.webp",
     "readTime": "3 min read",
     "wordCount": 656
   },
@@ -358,7 +358,7 @@
     "date": "2023-12-16T17:09:00.000Z",
     "dateDisplay": "Dec 16, 2023",
     "excerpt": "It's official, our Team won at ETHIndia 2023. The first 2 hours are pure excitement, it's finally begun- you find your idea, your niche. You manage to convince your team on the usability of your product and you're off to the races. Next…",
-    "cover": "/images/blog/how-we-won-ethindia23-gyanesh-samanta-mplcc/cover.svg",
+    "cover": "/images/blog/how-we-won-ethindia23-gyanesh-samanta-mplcc/cover.webp",
     "readTime": "5 min read",
     "wordCount": 1185
   },
@@ -369,7 +369,7 @@
     "date": "2023-10-15T04:30:00.000Z",
     "dateDisplay": "Oct 15, 2023",
     "excerpt": "Chapter 1: The AWS Redshift Expedition with Tealfeed Tealfeed, as a blogging platform, was not just about words; it was about data. Every click, every scroll, every interaction was a testament to user behavior. Deep Dive into Redshift:…",
-    "cover": "/images/blog/navigating-data-wilderness-from-aws-redshift-mongodb-gyanesh-samanta-4oksf/cover.svg",
+    "cover": "/images/blog/navigating-data-wilderness-from-aws-redshift-mongodb-gyanesh-samanta-4oksf/cover.webp",
     "readTime": "2 min read",
     "wordCount": 549
   },
@@ -380,7 +380,7 @@
     "date": "2023-10-07T17:55:00.000Z",
     "dateDisplay": "Oct 7, 2023",
     "excerpt": "New York City – a metropolis celebrated for its diversity, resilience, and endless opportunities. Yet, beneath the bright lights of Times Square and the tranquillity of Central Park, there's a narrative that casts a shadow over the…",
-    "cover": "/images/blog/nysee-shootings-gyanesh-samanta/cover.svg",
+    "cover": "/images/blog/nysee-shootings-gyanesh-samanta/cover.webp",
     "readTime": "4 min read",
     "wordCount": 904
   },
@@ -391,7 +391,7 @@
     "date": "2023-03-20T16:30:00.000Z",
     "dateDisplay": "Mar 20, 2023",
     "excerpt": "Quick Summary: The past decade has witnessed the meteoric rise of Web3, a cutting-edge technology that has revolutionized the crypto market. Even those previously unfamiliar with this realm are now enthusiastically expanding their…",
-    "cover": "/images/blog/navigating-future-decentralized-intelligence-through-data-samanta/cover.svg",
+    "cover": "/images/blog/navigating-future-decentralized-intelligence-through-data-samanta/cover.webp",
     "readTime": "5 min read",
     "wordCount": 1132
   },
@@ -402,7 +402,7 @@
     "date": "2022-09-24T11:25:00.000Z",
     "dateDisplay": "Sep 24, 2022",
     "excerpt": "There are a lot of resources where we talk about Data Scientists, Data Engineers or Data Analysts. There's a lot more when we talk about the difference between the said 3 roles. This newsletter doesn't focus on those aspects. Here we…",
-    "cover": "/images/blog/data-story-telling-what-why-how-gyanesh-samanta/cover.svg",
+    "cover": "/images/blog/data-story-telling-what-why-how-gyanesh-samanta/cover.webp",
     "readTime": "5 min read",
     "wordCount": 1172
   },
