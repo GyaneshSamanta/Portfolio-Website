@@ -79,8 +79,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  // Verification tokens — uncomment + paste when you set up Search Console.
-  // verification: { google: "<token-from-Google-Search-Console>" },
+  verification: {
+    google: "-kB1kQRR0joqW9-npEzt4saCB59L-sEVdgv1KCKq5cc",
+  },
 };
 
 export default function RootLayout({

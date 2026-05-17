@@ -17,18 +17,33 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Props): Metadata {
   const post = getPost(params.slug);
   if (!post) return { title: "Not found" };
+
   return {
     title: post.title,
     description: post.excerpt,
+    authors: [{ name: SITE_CONFIG.name, url: SITE_CONFIG.url }],
+    // Note: openGraph.images is intentionally omitted — Next.js App Router
+    // auto-discovers app/blog/[slug]/opengraph-image.tsx and injects the
+    // right per-post image URL. Setting it manually here would override the
+    // auto-generated tag.
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
       publishedTime: post.date,
+      authors: [SITE_CONFIG.name],
       url: `${SITE_CONFIG.url}/blog/${post.slug}`,
-      images: post.cover ? [{ url: post.cover }] : undefined,
+      siteName: SITE_CONFIG.name,
     },
-    alternates: post.linkedinUrl ? { canonical: `${SITE_CONFIG.url}/blog/${post.slug}` } : undefined,
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      creator: SITE_CONFIG.twitterHandle,
+      site: SITE_CONFIG.twitterHandle,
+      // twitter:image also auto-injected by Next from opengraph-image.tsx
+    },
+    alternates: { canonical: `${SITE_CONFIG.url}/blog/${post.slug}` },
   };
 }
 
