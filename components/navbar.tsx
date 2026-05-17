@@ -88,7 +88,7 @@ export function Navbar() {
               />
             </span>
             <span className="hidden font-mono text-xs uppercase tracking-[0.2em] text-fg-secondary md:inline">
-              gyanesh.s
+              Gyanesh Samanta
             </span>
           </Link>
 
