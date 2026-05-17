@@ -1,133 +1,199 @@
-import { ImageResponse } from 'next/og';
+/**
+ * opengraph-image.tsx — Auto-generated Open Graph image for the site root.
+ *
+ * Next.js 14 App Router discovers this file and:
+ *   - Generates the image at `/opengraph-image` (cached on Vercel edge)
+ *   - Auto-injects <meta property="og:image"> + <meta name="twitter:image">
+ *     pointing to it on the home route
+ *
+ * The image renders at 1200×630 (LinkedIn / Twitter / WhatsApp recommended).
+ * Pure inline SVG-style JSX — no external assets fetched at edge runtime.
+ */
 
-export const runtime = 'edge';
+import { ImageResponse } from "next/og";
 
-export const alt = 'Gyanesh Samanta — Product Manager';
-export const size = {
-  width: 1200,
-  height: 630,
-};
-export const contentType = 'image/png';
+export const runtime = "edge";
+export const alt = "Gyanesh Samanta — PM with T-shaped skills in Data Storytelling, Consumer Behaviour & AI";
+export const size = { width: 1200, height: 630 };
+export const contentType = "image/png";
 
-export default async function Image() {
+export default function Image() {
   return new ImageResponse(
     (
       <div
         style={{
-          height: '100%',
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'linear-gradient(135deg, #15173D 0%, #982598 50%, #15173D 100%)',
+          height: "100%",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "70px 80px",
+          background:
+            "radial-gradient(ellipse at 20% 0%, rgba(237, 46, 186, 0.35), transparent 55%), radial-gradient(ellipse at 80% 100%, rgba(142, 61, 239, 0.35), transparent 55%), linear-gradient(135deg, #0A0820 0%, #11103A 60%, #1A1A3A 100%)",
           fontFamily: '"Inter", system-ui, sans-serif',
+          color: "#F5EFEF",
+          position: "relative",
         }}
       >
-        {/* Decorative circles */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '-100px',
-            right: '-100px',
-            width: '400px',
-            height: '400px',
-            borderRadius: '50%',
-            background: 'rgba(228, 145, 201, 0.15)',
-            display: 'flex',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '-80px',
-            left: '-80px',
-            width: '300px',
-            height: '300px',
-            borderRadius: '50%',
-            background: 'rgba(152, 37, 152, 0.2)',
-            display: 'flex',
-          }}
-        />
+        {/* Decorative stars */}
+        <svg
+          width="1200"
+          height="630"
+          viewBox="0 0 1200 630"
+          style={{ position: "absolute", inset: 0, opacity: 0.5 }}
+        >
+          {[
+            [120, 90, 1.8],
+            [880, 60, 1.2],
+            [1080, 140, 1.5],
+            [320, 180, 1.0],
+            [70, 380, 1.4],
+            [1120, 460, 1.3],
+            [220, 520, 1.1],
+            [560, 80, 1.0],
+            [780, 540, 1.6],
+            [980, 320, 1.0],
+            [430, 460, 1.2],
+            [620, 380, 0.9],
+          ].map(([cx, cy, r], i) => (
+            <circle key={i} cx={cx} cy={cy} r={r} fill="#F5EFEF" opacity={0.7} />
+          ))}
+        </svg>
 
-        {/* Content */}
+        {/* TOP — eyebrow + name */}
+        <div style={{ display: "flex", flexDirection: "column", position: "relative", zIndex: 10 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+              fontSize: 18,
+              letterSpacing: 6,
+              color: "#C9BCC4",
+              textTransform: "uppercase",
+              fontFamily: '"Geist Mono", ui-monospace, monospace',
+            }}
+          >
+            <span style={{ width: 32, height: 2, background: "#ED2EBA" }} />
+            <span>Gyanesh Samanta · Portfolio</span>
+          </div>
+        </div>
+
+        {/* MIDDLE — display headline */}
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
+            display: "flex",
+            flexDirection: "column",
+            position: "relative",
+            zIndex: 10,
+            marginTop: -40,
+          }}
+        >
+          <div
+            style={{
+              fontSize: 92,
+              fontWeight: 800,
+              letterSpacing: "-0.02em",
+              lineHeight: 0.95,
+              color: "#F5EFEF",
+              display: "flex",
+            }}
+          >
+            PM with
+          </div>
+          <div
+            style={{
+              fontSize: 110,
+              fontStyle: "italic",
+              fontWeight: 400,
+              letterSpacing: "-0.01em",
+              lineHeight: 0.95,
+              fontFamily: '"Instrument Serif", "Iowan Old Style", serif',
+              color: "#ED2EBA",
+              display: "flex",
+              marginTop: 4,
+            }}
+          >
+            T-shaped skills.
+          </div>
+          <div
+            style={{
+              fontSize: 28,
+              fontWeight: 400,
+              color: "#C9BCC4",
+              maxWidth: 900,
+              marginTop: 24,
+              display: "flex",
+              lineHeight: 1.3,
+            }}
+          >
+            in Data Storytelling, Consumer Behaviour & AI.
+          </div>
+        </div>
+
+        {/* BOTTOM — proof badges */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            position: "relative",
             zIndex: 10,
           }}
         >
-          <div
-            style={{
-              fontSize: 80,
-              fontWeight: 800,
-              letterSpacing: '-0.05em',
-              lineHeight: 0.9,
-              color: '#F1E9E9',
-              textAlign: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              marginBottom: 24,
-            }}
-          >
-            <span>Gyanesh</span>
-            <span>Samanta</span>
+          <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
+            {[
+              ["48", "Newsletter editions"],
+              ["15+", "Hackathon wins"],
+              ["3", "IEEE papers"],
+              ["1000+", "Subscribers"],
+            ].map(([num, label]) => (
+              <div
+                key={label}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: "12px 18px",
+                  borderRadius: 14,
+                  border: "1px solid rgba(237, 46, 186, 0.3)",
+                  background: "rgba(26, 26, 58, 0.5)",
+                }}
+              >
+                <span style={{ fontSize: 28, fontWeight: 700, color: "#ED2EBA", display: "flex" }}>
+                  {num}
+                </span>
+                <span
+                  style={{
+                    fontSize: 12,
+                    letterSpacing: 1.5,
+                    textTransform: "uppercase",
+                    color: "#828397",
+                    fontFamily: '"Geist Mono", monospace',
+                    marginTop: 4,
+                    display: "flex",
+                  }}
+                >
+                  {label}
+                </span>
+              </div>
+            ))}
           </div>
 
           <div
             style={{
-              fontSize: 24,
-              fontWeight: 500,
-              color: '#E491C9',
-              textAlign: 'center',
-              display: 'flex',
-              marginBottom: 16,
+              fontSize: 18,
+              letterSpacing: 4,
+              textTransform: "uppercase",
+              color: "#828397",
+              fontFamily: '"Geist Mono", monospace',
+              display: "flex",
             }}
           >
-            Product Manager
+            gyaneshsamanta.vercel.app
           </div>
-
-          <div
-            style={{
-              fontSize: 16,
-              fontWeight: 400,
-              color: 'rgba(241, 233, 233, 0.7)',
-              textAlign: 'center',
-              display: 'flex',
-              maxWidth: 500,
-            }}
-          >
-            Data, AI & Consumer Behaviour
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 30,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 20,
-            fontSize: 14,
-            color: 'rgba(228, 145, 201, 0.6)',
-          }}
-        >
-          <span>gyane.sh</span>
-          <span style={{ color: '#982598' }}>●</span>
-          <span>linkedin.com/in/gyanesh-samanta</span>
-          <span style={{ color: '#982598' }}>●</span>
-          <span>github.com/GyaneshSamanta</span>
         </div>
       </div>
     ),
-    {
-      ...size,
-    }
+    { ...size }
   );
 }

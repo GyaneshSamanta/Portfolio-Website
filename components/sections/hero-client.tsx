@@ -53,6 +53,18 @@ export function HeroClient({ hero }: Props) {
       <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16 lg:items-center">
         {/* LEFT — text */}
         <div className="order-2 lg:order-1">
+          {/* Eyebrow: full name in mono caps, sits above the display heading.
+              Smaller weight so it doesn't compete with the headline below. */}
+          <motion.div
+            initial={reduced ? false : { opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-fg-tertiary"
+          >
+            <span className="inline-block h-px w-6 bg-brand-magenta/60" aria-hidden />
+            {hero.nameFirst} {hero.nameLast}
+          </motion.div>
+
           {/* Display heading: "PM with" + kinetic italic "T-shaped skills" */}
           <h1 className="font-bold tracking-[-0.02em] leading-[0.95] text-[clamp(2.75rem,9vw,6.5rem)] text-fg-primary">
             {/* Line 1 — "PM with" with kinetic per-letter blur-in */}

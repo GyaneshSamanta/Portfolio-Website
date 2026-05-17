@@ -28,27 +28,59 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_CONFIG.name}`,
   },
   description: SITE_CONFIG.description,
+  keywords: SITE_CONFIG.keywords,
+  authors: [{ name: SITE_CONFIG.name, url: SITE_CONFIG.url }],
+  creator: SITE_CONFIG.name,
+  publisher: SITE_CONFIG.name,
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/images/brand/newsletter-cover.png",
     shortcut: "/images/brand/newsletter-cover.png",
     apple: "/images/brand/newsletter-cover.png",
   },
   openGraph: {
-    type: "website",
+    type: "profile",
     locale: "en_US",
     url: SITE_CONFIG.url,
     title: SITE_CONFIG.title,
     description: SITE_CONFIG.description,
     siteName: SITE_CONFIG.name,
+    // The image array intentionally omits an explicit URL — Next.js App Router
+    // discovers `app/opengraph-image.tsx` and auto-injects the right meta tags
+    // pointing at /opengraph-image.png. Specifying width/height/alt here gives
+    // LinkedIn/Twitter/WhatsApp the dimensions to reserve space immediately.
     images: [
       {
-        url: SITE_CONFIG.ogImage,
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: SITE_CONFIG.name,
+        type: "image/png",
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
+    images: ["/opengraph-image"],
+    creator: SITE_CONFIG.twitterHandle,
+    site: SITE_CONFIG.twitterHandle,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  // Verification tokens — uncomment + paste when you set up Search Console.
+  // verification: { google: "<token-from-Google-Search-Console>" },
 };
 
 export default function RootLayout({
@@ -56,8 +88,45 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // JSON-LD Person schema — gives Google enough structured signal to surface
+  // a rich result (knowledge-panel-style) when someone searches the name.
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: SITE_CONFIG.name,
+    url: SITE_CONFIG.url,
+    image: `${SITE_CONFIG.url}/images/hero/headshot.jpg`,
+    jobTitle: "Product Manager",
+    description: SITE_CONFIG.description,
+    sameAs: [
+      SITE_CONFIG.links.linkedin,
+      SITE_CONFIG.links.github,
+      SITE_CONFIG.links.youtube,
+      SITE_CONFIG.links.newsletter,
+    ],
+    knowsAbout: [
+      "Product Management",
+      "Data Storytelling",
+      "Consumer Behaviour",
+      "Artificial Intelligence",
+      "B2B SaaS",
+      "Outbound Product Management",
+    ],
+    alumniOf: [
+      { "@type": "EducationalOrganization", name: "Xavier Institute of Management Bhubaneswar" },
+      { "@type": "EducationalOrganization", name: "SRM Institute of Science and Technology" },
+    ],
+    worksFor: { "@type": "Organization", name: "Ginesys" },
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+      </head>
       <body
         className={`${inter.variable} ${instrumentSerif.variable} font-sans antialiased bg-bg-base text-fg-primary min-h-screen flex flex-col selection:bg-brand-magenta/40 selection:text-fg-primary`}
       >
