@@ -103,6 +103,15 @@ const config: Config = {
         // DESIGN.md §3.6 motion tokens
         "out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
         "swift": "cubic-bezier(0.32, 0.72, 0, 1)",
+        // Apple iOS 26 spring-physics approximation (overshoot 1.56)
+        "spring": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "apple-smooth": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+      },
+      letterSpacing: {
+        // Apple type system tracking
+        "display": "-0.022em",
+        "headline": "-0.018em",
+        "body-tight": "-0.011em",
       },
       transitionDuration: {
         "motion-fast": "200ms",

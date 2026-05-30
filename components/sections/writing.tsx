@@ -77,26 +77,26 @@ function FeaturedCard({ post }: { post: BlogPostMeta }) {
     <Link
       href={`/blog/${post.slug}`}
       data-cursor="Read"
-      className="group relative grid overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/60 backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-swift hover:-translate-y-0.5 hover:border-border-strong hover:bg-bg-card-hover/70 lg:grid-cols-[1.1fr_1fr]"
+      className="group glass specular relative grid overflow-hidden rounded-3xl border-0 transition-[transform,background-color] duration-300 ease-spring hover:-translate-y-0.5 hover:bg-[hsl(var(--glass-material-strong))] md:grid-cols-[1fr_1.05fr]"
     >
-      <div className="relative aspect-[16/10] lg:aspect-auto lg:min-h-[360px]">
+      <div className="relative aspect-[16/9] md:aspect-auto md:min-h-[260px]">
         {post.cover ? (
           <Image
             src={post.cover}
             alt=""
             fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover transition-transform duration-500 ease-swift group-hover:scale-[1.02]"
-            unoptimized
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover transition-transform duration-500 ease-spring group-hover:scale-[1.02]"
+            unoptimized={/^https?:\/\//.test(post.cover)}
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-brand-magenta/30 via-brand-violet/20 to-bg-card" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-tr from-bg-card via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-bg-card via-transparent to-transparent md:bg-gradient-to-r" />
       </div>
 
-      <div className="flex flex-col p-6 md:p-10">
-        <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+      <div className="relative z-10 flex flex-col p-5 md:p-7">
+        <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
           <span>Latest edition</span>
           {post.dateDisplay && (
             <>
@@ -106,18 +106,20 @@ function FeaturedCard({ post }: { post: BlogPostMeta }) {
           )}
         </div>
 
-        <h3 className="mt-4 font-serif text-[clamp(1.5rem,3vw,2.5rem)] italic leading-[1.1] text-fg-primary">
+        <h3 className="mt-3 font-serif text-[clamp(1.25rem,2.5vw,1.875rem)] italic leading-[1.15] tracking-headline text-fg-primary">
           {post.title}
         </h3>
 
-        <p className="mt-4 line-clamp-3 text-base text-fg-secondary md:text-lg">{post.excerpt}</p>
+        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-fg-secondary md:text-base">
+          {post.excerpt}
+        </p>
 
-        <div className="mt-auto flex items-center justify-between pt-6">
-          <span className="inline-flex items-center gap-1 font-mono text-xs text-fg-tertiary">
+        <div className="mt-auto flex items-center justify-between pt-4">
+          <span className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.18em] text-fg-tertiary">
             <Clock className="h-3 w-3" />
             {post.readTime}
           </span>
-          <ArrowUpRight className="h-5 w-5 text-fg-tertiary transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg-primary" />
+          <ArrowUpRight className="h-4 w-4 text-fg-tertiary transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg-primary" />
         </div>
       </div>
     </Link>

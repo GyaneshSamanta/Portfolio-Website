@@ -74,7 +74,7 @@ function RecommendationCard({ rec }: { rec: Recommendation }) {
   const [logoOk, setLogoOk] = useState(true);
 
   return (
-    <article className="group relative inline-block w-full break-inside-avoid overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/70 p-6 backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-swift hover:-translate-y-0.5 hover:border-border-strong hover:bg-bg-card-hover/70 md:p-7">
+    <article className="group glass specular relative inline-block w-full break-inside-avoid overflow-hidden rounded-3xl border-0 p-6 transition-[transform,background-color] duration-300 ease-spring hover:-translate-y-0.5 hover:bg-[hsl(var(--glass-material-strong))] md:p-7">
       {/* Brand-tinted top-right glow */}
       <div
         aria-hidden
@@ -85,13 +85,35 @@ function RecommendationCard({ rec }: { rec: Recommendation }) {
         }}
       />
 
-      <Quote className="h-6 w-6 flex-shrink-0 text-brand-magenta" aria-hidden />
+      {/* Pronounced organization pill — sits ABOVE the quote so the reader's
+          eye lands on the credential first. Logo (left) + company name. */}
+      <div className="relative z-10 mb-5 inline-flex items-center gap-2 rounded-full border border-border-strong bg-bg-elevated/80 py-1 pl-1 pr-3.5">
+        {rec.companyLogo && logoOk ? (
+          <div className="relative h-6 w-6 flex-shrink-0 overflow-hidden rounded-full bg-white/95">
+            <Image
+              src={rec.companyLogo}
+              alt={rec.company}
+              fill
+              sizes="24px"
+              className="object-contain p-0.5"
+              onError={() => setLogoOk(false)}
+            />
+          </div>
+        ) : (
+          <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-magenta to-brand-violet text-[10px] font-semibold text-white">
+            {rec.company.charAt(0)}
+          </div>
+        )}
+        <span className="text-xs font-semibold text-fg-primary">{rec.company}</span>
+      </div>
 
-      <p className="mt-4 text-[15px] leading-relaxed text-fg-secondary md:text-base">
+      <Quote className="relative z-10 h-6 w-6 flex-shrink-0 text-brand-magenta" aria-hidden />
+
+      <p className="relative z-10 mt-3 text-[15px] leading-relaxed text-fg-secondary md:text-base">
         {rec.fullText}
       </p>
 
-      <div className="mt-6 flex items-center gap-3 border-t border-border-subtle pt-5">
+      <div className="relative z-10 mt-6 flex items-center gap-3 border-t border-border-subtle pt-5">
         {/* Avatar */}
         {rec.photo && photoOk ? (
           <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full ring-1 ring-border-strong">
@@ -119,21 +141,6 @@ function RecommendationCard({ rec }: { rec: Recommendation }) {
           <div className="truncate text-sm font-semibold text-fg-primary">{rec.name}</div>
           <div className="truncate font-mono text-[11px] text-fg-tertiary">
             {rec.designation}
-          </div>
-          <div className="mt-0.5 flex items-center gap-1.5">
-            {rec.companyLogo && logoOk && (
-              <div className="relative h-3.5 w-3.5 flex-shrink-0 overflow-hidden rounded-sm bg-white/95 p-px">
-                <Image
-                  src={rec.companyLogo}
-                  alt={rec.company}
-                  fill
-                  sizes="14px"
-                  className="object-contain"
-                  onError={() => setLogoOk(false)}
-                />
-              </div>
-            )}
-            <span className="truncate text-[11px] text-fg-secondary">{rec.company}</span>
           </div>
         </div>
 

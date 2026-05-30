@@ -36,6 +36,24 @@
     --border-strong: 300 40% 35%;
     --border-glow: 300 80% 60%;
 
+    /* Apple iOS 26 "Liquid Glass" tokens — layered onto the dark theme.
+       Material is the back of the glass; specular is the top-left highlight;
+       hairline is the inner stroke that defines the edge. */
+    --glass-material: 238 40% 16% / 0.55;
+    --glass-material-strong: 238 40% 14% / 0.75;
+    --glass-hairline: 0 0% 100% / 0.08;
+    --glass-specular: 0 0% 100% / 0.10;
+    --glass-edge-glow: 300 80% 60% / 0.18;
+
+    /* Apple type tracking — negative at large sizes is the Apple signature. */
+    --tracking-display: -0.022em;
+    --tracking-headline: -0.018em;
+    --tracking-body: -0.011em;
+
+    /* Spring-like motion curve. Closest CSS approximation to spring(0.4,0.85). */
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
     /* shadcn-compatible aliases — map old names onto new tokens so existing
        components (Button, Card, Badge, etc.) keep working until rewritten. */
     --background: var(--bg-base);
@@ -69,8 +87,24 @@
   * {
     @apply border-border;
   }
+  html {
+    /* Prevent horizontal scroll from any overflowing absolute children. */
+    overflow-x: hidden;
+  }
   body {
     @apply bg-background text-foreground;
+    /* Apple's body tracking — tightens body text at 17pt for editorial density. */
+    letter-spacing: var(--tracking-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Belt-and-braces overflow guard. */
+    overflow-x: hidden;
+  }
+
+  /* Apple display heading defaults — tighter tracking at large sizes is the
+     single most-missed detail when cloning their aesthetic. */
+  h1, h2, h3 {
+    letter-spacing: var(--tracking-display);
   }
 
   /* Hide native cursor on fine pointers; CursorCircle takes over.
@@ -104,6 +138,64 @@
 }
 
 @layer utilities {
+  /* ----- Apple "Liquid Glass" surfaces ---------------------------------- */
+
+  /* Standard glass surface. Use on cards, panels, navbar. */
+  .glass {
+    background: hsl(var(--glass-material));
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid hsl(var(--glass-hairline));
+    position: relative;
+    overflow: hidden;
+  }
+  /* Stronger glass — for modals, sheets, the navbar's scrolled state. */
+  .glass-strong {
+    background: hsl(var(--glass-material-strong));
+    backdrop-filter: blur(60px) saturate(200%);
+    -webkit-backdrop-filter: blur(60px) saturate(200%);
+    border: 1px solid hsl(var(--glass-hairline));
+    position: relative;
+    overflow: hidden;
+  }
+  /* The specular highlight — the most recognizable Apple iOS 26 detail.
+     A radial gradient at top-left, ~14% white, decays to transparent.
+     Apply as a ::before pseudo-element on top of any .glass. */
+  .specular::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 60% 40% at 18% 12%,
+      hsl(var(--glass-specular)),
+      transparent 65%
+    );
+    z-index: 1;
+  }
+  /* Edge glow — subtle brand-magenta caustic on the bottom-right of glass. */
+  .caustic::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 50% 35% at 85% 90%,
+      hsl(var(--glass-edge-glow)),
+      transparent 60%
+    );
+    z-index: 1;
+  }
+  /* Continuous corner — approximation of Apple's superellipse using a soft
+     blur-shaped mask. Standard border-radius works for most cases; this is
+     for hero / large statement surfaces where the difference reads. */
+  .squircle-32 {
+    border-radius: 32px;
+    /* iOS uses a continuous curvature — closest CSS gets is via a
+       slight inset shadow that softens the corner transition. */
+    box-shadow: inset 0 0 0 0.5px hsl(var(--glass-hairline));
+  }
+
   /* Brand gradient utilities — kept for legacy components; new sections should
      use semantic tokens directly. */
   .bg-brand-gradient {

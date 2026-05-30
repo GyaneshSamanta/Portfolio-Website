@@ -39,10 +39,10 @@ export async function PodcastSection() {
           <div>
             <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
               <Play className="h-3.5 w-3.5" />
-              Podcast
+              Podcasts
             </div>
-            <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-[-0.02em] text-fg-primary">
-              <span className="font-serif italic">Long-form,</span> on tap.
+            <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
+              <span className="font-serif italic">Gyanesh on Product:</span> Podcasts
             </h2>
             <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
               Full episodes + bite-sized takes — auto-loaded from my YouTube playlist.

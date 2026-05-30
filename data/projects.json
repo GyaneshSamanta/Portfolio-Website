@@ -1,0 +1,99 @@
+{
+  "hackathonWins": [
+    {
+      "name": "CrossDrop",
+      "slug": "crossdrop",
+      "githubUrl": "https://github.com/GyaneshSamanta/EthIndia-23-CrossDrop",
+      "tagline": "Cross-chain airdrop targeting for L2 ecosystems on Arbitrum",
+      "award": "Winner",
+      "event": "ETHIndia 2023",
+      "trophy": "🏆"
+    },
+    {
+      "name": "HopeVid",
+      "slug": "hopevid",
+      "githubUrl": "https://github.com/GyaneshSamanta/HopeVid-HackRx1.0",
+      "tagline": "Preventive health web app with telemedicine & COVID-19 tracking",
+      "award": "2nd Runner-Up",
+      "event": "HackRx 1.0",
+      "trophy": "🥉"
+    },
+    {
+      "name": "Wheelie",
+      "slug": "wheelie",
+      "githubUrl": "https://github.com/GyaneshSamanta/Wheelie",
+      "tagline": "Creative hardware-software solution for accessibility",
+      "award": "1st Overall",
+      "event": "Hack Empowered",
+      "trophy": "🏆"
+    },
+    {
+      "name": "Cycloninator",
+      "slug": "cycloninator",
+      "githubUrl": "https://github.com/GyaneshSamanta/Cycloninator",
+      "tagline": "Personal compact weather station using Linode Cloud",
+      "award": "2nd Overall",
+      "event": "Hacknado",
+      "trophy": "🥈"
+    },
+    {
+      "name": "MoodSings",
+      "slug": "moodsings",
+      "githubUrl": "https://github.com/GyaneshSamanta/MoodSings",
+      "tagline": "ML-powered mood-based music recommender",
+      "award": "2nd Overall",
+      "event": "MLH Birthday Bash",
+      "trophy": "🥈"
+    },
+    {
+      "name": "Nami, Maps!",
+      "slug": "nami-maps",
+      "githubUrl": "https://github.com/GyaneshSamanta/Nami-Maps",
+      "tagline": "Interactive map-based quest system",
+      "award": "Winner — X Marks The Spot",
+      "event": "AhoyHacks",
+      "trophy": "🏆"
+    }
+  ],
+  "openSource": [
+    {
+      "name": "NotebookLM-for-Windows",
+      "slug": "notebooklm-for-windows",
+      "githubUrl": "https://github.com/GyaneshSamanta/NotebookLM-for-Windows",
+      "tagline": "Standalone Windows desktop app wrapping Google NotebookLM — Ghost Mode, Split View & hotkeys",
+      "downloads": "5.6k",
+      "techStack": ["Electron", "Desktop App", "AI"]
+    },
+    {
+      "name": "Gemini-for-Windows",
+      "slug": "gemini-for-windows",
+      "githubUrl": "https://github.com/GyaneshSamanta/Gemini-for-Windows",
+      "tagline": "Native Electron wrapper for Google Gemini on Windows with multi-view modes",
+      "downloads": "29",
+      "techStack": ["Electron", "Desktop App", "AI"]
+    }
+  ],
+  "research": [
+    {
+      "name": "Sequel Marketing in Cinema",
+      "slug": "sequel-marketing-in-cinema",
+      "githubUrl": "https://github.com/GyaneshSamanta/Sequel-Marketing-in-Cinema",
+      "tagline": "Data analysis of marketing strategies for franchise sequels in Bollywood & Hollywood",
+      "tags": ["Data Analysis", "Marketing"]
+    },
+    {
+      "name": "NYC Shootings Research",
+      "slug": "nyc-shootings-research",
+      "githubUrl": "https://github.com/GyaneshSamanta/NYC-Shootings-Research-Paper",
+      "tagline": "Statistical research paper on NYC shooting incidents using NYPD open data",
+      "tags": ["Statistics", "Open Data"]
+    },
+    {
+      "name": "Research Papers",
+      "slug": "research-papers",
+      "githubUrl": "https://github.com/GyaneshSamanta/Research-Papers",
+      "tagline": "Collection of published & working papers on product, AI, and behavioral science",
+      "tags": ["Collection", "Working Papers"]
+    }
+  ]
+}

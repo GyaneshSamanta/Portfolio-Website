@@ -1,100 +1,86 @@
 "use client";
 
 /**
- * Journey — DESIGN.md §5.3 "the walk"
- * Desktop ≥1024px: pinned vertical scroll = horizontal travel; walking figure
- * sits centered while polaroids slide past. Active milestone scales up.
- * Mobile / reduced-motion: vertical timeline, polaroids alternate sides.
+ * Journey — DESIGN.md §5.3 (rev v3.0 — split-pane redesign)
+ *
+ * Old: horizontal scroll-jacked walk where the figure stayed pinned and
+ *      polaroid cards slid past. Brittle math, cards cropped, overshoot bug.
+ *
+ * New: vertical split-pane composition.
+ *
+ *   ┌──────────────────────┬──────────────────────┐
+ *   │                      │  ─── 2019 ───         │
+ *   │   sticky walking     │  ┌─────────────┐     │
+ *   │   visual + path      │  │ SRM University│     │
+ *   │   (left, 5 cols)     │  └─────────────┘     │
+ *   │                      │  ─── 2020 ───         │
+ *   │   • Walking figure   │  ┌─────────────┐     │
+ *   │   • Vertical path    │  │ SRM IIC      │     │
+ *   │   • Year marker      │  └─────────────┘     │
+ *   │   • Progress dots    │  ...                  │
+ *   │                      │                       │
+ *   └──────────────────────┴──────────────────────┘
+ *           7 / 12 chapters · "Snapdeal"  ← live label
+ *
+ * As the user scrolls, the figure ascends the path on the left while
+ * milestone cards stream in from the right. The active milestone is the one
+ * currently nearest the figure's vertical position.
+ *
+ * Mobile: same content; the left visual collapses to a thin path on the left
+ * edge with year-dots, cards stack vertically on the right.
  */
 
 import { useEffect, useRef, useState } from "react";
 import {
+  AnimatePresence,
   motion,
-  useMotionValueEvent,
   useReducedMotion,
   useScroll,
   useTransform,
+  type MotionValue,
 } from "framer-motion";
-import { X, MapPin } from "lucide-react";
+import { MapPin, X } from "lucide-react";
 import Image from "next/image";
 import journeyData from "@/data/journey.json";
-import { MilestonePolaroid, type Milestone } from "@/components/journey/milestone-polaroid";
 import { WalkingFigure } from "@/components/journey/walking-figure";
 
+type Milestone = {
+  id: string;
+  year: string;
+  type: "education" | "role" | "internship" | "milestone";
+  org: string;
+  title: string;
+  dates: string;
+  logo?: string;
+  shipped: string;
+  description?: string;
+  location?: string;
+  tags: string[];
+  color: "purple" | "pink" | "violet" | "magenta";
+  isFuture?: boolean;
+};
+
 const MILESTONES = journeyData as Milestone[];
-// Tilt cards for character (DESIGN.md §5.3: -2deg, 1deg, -1deg, randomized).
-const ROTATIONS = [-2, 1, -1, 2, -1.5, 0.5, -2, 1, -1, 0];
+
+const TYPE_LABEL: Record<Milestone["type"], string> = {
+  education: "Education",
+  role: "Full-time",
+  internship: "Internship",
+  milestone: "Milestone",
+};
 
 export function JourneySection() {
-  const [isDesktop, setIsDesktop] = useState(false);
-  const reduced = useReducedMotion();
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    setIsDesktop(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
-  const useVertical = !isDesktop || reduced;
-  return useVertical ? <JourneyVertical /> : <JourneyWalk />;
-}
-
-/* -------------------------------------------------------------------------- */
-/* Desktop: scroll-jacked horizontal walk                                      */
-/* -------------------------------------------------------------------------- */
-
-function JourneyWalk() {
   const sectionRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [walking, setWalking] = useState(false);
   const [openIdx, setOpenIdx] = useState<number | null>(null);
-
-  // Measured pixel travel — set after the track mounts. We compute it as the
-  // exact distance needed for the LAST polaroid to land under the figure when
-  // scrollYProgress=1. No more overshoot into a black void.
-  const [travelPx, setTravelPx] = useState(0);
-
-  useEffect(() => {
-    const measure = () => {
-      const track = trackRef.current;
-      if (!track) return;
-      // Track is positioned so its FIRST card sits centered at scroll=0 (see
-      // the `left:calc(50% - 140px)` style below). To then center the LAST
-      // card at scroll=1, we translate the track left by (trackWidth - 2*halfCard).
-      // Card width is ~280px; halfCard = 140px.
-      const trackWidth = track.scrollWidth;
-      const px = Math.max(0, trackWidth - 280);
-      setTravelPx(px);
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
+  const [walking, setWalking] = useState(false);
+  const [activeIdx, setActiveIdx] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], [0, -travelPx]);
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    // Map scroll progress to the milestone under the figure. We use floor +
-    // clamp + a tiny dead zone so the trailing card doesn't read as "active"
-    // when the user is only partway into the section's tail.
-    const fraction = Math.max(0, Math.min(0.999, latest));
-    const idx = Math.min(
-      Math.floor(fraction * MILESTONES.length),
-      MILESTONES.length - 1
-    );
-    setActiveIdx((prev) => (prev === idx ? prev : idx));
-  });
-
-  // Walking flag stays on for ~800ms after the last scroll tick so the leg
-  // cycle has time to complete naturally before snapping to idle.
+  // Walking flag — stays on briefly after each scroll tick.
   useEffect(() => {
     let timer: number | undefined;
     const unsub = scrollYProgress.on("change", () => {
@@ -108,88 +94,65 @@ function JourneyWalk() {
     };
   }, [scrollYProgress]);
 
+  // Active = milestone closest to scroll progress
+  useEffect(() => {
+    const unsub = scrollYProgress.on("change", (latest) => {
+      const idx = Math.min(
+        Math.floor(latest * MILESTONES.length),
+        MILESTONES.length - 1
+      );
+      setActiveIdx((prev) => (prev === idx ? prev : Math.max(0, idx)));
+    });
+    return () => unsub();
+  }, [scrollYProgress]);
+
   return (
     <>
       <section
         id="journey"
         ref={sectionRef}
-        className="relative bg-bg-base"
-        style={{ height: `${MILESTONES.length * 45}vh` }}
+        className="relative bg-bg-base px-5 py-24 md:px-8 lg:px-12 lg:py-32"
       >
-        {/* Sticky viewport — the actual scene the user sees. */}
-        <div className="sticky top-0 flex h-screen flex-col overflow-hidden">
-          <header className="mx-auto w-full max-w-[1400px] px-12 pt-24 pb-6">
+        <div className="mx-auto max-w-[1400px]">
+          <header className="mb-12 lg:mb-16">
             <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
               The journey
             </div>
-            <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-[-0.02em] text-fg-primary">
+            <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
               <span className="font-serif italic">A walk</span> through the years.
             </h2>
             <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
-              Scroll to walk forward.
+              ML engineer → data scientist → B2C PM → B2B PM. The path tightened with each
+              step.
             </p>
           </header>
 
-          {/* Path + polaroid track. */}
-          <div className="relative flex-1">
-            {/* Background parallax cloud accents. */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 -z-[1] bg-[radial-gradient(circle_at_15%_50%,hsl(var(--brand-violet)/0.18),transparent_45%),radial-gradient(circle_at_85%_60%,hsl(var(--brand-magenta)/0.15),transparent_45%)]"
-            />
+          {/* Split pane: walking visual (left) + chapter cards (right) */}
+          <div className="grid grid-cols-[60px_1fr] gap-5 md:grid-cols-[100px_1fr] md:gap-8 lg:grid-cols-[260px_1fr] lg:gap-12">
+            {/* LEFT — sticky walking visual */}
+            <aside className="relative">
+              <div className="sticky top-32 flex flex-col items-center">
+                <Pathway
+                  scrollYProgress={scrollYProgress}
+                  walking={walking}
+                  activeIdx={activeIdx}
+                />
+              </div>
+            </aside>
 
-            {/* Dotted path baseline. */}
-            <svg
-              aria-hidden
-              className="absolute left-0 right-0 top-1/2 -translate-y-1/2"
-              width="100%"
-              height="6"
-              preserveAspectRatio="none"
-            >
-              <line
-                x1="0"
-                y1="3"
-                x2="100%"
-                y2="3"
-                stroke="hsl(var(--border-subtle))"
-                strokeWidth="2"
-                strokeDasharray="4 8"
-              />
-            </svg>
-
-            {/* Traveler — pinned to viewport center. The path sits just under
-                the figure's feet. */}
-            <div
-              className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-[calc(50%+8px)]"
-              aria-hidden
-            >
-              <WalkingFigure walking={walking} />
-            </div>
-
-            {/* Polaroid track — translates horizontally with scroll.
-                left: calc(50% - 140px) puts the first card's center (assuming
-                ~280px card width) exactly at viewport center at scroll=0. */}
-            <motion.div
-              ref={trackRef}
-              style={{ x, left: "calc(50% - 140px)" }}
-              className="absolute top-1/2 flex -translate-y-1/2 items-center gap-16 will-change-transform"
-            >
+            {/* RIGHT — chapter cards stack */}
+            <ol className="flex flex-col gap-6 md:gap-8">
               {MILESTONES.map((m, i) => (
-                <div key={m.id} className="flex flex-col items-center">
-                  {/* The polaroid itself — sits above the line. */}
-                  <div className={i % 2 === 0 ? "mb-32" : "mt-32"}>
-                    <MilestonePolaroid
-                      milestone={m}
-                      rotateDeg={ROTATIONS[i % ROTATIONS.length]}
-                      active={i === activeIdx}
-                      onClick={() => setOpenIdx(i)}
-                    />
-                  </div>
-                </div>
+                <ChapterCard
+                  key={m.id}
+                  milestone={m}
+                  index={i}
+                  active={i === activeIdx}
+                  onOpen={() => setOpenIdx(i)}
+                />
               ))}
-            </motion.div>
+            </ol>
           </div>
-
         </div>
       </section>
 
@@ -202,70 +165,181 @@ function JourneyWalk() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Mobile / reduced-motion: vertical timeline                                  */
+/* Left pane — pathway with traveling figure                                   */
 /* -------------------------------------------------------------------------- */
 
-function JourneyVertical() {
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
+function Pathway({
+  scrollYProgress,
+  walking,
+  activeIdx,
+}: {
+  scrollYProgress: MotionValue<number>;
+  walking: boolean;
+  activeIdx: number;
+}) {
+  // Figure ascends from top to bottom of the path as user scrolls.
+  const figureY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  // Progress line fills behind the figure.
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const current = MILESTONES[activeIdx];
 
   return (
-    <>
-      <section
-        id="journey"
-        className="relative bg-bg-base px-5 py-24 md:px-8"
-      >
-        <div className="mx-auto max-w-3xl">
-          <header className="mb-12">
-            <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-              The journey
-            </div>
-            <h2 className="mt-3 text-[clamp(2rem,7vw,3.5rem)] font-bold leading-[0.95] tracking-[-0.02em] text-fg-primary">
-              <span className="font-serif italic">A walk</span> through the years.
-            </h2>
-          </header>
-
-          <div className="relative">
-            {/* Vertical dashed path. */}
-            <div
-              aria-hidden
-              className="absolute left-3 top-0 h-full w-px border-l-2 border-dashed border-border-subtle md:left-6"
-            />
-
-            <ul className="space-y-10">
-              {MILESTONES.map((m, i) => (
-                <li key={m.id} className="relative pl-10 md:pl-16">
-                  {/* Dot marker. */}
-                  <div
-                    aria-hidden
-                    className={`absolute left-0.5 top-3 h-5 w-5 rounded-full border-2 md:left-3.5 ${
-                      m.isFuture
-                        ? "border-dashed border-brand-magenta bg-bg-base"
-                        : "border-brand-magenta bg-brand-magenta"
-                    }`}
-                  />
-                  <MilestonePolaroid
-                    milestone={m}
-                    rotateDeg={0}
-                    active={false}
-                    onClick={() => setOpenIdx(i)}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
+    <div className="relative w-full">
+      {/* Active year + counter — desktop only label above the path */}
+      <div className="mb-8 hidden lg:block">
+        <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+          Chapter {String(activeIdx + 1).padStart(2, "0")} / {String(MILESTONES.length).padStart(2, "0")}
         </div>
-      </section>
+        <div className="mt-2 font-serif text-3xl italic tracking-headline text-fg-primary">
+          {current?.year ?? "—"}
+        </div>
+        <div className="mt-1 text-sm text-fg-secondary">{current?.org ?? ""}</div>
+      </div>
 
-      <MilestoneModal
-        milestone={openIdx !== null ? MILESTONES[openIdx] : null}
-        onClose={() => setOpenIdx(null)}
-      />
-    </>
+      {/* The path — vertical dashed line with progress fill */}
+      <div className="relative mx-auto h-[480px] w-1 md:h-[600px]">
+        {/* Track background */}
+        <div
+          aria-hidden
+          className="absolute inset-0 rounded-full opacity-50"
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom, hsl(var(--border-subtle)) 0, hsl(var(--border-subtle)) 6px, transparent 6px, transparent 12px)",
+            backgroundSize: "100% 12px",
+            backgroundRepeat: "repeat-y",
+          }}
+        />
+
+        {/* Progress fill (solid gradient up to figure) */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-x-0 top-0 rounded-full"
+          style={{
+            height: lineHeight,
+            background:
+              "linear-gradient(to bottom, hsl(var(--brand-magenta)), hsl(var(--brand-violet)))",
+          }}
+        />
+
+        {/* Walking figure — moves vertically with scroll */}
+        <motion.div
+          className="absolute left-1/2 z-10 -translate-x-1/2"
+          style={{ top: figureY, y: "-50%" }}
+        >
+          <WalkingFigure walking={walking} />
+        </motion.div>
+      </div>
+
+      {/* Mobile/tablet active label below the path */}
+      <div className="mt-6 text-center lg:hidden">
+        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
+          {String(activeIdx + 1).padStart(2, "0")} / {String(MILESTONES.length).padStart(2, "0")}
+        </div>
+        <div className="mt-1 font-serif text-base italic text-fg-primary">
+          {current?.year}
+        </div>
+      </div>
+    </div>
   );
 }
 
 /* -------------------------------------------------------------------------- */
-/* Modal — minimal accessible dialog                                            */
+/* Right pane — chapter cards                                                  */
+/* -------------------------------------------------------------------------- */
+
+const COLOR_GLOW: Record<Milestone["color"], string> = {
+  purple: "from-brand-purple/40 to-transparent",
+  pink: "from-brand-pink/40 to-transparent",
+  violet: "from-brand-violet/40 to-transparent",
+  magenta: "from-brand-magenta/40 to-transparent",
+};
+
+function ChapterCard({
+  milestone,
+  index,
+  active,
+  onOpen,
+}: {
+  milestone: Milestone;
+  index: number;
+  active: boolean;
+  onOpen: () => void;
+}) {
+  return (
+    <motion.li
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-15% 0px" }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      className="list-none"
+    >
+      <button
+        type="button"
+        onClick={onOpen}
+        data-cursor="View details"
+        className={`group glass specular relative w-full overflow-hidden rounded-3xl border-0 p-5 text-left transition-[transform,background-color] duration-300 ease-spring hover:-translate-y-0.5 hover:bg-[hsl(var(--glass-material-strong))] md:p-6 ${
+          active ? "ring-1 ring-brand-magenta/40" : ""
+        }`}
+      >
+        {/* Color tinted halo when active */}
+        {active && (
+          <div
+            aria-hidden
+            className={`pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-to-br ${COLOR_GLOW[milestone.color]} opacity-80`}
+          />
+        )}
+
+        <div className="relative z-10 flex items-start gap-4">
+          {/* Logo */}
+          {milestone.logo ? (
+            <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-xl bg-white/95 ring-1 ring-border-subtle">
+              <Image src={milestone.logo} alt="" fill sizes="48px" className="object-contain" />
+            </div>
+          ) : (
+            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-magenta to-brand-violet text-base font-semibold text-white">
+              {milestone.org.charAt(0)}
+            </div>
+          )}
+
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
+              <span className="rounded-full bg-bg-elevated px-2 py-0.5 text-fg-secondary">
+                {milestone.year}
+              </span>
+              <span>·</span>
+              <span>{TYPE_LABEL[milestone.type]}</span>
+              <span>·</span>
+              <span className="text-fg-secondary">{milestone.dates}</span>
+            </div>
+
+            <div className="mt-2 text-base font-semibold tracking-headline text-fg-primary md:text-lg">
+              {milestone.title}
+            </div>
+            <div className="text-sm text-fg-secondary">{milestone.org}</div>
+
+            <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-fg-secondary">
+              {milestone.shipped}
+            </p>
+
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {milestone.tags.slice(0, 3).map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full bg-bg-elevated px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-fg-secondary"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </button>
+    </motion.li>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Modal                                                                       */
 /* -------------------------------------------------------------------------- */
 
 function MilestoneModal({
@@ -290,82 +364,84 @@ function MilestoneModal({
     };
   }, [milestone, onClose]);
 
-  if (!milestone) return null;
-
   return (
-    <motion.div
-      role="dialog"
-      aria-modal
-      aria-labelledby="milestone-title"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[80] flex items-center justify-center bg-bg-base/80 px-4 backdrop-blur"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={reduced ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-2xl rounded-3xl border border-border-strong bg-bg-elevated p-6 md:p-10"
-      >
-        <button
-          type="button"
+    <AnimatePresence>
+      {milestone && (
+        <motion.div
+          role="dialog"
+          aria-modal
+          aria-labelledby="milestone-title"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-bg-base/80 px-4 backdrop-blur"
           onClick={onClose}
-          aria-label="Close"
-          data-cursor="Close"
-          className="absolute right-4 top-4 rounded-full p-2 text-fg-tertiary transition-colors hover:bg-bg-card hover:text-fg-primary"
         >
-          <X className="h-4 w-4" />
-        </button>
-
-        <div className="flex items-start gap-4">
-          {milestone.logo ? (
-            <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-2xl bg-white/95 ring-1 ring-border-subtle">
-              <Image src={milestone.logo} alt="" fill sizes="56px" className="object-contain" />
-            </div>
-          ) : (
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-magenta to-brand-violet text-lg font-semibold text-white">
-              {milestone.org.charAt(0)}
-            </div>
-          )}
-          <div>
-            <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-              {milestone.year} · {milestone.dates}
-            </div>
-            <h3
-              id="milestone-title"
-              className="mt-1 text-2xl font-bold leading-tight text-fg-primary md:text-3xl"
+          <motion.div
+            initial={reduced ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-2xl rounded-3xl border border-border-strong bg-bg-elevated p-6 md:p-10"
+          >
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close"
+              data-cursor="Close"
+              className="absolute right-4 top-4 rounded-full p-2 text-fg-tertiary transition-colors hover:bg-bg-card hover:text-fg-primary"
             >
-              {milestone.title}
-            </h3>
-            <div className="mt-1 text-base text-fg-secondary">{milestone.org}</div>
-          </div>
-        </div>
+              <X className="h-4 w-4" />
+            </button>
 
-        {milestone.location && (
-          <div className="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-fg-tertiary">
-            <MapPin className="h-3.5 w-3.5" />
-            {milestone.location}
-          </div>
-        )}
+            <div className="flex items-start gap-4">
+              {milestone.logo ? (
+                <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-2xl bg-white/95 ring-1 ring-border-subtle">
+                  <Image src={milestone.logo} alt="" fill sizes="56px" className="object-contain" />
+                </div>
+              ) : (
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-magenta to-brand-violet text-lg font-semibold text-white">
+                  {milestone.org.charAt(0)}
+                </div>
+              )}
+              <div>
+                <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+                  {milestone.year} · {milestone.dates}
+                </div>
+                <h3
+                  id="milestone-title"
+                  className="mt-1 text-2xl font-bold leading-tight tracking-headline text-fg-primary md:text-3xl"
+                >
+                  {milestone.title}
+                </h3>
+                <div className="mt-1 text-base text-fg-secondary">{milestone.org}</div>
+              </div>
+            </div>
 
-        <p className="mt-6 text-base leading-relaxed text-fg-secondary md:text-lg">
-          {milestone.description ?? milestone.shipped}
-        </p>
+            {milestone.location && (
+              <div className="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-fg-tertiary">
+                <MapPin className="h-3.5 w-3.5" />
+                {milestone.location}
+              </div>
+            )}
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          {milestone.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-border-subtle bg-bg-card px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-fg-secondary"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </motion.div>
-    </motion.div>
+            <p className="mt-6 text-base leading-relaxed text-fg-secondary md:text-lg">
+              {milestone.description ?? milestone.shipped}
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              {milestone.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-border-subtle bg-bg-card px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-fg-secondary"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
