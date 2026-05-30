@@ -135,7 +135,7 @@ export function HeroClient({ hero }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="Read newsletter"
-              className="group inline-flex items-center gap-2 rounded-full border border-border-strong/60 bg-bg-card/40 px-6 py-3 text-sm font-semibold text-fg-primary backdrop-blur transition-colors duration-200 ease-swift hover:border-border-glow hover:bg-bg-card-hover/60"
+              className="group glass specular inline-flex items-center gap-2 rounded-full border-0 px-6 py-3 text-sm font-semibold text-fg-primary transition-colors duration-200 ease-spring hover:bg-[hsl(var(--glass-material-strong))]"
             >
               {hero.ctaSecondaryLabel}
               <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

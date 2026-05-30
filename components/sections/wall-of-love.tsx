@@ -1,14 +1,15 @@
 "use client";
 
 /**
- * WallOfLove — DESIGN.md §5.7 (rev v2.2 — masonry rebuild)
+ * WallOfLove — DESIGN.md §5.7 (rev v3.1 — Apple Liquid Glass + full text)
  *
- * Replaced the marquee + hover-popover pattern. The user explicitly asked for
- * "much bigger tiles, fit the entire recommendation there, I don't want these
- * smaller versions that have a semi full modal popping up at the bottom".
+ * Cards are sized to fit the FULL recommendation text. No truncation.
+ * Layout: balanced CSS columns (3 on desktop, 2 on tablet, 1 on mobile) —
+ * each card grows to its own natural height. break-inside-avoid keeps a
+ * single recommendation from splitting across columns.
  *
- * New layout: CSS columns masonry, full recommendation per card, scrollable
- * naturally. Reading order: latest first. No truncation.
+ * Org credential sits as a refined chip in the card footer, INLINE with the
+ * person's name + title — feels like a credential, not a pasted-on banner.
  */
 
 import Image from "next/image";
@@ -39,14 +40,14 @@ export function WallOfLoveSection() {
   return (
     <section
       id="recommendations"
-      className="relative bg-bg-base px-5 py-24 md:px-8 lg:px-12 lg:py-32"
+      className="relative bg-bg-base px-5 py-14 md:px-8 lg:px-12 lg:py-20"
     >
       <div className="mx-auto max-w-[1400px]">
-        <header className="mb-12">
+        <header className="mb-10">
           <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
             Wall of love · {RECS.length} recommendations
           </div>
-          <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-[-0.02em] text-fg-primary">
+          <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
             What people I've <span className="font-serif italic">actually</span> worked with say.
           </h2>
           <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
@@ -55,8 +56,7 @@ export function WallOfLoveSection() {
           </p>
         </header>
 
-        {/* CSS columns masonry — preserves natural reading order, balances card
-            heights automatically. Single col on mobile, 2 on tablet, 3 on desktop. */}
+        {/* CSS columns masonry. Cards grow to fit full text — never truncated. */}
         <div className="columns-1 gap-5 md:columns-2 lg:columns-3 [&>article]:mb-5">
           {RECS.map((rec) => (
             <RecommendationCard key={rec.slug} rec={rec} />
@@ -75,7 +75,7 @@ function RecommendationCard({ rec }: { rec: Recommendation }) {
 
   return (
     <article className="group glass specular relative inline-block w-full break-inside-avoid overflow-hidden rounded-3xl border-0 p-6 transition-[transform,background-color] duration-300 ease-spring hover:-translate-y-0.5 hover:bg-[hsl(var(--glass-material-strong))] md:p-7">
-      {/* Brand-tinted top-right glow */}
+      {/* Brand-tinted top-right caustic */}
       <div
         aria-hidden
         className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full opacity-40 transition-opacity duration-300 group-hover:opacity-70"
@@ -85,35 +85,16 @@ function RecommendationCard({ rec }: { rec: Recommendation }) {
         }}
       />
 
-      {/* Pronounced organization pill — sits ABOVE the quote so the reader's
-          eye lands on the credential first. Logo (left) + company name. */}
-      <div className="relative z-10 mb-5 inline-flex items-center gap-2 rounded-full border border-border-strong bg-bg-elevated/80 py-1 pl-1 pr-3.5">
-        {rec.companyLogo && logoOk ? (
-          <div className="relative h-6 w-6 flex-shrink-0 overflow-hidden rounded-full bg-white/95">
-            <Image
-              src={rec.companyLogo}
-              alt={rec.company}
-              fill
-              sizes="24px"
-              className="object-contain p-0.5"
-              onError={() => setLogoOk(false)}
-            />
-          </div>
-        ) : (
-          <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-magenta to-brand-violet text-[10px] font-semibold text-white">
-            {rec.company.charAt(0)}
-          </div>
-        )}
-        <span className="text-xs font-semibold text-fg-primary">{rec.company}</span>
-      </div>
-
+      {/* Quote glyph */}
       <Quote className="relative z-10 h-6 w-6 flex-shrink-0 text-brand-magenta" aria-hidden />
 
-      <p className="relative z-10 mt-3 text-[15px] leading-relaxed text-fg-secondary md:text-base">
+      {/* Full recommendation — never truncated */}
+      <p className="relative z-10 mt-4 text-[15px] leading-relaxed text-fg-secondary md:text-base">
         {rec.fullText}
       </p>
 
-      <div className="relative z-10 mt-6 flex items-center gap-3 border-t border-border-subtle pt-5">
+      {/* Footer: avatar + name/title + org chip on the right */}
+      <div className="relative z-10 mt-6 flex items-start gap-3 border-t border-border-subtle pt-5">
         {/* Avatar */}
         {rec.photo && photoOk ? (
           <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full ring-1 ring-border-strong">
@@ -137,13 +118,36 @@ function RecommendationCard({ rec }: { rec: Recommendation }) {
           </div>
         )}
 
+        {/* Name + designation + org all in one column */}
         <div className="min-w-0 flex-1">
-          <div className="truncate text-sm font-semibold text-fg-primary">{rec.name}</div>
-          <div className="truncate font-mono text-[11px] text-fg-tertiary">
+          <div className="text-sm font-semibold text-fg-primary">{rec.name}</div>
+          <div className="mt-0.5 text-[11px] text-fg-tertiary">
             {rec.designation}
+          </div>
+
+          {/* Org chip — refined, in-flow with the name block */}
+          <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-border-subtle bg-bg-elevated/80 py-0.5 pl-0.5 pr-2.5">
+            {rec.companyLogo && logoOk ? (
+              <div className="relative h-4 w-4 flex-shrink-0 overflow-hidden rounded-full bg-white/95">
+                <Image
+                  src={rec.companyLogo}
+                  alt={rec.company}
+                  fill
+                  sizes="16px"
+                  className="object-contain p-px"
+                  onError={() => setLogoOk(false)}
+                />
+              </div>
+            ) : (
+              <div className="flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-magenta to-brand-violet text-[8px] font-semibold text-white">
+                {rec.company.charAt(0)}
+              </div>
+            )}
+            <span className="text-[11px] font-medium text-fg-primary">{rec.company}</span>
           </div>
         </div>
 
+        {/* LinkedIn link top-right */}
         {rec.linkedinUrl && (
           <a
             href={rec.linkedinUrl}
@@ -151,7 +155,7 @@ function RecommendationCard({ rec }: { rec: Recommendation }) {
             rel="noopener noreferrer"
             data-cursor="LinkedIn"
             aria-label={`${rec.name} on LinkedIn`}
-            className="flex-shrink-0 text-fg-tertiary transition-colors hover:text-fg-primary"
+            className="mt-0.5 flex-shrink-0 text-fg-tertiary transition-colors hover:text-fg-primary"
           >
             <Linkedin className="h-4 w-4" />
           </a>

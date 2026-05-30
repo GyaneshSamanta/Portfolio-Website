@@ -16,7 +16,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-bg-base px-5 py-32 md:px-8 lg:px-12 lg:py-44"
+      className="relative overflow-hidden bg-bg-base px-5 py-20 md:px-8 lg:px-12 lg:py-28"
     >
       {/* Atmospheric wash */}
       <div
@@ -29,7 +29,7 @@ export function ContactSection() {
           Contact
         </div>
 
-        <h2 className="mt-4 text-[clamp(2.5rem,7vw,5rem)] font-bold leading-[0.95] tracking-[-0.02em] text-fg-primary">
+        <h2 className="mt-4 text-[clamp(2.5rem,7vw,5rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
           <span className="font-serif italic">Let&apos;s build</span> something.
         </h2>
 

@@ -32,7 +32,7 @@ export async function PodcastSection() {
   return (
     <section
       id="podcast"
-      className="relative bg-bg-base px-5 py-24 md:px-8 lg:px-12 lg:py-32"
+      className="relative bg-bg-base px-5 py-14 md:px-8 lg:px-12 lg:py-20"
     >
       <div className="mx-auto max-w-[1400px]">
         <header className="mb-10 flex flex-wrap items-end justify-between gap-6">

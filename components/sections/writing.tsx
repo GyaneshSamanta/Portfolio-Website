@@ -20,7 +20,7 @@ export function WritingSection() {
   return (
     <section
       id="writing"
-      className="relative bg-bg-base px-5 py-24 md:px-8 lg:px-12 lg:py-32"
+      className="relative bg-bg-base px-5 py-14 md:px-8 lg:px-12 lg:py-20"
     >
       <div className="mx-auto max-w-[1400px]">
         <header className="mb-10">
@@ -133,7 +133,7 @@ function CompactCard({ post }: { post: BlogPostMeta }) {
     <Link
       href={`/blog/${post.slug}`}
       data-cursor="Read"
-      className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/60 backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-swift hover:-translate-y-0.5 hover:border-border-strong hover:bg-bg-card-hover/70"
+      className="group glass specular flex h-full flex-col overflow-hidden rounded-3xl border-0 transition-[transform,background-color] duration-300 ease-spring hover:-translate-y-0.5 hover:bg-[hsl(var(--glass-material-strong))]"
     >
       {/* Cinemascope-ish cover so cards stay compact vertically. */}
       <div className="relative aspect-[21/9] w-full overflow-hidden bg-bg-elevated">

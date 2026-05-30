@@ -66,10 +66,10 @@ export function Navbar() {
       >
         <div
           className={cn(
-            "mx-auto flex items-center gap-3 transition-all duration-500",
+            "glass specular relative mx-auto flex items-center gap-3 rounded-full transition-all duration-500 ease-spring",
             scrolled
-              ? "h-12 max-w-3xl rounded-full border border-border-subtle bg-bg-elevated/85 px-3 backdrop-blur-md md:h-14 md:px-4"
-              : "h-16 max-w-[1400px] rounded-full border border-border-subtle/40 bg-bg-elevated/40 px-4 backdrop-blur-md md:h-20 md:px-6"
+              ? "h-12 max-w-3xl px-3 md:h-14 md:px-4"
+              : "h-16 max-w-[1400px] px-4 md:h-20 md:px-6"
           )}
         >
           {/* Logo */}
