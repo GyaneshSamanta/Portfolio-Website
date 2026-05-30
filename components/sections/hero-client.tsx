@@ -53,8 +53,7 @@ export function HeroClient({ hero }: Props) {
       <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16 lg:items-center">
         {/* LEFT — text */}
         <div className="order-2 lg:order-1">
-          {/* Eyebrow: full name in mono caps, sits above the display heading.
-              Smaller weight so it doesn't compete with the headline below. */}
+          {/* Eyebrow — small "Portfolio · Product Manager" label */}
           <motion.div
             initial={reduced ? false : { opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -62,42 +61,42 @@ export function HeroClient({ hero }: Props) {
             className="mb-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-fg-tertiary"
           >
             <span className="inline-block h-px w-6 bg-brand-magenta/60" aria-hidden />
-            {hero.nameFirst} {hero.nameLast}
+            Portfolio · Product Manager
           </motion.div>
 
-          {/* Display heading: "PM with" + kinetic italic "T-shaped skills" */}
-          <h1 className="font-bold tracking-[-0.02em] leading-[0.95] text-[clamp(2.75rem,9vw,6.5rem)] text-fg-primary">
-            {/* Line 1 — "PM with" with kinetic per-letter blur-in */}
-            <KineticHeading text={hero.headline} as="span" delay={0} className="block" />
-            {/* Line 2 — italic gradient phrase. Single element so the gradient
-                actually paints. Reveal-on-mount via motion + opacity. */}
-            <motion.span
-              initial={reduced ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="block font-serif italic"
-              style={{
-                backgroundImage:
-                  "linear-gradient(90deg, hsl(var(--brand-magenta)) 0%, hsl(var(--brand-pink)) 35%, hsl(var(--brand-violet)) 70%, hsl(var(--brand-magenta)) 100%)",
-                backgroundSize: "200% 100%",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                color: "transparent",
-                WebkitTextFillColor: "transparent",
-                animation: reduced ? undefined : "gradient-flow 6s ease-in-out infinite",
-              }}
-            >
-              {hero.headlineHighlight}
-            </motion.span>
+          {/* H1 — the name itself. The hero of the page. */}
+          <h1 className="font-bold tracking-display leading-[0.92] text-[clamp(3rem,10vw,7rem)] text-fg-primary">
+            <KineticHeading text={hero.nameFirst} as="span" delay={0} className="block" />
+            <KineticHeading text={hero.nameLast} as="span" delay={0.2} className="block" />
           </h1>
 
-          {/* Followup line that ties the T-shape claim back to specifics. */}
+          {/* Tagline — italic gradient phrase, smaller than the name. */}
+          <motion.p
+            initial={reduced ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-4 max-w-[42ch] text-[clamp(1.5rem,3.5vw,2.5rem)] font-serif italic leading-[1.1] tracking-headline"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, hsl(var(--brand-magenta)) 0%, hsl(var(--brand-pink)) 35%, hsl(var(--brand-violet)) 70%, hsl(var(--brand-magenta)) 100%)",
+              backgroundSize: "200% 100%",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              color: "transparent",
+              WebkitTextFillColor: "transparent",
+              animation: reduced ? undefined : "gradient-flow 6s ease-in-out infinite",
+            }}
+          >
+            {hero.headline} {hero.headlineHighlight}.
+          </motion.p>
+
+          {/* Followup */}
           {hero.headlineFollowup && (
             <motion.p
               initial={reduced ? false : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-4 max-w-[52ch] text-[clamp(1.1rem,2.5vw,1.5rem)] leading-snug tracking-[-0.005em] text-fg-secondary [text-wrap:balance]"
+              className="mt-3 max-w-[52ch] text-base text-fg-secondary md:text-lg [text-wrap:balance]"
             >
               {hero.headlineFollowup}
             </motion.p>

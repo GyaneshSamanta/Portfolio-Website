@@ -36,14 +36,16 @@
     --border-strong: 300 40% 35%;
     --border-glow: 300 80% 60%;
 
-    /* Apple iOS 26 "Liquid Glass" tokens — layered onto the dark theme.
-       Material is the back of the glass; specular is the top-left highlight;
-       hairline is the inner stroke that defines the edge. */
-    --glass-material: 238 40% 16% / 0.55;
-    --glass-material-strong: 238 40% 14% / 0.75;
-    --glass-hairline: 0 0% 100% / 0.08;
-    --glass-specular: 0 0% 100% / 0.10;
-    --glass-edge-glow: 300 80% 60% / 0.18;
+    /* Apple iOS 26 "Liquid Glass" tokens — tuned for visibility on dark BG.
+       Material is intentionally translucent so the ambient gradient shows
+       through; specular + hairline + inner-sheen do the heavy lifting on
+       making the surface read as glass, not as a tinted card. */
+    --glass-material: 238 40% 22% / 0.35;
+    --glass-material-strong: 238 40% 26% / 0.55;
+    --glass-hairline: 0 0% 100% / 0.14;
+    --glass-specular: 0 0% 100% / 0.18;
+    --glass-edge-glow: 300 80% 60% / 0.22;
+    --glass-sheen: 0 0% 100% / 0.06;
 
     /* Apple type tracking — negative at large sizes is the Apple signature. */
     --tracking-display: -0.022em;
@@ -136,39 +138,72 @@
 }
 
 @layer utilities {
-  /* ----- Apple "Liquid Glass" surfaces ---------------------------------- */
+  /* ----- Apple iOS 26 "Liquid Glass" — multi-layer ------------------------
+     Composition (back to front):
+       (1) Material — translucent fill, lets gradient bg show through
+       (2) Inner sheen — a linear top-to-bottom highlight gradient inside
+           the element, simulates the curved-glass refraction edge
+       (3) Hairline — bright 1px inner border
+       (4) Specular — a soft radial highlight at the top-left
+       (5) Outer shadow — depth lift off the page
+  */
 
-  /* Standard glass surface. Use on cards, panels, navbar. */
+  /* Standard glass surface — for cards, panels, navbar. */
   .glass {
-    background: hsl(var(--glass-material));
+    position: relative;
+    overflow: hidden;
+    background:
+      /* Inner sheen — top is brighter, fades down */
+      linear-gradient(
+        180deg,
+        hsl(var(--glass-sheen)) 0%,
+        transparent 28%,
+        transparent 100%
+      ),
+      hsl(var(--glass-material));
     backdrop-filter: blur(40px) saturate(180%);
     -webkit-backdrop-filter: blur(40px) saturate(180%);
+    /* Hairline border. The inset shadow brightens the inner edge, giving
+       the impression of light refracting through the glass edge. */
+    box-shadow:
+      inset 0 1px 0 hsl(var(--glass-hairline)),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+      0 8px 32px -8px rgba(0, 0, 0, 0.45);
     border: 1px solid hsl(var(--glass-hairline));
+  }
+
+  /* Stronger glass — for hovered cards / modals / sheets / navbar-scrolled */
+  .glass-strong {
     position: relative;
     overflow: hidden;
-  }
-  /* Stronger glass — for modals, sheets, the navbar's scrolled state. */
-  .glass-strong {
-    background: hsl(var(--glass-material-strong));
+    background:
+      linear-gradient(
+        180deg,
+        hsl(var(--glass-sheen)) 0%,
+        transparent 30%,
+        transparent 100%
+      ),
+      hsl(var(--glass-material-strong));
     backdrop-filter: blur(60px) saturate(200%);
     -webkit-backdrop-filter: blur(60px) saturate(200%);
+    box-shadow:
+      inset 0 1px 0 hsl(var(--glass-hairline)),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+      0 12px 40px -10px rgba(0, 0, 0, 0.5);
     border: 1px solid hsl(var(--glass-hairline));
-    position: relative;
-    overflow: hidden;
   }
-  /* The specular highlight — Apple iOS 26 detail. A soft radial highlight
-     at top-left, very faint, decays to transparent quickly. NOTE: previous
-     version was too aggressive and read as a visible streak; toned to 5%
-     opacity at a smaller spread. */
+
+  /* The specular highlight — the most recognizable iOS 26 detail.
+     A soft top-left radial that simulates a single overhead light source. */
   .specular::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
     background: radial-gradient(
-      ellipse 70% 50% at 20% 0%,
-      rgba(255, 255, 255, 0.05),
-      transparent 55%
+      ellipse 60% 35% at 18% 0%,
+      hsl(var(--glass-specular)),
+      transparent 60%
     );
     z-index: 1;
   }

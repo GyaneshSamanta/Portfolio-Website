@@ -69,10 +69,23 @@ export function WalkingFigure({ walking }: Props) {
       <svg viewBox="0 0 40 72" width="40" height="72" aria-hidden className="block">
         <defs>
           <linearGradient id="figureGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(var(--brand-magenta))" />
-            <stop offset="100%" stopColor="hsl(var(--brand-violet))" />
+            {/* Cream / soft-cyan so the figure pops OFF the magenta progress line
+                instead of blending into it. */}
+            <stop offset="0%" stopColor="#FFF6E0" />
+            <stop offset="100%" stopColor="#C8E8FF" />
           </linearGradient>
+          {/* Soft white halo around each stroke so the figure stays legible
+              against any path color. */}
+          <filter id="figureGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="1.4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
         </defs>
+
+        <g filter="url(#figureGlow)">
 
         {/* Head */}
         <circle cx="20" cy="10" r="6" fill="url(#figureGrad)" />
@@ -156,7 +169,9 @@ export function WalkingFigure({ walking }: Props) {
           />
         </motion.g>
 
-        {/* Ground shadow */}
+        </g>
+
+        {/* Ground shadow — outside the glow filter so it stays subtle */}
         <motion.ellipse
           cx="20"
           cy="66"

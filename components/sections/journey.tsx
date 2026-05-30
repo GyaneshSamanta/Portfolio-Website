@@ -59,7 +59,7 @@ type Milestone = {
 };
 
 const MILESTONES = journeyData as Milestone[];
-const SCROLL_PER_CHAPTER = 65; // vh per chapter
+const SCROLL_PER_CHAPTER = 50; // vh per chapter — shorter zones feel snappier
 
 const TYPE_LABEL: Record<Milestone["type"], string> = {
   education: "Education",
@@ -101,13 +101,15 @@ export function JourneySection() {
   }, [scrollYProgress]);
 
   // Active milestone = scrollYProgress mapped to milestone index.
+  // Switch at the chapter midpoint (idx + 0.5) so each card sits centered
+  // in its scroll zone and the transition feels balanced rather than abrupt.
   useEffect(() => {
     const unsub = scrollYProgress.on("change", (latest) => {
       const idx = Math.min(
-        Math.floor(latest * MILESTONES.length),
+        Math.max(0, Math.round(latest * MILESTONES.length - 0.5)),
         MILESTONES.length - 1
       );
-      setActiveIdx((prev) => (prev === idx ? prev : Math.max(0, idx)));
+      setActiveIdx((prev) => (prev === idx ? prev : idx));
     });
     return () => unsub();
   }, [scrollYProgress]);
@@ -248,10 +250,10 @@ function ChapterCard({
       type="button"
       onClick={onOpen}
       data-cursor="View details"
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -24 }}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      exit={{ opacity: 0, y: -40, filter: "blur(8px)" }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       className="group glass specular relative flex h-[420px] w-full flex-col overflow-hidden rounded-3xl border-0 p-6 text-left transition-[background-color] duration-300 ease-spring hover:bg-[hsl(var(--glass-material-strong))] md:h-[480px] md:p-8 lg:h-[520px] lg:p-10"
     >
       {/* Color halo */}
