@@ -1,14 +1,17 @@
 "use client";
 
 /**
- * WalkingFigure — DESIGN.md §5.3 (rev v2.3)
- * Subtle, human-like walking gait.
- *  - Arms swing less than legs (real walking: arms swing about half as much).
- *  - Diagonal pairing: left arm + right leg forward together, opposite for
- *    right arm + left leg.
- *  - Slower step rhythm (0.85s/step) so each cycle has time to read.
- *  - Subtle 1.5px body bob synced to the step cycle.
- *  - prefers-reduced-motion → figure stays still.
+ * WalkingFigure — rev v3.2
+ *
+ * Clean SVG stick walker with diagonal limb pairing (left arm + right leg
+ * forward together). All rotations are SVG-native `transform="rotate()"` so
+ * pivots are guaranteed to be at the joint, not floating in space.
+ *
+ * Bug fix from v3.1: previous version used `transformBox: "fill-box"` on
+ * motion.line which makes transform-origin relative to each line's tiny
+ * bounding box — caused legs to rotate around their own midpoint and visibly
+ * detach from the torso. Now uses `<g transform="rotate(deg X Y)">` with X/Y
+ * in viewBox coordinates.
  */
 
 import { motion, useReducedMotion } from "framer-motion";
@@ -17,36 +20,33 @@ type Props = {
   walking: boolean;
 };
 
-const STEP_DURATION = 0.85; // full step cycle
-const LEG_SWING = 18; // degrees — legs swing more
-const ARM_SWING = 10; // degrees — arms swing less
+const STEP_DURATION = 0.85;
+const ARM_SWING = 10;
+const LEG_SWING = 18;
 
 export function WalkingFigure({ walking }: Props) {
   const reduced = useReducedMotion();
   const animate = walking && !reduced;
 
-  // Tween reused for all limb pairs
   const tween = {
     duration: STEP_DURATION,
     repeat: animate ? Infinity : 0,
     ease: "easeInOut",
   } as const;
 
-  // Phase-A pair (left arm + right leg): start back, swing forward, return.
-  const phaseA = (swing: number) =>
-    animate ? { rotate: [-swing, swing, -swing] } : { rotate: 0 };
-  // Phase-B pair (right arm + left leg): mirror.
-  const phaseB = (swing: number) =>
-    animate ? { rotate: [swing, -swing, swing] } : { rotate: 0 };
+  // Phase-A / Phase-B sequence of angles
+  const phaseAAngles = animate ? [-ARM_SWING, ARM_SWING, -ARM_SWING] : [0, 0, 0];
+  const phaseBAngles = animate ? [ARM_SWING, -ARM_SWING, ARM_SWING] : [0, 0, 0];
+  const phaseALegAngles = animate ? [-LEG_SWING, LEG_SWING, -LEG_SWING] : [0, 0, 0];
+  const phaseBLegAngles = animate ? [LEG_SWING, -LEG_SWING, LEG_SWING] : [0, 0, 0];
 
   return (
     <motion.div
       className="relative h-[72px] w-[40px]"
-      // Body bob — tiny vertical bounce per step (heel-strike sync).
       animate={animate ? { y: [0, -1.5, 0, -1.5, 0] } : { y: 0 }}
       transition={tween}
     >
-      {/* Soft halo behind the figure. */}
+      {/* Halo */}
       <motion.div
         aria-hidden
         animate={
@@ -80,57 +80,81 @@ export function WalkingFigure({ walking }: Props) {
         {/* Torso */}
         <path d="M16 18 Q20 17 24 18 L23 36 Q20 37 17 36 Z" fill="url(#figureGrad)" />
 
-        {/* Phase-A: left arm + right leg */}
-        <motion.line
-          x1="17"
-          y1="22"
-          x2="13"
-          y2="34"
-          stroke="url(#figureGrad)"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          animate={phaseA(ARM_SWING)}
-          transition={tween}
-          style={{ transformOrigin: "17px 22px", transformBox: "fill-box" }}
-        />
-        <motion.line
-          x1="22"
-          y1="36"
-          x2="24"
-          y2="58"
-          stroke="url(#figureGrad)"
-          strokeWidth="3"
-          strokeLinecap="round"
-          animate={phaseA(LEG_SWING)}
-          transition={tween}
-          style={{ transformOrigin: "22px 36px", transformBox: "fill-box" }}
-        />
+        {/* Each limb sits inside an animated <g> whose SVG transform rotates
+            around the joint at viewBox coords (X, Y). transformOrigin/box
+            shenanigans avoided entirely. */}
 
-        {/* Phase-B: right arm + left leg */}
-        <motion.line
-          x1="23"
-          y1="22"
-          x2="27"
-          y2="34"
-          stroke="url(#figureGrad)"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          animate={phaseB(ARM_SWING)}
+        {/* Phase-A left arm — pivot at left shoulder (17, 22) */}
+        <motion.g
+          style={{ originX: 0, originY: 0 }}
+          animate={{ rotate: phaseAAngles }}
           transition={tween}
-          style={{ transformOrigin: "23px 22px", transformBox: "fill-box" }}
-        />
-        <motion.line
-          x1="18"
-          y1="36"
-          x2="16"
-          y2="58"
-          stroke="url(#figureGrad)"
-          strokeWidth="3"
-          strokeLinecap="round"
-          animate={phaseB(LEG_SWING)}
+          transform="translate(17 22)"
+        >
+          <line
+            x1="0"
+            y1="0"
+            x2="-4"
+            y2="12"
+            stroke="url(#figureGrad)"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+        </motion.g>
+
+        {/* Phase-A right leg — pivot at right hip (22, 36) */}
+        <motion.g
+          style={{ originX: 0, originY: 0 }}
+          animate={{ rotate: phaseALegAngles }}
           transition={tween}
-          style={{ transformOrigin: "18px 36px", transformBox: "fill-box" }}
-        />
+          transform="translate(22 36)"
+        >
+          <line
+            x1="0"
+            y1="0"
+            x2="2"
+            y2="22"
+            stroke="url(#figureGrad)"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+        </motion.g>
+
+        {/* Phase-B right arm — pivot at right shoulder (23, 22) */}
+        <motion.g
+          style={{ originX: 0, originY: 0 }}
+          animate={{ rotate: phaseBAngles }}
+          transition={tween}
+          transform="translate(23 22)"
+        >
+          <line
+            x1="0"
+            y1="0"
+            x2="4"
+            y2="12"
+            stroke="url(#figureGrad)"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+        </motion.g>
+
+        {/* Phase-B left leg — pivot at left hip (18, 36) */}
+        <motion.g
+          style={{ originX: 0, originY: 0 }}
+          animate={{ rotate: phaseBLegAngles }}
+          transition={tween}
+          transform="translate(18 36)"
+        >
+          <line
+            x1="0"
+            y1="0"
+            x2="-2"
+            y2="22"
+            stroke="url(#figureGrad)"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+        </motion.g>
 
         {/* Ground shadow */}
         <motion.ellipse

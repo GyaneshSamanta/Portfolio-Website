@@ -87,18 +87,16 @@
   * {
     @apply border-border;
   }
-  html {
-    /* Prevent horizontal scroll from any overflowing absolute children. */
-    overflow-x: hidden;
-  }
+  /* NOTE: We do NOT set overflow-x: hidden on html/body — it silently breaks
+     position: sticky for ALL descendants. If a child element overflows
+     horizontally, fix it at the component level (overflow-hidden + a
+     containing wrapper) instead. */
   body {
     @apply bg-background text-foreground;
     /* Apple's body tracking — tightens body text at 17pt for editorial density. */
     letter-spacing: var(--tracking-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Belt-and-braces overflow guard. */
-    overflow-x: hidden;
   }
 
   /* Apple display heading defaults — tighter tracking at large sizes is the
@@ -158,18 +156,19 @@
     position: relative;
     overflow: hidden;
   }
-  /* The specular highlight — the most recognizable Apple iOS 26 detail.
-     A radial gradient at top-left, ~14% white, decays to transparent.
-     Apply as a ::before pseudo-element on top of any .glass. */
+  /* The specular highlight — Apple iOS 26 detail. A soft radial highlight
+     at top-left, very faint, decays to transparent quickly. NOTE: previous
+     version was too aggressive and read as a visible streak; toned to 5%
+     opacity at a smaller spread. */
   .specular::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
     background: radial-gradient(
-      ellipse 60% 40% at 18% 12%,
-      hsl(var(--glass-specular)),
-      transparent 65%
+      ellipse 70% 50% at 20% 0%,
+      rgba(255, 255, 255, 0.05),
+      transparent 55%
     );
     z-index: 1;
   }

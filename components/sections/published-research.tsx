@@ -33,7 +33,7 @@ export function PublishedResearchSection() {
   return (
     <section
       id="research"
-      className="relative bg-bg-base px-5 py-14 md:px-8 lg:px-12 lg:py-20"
+      className="relative px-5 py-14 md:px-8 lg:px-12 lg:py-20"
     >
       <div className="mx-auto max-w-[1400px]">
         <header className="mb-10">

@@ -129,8 +129,19 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${instrumentSerif.variable} font-sans antialiased bg-bg-base text-fg-primary min-h-screen flex flex-col selection:bg-brand-magenta/40 selection:text-fg-primary`}
+        className={`${inter.variable} ${instrumentSerif.variable} relative font-sans antialiased bg-bg-base text-fg-primary min-h-screen flex flex-col selection:bg-brand-magenta/40 selection:text-fg-primary`}
       >
+        {/* Site-wide ambient gradient — subtle, sits behind everything. Two
+            radial gradients positioned in opposite corners give the dark
+            background some depth without competing with section content. */}
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 -z-20"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 50% at 80% 0%, hsl(var(--brand-magenta) / 0.10), transparent 55%), radial-gradient(ellipse 70% 60% at 10% 90%, hsl(var(--brand-violet) / 0.10), transparent 55%), linear-gradient(180deg, #0A0820 0%, #0F0C28 50%, #0A0820 100%)",
+          }}
+        />
         {/* Skip link — keyboard users land here first (DESIGN.md §9). */}
         <a
           href="#main"

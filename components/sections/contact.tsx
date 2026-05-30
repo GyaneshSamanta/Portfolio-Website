@@ -16,7 +16,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-bg-base px-5 py-20 md:px-8 lg:px-12 lg:py-28"
+      className="relative overflow-hidden px-5 py-14 md:px-8 lg:px-12 lg:py-20"
     >
       {/* Atmospheric wash */}
       <div

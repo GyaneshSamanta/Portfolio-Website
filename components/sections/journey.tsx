@@ -117,7 +117,7 @@ export function JourneySection() {
       <section
         id="journey"
         ref={sectionRef}
-        className="relative bg-bg-base px-5 md:px-8 lg:px-12"
+        className="relative px-5 md:px-8 lg:px-12"
         style={{ minHeight: `${MILESTONES.length * SCROLL_PER_CHAPTER}vh` }}
       >
         {/* Sticky viewport — both panes pinned inside */}

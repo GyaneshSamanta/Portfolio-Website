@@ -42,7 +42,7 @@ export function HeroClient({ hero }: Props) {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[640px] flex-col justify-center overflow-hidden bg-bg-base px-5 pt-28 pb-16 md:px-8 md:min-h-[720px] lg:min-h-screen lg:px-12 lg:pt-40 lg:pb-20"
+      className="relative flex min-h-[640px] flex-col justify-center overflow-hidden px-5 pt-28 pb-16 md:px-8 md:min-h-[720px] lg:min-h-screen lg:px-12 lg:pt-40 lg:pb-20"
     >
       {/* Atmospheric gradient wash. */}
       <div
