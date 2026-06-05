@@ -102,13 +102,13 @@ export function ShortsPhone({ videoIds, rotateAfterMs = 18000 }: Props) {
                 allow="autoplay; encrypted-media; picture-in-picture"
                 allowFullScreen
                 loading="lazy"
-                className="absolute top-0 border-0"
+                className="absolute border-0 animate-fade-in"
                 style={{
-                  /* 16/9 of phone width = 177.78% — iframe overflows left+right
-                     by 39% each side. The Short content is centered within and
-                     ends up exactly filling the phone width. */
-                  width: "177.78%",
-                  height: "100%",
+                  /* Scale by 1.15 to push the top title bar and bottom controls
+                     out of the visible overflow-hidden screen frame. */
+                  width: "204.45%",
+                  height: "115%",
+                  top: "-7.5%",
                   left: "50%",
                   transform: "translateX(-50%)",
                   pointerEvents: "none",
@@ -119,9 +119,11 @@ export function ShortsPhone({ videoIds, rotateAfterMs = 18000 }: Props) {
               <img
                 src={poster}
                 alt=""
-                className="absolute top-0 h-full object-cover"
+                className="absolute object-cover"
                 style={{
-                  width: "177.78%",
+                  width: "204.45%",
+                  height: "115%",
+                  top: "-7.5%",
                   left: "50%",
                   transform: "translateX(-50%)",
                 }}

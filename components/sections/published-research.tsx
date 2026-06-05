@@ -41,8 +41,8 @@ export function PublishedResearchSection() {
             <BookOpen className="h-3.5 w-3.5" />
             Published Research
           </div>
-          <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
-            <span className="font-serif italic">Peer-reviewed</span>, indexed by IEEE.
+          <h2 className="mt-3 text-[clamp(2rem,4.5vw,3.25rem)] font-bold leading-tight tracking-display text-fg-primary">
+            Published Research papers in <span className="font-serif italic">International Journal</span> (Scopus Indexed).
           </h2>
           <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
             Three publications across cybersecurity, blockchain analytics, and IoT systems —

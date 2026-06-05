@@ -63,7 +63,7 @@ const PHASES = [
     transition: "Synthesizing AI and B2B systems. Bringing together engineering roots, user analytics, and MBA strategy to design Sterling OMS solutions for IBM enterprise deals and lead outbound AI products at the Ginesys CPO office.",
     color: "magenta" as const,
     icon: GraduationCap,
-    orgs: ["ibm-2025", "hellopm-2026", "ginesys-2026"],
+    orgs: ["ibm-2025", "hellopm-2026", "ginesys-2026", "ibm-apm-2026"],
   },
 ];
 

@@ -27,9 +27,9 @@ export function NowShippingSection() {
       className="relative px-5 py-10 md:px-8 lg:px-12 lg:py-14"
     >
       <div className="mx-auto max-w-[1400px]">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.5fr] lg:gap-12 lg:items-center">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.5fr] lg:gap-12 lg:items-start">
           {/* LEFT: Header + Achievements */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col lg:pt-1">
             <header className="mb-6">
               <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
                 <Activity className="h-3.5 w-3.5 text-signal-live" />

@@ -211,5 +211,23 @@
       "B2B"
     ],
     "color": "magenta"
+  },
+  {
+    "id": "ibm-apm-2026",
+    "year": "2026",
+    "type": "role",
+    "org": "IBM",
+    "title": "Associate Product Manager",
+    "dates": "Jun 2026 — Present",
+    "logo": "/images/logos/ibm.jpeg",
+    "location": "Bengaluru, India",
+    "shipped": "Associate Product Manager in the B2B Commerce space.",
+    "description": "Driving outbound product initiatives, collaborating on strategic client delivery, and expanding enterprise AI features for IBM's order management and B2B product ecosystem.",
+    "tags": [
+      "B2B",
+      "Product Management",
+      "Enterprise"
+    ],
+    "color": "magenta"
   }
 ]
