@@ -24,64 +24,69 @@ export function NowShippingSection() {
   return (
     <section
       id="now-shipping"
-      className="relative px-5 py-14 md:px-8 lg:px-12 lg:py-20"
+      className="relative px-5 py-10 md:px-8 lg:px-12 lg:py-14"
     >
       <div className="mx-auto max-w-[1400px]">
-        <header className="mb-10">
-          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-            <Activity className="h-3.5 w-3.5 text-signal-live" />
-            Now shipping
-          </div>
-          <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
-            <span className="font-serif italic">PM</span> who builds.
-          </h2>
-          <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
-            Live signals from my GitHub — receipts, not promises.
-          </p>
-        </header>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.5fr] lg:gap-12 lg:items-center">
+          {/* LEFT: Header + Achievements */}
+          <div className="flex flex-col justify-center">
+            <header className="mb-6">
+              <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+                <Activity className="h-3.5 w-3.5 text-signal-live" />
+                Now shipping
+              </div>
+              <h2 className="mt-2 text-[clamp(2rem,4vw,3.25rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
+                <span className="font-serif italic">PM</span> who builds.
+              </h2>
+              <p className="mt-2 text-sm text-fg-secondary">
+                Live signals from my GitHub — receipts, not promises.
+              </p>
+            </header>
 
-        {/* Achievement pills */}
-        {badges && badges.length > 0 && (
-          <div className="mb-6">
-            <h3 className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-              Achievements at a glance
-            </h3>
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-              {badges.map((b) => (
-                <ProofTile key={b} text={b} />
-              ))}
+            {/* Achievement pills in a compact 2x2 grid */}
+            {badges && badges.length > 0 && (
+              <div className="mt-2">
+                <h3 className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
+                  Achievements at a glance
+                </h3>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {badges.map((b) => (
+                    <ProofTile key={b} text={b} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* RIGHT: Snake contribution graph — framed in a sleek glass tile */}
+          <div className="glass specular relative rounded-3xl border-0 p-5 md:p-6">
+            <div className="mb-4 flex items-center justify-between font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+              <span className="inline-flex items-center gap-2">
+                <Github className="h-3.5 w-3.5" />
+                GitHub contributions · live
+              </span>
+              <a
+                href="https://github.com/GyaneshSamanta"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="View profile"
+                className="text-fg-secondary transition-colors hover:text-fg-primary"
+              >
+                @GyaneshSamanta →
+              </a>
             </div>
-          </div>
-        )}
-
-        {/* Snake contribution graph — framed, single tile, no oversize */}
-        <div className="glass specular relative rounded-3xl border-0 p-5 md:p-7">
-          <div className="mb-4 flex items-center justify-between font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-            <span className="inline-flex items-center gap-2">
-              <Github className="h-3.5 w-3.5" />
-              GitHub contributions · live
-            </span>
-            <a
-              href="https://github.com/GyaneshSamanta"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="View profile"
-              className="text-fg-secondary transition-colors hover:text-fg-primary"
-            >
-              @GyaneshSamanta →
-            </a>
-          </div>
-          <div className="flex items-center justify-center">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://raw.githubusercontent.com/GyaneshSamanta/GyaneshSamanta/output/github-contribution-grid-snake-dark.svg"
-              alt="GitHub contribution graph being consumed by an animated snake"
-              loading="lazy"
-              className="h-auto w-full max-w-[860px]"
-            />
-          </div>
-          <div className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
-            Auto-rendered daily by Platane/snk
+            <div className="flex items-center justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://raw.githubusercontent.com/GyaneshSamanta/GyaneshSamanta/output/github-contribution-grid-snake-dark.svg"
+                alt="GitHub contribution graph being consumed by an animated snake"
+                loading="lazy"
+                className="h-auto w-full max-w-[860px]"
+              />
+            </div>
+            <div className="mt-3 text-center font-mono text-[9px] uppercase tracking-[0.2em] text-fg-tertiary">
+              Auto-rendered daily by Platane/snk
+            </div>
           </div>
         </div>
       </div>

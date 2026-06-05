@@ -53,24 +53,22 @@ export function HeroClient({ hero }: Props) {
       <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16 lg:items-center">
         {/* LEFT — text */}
         <div className="order-2 lg:order-1">
-          {/* Eyebrow: full name in mono caps, sits above the display heading.
-              Smaller weight so it doesn't compete with the headline below. */}
+          {/* Eyebrow: a decorative line with a product-focused tag */}
           <motion.div
             initial={reduced ? false : { opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-fg-tertiary"
+            className="mb-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-brand-magenta"
           >
             <span className="inline-block h-px w-6 bg-brand-magenta/60" aria-hidden />
-            {hero.nameFirst} {hero.nameLast}
+            Product Leader & AI Builder
           </motion.div>
 
-          {/* Display heading: "PM with" + kinetic italic "T-shaped skills" */}
-          <h1 className="font-bold tracking-[-0.02em] leading-[0.95] text-[clamp(2.75rem,9vw,6.5rem)] text-fg-primary">
-            {/* Line 1 — "PM with" with kinetic per-letter blur-in */}
-            <KineticHeading text={hero.headline} as="span" delay={0} className="block" />
-            {/* Line 2 — italic gradient phrase. Single element so the gradient
-                actually paints. Reveal-on-mount via motion + opacity. */}
+          {/* Display heading: Name "Gyanesh Samanta" in massive size */}
+          <h1 className="font-bold tracking-[-0.02em] leading-[0.95] text-[clamp(3.25rem,10vw,7.5rem)] text-fg-primary">
+            {/* First Name with kinetic per-letter blur-in */}
+            <KineticHeading text={hero.nameFirst} as="span" delay={0} className="block" />
+            {/* Last Name — italic gradient phrase */}
             <motion.span
               initial={reduced ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -87,17 +85,27 @@ export function HeroClient({ hero }: Props) {
                 animation: reduced ? undefined : "gradient-flow 6s ease-in-out infinite",
               }}
             >
-              {hero.headlineHighlight}
+              {hero.nameLast}
             </motion.span>
           </h1>
+
+          {/* Subheading: "PM with T-shaped skills" */}
+          <motion.h2
+            initial={reduced ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6 text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold leading-tight tracking-headline text-fg-primary"
+          >
+            {hero.headline} <span className="text-brand-pink font-serif italic">{hero.headlineHighlight}</span>
+          </motion.h2>
 
           {/* Followup line that ties the T-shape claim back to specifics. */}
           {hero.headlineFollowup && (
             <motion.p
               initial={reduced ? false : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-4 max-w-[52ch] text-[clamp(1.1rem,2.5vw,1.5rem)] leading-snug tracking-[-0.005em] text-fg-secondary [text-wrap:balance]"
+              transition={{ delay: 0.95, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-2 font-mono text-xs uppercase tracking-[0.15em] text-fg-tertiary"
             >
               {hero.headlineFollowup}
             </motion.p>

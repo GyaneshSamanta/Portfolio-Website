@@ -1,46 +1,10 @@
 "use client";
 
-/**
- * Journey — DESIGN.md §5.3 (rev v3.1 — sticky-both-panes card-swap)
- *
- * Both LEFT pane (walking visual) and RIGHT pane (single chapter card)
- * are STICKY inside a tall section. As the user scrolls through the section,
- * the figure ascends the path on the left, and the card on the right
- * crossfades through milestones — one card at a time, content morphs.
- *
- *   ┌──────────────────────┬──────────────────────┐
- *   │                      │                      │
- *   │   sticky walking     │   STICKY single      │
- *   │   visual + path      │   chapter card       │
- *   │                      │   (content swaps     │
- *   │   • Figure ascends   │    as user scrolls)  │
- *   │   • Path progress    │                      │
- *   │   • Chapter counter  │   ┌──────────────┐   │
- *   │                      │   │ 2019         │   │
- *   │                      │   │ SRM Univ.    │   │
- *   │                      │   │ B.Tech CS    │   │
- *   │                      │   └──────────────┘   │
- *   └──────────────────────┴──────────────────────┘
- *
- * Section height = N × 65vh — gives each chapter its own scroll zone.
- * AnimatePresence handles the card transitions.
- *
- * Mobile: same sticky model, just tighter widths.
- */
-
-import { useEffect, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-  type MotionValue,
-} from "framer-motion";
-import { MapPin, X, ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { MapPin, X, ArrowUpRight, Award, Briefcase, GraduationCap, Code } from "lucide-react";
 import Image from "next/image";
 import journeyData from "@/data/journey.json";
-import { WalkingFigure } from "@/components/journey/walking-figure";
 import { cn } from "@/lib/utils";
 
 type Milestone = {
@@ -56,11 +20,52 @@ type Milestone = {
   location?: string;
   tags: string[];
   color: "purple" | "pink" | "violet" | "magenta";
-  isFuture?: boolean;
 };
 
 const MILESTONES = journeyData as Milestone[];
-const SCROLL_PER_CHAPTER = 65; // vh per chapter
+
+const PHASES = [
+  {
+    id: "ml-engineer",
+    num: "01",
+    title: "Machine Learning Engineer",
+    years: "2019 — 2022",
+    transition: "Building the code foundation. Started with CS research and moved quickly from classical AI pipelines to engineering recommendation models, learning how to build features and structure real data, but realizing that the most interesting challenge wasn't just tuning weights, but understanding the user behaviour behind the predictions.",
+    color: "violet" as const,
+    icon: Code,
+    orgs: ["srm-2019", "srm-iic-2020", "ischoolconnect-2022"],
+  },
+  {
+    id: "data-scientist",
+    num: "02",
+    title: "Data Scientist",
+    years: "2022 — 2023",
+    transition: "Pivoting to telemetry. To bridge the gap between model outputs and user outcomes, I focused on data science—building analytics surfaces for creator networks and drone mapping payloads, learning to tell stories with numbers and design metrics for product decisions.",
+    color: "pink" as const,
+    icon: Award,
+    orgs: ["tealfeed-2022", "tih-iot-2022"],
+  },
+  {
+    id: "b2c-pm",
+    num: "03",
+    title: "Consumer (B2C) Product Manager",
+    years: "2023 — 2026",
+    transition: "Taking direct ownership. Self-transitioned to PM at Wall.app to shape questing-as-a-service, then scaled loyalty programs for millions of shoppers at Snapdeal, before diving into an MBA at XIMB to align technical telemetry with core business metrics.",
+    color: "purple" as const,
+    icon: Briefcase,
+    orgs: ["wall-2023", "snapdeal-2023", "ximb-2024", "xsys-2024"],
+  },
+  {
+    id: "b2b-pm",
+    num: "04",
+    title: "Enterprise (B2B) PM & AI Builder",
+    years: "2025 — Present",
+    transition: "Synthesizing AI and B2B systems. Bringing together engineering roots, user analytics, and MBA strategy to design Sterling OMS solutions for IBM enterprise deals and lead outbound AI products at the Ginesys CPO office.",
+    color: "magenta" as const,
+    icon: GraduationCap,
+    orgs: ["ibm-2025", "hellopm-2026", "ginesys-2026"],
+  },
+];
 
 const TYPE_LABEL: Record<Milestone["type"], string> = {
   education: "Education",
@@ -70,399 +75,265 @@ const TYPE_LABEL: Record<Milestone["type"], string> = {
 };
 
 const COLOR_HALO: Record<Milestone["color"], string> = {
-  purple: "from-brand-purple/40 to-transparent",
-  pink: "from-brand-pink/40 to-transparent",
-  violet: "from-brand-violet/40 to-transparent",
-  magenta: "from-brand-magenta/40 to-transparent",
+  purple: "from-brand-purple/20 to-transparent",
+  pink: "from-brand-pink/20 to-transparent",
+  violet: "from-brand-violet/20 to-transparent",
+  magenta: "from-brand-magenta/20 to-transparent",
 };
 
 export function JourneySection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
-  const [walking, setWalking] = useState(false);
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [activePhase, setActivePhase] = useState("ml-engineer");
+  const [openMilestone, setOpenMilestone] = useState<Milestone | null>(null);
 
   useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 1024);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActivePhase(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: "-25% 0px -55% 0px", // triggers when element crosses near-center of viewport
+      }
+    );
+
+    PHASES.forEach((phase) => {
+      const el = document.getElementById(phase.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
-
-  // Walking flag — stays on briefly after each scroll tick.
-  useEffect(() => {
-    let timer: number | undefined;
-    const unsub = scrollYProgress.on("change", () => {
-      setWalking(true);
-      if (timer) window.clearTimeout(timer);
-      timer = window.setTimeout(() => setWalking(false), 800);
-    });
-    return () => {
-      unsub();
-      if (timer) window.clearTimeout(timer);
-    };
-  }, [scrollYProgress]);
-
-  // Active milestone = scrollYProgress mapped to milestone index.
-  useEffect(() => {
-    if (!isDesktop) return;
-    const unsub = scrollYProgress.on("change", (latest) => {
-      const idx = Math.min(
-        Math.floor(latest * MILESTONES.length),
-        MILESTONES.length - 1
-      );
-      setActiveIdx((prev) => (prev === idx ? prev : Math.max(0, idx)));
-    });
-    return () => unsub();
-  }, [scrollYProgress, isDesktop]);
+  const handlePhaseClick = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <>
       <section
         id="journey"
-        ref={sectionRef}
-        className="relative px-5 md:px-8 lg:px-12"
-        style={isDesktop ? { minHeight: `${MILESTONES.length * SCROLL_PER_CHAPTER}vh` } : undefined}
+        className="relative px-5 py-14 md:px-8 lg:px-12 lg:py-20"
       >
-        {/* DESKTOP VIEW */}
-        {isDesktop && (
-          <div className="sticky top-0 flex h-screen flex-col justify-center py-14 lg:py-20">
-            <div className="mx-auto w-full max-w-[1400px]">
-              <header className="mb-8">
-                <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-                  The journey
-                </div>
-                <h2 className="mt-2 text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
-                  <span className="font-serif italic">A walk</span> through the years.
-                </h2>
-                <p className="mt-2 max-w-[60ch] text-sm text-fg-secondary md:text-base">
-                  ML engineer → data scientist → B2C PM → B2B PM.
-                </p>
-              </header>
+        <div className="mx-auto max-w-[1400px]">
+          <header className="mb-12 text-center lg:text-left">
+            <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+              The Journey
+            </div>
+            <h2 className="mt-3 text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
+              <span className="font-serif italic">A transition</span> through the craft.
+            </h2>
+            <p className="mt-3 max-w-[60ch] mx-auto lg:mx-0 text-base text-fg-secondary md:text-lg">
+              The transition story: from coding model architectures to analyzing user cohorts, to owning B2C loyalty and B2B enterprise AI products.
+            </p>
+          </header>
 
-              {/* Two sticky panes side-by-side */}
-              <div className="grid grid-cols-[100px_1fr] gap-6 md:grid-cols-[200px_1fr] md:gap-10 lg:grid-cols-[280px_1fr] lg:gap-14">
-                {/* LEFT — walking visual */}
-                <Pathway
-                  scrollYProgress={scrollYProgress}
-                  walking={walking}
-                  activeIdx={activeIdx}
-                />
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
+            {/* LEFT — Sticky Phase Navigation (Desktop Only) */}
+            <div className="hidden lg:block">
+              <div className="sticky top-28 self-start">
+                <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
+                  Transition Stages
+                </h3>
+                <div className="relative pl-6 mt-8">
+                  {/* Continuous vertical timeline connector line */}
+                  <div className="absolute left-[7px] top-3 bottom-3 w-[2px] bg-border-subtle" />
 
-                {/* RIGHT — single chapter card, content swaps */}
-                <div className="relative">
-                  <AnimatePresence mode="wait" initial={false}>
-                    <ChapterCard
-                      key={MILESTONES[activeIdx].id}
-                      milestone={MILESTONES[activeIdx]}
-                      onOpen={() => setOpenIdx(activeIdx)}
-                    />
-                  </AnimatePresence>
+                  {PHASES.map((phase) => {
+                    const isActive = activePhase === phase.id;
+                    return (
+                      <button
+                        key={phase.id}
+                        onClick={() => handlePhaseClick(phase.id)}
+                        className="group relative flex items-start gap-4 mb-10 text-left last:mb-0 transition-colors w-full focus:outline-none"
+                      >
+                        {/* Dot indicator */}
+                        <div
+                          className={cn(
+                            "absolute -left-[23px] top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-bg-base border-2 transition-all duration-300",
+                            isActive
+                              ? "border-brand-magenta scale-125 shadow-[0_0_8px_hsl(var(--brand-magenta))]"
+                              : "border-border-subtle group-hover:border-fg-tertiary"
+                          )}
+                        />
+
+                        <div className="flex flex-col">
+                          <span className="font-mono text-[10px] tracking-widest text-fg-tertiary uppercase">
+                            {phase.years}
+                          </span>
+                          <span
+                            className={cn(
+                              "text-sm font-semibold transition-colors duration-300",
+                              isActive ? "text-fg-primary" : "text-fg-tertiary group-hover:text-fg-secondary"
+                            )}
+                          >
+                            {phase.title}
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
-          </div>
-        )}
 
-        {/* MOBILE/TABLET VERTICAL VIEW */}
-        {!isDesktop && (
-          <div className="relative py-14 md:py-20">
-            <div className="mx-auto w-full max-w-2xl">
-              <header className="mb-10">
-                <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-                  The journey
-                </div>
-                <h2 className="mt-2 text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
-                  <span className="font-serif italic">A walk</span> through the years.
-                </h2>
-                <p className="mt-2 text-sm text-fg-secondary">
-                  ML engineer → data scientist → B2C PM → B2B PM.
-                </p>
-              </header>
-
-              <div className="relative pl-6 border-l border-dashed border-border-subtle">
-                {MILESTONES.map((milestone, idx) => (
-                  <div key={milestone.id} className="relative mb-10 last:mb-0">
-                    {/* Dot marker on the vertical line */}
-                    <div className="absolute -left-[31px] top-6 flex h-4 w-4 items-center justify-center rounded-full bg-bg-base">
-                      <div
-                        className={cn(
-                          "h-2 w-2 rounded-full",
-                          milestone.color === "purple" && "bg-brand-purple",
-                          milestone.color === "pink" && "bg-brand-pink",
-                          milestone.color === "violet" && "bg-brand-violet",
-                          milestone.color === "magenta" && "bg-brand-magenta"
-                        )}
-                      />
+            {/* RIGHT — Epoch Containers */}
+            <div className="space-y-16">
+              {PHASES.map((phase) => {
+                const phaseMilestones = MILESTONES.filter((m) => phase.orgs.includes(m.id));
+                const PhaseIcon = phase.icon;
+                return (
+                  <div
+                    key={phase.id}
+                    id={phase.id}
+                    className="scroll-mt-28"
+                  >
+                    {/* Phase Header */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className={cn(
+                        "flex h-8 w-8 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.08]",
+                        phase.color === "purple" && "text-brand-purple",
+                        phase.color === "pink" && "text-brand-pink",
+                        phase.color === "violet" && "text-brand-violet",
+                        phase.color === "magenta" && "text-brand-magenta"
+                      )}>
+                        <PhaseIcon className="h-4 w-4" />
+                      </div>
+                      <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+                        Phase {phase.num} · {phase.years}
+                      </div>
                     </div>
 
-                    {/* Year banner */}
-                    <div className="mb-2 font-serif text-xl italic text-fg-primary">
-                      {milestone.year}
+                    <h3 className="text-2xl font-bold tracking-headline text-fg-primary md:text-3xl">
+                      {phase.title}
+                    </h3>
+
+                    {/* Transition narrative quote block */}
+                    <div className="glass specular relative rounded-2xl border-0 p-5 mt-4 mb-6 bg-gradient-to-r from-bg-card/40 to-transparent">
+                      {/* Ambient caustics glow on the left of transition text */}
+                      <div className={cn(
+                        "absolute left-0 top-0 bottom-0 w-[3px] rounded-l-2xl",
+                        phase.color === "purple" && "bg-brand-purple",
+                        phase.color === "pink" && "bg-brand-pink",
+                        phase.color === "violet" && "bg-brand-violet",
+                        phase.color === "magenta" && "bg-brand-magenta"
+                      )} />
+                      <p className="text-sm italic leading-relaxed text-fg-secondary pl-3">
+                        &ldquo;{phase.transition}&rdquo;
+                      </p>
                     </div>
 
-                    {/* Card */}
-                    <ChapterCardVertical
-                      milestone={milestone}
-                      onOpen={() => setOpenIdx(idx)}
-                    />
+                    {/* Cards vertical stack */}
+                    <div className="relative pl-6 border-l border-dashed border-border-subtle space-y-8">
+                      {phaseMilestones.map((m) => (
+                        <div key={m.id} className="relative">
+                          {/* Timeline Dot Marker */}
+                          <div className="absolute -left-[31px] top-6 flex h-4 w-4 items-center justify-center rounded-full bg-bg-base">
+                            <div className={cn(
+                              "h-2.5 w-2.5 rounded-full border border-bg-base transition-colors duration-300",
+                              m.color === "purple" && "bg-brand-purple shadow-[0_0_6px_hsl(var(--brand-purple))]",
+                              m.color === "pink" && "bg-brand-pink shadow-[0_0_6px_hsl(var(--brand-pink))]",
+                              m.color === "violet" && "bg-brand-violet shadow-[0_0_6px_hsl(var(--brand-violet))]",
+                              m.color === "magenta" && "bg-brand-magenta shadow-[0_0_6px_hsl(var(--brand-magenta))]"
+                            )} />
+                          </div>
+
+                          {/* Milestone Card */}
+                          <button
+                            type="button"
+                            onClick={() => setOpenMilestone(m)}
+                            data-cursor="View details"
+                            className="group glass specular relative flex w-full flex-col overflow-hidden rounded-3xl border-0 p-5 text-left transition-all duration-300 ease-spring hover:-translate-y-0.5 hover:bg-[hsl(var(--glass-material-strong))] md:p-6"
+                          >
+                            {/* Color halo */}
+                            <div className={cn(
+                              "pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full bg-gradient-to-br opacity-40 blur-2xl",
+                              COLOR_HALO[m.color]
+                            )} />
+
+                            <div className="relative z-10 flex items-start gap-4">
+                              {/* Logo image or fallback letter */}
+                              {m.logo ? (
+                                <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-xl bg-white/95 ring-1 ring-border-subtle">
+                                  <Image src={m.logo} alt="" fill sizes="48px" className="object-contain" />
+                                </div>
+                              ) : (
+                                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-magenta to-brand-violet text-base font-semibold text-white">
+                                  {m.org.charAt(0)}
+                                </div>
+                              )}
+
+                              <div className="min-w-0 flex-1">
+                                <div className="flex flex-wrap items-center gap-2 font-mono text-[9px] uppercase tracking-[0.15em] text-fg-tertiary">
+                                  <span className="rounded-full bg-bg-card px-2 py-0.5 text-fg-secondary">
+                                    {TYPE_LABEL[m.type]}
+                                  </span>
+                                  <span>·</span>
+                                  <span>{m.dates}</span>
+                                </div>
+                                <h4 className="mt-1.5 text-sm font-semibold text-fg-secondary">
+                                  {m.org}
+                                </h4>
+                              </div>
+                            </div>
+
+                            <h5 className="relative z-10 mt-4 text-lg font-bold leading-tight tracking-headline text-fg-primary md:text-xl">
+                              {m.title}
+                            </h5>
+
+                            <p className="relative z-10 mt-2 text-sm leading-relaxed text-fg-secondary font-medium">
+                              {m.shipped}
+                            </p>
+
+                            {m.description && (
+                              <p className="relative z-10 mt-1.5 line-clamp-2 text-xs leading-relaxed text-fg-tertiary">
+                                {m.description}
+                              </p>
+                            )}
+
+                            <div className="relative z-10 mt-4 flex items-center justify-between pt-3 border-t border-white/[0.04] w-full">
+                              <div className="flex flex-wrap gap-1">
+                                {m.tags.slice(0, 3).map((tag) => (
+                                  <span
+                                    key={tag}
+                                    className="rounded-full glass specular px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-fg-secondary"
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                              <span className="inline-flex items-center gap-1 font-mono text-[9px] uppercase tracking-wider text-fg-tertiary group-hover:text-fg-primary transition-colors">
+                                Learn more
+                                <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                              </span>
+                            </div>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
           </div>
-        )}
+        </div>
       </section>
 
       <MilestoneModal
-        milestone={openIdx !== null ? MILESTONES[openIdx] : null}
-        onClose={() => setOpenIdx(null)}
+        milestone={openMilestone}
+        onClose={() => setOpenMilestone(null)}
       />
     </>
   );
 }
 
 /* -------------------------------------------------------------------------- */
-/* Left pane — pathway with traveling figure                                   */
-/* -------------------------------------------------------------------------- */
-
-function Pathway({
-  scrollYProgress,
-  walking,
-  activeIdx,
-}: {
-  scrollYProgress: MotionValue<number>;
-  walking: boolean;
-  activeIdx: number;
-}) {
-  const figureY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  return (
-    <div className="relative flex h-[420px] flex-col items-center md:h-[480px] lg:h-[500px]">
-      {/* Counter — top of pane */}
-      <div className="mb-4 text-center md:mb-6">
-        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary md:text-xs">
-          Chapter {String(activeIdx + 1).padStart(2, "0")}/{String(MILESTONES.length).padStart(2, "0")}
-        </div>
-        <div className="mt-1 font-serif text-2xl italic tracking-headline text-fg-primary md:text-4xl">
-          {MILESTONES[activeIdx]?.year ?? "—"}
-        </div>
-      </div>
-
-      {/* The path */}
-      <div className="relative w-1 flex-1">
-        {/* Dashed track */}
-        <div
-          aria-hidden
-          className="absolute inset-0 rounded-full opacity-50"
-          style={{
-            backgroundImage:
-              "linear-gradient(to bottom, hsl(var(--border-subtle)) 0, hsl(var(--border-subtle)) 6px, transparent 6px, transparent 12px)",
-            backgroundSize: "100% 12px",
-            backgroundRepeat: "repeat-y",
-          }}
-        />
-
-        {/* Progress fill */}
-        <motion.div
-          aria-hidden
-          className="absolute inset-x-0 top-0 rounded-full"
-          style={{
-            height: lineHeight,
-            background:
-              "linear-gradient(to bottom, hsl(var(--brand-magenta)), hsl(var(--brand-violet)))",
-          }}
-        />
-
-        {/* Walking figure */}
-        <motion.div
-          className="absolute left-1/2 z-10 -translate-x-1/2"
-          style={{ top: figureY, y: "-50%" }}
-        >
-          <WalkingFigure walking={walking} />
-        </motion.div>
-      </div>
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
-/* Right pane — single chapter card (swaps content via AnimatePresence)        */
-/* -------------------------------------------------------------------------- */
-
-function ChapterCard({
-  milestone,
-  onOpen,
-}: {
-  milestone: Milestone;
-  onOpen: () => void;
-}) {
-  return (
-    <motion.button
-      type="button"
-      onClick={onOpen}
-      data-cursor="View details"
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -24 }}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-      className="group glass specular relative flex h-[420px] w-full flex-col overflow-hidden rounded-3xl border-0 p-6 text-left transition-[background-color] duration-300 ease-spring hover:bg-[hsl(var(--glass-material-strong))] md:h-[480px] md:p-8 lg:h-[500px] lg:p-10"
-    >
-      {/* Color halo */}
-      <div
-        aria-hidden
-        className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-to-br ${COLOR_HALO[milestone.color]} opacity-80`}
-      />
-
-      <div className="relative z-10 flex items-start gap-4">
-        {/* Logo */}
-        {milestone.logo ? (
-          <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-2xl bg-white/95 ring-1 ring-border-subtle md:h-16 md:w-16">
-            <Image src={milestone.logo} alt="" fill sizes="64px" className="object-contain" />
-          </div>
-        ) : (
-          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-magenta to-brand-violet text-xl font-semibold text-white md:h-16 md:w-16">
-            {milestone.org.charAt(0)}
-          </div>
-        )}
-
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
-            <span className="rounded-full bg-bg-elevated px-2 py-0.5 text-fg-secondary">
-              {TYPE_LABEL[milestone.type]}
-            </span>
-            <span>·</span>
-            <span>{milestone.dates}</span>
-          </div>
-          <div className="mt-2 text-sm font-semibold text-fg-secondary md:text-base">
-            {milestone.org}
-          </div>
-        </div>
-      </div>
-
-      <h3 className="relative z-10 mt-6 text-2xl font-bold leading-tight tracking-headline text-fg-primary md:text-3xl lg:text-4xl">
-        {milestone.title}
-      </h3>
-
-      {/* Scrollable text container to prevent vertical cutting off of card details */}
-      <div className="relative z-10 mt-4 flex-1 min-h-0 overflow-y-auto pr-1 select-text scrollbar-thin">
-        <p className="text-sm leading-relaxed text-fg-secondary md:text-base">
-          {milestone.shipped}
-        </p>
-
-        {milestone.description && (
-          <p className="mt-3 text-sm leading-relaxed text-fg-tertiary md:text-base">
-            {milestone.description}
-          </p>
-        )}
-      </div>
-
-      <div className="relative z-10 mt-6 flex items-end justify-between pt-4 border-t border-border-subtle/50 w-full">
-        <div className="flex flex-wrap gap-1.5">
-          {milestone.tags.slice(0, 4).map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full bg-bg-elevated px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-fg-secondary"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-fg-tertiary transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg-primary" />
-      </div>
-    </motion.button>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
-/* Mobile/Tablet inline card layout (dynamic h-auto layout)                     */
-/* -------------------------------------------------------------------------- */
-
-function ChapterCardVertical({
-  milestone,
-  onOpen,
-}: {
-  milestone: Milestone;
-  onOpen: () => void;
-}) {
-  return (
-    <div
-      onClick={onOpen}
-      data-cursor="View details"
-      className="group glass specular relative flex w-full cursor-pointer flex-col overflow-hidden rounded-3xl border-0 p-6 text-left transition-[background-color] duration-300 ease-spring hover:bg-[hsl(var(--glass-material-strong))]"
-    >
-      {/* Color halo */}
-      <div
-        aria-hidden
-        className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-to-br ${COLOR_HALO[milestone.color]} opacity-80`}
-      />
-
-      <div className="relative z-10 flex items-start gap-4">
-        {/* Logo */}
-        {milestone.logo ? (
-          <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-2xl bg-white/95 ring-1 ring-border-subtle">
-            <Image src={milestone.logo} alt="" fill sizes="48px" className="object-contain" />
-          </div>
-        ) : (
-          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-magenta to-brand-violet text-lg font-semibold text-white">
-            {milestone.org.charAt(0)}
-          </div>
-        )}
-
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
-            <span className="rounded-full bg-bg-elevated px-2 py-0.5 text-fg-secondary">
-              {TYPE_LABEL[milestone.type]}
-            </span>
-            <span>·</span>
-            <span>{milestone.dates}</span>
-          </div>
-          <div className="mt-2 text-sm font-semibold text-fg-secondary">
-            {milestone.org}
-          </div>
-        </div>
-      </div>
-
-      <h3 className="relative z-10 mt-5 text-xl font-bold leading-tight tracking-headline text-fg-primary">
-        {milestone.title}
-      </h3>
-
-      <p className="relative z-10 mt-3 text-sm leading-relaxed text-fg-secondary">
-        {milestone.shipped}
-      </p>
-
-      {milestone.description && (
-        <p className="relative z-10 mt-2 text-xs leading-relaxed text-fg-tertiary">
-          {milestone.description}
-        </p>
-      )}
-
-      <div className="relative z-10 mt-5 flex items-end justify-between pt-4 border-t border-border-subtle/50 w-full">
-        <div className="flex flex-wrap gap-1">
-          {milestone.tags.slice(0, 3).map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full bg-bg-elevated px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-fg-secondary"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-fg-tertiary transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg-primary" />
-      </div>
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
-/* Modal                                                                       */
+/* Modal detail view for individual milestones                                 */
 /* -------------------------------------------------------------------------- */
 
 function MilestoneModal({
