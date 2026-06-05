@@ -85,6 +85,20 @@ export async function getRepos(username: string): Promise<Repo[]> {
   }
 }
 
+interface GitHubEvent {
+  type: string;
+  repo: {
+    name: string;
+  };
+  payload?: {
+    commits?: {
+      sha: string;
+      message: string;
+    }[];
+  };
+  created_at: string;
+}
+
 export async function getRecentPushEvents(username: string): Promise<PushEvent[]> {
   try {
     const res = await fetch(
@@ -92,11 +106,11 @@ export async function getRecentPushEvents(username: string): Promise<PushEvent[]
       { headers: GH_HEADERS, next: { revalidate: 300 } }
     );
     if (!res.ok) return [];
-    const events = await res.json();
+    const events = (await res.json()) as GitHubEvent[];
     return events
-      .filter((e: any) => e.type === "PushEvent")
+      .filter((e) => e.type === "PushEvent")
       .slice(0, 5)
-      .map((e: any) => {
+      .map((e) => {
         const firstCommit = e.payload?.commits?.[0];
         return {
           repo: e.repo?.name ?? "unknown",
@@ -162,10 +176,19 @@ export async function getContributions(username: string): Promise<ContributionDa
       FOURTH_QUARTILE: 4,
     };
 
+    interface GraphQLContributionDay {
+      date: string;
+      contributionCount: number;
+      contributionLevel: string;
+    }
+    interface GraphQLContributionWeek {
+      contributionDays: GraphQLContributionDay[];
+    }
+
     return {
       total: cal.totalContributions,
-      weeks: cal.weeks.map((w: any) => ({
-        days: w.contributionDays.map((d: any) => ({
+      weeks: (cal.weeks as GraphQLContributionWeek[]).map((w) => ({
+        days: w.contributionDays.map((d) => ({
           date: d.date,
           count: d.contributionCount,
           level: levelMap[d.contributionLevel] ?? 0,

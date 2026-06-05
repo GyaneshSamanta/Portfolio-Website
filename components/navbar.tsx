@@ -66,7 +66,7 @@ export function Navbar() {
       >
         <div
           className={cn(
-            "glass specular relative mx-auto flex items-center gap-3 rounded-full transition-all duration-500 ease-spring",
+            "glass specular relative mx-auto flex items-center gap-3 rounded-full transition-all duration-500 ease-spring shadow-[0_8px_32px_rgba(0,0,0,0.3)] border-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]",
             scrolled
               ? "h-12 max-w-3xl px-3 md:h-14 md:px-4"
               : "h-16 max-w-[1400px] px-4 md:h-20 md:px-6"
@@ -99,7 +99,7 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   data-cursor={item.label}
-                  className="rounded-full px-3 py-1.5 text-sm font-medium text-fg-secondary transition-colors hover:bg-bg-card hover:text-fg-primary"
+                  className="rounded-full px-3 py-1.5 text-sm font-medium text-fg-secondary transition-all hover:bg-white/[0.07] hover:text-fg-primary hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
                 >
                   {item.label}
                 </Link>
@@ -121,7 +121,7 @@ export function Navbar() {
             data-cursor="Contact"
             className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-brand-magenta to-brand-violet px-4 py-1.5 text-sm font-semibold text-white transition-transform duration-200 ease-swift hover:scale-[1.03] md:ml-2"
           >
-            Let's talk
+            Let&apos;s talk
             <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
 
@@ -144,25 +144,25 @@ export function Navbar() {
         {isOpen && (
           <motion.div
             id="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-bg-base/95 backdrop-blur-xl md:hidden"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 bg-bg-base/75 backdrop-blur-3xl md:hidden border-b border-border-subtle"
           >
             <div className="flex h-full flex-col px-6 pb-10 pt-24">
-              <ul className="flex flex-col gap-2">
+              <ul className="flex flex-col gap-3">
                 {NAV_ITEMS.map((item, idx) => (
                   <motion.li
                     key={item.href}
-                    initial={{ opacity: 0, x: -16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.04 }}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.05 }}
                   >
                     <Link
                       href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className="block rounded-2xl border border-border-subtle bg-bg-card/50 px-4 py-4 text-2xl font-semibold text-fg-primary"
+                      className="glass specular block rounded-2xl border-0 px-6 py-4 text-xl font-semibold text-fg-primary active:scale-[0.98] transition-all"
                     >
                       {item.label}
                     </Link>

@@ -90,7 +90,7 @@ function PaperCard({ paper, onOpen }: { paper: Paper; onOpen: () => void }) {
       <div className="relative z-10 flex flex-1 flex-col p-5">
         {/* IEEE badge */}
         <div className="mb-3 flex items-center justify-between">
-          <span className="inline-flex items-center gap-1.5 rounded-md bg-bg-elevated px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-brand-magenta ring-1 ring-brand-magenta/40">
+          <span className="inline-flex items-center gap-1.5 rounded-md glass specular px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-brand-magenta ring-1 ring-brand-magenta/30">
             IEEE
             {year && <span className="text-fg-tertiary">· {year}</span>}
           </span>
@@ -148,19 +148,19 @@ function PaperModal({ paper, onClose }: { paper: Paper | null; onClose: () => vo
             exit={reduced ? { opacity: 0 } : { x: "100%" }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="ml-auto h-full w-full overflow-y-auto border-l border-border-strong bg-bg-elevated p-6 md:max-w-2xl md:p-10"
+            className="ml-auto h-full w-full overflow-y-auto border-l border-white/10 glass-strong specular shadow-[-12px_0_48px_rgba(0,0,0,0.4)] p-6 md:max-w-2xl md:p-10"
           >
             <button
               type="button"
               onClick={onClose}
               aria-label="Close"
               data-cursor="Close"
-              className="ml-auto flex rounded-full p-2 text-fg-tertiary transition-colors hover:bg-bg-card hover:text-fg-primary"
+              className="ml-auto flex rounded-full p-2 text-fg-tertiary transition-all hover:bg-white/[0.08] hover:text-fg-primary relative z-[2]"
             >
               <X className="h-4 w-4" />
             </button>
 
-            <div className="inline-flex items-center gap-1.5 rounded-md bg-bg-card px-3 py-1 font-mono text-xs font-bold uppercase tracking-[0.18em] text-brand-magenta ring-1 ring-brand-magenta/40">
+            <div className="inline-flex items-center gap-1.5 rounded-md glass specular px-3 py-1 font-mono text-xs font-bold uppercase tracking-[0.18em] text-brand-magenta ring-1 ring-brand-magenta/30">
               IEEE Publication
             </div>
 
@@ -189,7 +189,7 @@ function PaperModal({ paper, onClose }: { paper: Paper | null; onClose: () => vo
               {paper.description}
             </p>
 
-            <div className="mt-6 inline-flex items-center gap-2 rounded-2xl border border-border-subtle bg-bg-card px-4 py-3">
+            <div className="mt-6 inline-flex items-center gap-2 rounded-2xl glass specular px-4 py-3">
               <BookOpen className="h-4 w-4 text-fg-tertiary" />
               <span className="font-mono text-xs uppercase tracking-[0.15em] text-fg-secondary">
                 {AFFILIATIONS[paper.id]}

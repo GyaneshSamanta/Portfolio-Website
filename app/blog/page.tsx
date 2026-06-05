@@ -32,7 +32,7 @@ export default function BlogIndex() {
             Gyanesh on Product · {posts.length} editions
           </div>
           <h1 className="mt-3 text-[clamp(2.5rem,7vw,5rem)] font-bold leading-[0.95] tracking-[-0.02em] text-fg-primary">
-            <span className="font-serif italic">Everything</span> I've written.
+            <span className="font-serif italic">Everything</span> I&apos;ve written.
           </h1>
           <p className="mt-4 max-w-[60ch] text-base text-fg-secondary md:text-lg">
             Essays on product management, AI, behavioural economics, and consumer behaviour.

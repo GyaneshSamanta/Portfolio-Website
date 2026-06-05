@@ -27,10 +27,10 @@ export function SelectedWorkSection() {
             Selected work
           </div>
           <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
-            Things I'm <span className="font-serif italic">proud</span> of.
+            Things I&apos;m <span className="font-serif italic">proud</span> of.
           </h2>
           <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
-            Hackathon wins, open-source tools shipped, and research I've spent time on.
+            Hackathon wins, open-source tools shipped, and research I&apos;ve spent time on.
             Curated, not exhaustive.
           </p>
         </header>
@@ -110,7 +110,7 @@ function HackathonCard({ project }: { project: Hackathon }) {
       </p>
 
       <div className="relative z-10 mt-auto flex items-center gap-2 pt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-fg-tertiary">
-        <span className="rounded-full bg-bg-elevated px-2 py-0.5 text-fg-secondary">
+        <span className="rounded-full glass specular px-2.5 py-0.5 text-fg-secondary">
           {project.event}
         </span>
       </div>
@@ -149,7 +149,7 @@ function OpenSourceCard({ project }: { project: Repo }) {
         {project.techStack.map((tag) => (
           <span
             key={tag}
-            className="rounded-full bg-bg-elevated px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-fg-secondary"
+            className="rounded-full glass specular px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-fg-secondary"
           >
             {tag}
           </span>
@@ -191,7 +191,7 @@ function ResearchRepoCard({ project }: { project: ResearchRepo }) {
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full bg-bg-elevated px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-fg-secondary"
+            className="rounded-full glass specular px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-fg-secondary"
           >
             {tag}
           </span>

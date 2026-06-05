@@ -4,9 +4,9 @@
  * Now Shipping section. Keeps the hero fast + free of network dependencies.
  */
 
-import { HeroClient } from "./hero-client";
+import { HeroClient, type HeroData } from "./hero-client";
 import heroData from "@/data/hero.json";
 
 export function HeroSection() {
-  return <HeroClient hero={heroData as any} />;
+  return <HeroClient hero={heroData as unknown as HeroData} />;
 }

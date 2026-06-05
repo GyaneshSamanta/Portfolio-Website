@@ -77,9 +77,33 @@ export async function getPlaylistVideos(playlistId: string): Promise<Video[]> {
       return [];
     }
 
-    let data: any;
+    interface YouTubeRawData {
+      contents?: {
+        twoColumnBrowseResultsRenderer?: {
+          tabs?: {
+            tabRenderer?: {
+              content?: {
+                sectionListRenderer?: {
+                  contents?: {
+                    itemSectionRenderer?: {
+                      contents?: {
+                        playlistVideoListRenderer?: {
+                          contents?: unknown[];
+                        };
+                      }[];
+                    };
+                  }[];
+                };
+              };
+            };
+          }[];
+        };
+      };
+    }
+
+    let data: YouTubeRawData;
     try {
-      data = JSON.parse(match[1]);
+      data = JSON.parse(match[1]) as YouTubeRawData;
     } catch (err) {
       console.warn("[youtube] failed to parse ytInitialData JSON", err);
       return [];
@@ -98,8 +122,27 @@ export async function getPlaylistVideos(playlistId: string): Promise<Video[]> {
       return [];
     }
 
+    interface YouTubePlaylistItem {
+      playlistVideoRenderer?: {
+        videoId?: string;
+        title?: {
+          runs?: { text: string }[];
+          simpleText?: string;
+        };
+        thumbnail?: {
+          thumbnails?: { url: string }[];
+        };
+        lengthText?: {
+          simpleText?: string;
+        };
+        videoInfo?: {
+          runs?: { text: string }[];
+        };
+      };
+    }
+
     const videos: Video[] = [];
-    for (const wrap of items) {
+    for (const wrap of items as YouTubePlaylistItem[]) {
       const r = wrap?.playlistVideoRenderer;
       if (!r) continue;
 
@@ -108,7 +151,7 @@ export async function getPlaylistVideos(playlistId: string): Promise<Video[]> {
       if (!id || !title) continue;
 
       // Pick the highest-res thumbnail YouTube gave us.
-      const thumbs: any[] = r.thumbnail?.thumbnails ?? [];
+      const thumbs = r.thumbnail?.thumbnails ?? [];
       const thumbnail =
         thumbs[thumbs.length - 1]?.url ?? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 
@@ -120,7 +163,7 @@ export async function getPlaylistVideos(playlistId: string): Promise<Video[]> {
       const isShort = durationSeconds > 0 && durationSeconds <= 180;
 
       // videoInfo.runs is usually [{ text: "1.2K views" }, { text: " • " }, { text: "3 days ago" }]
-      const infoRuns: any[] = r.videoInfo?.runs ?? [];
+      const infoRuns = (r.videoInfo?.runs ?? []) as { text: string }[];
       const viewsText: string | null = infoRuns?.[0]?.text ?? null;
       const publishedText: string | null = infoRuns?.[2]?.text ?? null;
 

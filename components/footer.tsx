@@ -4,10 +4,10 @@
  */
 
 import Link from "next/link";
-import { Github, Linkedin, Mail, Youtube } from "lucide-react";
+import { Github, Linkedin, Mail, Youtube, type LucideIcon } from "lucide-react";
 import footerData from "@/data/footer.json";
 
-const ICON_MAP: Record<string, any> = {
+const ICON_MAP: Record<string, LucideIcon> = {
   linkedin: Linkedin,
   github: Github,
   youtube: Youtube,

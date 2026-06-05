@@ -105,7 +105,7 @@ export async function PodcastSection() {
 
 function FeaturedEpisode({ video }: { video: Awaited<ReturnType<typeof getPlaylistVideos>>[number] }) {
   return (
-    <div className="overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/40">
+    <div className="glass specular relative overflow-hidden rounded-3xl border-0">
       <div className="aspect-video w-full">
         <LiteYouTube videoId={video.id} title={video.title} className="block h-full w-full" />
       </div>
@@ -141,7 +141,7 @@ function FeaturedEpisode({ video }: { video: Awaited<ReturnType<typeof getPlayli
 
 function EpisodeCard({ video }: { video: Awaited<ReturnType<typeof getPlaylistVideos>>[number] }) {
   return (
-    <article className="overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/40">
+    <article className="group glass specular relative flex h-full flex-col overflow-hidden rounded-3xl border-0 transition-[transform,background-color] duration-300 ease-spring hover:-translate-y-0.5 hover:bg-[hsl(var(--glass-material-strong))]">
       <div className="aspect-video w-full">
         <LiteYouTube videoId={video.id} title={video.title} className="block h-full w-full" />
       </div>
@@ -159,7 +159,7 @@ function EpisodeCard({ video }: { video: Awaited<ReturnType<typeof getPlaylistVi
 
 function PodcastEmptyState() {
   return (
-    <div className="overflow-hidden rounded-3xl border border-dashed border-border-subtle bg-bg-card/40 px-6 py-12 text-center md:py-16">
+    <div className="glass specular relative overflow-hidden rounded-3xl border-0 px-6 py-12 text-center md:py-16">
       <Play className="mx-auto h-8 w-8 text-fg-tertiary" />
       <p className="mt-4 font-serif text-2xl italic text-fg-primary">Episodes loading…</p>
       <p className="mt-2 text-sm text-fg-secondary">

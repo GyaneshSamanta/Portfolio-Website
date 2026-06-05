@@ -14,7 +14,7 @@ import { ArrowUpRight } from "lucide-react";
 import { KineticHeading } from "@/components/kinetic-heading";
 import { SkillMarquee } from "@/components/ui/skill-marquee";
 
-type HeroData = {
+export type HeroData = {
   nameFirst: string;
   nameLast: string;
   headline: string;

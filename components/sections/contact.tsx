@@ -90,13 +90,13 @@ function EmailInline({ email }: { email: string }) {
         type="button"
         onClick={handleCopy}
         data-cursor={copied ? "Copied!" : "Click to copy"}
-        className="group inline-flex items-center gap-1.5 rounded-full border border-border-subtle bg-bg-card/60 px-3 py-1 font-mono text-sm text-fg-primary transition-colors hover:border-border-strong"
+        className="group glass specular relative inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-mono text-sm text-fg-primary transition-all duration-200 ease-spring hover:bg-[hsl(var(--glass-material-strong))]"
       >
         {email}
         {copied ? (
-          <Check className="h-3.5 w-3.5 text-signal-live" />
+          <Check className="h-3.5 w-3.5 text-signal-live relative z-[2]" />
         ) : (
-          <Copy className="h-3.5 w-3.5 text-fg-tertiary transition-colors group-hover:text-fg-primary" />
+          <Copy className="h-3.5 w-3.5 text-fg-tertiary transition-colors group-hover:text-fg-primary relative z-[2]" />
         )}
       </button>
     </div>

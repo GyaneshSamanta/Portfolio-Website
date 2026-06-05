@@ -23,7 +23,7 @@ type Props = {
 };
 
 const BASE_CLS =
-  "group relative flex flex-col overflow-hidden rounded-3xl border border-border-subtle bg-bg-card/60 p-5 backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-swift hover:-translate-y-0.5 hover:border-border-strong hover:bg-bg-card-hover/70 md:p-6";
+  "group glass specular relative flex flex-col overflow-hidden rounded-3xl border-0 p-5 transition-[transform,background-color] duration-300 ease-spring hover:-translate-y-0.5 hover:bg-[hsl(var(--glass-material-strong))] md:p-6";
 
 export function BentoTile({
   children,

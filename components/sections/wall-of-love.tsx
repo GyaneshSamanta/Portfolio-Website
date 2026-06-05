@@ -48,7 +48,7 @@ export function WallOfLoveSection() {
             Wall of love · {RECS.length} recommendations
           </div>
           <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
-            What people I've <span className="font-serif italic">actually</span> worked with say.
+            What people I&apos;ve <span className="font-serif italic">actually</span> worked with say.
           </h2>
           <p className="mt-3 max-w-[60ch] text-base text-fg-secondary md:text-lg">
             Faculty who taught me, managers who shipped with me, peers who watched me build.

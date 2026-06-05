@@ -41,6 +41,7 @@ import { MapPin, X, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import journeyData from "@/data/journey.json";
 import { WalkingFigure } from "@/components/journey/walking-figure";
+import { cn } from "@/lib/utils";
 
 type Milestone = {
   id: string;
@@ -80,6 +81,14 @@ export function JourneySection() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [walking, setWalking] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -102,6 +111,7 @@ export function JourneySection() {
 
   // Active milestone = scrollYProgress mapped to milestone index.
   useEffect(() => {
+    if (!isDesktop) return;
     const unsub = scrollYProgress.on("change", (latest) => {
       const idx = Math.min(
         Math.floor(latest * MILESTONES.length),
@@ -110,7 +120,7 @@ export function JourneySection() {
       setActiveIdx((prev) => (prev === idx ? prev : Math.max(0, idx)));
     });
     return () => unsub();
-  }, [scrollYProgress]);
+  }, [scrollYProgress, isDesktop]);
 
   return (
     <>
@@ -118,45 +128,96 @@ export function JourneySection() {
         id="journey"
         ref={sectionRef}
         className="relative px-5 md:px-8 lg:px-12"
-        style={{ minHeight: `${MILESTONES.length * SCROLL_PER_CHAPTER}vh` }}
+        style={isDesktop ? { minHeight: `${MILESTONES.length * SCROLL_PER_CHAPTER}vh` } : undefined}
       >
-        {/* Sticky viewport — both panes pinned inside */}
-        <div className="sticky top-0 flex h-screen flex-col justify-center py-14 lg:py-20">
-          <div className="mx-auto w-full max-w-[1400px]">
-            <header className="mb-8">
-              <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
-                The journey
-              </div>
-              <h2 className="mt-2 text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
-                <span className="font-serif italic">A walk</span> through the years.
-              </h2>
-              <p className="mt-2 max-w-[60ch] text-sm text-fg-secondary md:text-base">
-                ML engineer → data scientist → B2C PM → B2B PM.
-              </p>
-            </header>
+        {/* DESKTOP VIEW */}
+        {isDesktop && (
+          <div className="sticky top-0 flex h-screen flex-col justify-center py-14 lg:py-20">
+            <div className="mx-auto w-full max-w-[1400px]">
+              <header className="mb-8">
+                <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+                  The journey
+                </div>
+                <h2 className="mt-2 text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
+                  <span className="font-serif italic">A walk</span> through the years.
+                </h2>
+                <p className="mt-2 max-w-[60ch] text-sm text-fg-secondary md:text-base">
+                  ML engineer → data scientist → B2C PM → B2B PM.
+                </p>
+              </header>
 
-            {/* Two sticky panes side-by-side */}
-            <div className="grid grid-cols-[100px_1fr] gap-6 md:grid-cols-[200px_1fr] md:gap-10 lg:grid-cols-[280px_1fr] lg:gap-14">
-              {/* LEFT — walking visual */}
-              <Pathway
-                scrollYProgress={scrollYProgress}
-                walking={walking}
-                activeIdx={activeIdx}
-              />
+              {/* Two sticky panes side-by-side */}
+              <div className="grid grid-cols-[100px_1fr] gap-6 md:grid-cols-[200px_1fr] md:gap-10 lg:grid-cols-[280px_1fr] lg:gap-14">
+                {/* LEFT — walking visual */}
+                <Pathway
+                  scrollYProgress={scrollYProgress}
+                  walking={walking}
+                  activeIdx={activeIdx}
+                />
 
-              {/* RIGHT — single chapter card, content swaps */}
-              <div className="relative">
-                <AnimatePresence mode="wait" initial={false}>
-                  <ChapterCard
-                    key={MILESTONES[activeIdx].id}
-                    milestone={MILESTONES[activeIdx]}
-                    onOpen={() => setOpenIdx(activeIdx)}
-                  />
-                </AnimatePresence>
+                {/* RIGHT — single chapter card, content swaps */}
+                <div className="relative">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <ChapterCard
+                      key={MILESTONES[activeIdx].id}
+                      milestone={MILESTONES[activeIdx]}
+                      onOpen={() => setOpenIdx(activeIdx)}
+                    />
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
+
+        {/* MOBILE/TABLET VERTICAL VIEW */}
+        {!isDesktop && (
+          <div className="relative py-14 md:py-20">
+            <div className="mx-auto w-full max-w-2xl">
+              <header className="mb-10">
+                <div className="font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
+                  The journey
+                </div>
+                <h2 className="mt-2 text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[0.95] tracking-display text-fg-primary">
+                  <span className="font-serif italic">A walk</span> through the years.
+                </h2>
+                <p className="mt-2 text-sm text-fg-secondary">
+                  ML engineer → data scientist → B2C PM → B2B PM.
+                </p>
+              </header>
+
+              <div className="relative pl-6 border-l border-dashed border-border-subtle">
+                {MILESTONES.map((milestone, idx) => (
+                  <div key={milestone.id} className="relative mb-10 last:mb-0">
+                    {/* Dot marker on the vertical line */}
+                    <div className="absolute -left-[31px] top-6 flex h-4 w-4 items-center justify-center rounded-full bg-bg-base">
+                      <div
+                        className={cn(
+                          "h-2 w-2 rounded-full",
+                          milestone.color === "purple" && "bg-brand-purple",
+                          milestone.color === "pink" && "bg-brand-pink",
+                          milestone.color === "violet" && "bg-brand-violet",
+                          milestone.color === "magenta" && "bg-brand-magenta"
+                        )}
+                      />
+                    </div>
+
+                    {/* Year banner */}
+                    <div className="mb-2 font-serif text-xl italic text-fg-primary">
+                      {milestone.year}
+                    </div>
+
+                    {/* Card */}
+                    <ChapterCardVertical
+                      milestone={milestone}
+                      onOpen={() => setOpenIdx(idx)}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       <MilestoneModal
@@ -184,7 +245,7 @@ function Pathway({
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div className="relative flex h-[420px] flex-col items-center md:h-[480px] lg:h-[520px]">
+    <div className="relative flex h-[420px] flex-col items-center md:h-[480px] lg:h-[500px]">
       {/* Counter — top of pane */}
       <div className="mb-4 text-center md:mb-6">
         <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary md:text-xs">
@@ -252,7 +313,7 @@ function ChapterCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -24 }}
       transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-      className="group glass specular relative flex h-[420px] w-full flex-col overflow-hidden rounded-3xl border-0 p-6 text-left transition-[background-color] duration-300 ease-spring hover:bg-[hsl(var(--glass-material-strong))] md:h-[480px] md:p-8 lg:h-[520px] lg:p-10"
+      className="group glass specular relative flex h-[420px] w-full flex-col overflow-hidden rounded-3xl border-0 p-6 text-left transition-[background-color] duration-300 ease-spring hover:bg-[hsl(var(--glass-material-strong))] md:h-[480px] md:p-8 lg:h-[500px] lg:p-10"
     >
       {/* Color halo */}
       <div
@@ -290,17 +351,20 @@ function ChapterCard({
         {milestone.title}
       </h3>
 
-      <p className="relative z-10 mt-4 text-sm leading-relaxed text-fg-secondary md:text-base">
-        {milestone.shipped}
-      </p>
-
-      {milestone.description && (
-        <p className="relative z-10 mt-3 text-sm leading-relaxed text-fg-tertiary md:text-base">
-          {milestone.description}
+      {/* Scrollable text container to prevent vertical cutting off of card details */}
+      <div className="relative z-10 mt-4 flex-1 min-h-0 overflow-y-auto pr-1 select-text scrollbar-thin">
+        <p className="text-sm leading-relaxed text-fg-secondary md:text-base">
+          {milestone.shipped}
         </p>
-      )}
 
-      <div className="relative z-10 mt-auto flex items-end justify-between pt-6">
+        {milestone.description && (
+          <p className="mt-3 text-sm leading-relaxed text-fg-tertiary md:text-base">
+            {milestone.description}
+          </p>
+        )}
+      </div>
+
+      <div className="relative z-10 mt-6 flex items-end justify-between pt-4 border-t border-border-subtle/50 w-full">
         <div className="flex flex-wrap gap-1.5">
           {milestone.tags.slice(0, 4).map((tag) => (
             <span
@@ -314,6 +378,86 @@ function ChapterCard({
         <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-fg-tertiary transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg-primary" />
       </div>
     </motion.button>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Mobile/Tablet inline card layout (dynamic h-auto layout)                     */
+/* -------------------------------------------------------------------------- */
+
+function ChapterCardVertical({
+  milestone,
+  onOpen,
+}: {
+  milestone: Milestone;
+  onOpen: () => void;
+}) {
+  return (
+    <div
+      onClick={onOpen}
+      data-cursor="View details"
+      className="group glass specular relative flex w-full cursor-pointer flex-col overflow-hidden rounded-3xl border-0 p-6 text-left transition-[background-color] duration-300 ease-spring hover:bg-[hsl(var(--glass-material-strong))]"
+    >
+      {/* Color halo */}
+      <div
+        aria-hidden
+        className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-to-br ${COLOR_HALO[milestone.color]} opacity-80`}
+      />
+
+      <div className="relative z-10 flex items-start gap-4">
+        {/* Logo */}
+        {milestone.logo ? (
+          <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-2xl bg-white/95 ring-1 ring-border-subtle">
+            <Image src={milestone.logo} alt="" fill sizes="48px" className="object-contain" />
+          </div>
+        ) : (
+          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-magenta to-brand-violet text-lg font-semibold text-white">
+            {milestone.org.charAt(0)}
+          </div>
+        )}
+
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-tertiary">
+            <span className="rounded-full bg-bg-elevated px-2 py-0.5 text-fg-secondary">
+              {TYPE_LABEL[milestone.type]}
+            </span>
+            <span>·</span>
+            <span>{milestone.dates}</span>
+          </div>
+          <div className="mt-2 text-sm font-semibold text-fg-secondary">
+            {milestone.org}
+          </div>
+        </div>
+      </div>
+
+      <h3 className="relative z-10 mt-5 text-xl font-bold leading-tight tracking-headline text-fg-primary">
+        {milestone.title}
+      </h3>
+
+      <p className="relative z-10 mt-3 text-sm leading-relaxed text-fg-secondary">
+        {milestone.shipped}
+      </p>
+
+      {milestone.description && (
+        <p className="relative z-10 mt-2 text-xs leading-relaxed text-fg-tertiary">
+          {milestone.description}
+        </p>
+      )}
+
+      <div className="relative z-10 mt-5 flex items-end justify-between pt-4 border-t border-border-subtle/50 w-full">
+        <div className="flex flex-wrap gap-1">
+          {milestone.tags.slice(0, 3).map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full bg-bg-elevated px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-fg-secondary"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-fg-tertiary transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg-primary" />
+      </div>
+    </div>
   );
 }
 
@@ -361,14 +505,14 @@ function MilestoneModal({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-2xl rounded-3xl border border-border-strong bg-bg-elevated p-6 md:p-10"
+            className="relative w-full max-w-2xl rounded-3xl glass-strong specular border border-white/10 shadow-[0_24px_64px_rgba(0,0,0,0.5)] p-6 md:p-10"
           >
             <button
               type="button"
               onClick={onClose}
               aria-label="Close"
               data-cursor="Close"
-              className="absolute right-4 top-4 rounded-full p-2 text-fg-tertiary transition-colors hover:bg-bg-card hover:text-fg-primary"
+              className="absolute right-4 top-4 rounded-full p-2 text-fg-tertiary transition-all hover:bg-white/[0.08] hover:text-fg-primary z-[2]"
             >
               <X className="h-4 w-4" />
             </button>
@@ -412,7 +556,7 @@ function MilestoneModal({
               {milestone.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-border-subtle bg-bg-card px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-fg-secondary"
+                  className="rounded-full glass specular px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-fg-secondary"
                 >
                   {tag}
                 </span>

@@ -16,9 +16,10 @@
 import { Activity, Github } from "lucide-react";
 import { ProofTile } from "@/components/now-shipping/proof-tile";
 import heroData from "@/data/hero.json";
+import { type HeroData } from "./hero-client";
 
 export function NowShippingSection() {
-  const badges = (heroData as any).badges as string[] | undefined;
+  const badges = (heroData as unknown as HeroData).badges;
 
   return (
     <section
@@ -54,7 +55,7 @@ export function NowShippingSection() {
         )}
 
         {/* Snake contribution graph — framed, single tile, no oversize */}
-        <div className="rounded-3xl border border-border-subtle bg-bg-card/40 p-5 backdrop-blur-sm md:p-7">
+        <div className="glass specular relative rounded-3xl border-0 p-5 md:p-7">
           <div className="mb-4 flex items-center justify-between font-mono text-xs uppercase tracking-[0.2em] text-fg-tertiary">
             <span className="inline-flex items-center gap-2">
               <Github className="h-3.5 w-3.5" />
