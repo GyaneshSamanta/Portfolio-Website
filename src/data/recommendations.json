@@ -1,5 +1,33 @@
 [
   {
+    "slug": "sreeram-narayan",
+    "name": "Sreeram Narayan",
+    "designation": "Chief Product Officer",
+    "company": "Ginesys",
+    "companyLogo": "/images/logos/ginesys.jpeg",
+    "relationship": "Mentor",
+    "photo": "/images/recommendations/sreeram-narayan.png",
+    "photoAlt": "Sreeram Narayan headshot",
+    "linkedinUrl": "https://www.linkedin.com/search/results/all/?keywords=Sreeram+Narayan",
+    "shortQuote": "Demonstrated curiosity, customer empathy, and a good product mindset while quickly absorbing new domain context.",
+    "fullText": "Gyanesh reported to me during his 2-month product internship at Ginesys, working primarily on AI-led initiatives. He conducted customer discovery, understood business and user problems, and built prototypes that helped validate important hypotheses on our product roadmap. He demonstrated curiosity, customer empathy, and a good product mindset while quickly absorbing new domain context. With continued experience, I believe Gyanesh can grow into a strong, logical product thinker. His willingness to learn, accept feedback, and iterate will serve him well in his product career. I wish him the very best for the journey ahead.",
+    "date": "Jul 2026"
+  },
+  {
+    "slug": "piyush-goel",
+    "name": "Dr. Piyush Goel",
+    "designation": "AI Builder, Co-founder",
+    "company": "Ironman",
+    "companyLogo": "",
+    "relationship": "Manager",
+    "photo": "/images/recommendations/piyush-goel.png",
+    "photoAlt": "Dr. Piyush Goel headshot",
+    "linkedinUrl": "https://www.linkedin.com/search/results/all/?keywords=Dr.+Piyush+Goel",
+    "shortQuote": "A good mix of business sense, product mindset and experience of latest tech tools to deliver and iterate quickly.",
+    "fullText": "Gyanesh is very observant, thoughtful and a quick learner. During his short internship, he rapidly picked up the domain context, customer understanding, conducted user research and delivered well articulated prorotypes directly to the customers. He has a good mix of business sense, product mindset and experience of latest tech tools to deliver and iterate quickly in a way that resonates with the audience. It was great to have you with us Gyanesh. All the best for future endeavours!",
+    "date": "Jun 2026"
+  },
+  {
     "slug": "soumya-sarkar",
     "name": "Soumya Sarkar",
     "designation": "Associate Professor",
