@@ -1,86 +1,86 @@
 [
   {
     "name": "Abhaya Mattoo Rawat",
-    "role": "Product Leader",
-    "company": "",
-    "logo": "",
+    "role": "Lead Product Manager",
+    "company": "Thoughtworks",
+    "logo": "https://logo.clearbit.com/thoughtworks.com",
     "image": "/images/fame/abhaya-mattoo-rawat.jpeg"
   },
   {
     "name": "Akshay Saraswat",
-    "role": "Principal Product Manager",
-    "company": "Elastic",
-    "logo": "https://logo.clearbit.com/elastic.co",
+    "role": "Senior Product Manager",
+    "company": "Amazon (AWS)",
+    "logo": "https://logo.clearbit.com/amazon.com",
     "image": "/images/fame/akshay-saraswat.png"
   },
   {
     "name": "Anshu Sharma",
-    "role": "Co-founder & CEO",
-    "company": "Skyflow",
-    "logo": "https://logo.clearbit.com/skyflow.com",
+    "role": "Co-Founder",
+    "company": "SkillWyze",
+    "logo": "",
     "image": "/images/fame/anshu-sharma.png"
   },
   {
     "name": "Deepak Tolani",
-    "role": "Product Leader",
-    "company": "",
+    "role": "BW 40 Under 40 Marketer",
+    "company": "ex-Amazon, ex-Disney+Hotstar",
     "logo": "",
     "image": "/images/fame/deepak-tolani.png"
   },
   {
     "name": "Jyoti Gupta",
-    "role": "Product Leader",
-    "company": "",
-    "logo": "",
+    "role": "Product Manager",
+    "company": "Maxwood Furniture",
+    "logo": "https://logo.clearbit.com/maxwoodfurniture.com",
     "image": "/images/fame/jyoti-gupta.jpeg"
   },
   {
     "name": "Kammaljit Deka",
-    "role": "Product Leader",
-    "company": "",
+    "role": "Founder",
+    "company": "ProductOS",
     "logo": "",
     "image": "/images/fame/kammaljit-deka.png"
   },
   {
     "name": "Pavan Kumar Galiveeti",
-    "role": "Product & Tech Writer",
-    "company": "",
-    "logo": "",
+    "role": "Lead Product Manager",
+    "company": "Thomson Reuters",
+    "logo": "https://logo.clearbit.com/thomsonreuters.com",
     "image": "/images/fame/pavan-kumar-galiveeti.png"
   },
   {
     "name": "Prashant Kumar",
-    "role": "Product Leader",
-    "company": "",
+    "role": "Founding Product Lead",
+    "company": "Crafting Tomorrow",
     "logo": "",
     "image": "/images/fame/prashant-kumar.jpeg"
   },
   {
     "name": "Ravi Chhetri",
-    "role": "Product Leader",
-    "company": "",
-    "logo": "",
+    "role": "Sr Staff IAM Architect",
+    "company": "GE Healthcare",
+    "logo": "https://logo.clearbit.com/gehealthcare.com",
     "image": "/images/fame/ravi-chhetri.jpeg"
   },
   {
     "name": "Sameer Kulkarni",
-    "role": "Product Leader",
-    "company": "",
+    "role": "Founder",
+    "company": "Navaantrix",
     "logo": "",
     "image": "/images/fame/sameer-kulkarni.jpeg"
   },
   {
     "name": "Satya Teppala",
-    "role": "Product Leader",
-    "company": "",
-    "logo": "",
+    "role": "Associate Director",
+    "company": "NTT Data",
+    "logo": "https://logo.clearbit.com/nttdata.com",
     "image": "/images/fame/satya-teppala.png"
   },
   {
     "name": "Sourabh Pandey",
-    "role": "CXO Fulfillment & Experience",
-    "company": "Meesho",
-    "logo": "https://logo.clearbit.com/meesho.com",
+    "role": "Senior Product Manager",
+    "company": "Microsoft",
+    "logo": "https://logo.clearbit.com/microsoft.com",
     "image": "/images/fame/sourabh-pandey.jpeg"
   },
   {
@@ -92,8 +92,8 @@
   },
   {
     "name": "Tanvi Sethia",
-    "role": "Product Leader",
-    "company": "",
+    "role": "Founder",
+    "company": "Tanvi Sethia Consulting",
     "logo": "",
     "image": "/images/fame/tanvi-sethia.jpeg"
   }
