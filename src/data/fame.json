@@ -3,98 +3,90 @@
     "name": "Abhaya Mattoo Rawat",
     "role": "Lead Product Manager",
     "company": "Thoughtworks",
-    "logo": "https://logo.clearbit.com/thoughtworks.com",
     "image": "/images/fame/abhaya-mattoo-rawat.jpeg"
   },
   {
     "name": "Akshay Saraswat",
     "role": "Senior Product Manager",
     "company": "Amazon (AWS)",
-    "logo": "https://logo.clearbit.com/amazon.com",
     "image": "/images/fame/akshay-saraswat.png"
   },
   {
     "name": "Anshu Sharma",
     "role": "Co-Founder",
     "company": "SkillWyze",
-    "logo": "",
     "image": "/images/fame/anshu-sharma.png"
   },
   {
     "name": "Deepak Tolani",
     "role": "BW 40 Under 40 Marketer",
     "company": "ex-Amazon, ex-Disney+Hotstar",
-    "logo": "",
     "image": "/images/fame/deepak-tolani.png"
   },
   {
     "name": "Jyoti Gupta",
     "role": "Product Manager",
     "company": "Maxwood Furniture",
-    "logo": "https://logo.clearbit.com/maxwoodfurniture.com",
     "image": "/images/fame/jyoti-gupta.jpeg"
   },
   {
     "name": "Kammaljit Deka",
     "role": "Founder",
     "company": "ProductOS",
-    "logo": "",
     "image": "/images/fame/kammaljit-deka.png"
   },
   {
     "name": "Pavan Kumar Galiveeti",
     "role": "Lead Product Manager",
     "company": "Thomson Reuters",
-    "logo": "https://logo.clearbit.com/thomsonreuters.com",
     "image": "/images/fame/pavan-kumar-galiveeti.png"
   },
   {
     "name": "Prashant Kumar",
     "role": "Founding Product Lead",
     "company": "Crafting Tomorrow",
-    "logo": "",
     "image": "/images/fame/prashant-kumar.jpeg"
   },
   {
     "name": "Ravi Chhetri",
     "role": "Sr Staff IAM Architect",
     "company": "GE Healthcare",
-    "logo": "https://logo.clearbit.com/gehealthcare.com",
     "image": "/images/fame/ravi-chhetri.jpeg"
   },
   {
     "name": "Sameer Kulkarni",
     "role": "Founder",
     "company": "Navaantrix",
-    "logo": "",
     "image": "/images/fame/sameer-kulkarni.jpeg"
   },
   {
     "name": "Satya Teppala",
     "role": "Associate Director",
     "company": "NTT Data",
-    "logo": "https://logo.clearbit.com/nttdata.com",
     "image": "/images/fame/satya-teppala.png"
+  },
+  {
+    "name": "Soumya Siddhartha Mohanty",
+    "role": "Head of Product, Innovation, Marketing, Growth",
+    "company": "Unilever",
+    "image": "/images/fame/soumya-siddhartha-mohanty.jpeg"
   },
   {
     "name": "Sourabh Pandey",
     "role": "Senior Product Manager",
     "company": "Microsoft",
-    "logo": "https://logo.clearbit.com/microsoft.com",
     "image": "/images/fame/sourabh-pandey.jpeg"
   },
   {
     "name": "Sreeram Narayan",
     "role": "Chief Product Officer",
     "company": "Ginesys",
-    "logo": "https://logo.clearbit.com/ginesys.in",
     "image": "/images/fame/sreeram-narayan.jpeg"
   },
   {
     "name": "Tanvi Sethia",
     "role": "Founder",
     "company": "Tanvi Sethia Consulting",
-    "logo": "",
     "image": "/images/fame/tanvi-sethia.jpeg"
   }
 ]

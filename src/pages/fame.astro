@@ -12,22 +12,16 @@ import fameData from '../data/fame.json';
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-10">
       {fameData.map((person) => (
         <article class="flex flex-col items-center text-center group">
-          <div class="relative w-full aspect-square mb-4">
-            <div class="w-full h-full border border-border p-1 bg-white shadow-sm rounded-sm overflow-hidden">
+          <div class="w-full aspect-square border border-border bg-white shadow-sm rounded-sm mb-4 p-1">
+            <div class="w-full h-full overflow-hidden bg-[#EFECE6] relative">
               {person.image ? (
-                <img src={person.image} alt={person.name} class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500" onerror="this.style.display='none'" />
+                <img src={person.image} alt={person.name} class="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500" onerror="this.style.display='none'" />
               ) : (
-                <div class="w-full h-full bg-[#EFECE6] flex items-center justify-center">
+                <div class="absolute inset-0 flex items-center justify-center">
                   <span class="text-ink-lighter text-[20px] uppercase tracking-widest font-sans">{person.name.charAt(0)}</span>
                 </div>
               )}
             </div>
-            
-            {person.logo && (
-              <div class="absolute -bottom-3 -right-3 w-10 h-10 rounded-full bg-white border border-border p-1.5 flex items-center justify-center shadow-sm z-10 opacity-90 group-hover:opacity-100 transition-opacity">
-                <img src={person.logo} alt={`${person.company} logo`} class="w-full h-full object-contain" onerror="this.style.display='none'" />
-              </div>
-            )}
           </div>
           
           <h3 class="text-[15px] font-medium text-ink leading-tight">{person.name}</h3>
