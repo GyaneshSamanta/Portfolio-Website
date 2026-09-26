@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import fameData from '../data/fame.json';
+---
+<Layout title="Wall of Fame - Gyanesh Samanta">
+  <section class="mt-4">
+    <header class="mb-10 flex items-center justify-between border-b border-border pb-4">
+      <h1 class="text-2xl font-medium text-ink">Wall of Fame</h1>
+      <span class="text-[10px] uppercase tracking-widest font-sans text-ink-light">Podcast & Newsletter Guests</span>
+    </header>
+    
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-10">
+      {fameData.map((person) => (
+        <article class="flex flex-col items-center text-center group">
+          <div class="relative w-full aspect-square mb-4">
+            <div class="w-full h-full border border-border p-1 bg-white shadow-sm rounded-sm overflow-hidden">
+              {person.image ? (
+                <img src={person.image} alt={person.name} class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500" onerror="this.style.display='none'" />
+              ) : (
+                <div class="w-full h-full bg-[#EFECE6] flex items-center justify-center">
+                  <span class="text-ink-lighter text-[20px] uppercase tracking-widest font-sans">{person.name.charAt(0)}</span>
+                </div>
+              )}
+            </div>
+            
+            {person.logo && (
+              <div class="absolute -bottom-3 -right-3 w-10 h-10 rounded-full bg-white border border-border p-1.5 flex items-center justify-center shadow-sm z-10 opacity-90 group-hover:opacity-100 transition-opacity">
+                <img src={person.logo} alt={`${person.company} logo`} class="w-full h-full object-contain" onerror="this.style.display='none'" />
+              </div>
+            )}
+          </div>
+          
+          <h3 class="text-[15px] font-medium text-ink leading-tight">{person.name}</h3>
+          <p class="text-[10px] font-sans uppercase tracking-[0.05em] text-ink-light mt-1.5 leading-snug px-1">
+            {person.role}
+            {person.company && <span class="block text-ink-lighter mt-0.5">@ {person.company}</span>}
+          </p>
+        </article>
+      ))}
+    </div>
+  </section>
+</Layout>
