@@ -1,0 +1,30 @@
+{
+  "videos": [
+    {
+      "id": "P3wbwwGZKTs",
+      "title": "Will Products Be Built for Psychographic Segments by 2030?"
+    },
+    {
+      "id": "GwedE2_ynec",
+      "title": "What Happens to Creativity When AI Becomes the Default Idea Generator?"
+    },
+    {
+      "id": "1o2GtZhjZus",
+      "title": "Career Paths in 2026: Is the 'Product Analyst' the New PM?"
+    },
+    {
+      "id": "TSDl1FCvgYI",
+      "title": "Beyond Automation: Designing Purposeful Work within the GenAI hype train"
+    }
+  ],
+  "shorts": [
+    {
+      "id": "RJJbNzSOXeo",
+      "title": "Guardrails ground zero"
+    },
+    {
+      "id": "5xU7tsfxvGk",
+      "title": "AI Powered Login Security Risk Based vs Standard Access"
+    }
+  ]
+}

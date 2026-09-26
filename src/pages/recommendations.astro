@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import recsData from '../data/recommendations.json';
+---
+<Layout title="Commendations - Gyanesh Samanta">
+  <section class="mt-4">
+    <header class="mb-10 flex items-center justify-between border-b border-border pb-4">
+      <h1 class="text-2xl font-medium text-ink">Wall of Love</h1>
+      <span class="text-[10px] uppercase tracking-widest font-sans text-ink-light">Colleagues & Mentors</span>
+    </header>
+    
+    <div class="columns-1 md:columns-2 gap-6 space-y-6">
+      {recsData.map((rec) => (
+        <article class="break-inside-avoid border border-border p-5 bg-white rounded-sm shadow-sm">
+          <p class="text-[14px] text-ink leading-[1.65] text-justify mb-5">"{rec.fullText || rec.shortQuote}"</p>
+          
+          <div class="flex items-center gap-3 border-t border-border pt-4">
+            <div class="relative w-10 h-10 shrink-0">
+              {rec.photo ? (
+                <img src={rec.photo} alt={rec.photoAlt} class="w-full h-full object-cover rounded-full border border-border" />
+              ) : (
+                <div class="w-full h-full rounded-full bg-[#EFECE6] border border-border flex items-center justify-center font-sans text-xs text-ink-light">
+                  {rec.name.charAt(0)}
+                </div>
+              )}
+              {rec.companyLogo && (
+                <div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-white border border-border p-0.5 flex items-center justify-center">
+                  <img src={rec.companyLogo} alt="Company logo" class="w-full h-full object-contain mix-blend-multiply" />
+                </div>
+              )}
+            </div>
+            
+            <div class="flex flex-col justify-center">
+              <h3 class="font-semibold text-ink text-[13px] font-sans leading-tight">{rec.name}</h3>
+              <p class="text-[11px] text-ink-light font-sans mt-0.5 leading-tight">
+                {rec.designation}, {rec.company}
+              </p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Layout>

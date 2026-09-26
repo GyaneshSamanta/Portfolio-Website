@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import youtubeData from '../data/youtube.json';
+---
+<Layout title="Podcast - Gyanesh Samanta">
+  <section class="mt-4">
+    <header class="mb-10 flex flex-col sm:flex-row sm:items-center justify-between border-b border-border pb-6 gap-4">
+      <div>
+        <h1 class="text-2xl font-medium text-ink mb-1">Podcast & Media</h1>
+        <span class="text-[10px] uppercase tracking-widest font-sans text-ink-light">YouTube Videos & Shorts</span>
+      </div>
+      <a href="https://www.youtube.com/@GyaneshOnProduct" target="_blank" class="px-5 py-2.5 border border-ink bg-ink text-white font-sans text-[11px] font-medium uppercase tracking-[0.1em] hover:bg-white hover:text-ink transition-colors rounded-sm shadow-sm inline-block text-center sm:text-left">
+        Visit Channel
+      </a>
+    </header>
+
+    <div class="mb-16">
+      <h2 class="text-xl font-medium text-ink mb-6 border-b border-border/50 pb-2">Full Episodes</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {youtubeData.videos.map((video) => (
+          <div class="flex flex-col gap-3">
+            <div class="aspect-video w-full rounded-sm overflow-hidden border border-border bg-black shadow-sm">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src={`https://www.youtube-nocookie.com/embed/${video.id}`} 
+                title={video.title} 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen
+                class="w-full h-full"
+              ></iframe>
+            </div>
+            <h3 class="text-[14px] font-medium text-ink leading-snug">{video.title}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-medium text-ink mb-6 border-b border-border/50 pb-2">Shorts</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {youtubeData.shorts.map((short) => (
+          <div class="flex flex-col gap-3">
+            <div class="aspect-[9/16] w-full rounded-sm overflow-hidden border border-border bg-black shadow-sm">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src={`https://www.youtube-nocookie.com/embed/${short.id}`} 
+                title={short.title} 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen
+                class="w-full h-full"
+              ></iframe>
+            </div>
+            <h3 class="text-[12px] font-medium text-ink leading-snug line-clamp-2">{short.title}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

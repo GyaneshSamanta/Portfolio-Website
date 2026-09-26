@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import journeyData from '../data/journey.json';
+
+const allEvents = [...journeyData].reverse();
+const experience = allEvents.filter(e => e.type === 'role' || e.type === 'internship');
+const education = allEvents.filter(e => e.type === 'education' || e.type === 'milestone');
+---
+
+<Layout title="Career - Gyanesh Samanta">
+  <section class="mt-4">
+    <header class="mb-10 flex items-center justify-between border-b border-border pb-4">
+      <h1 class="text-2xl font-medium text-ink">Professional Experience</h1>
+      <span class="text-[10px] uppercase tracking-widest font-sans text-ink-light">Chronological</span>
+    </header>
+    
+    <div class="space-y-12">
+      {experience.map((item) => (
+        <article class="flex flex-col md:flex-row gap-5 md:gap-8 relative group">
+          <div class="w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-sm border border-border bg-white flex items-center justify-center p-1 shadow-sm overflow-hidden">
+             {item.logo ? (
+               <img src={item.logo} alt={`${item.org} logo`} class="w-full h-full object-contain mix-blend-multiply" />
+             ) : (
+               <div class="text-[10px] font-sans uppercase text-ink-lighter">{item.org.substring(0,3)}</div>
+             )}
+          </div>
+          
+          <div class="flex-grow pt-1">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
+              <h3 class="text-lg font-medium text-ink">{item.title}</h3>
+              <time class="text-[11px] font-sans uppercase tracking-widest text-ink-light mt-1 md:mt-0">{item.dates}</time>
+            </div>
+            
+            <div class="text-sm font-sans text-ink-light mb-3">
+              <span class="font-medium text-ink">{item.org}</span> - {item.location}
+            </div>
+            
+            <p class="text-[15px] text-ink leading-[1.6] text-justify mb-3">
+              {item.description}
+            </p>
+            
+            {item.shipped && (
+              <div class="inline-block text-[13px] bg-black/5 px-2.5 py-1 rounded-sm border border-black/5 mt-1 text-ink-light">
+                <span class="font-medium text-ink">Shipped:</span> {item.shipped}
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+    
+    <header class="mt-20 mb-10 flex items-center justify-between border-b border-border pb-4">
+      <h1 class="text-2xl font-medium text-ink">Education & Milestones</h1>
+    </header>
+    
+    <div class="space-y-10">
+      {education.map((item) => (
+        <article class="flex flex-col md:flex-row gap-5 md:gap-8 relative group">
+          <div class="w-10 h-10 md:w-12 md:h-12 shrink-0 rounded-full border border-border bg-[#F5F2EC] flex items-center justify-center p-1.5 shadow-sm overflow-hidden">
+             {item.logo ? (
+               <img src={item.logo} alt={`${item.org} logo`} class="w-full h-full object-contain mix-blend-multiply rounded-full" />
+             ) : (
+               <div class="w-2 h-2 rounded-full bg-ink-lighter"></div>
+             )}
+          </div>
+          
+          <div class="flex-grow pt-0.5">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-1">
+              <h3 class="text-[17px] font-medium text-ink">{item.title}</h3>
+              <time class="text-[11px] font-sans uppercase tracking-widest text-ink-light mt-1 md:mt-0">{item.dates}</time>
+            </div>
+            <div class="text-sm font-sans text-ink-light mb-2">
+              <span class="font-medium text-ink">{item.org}</span> - {item.location}
+            </div>
+            <p class="text-[14px] text-ink leading-[1.6]">
+              {item.description}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Layout>

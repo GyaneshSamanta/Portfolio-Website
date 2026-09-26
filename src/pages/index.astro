@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import heroData from '../data/hero.json';
+---
+
+<Layout title={`${heroData.nameFirst} ${heroData.nameLast}`}>
+  <section class="mt-4">
+    <div class="flex flex-col sm:flex-row gap-6 md:gap-8 items-start mb-10">
+      <div class="w-24 h-24 sm:w-32 sm:h-32 shrink-0 border border-border p-1 bg-white rounded-sm shadow-sm relative overflow-hidden">
+        <img src={heroData.heroImage} alt={heroData.heroImageAlt} class="w-full h-full object-cover" />
+      </div>
+      
+      <div class="flex-grow pt-2">
+        <h1 class="text-2xl sm:text-3xl font-medium text-ink leading-snug mb-3">
+          {heroData.headline} <span class="italic text-ink-light font-normal">{heroData.headlineHighlight}</span> {heroData.headlineFollowup}
+        </h1>
+        <div class="flex items-center gap-4 text-xs font-sans uppercase tracking-widest text-ink-lighter mt-4">
+          <span class="flex items-center gap-1.5"><span class="w-1 h-1 bg-ink/40 rounded-full"></span> Consumer Behaviour</span>
+          <span class="flex items-center gap-1.5"><span class="w-1 h-1 bg-ink/40 rounded-full"></span> AI</span>
+          <span class="flex items-center gap-1.5"><span class="w-1 h-1 bg-ink/40 rounded-full"></span> Data Storytelling</span>
+        </div>
+      </div>
+    </div>
+    
+    <article class="prose prose-p:text-ink prose-p:leading-[1.65] prose-p:text-[16px] max-w-none text-justify">
+      <p>
+        I think in systems. I build in products. I write and talk about both. I make sense of complex products. Whether it is building B2B experiences that actually scale, or helping teams navigate AI integration without losing sight of the user, that is where I add value.
+      </p>
+      <p>
+        Right now, I am building B2B product experiences at IBM and researching how AI reshapes the PM role. Spoiler: it is not about replacing you, it is about elevating what you build. Previously, I built and scaled products in highly competitive spaces (B2B SaaS, e-commerce, Web3, ed-tech). I have been in the rooms where teams panic about pivots, data quality crises, and AI roadmap chaos.
+      </p>
+      <p>
+        I write about product strategy that sticks, AI in realistic terms (not hype), how behavioral science actually changes user decisions, and case studies from the frontlines. 
+      </p>
+    </article>
+    
+    <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-px bg-border border border-border rounded-sm overflow-hidden shadow-sm">
+      {heroData.badges.map((badge: string) => {
+        const [number, ...textParts] = badge.split(' ');
+        const text = textParts.join(' ');
+        return (
+          <div class="text-center p-6 bg-white flex flex-col justify-center">
+            <div class="text-2xl font-medium text-ink mb-1">{number}</div>
+            <div class="text-[11px] text-ink-light uppercase tracking-widest font-sans">{text}</div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+</Layout>

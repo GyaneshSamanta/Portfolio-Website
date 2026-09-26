@@ -1,0 +1,48 @@
+---
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1).replace(/\/$/, '') || '';
+
+const NAV_ITEMS = [
+  { label: 'Overview', path: '' },
+  { label: 'Career', path: 'career' },
+  { label: 'Research', path: 'research' },
+  { label: 'Podcast', path: 'podcast' },
+  { label: 'Commendations', path: 'recommendations' },
+  { label: 'Writings', path: 'newsletter' },
+  { label: 'Influences', path: 'people' },
+  { label: 'Correspond', path: 'collaborate' },
+];
+---
+
+<header class="w-full max-w-[800px] mx-auto border-b border-border pb-6 flex flex-col gap-6 no-underline-links relative">
+  <div class="flex flex-col md:flex-row justify-between items-baseline gap-2 md:gap-4">
+    <a href="/" class="text-3xl font-serif text-ink tracking-tight font-medium hover:no-underline block">
+      Gyanesh Samanta
+    </a>
+  </div>
+  
+  <nav class="w-full">
+    <ul class="flex flex-wrap items-center gap-x-6 gap-y-4 text-[12px] font-sans tracking-[0.1em] uppercase">
+      {NAV_ITEMS.map((item) => {
+        const isActive = currentPath === item.path;
+        return (
+          <li class="shrink-0">
+            <a 
+              href={`/${item.path}`} 
+              class={`transition-colors py-1 block relative ${
+                isActive 
+                  ? 'text-ink font-semibold' 
+                  : 'text-ink-light hover:text-ink'
+              }`}
+            >
+              {item.label}
+              {isActive && (
+                <span class="absolute -bottom-[6px] left-0 w-full h-[1.5px] bg-ink rounded-full"></span>
+              )}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const influences = [
+  {
+    name: "Sebastian Vettel",
+    role: "Four-time F1 World Champion",
+    image: "/images/influences/sebastian-vettel.png",
+    content: "\"We have to remember these days, because there is no guarantee that they will last forever!\" When Seb came on the team radio after securing his fourth consecutive world championship in India, it was a moment that stuck with me forever. He represents everything I love about Formula 1. Beyond his staggering mechanical empathy and dominance, it is his immense emotional intelligence and reverence for the history of the sport that I admire most. He showed me that you can be a ruthless, elite competitor on the track while remaining deeply empathetic and historically conscious off it. His growth from a fiery young talent to a beloved, thoughtful leader sets the benchmark for how I want to lead teams and build products: with extreme precision, but always with a deep human touch."
+  },
+  {
+    name: "Marco Pierre White",
+    role: "Chef & Restaurateur",
+    image: "/images/influences/marco-pierre-white.png",
+    content: "\"I think when I was my cleverest is when I was ruled by my insecurities and my fears... that is when I was at my best.\" The original enfant terrible of the culinary world. I am fascinated by his story. A fierce blend of his Italian, French, and British heritage, his sheer perseverance in the kitchen shaped modern gastronomy. Marco's philosophy completely rewired how I view pressure. He teaches that mastery is born from obsession, discipline, and harnessing your own fears as fuel. Whenever I face a seemingly impossible product deadline, I think of his kitchen. Absolute discipline, no excuses, and a commitment to perfection that borders on madness. He set the ultimate bar for what it means to truly master your domain."
+  },
+  {
+    name: "Adrian Newey",
+    role: "F1 Engineer & Aerodynamicist",
+    image: "/images/influences/adrian-newey.png",
+    content: "Reading his autobiography, *How to Build a Car*, was a fundamental turning point for me. From his early days sketching cars as a boy and getting expelled from Repton School, to studying aeronautics at Southampton and eventually becoming the greatest aerodynamicist in F1 history, his story is pure inspiration. He literally 'sees' airflow. His incredible achievements remind me that the best products are not built by committee. They are built by visionaries who combine extreme engineering rigor with an intuitive, almost artistic feel for their craft."
+  },
+  {
+    name: "Anthony Mangieri",
+    role: "Pizzaiolo (Una Pizza Napoletana)",
+    image: "/images/influences/anthony-mangieri.png",
+    content: "Chef Anthony's approach to his craft is my ultimate antidote to hustle culture. His steadfast goal of staying at one restaurant, refusing to franchise, and touching every single ball of dough himself just to perfect his craft deeply affects my work ethic. In a tech world obsessed with blitzscaling and mindless growth, he stands as a monument to obsessive focus. It reminds me to care obsessively about the micro details of the single product I am building right now, instead of chasing a hundred mediocre outcomes."
+  },
+  {
+    name: "Marty Cagan",
+    role: "Product Leader & Author",
+    image: "/images/influences/marty-cagan.png",
+    content: "His book *Inspired* is practically my bible. Cagan did not just teach me how to be a product manager; he gave me the exact vocabulary to fight for empowered product teams. He cuts through all the bureaucratic noise and sets the absolute gold standard for how great tech products are actually built."
+  },
+  {
+    name: "Sleep Token",
+    role: "Band",
+    image: "/images/influences/sleep-token.png",
+    content: "My absolute favorite band to listen to. The way they blend crushing technicality with deeply emotional, atmospheric songwriting is unparalleled. When I am in deep work mode, figuring out a complex system architecture, their music is the exact immersive soundscape I need."
+  },
+  {
+    name: "Rilès",
+    role: "Singer & Producer",
+    image: "/images/influences/riles.png",
+    content: "My favorite singer so far. An independent artist who built his entire empire from his bedroom: producing, writing, mixing, and directing everything himself. He is a pure, unfiltered example of zero to one execution. His relentless hustle is something I try to channel every single day."
+  },
+  {
+    name: "Hidetaka Miyazaki",
+    role: "Director, FromSoftware",
+    image: "/images/influences/miyazaki.png",
+    content: "Miyazaki didn't just make games; he changed my entire philosophy on respect. Before FromSoftware, I thought good design meant holding the user's hand. He throws you into brutal, unforgiving worlds and just trusts you to figure it out. That uncompromising faith in the player's intelligence is intoxicating. Every time I think about dumbing down a feature, I ask myself: 'What would Miyazaki do?'"
+  },
+  {
+    name: "Elden Ring",
+    role: "Video Game / Masterpiece",
+    image: "/images/influences/elden-ring.jpg",
+    content: "I have never been so utterly consumed by a world. The moment you step into Limgrave, it is just you and this colossal, terrifying, beautiful landscape. No objective markers, no hand-holding UI, just pure, undiluted curiosity. Finding the underground Siofra River by accident was a transcendent moment for me. It proves that mystery is the ultimate engagement hook."
+  },
+  {
+    name: "Gérald Genta",
+    role: "Legendary Watch Designer",
+    image: "/images/influences/gerald-genta.png",
+    content: "The man was a sheer force of nature. He didn't just design watches; he manifested icons out of thin air. Imagine sketching the Audemars Piguet Royal Oak overnight and casually inventing the luxury steel sports watch. It is that raw, paradigm-shattering audacity that makes me a complete fanboy. He is the ultimate reminder that true design isn't about following trends, it's about forcing the world to catch up to your vision."
+  },
+  {
+    name: "Bloodborne",
+    role: "The Romantic Melancholy of Video Games",
+    image: "/images/influences/bloodborne.jpg",
+    content: "Nothing will ever touch the romantic, gothic melancholy of Yharnam. It is an absolute masterpiece of atmosphere. The fast, aggressive combat forces you to conquer your own fear, while the Lovecraftian horror creeping into the world design is just chef's kiss. It is visceral, haunting, and beautiful. It's not just a game; it is a feeling I chase in every piece of art I consume."
+  }
+];
+---
+<Layout title="Influences - Gyanesh Samanta">
+  <section class="mt-4">
+    <header class="mb-10 flex items-center justify-between border-b border-border pb-4">
+      <h1 class="text-2xl font-medium text-ink">Influences</h1>
+      <span class="text-[10px] uppercase tracking-widest font-sans text-ink-light">Mentors & Idols</span>
+    </header>
+
+    <div class="space-y-12">
+      {influences.map((person) => (
+        <article class="flex flex-col md:flex-row gap-6 md:gap-8 items-start border-b border-border pb-8 last:border-0">
+          <div class="w-20 md:w-28 shrink-0">
+            <div class="aspect-square border border-border p-1 bg-white shadow-sm rounded-sm overflow-hidden">
+              {person.image ? (
+                <img src={person.image} alt={person.name} class="w-full h-full object-cover object-top filter grayscale" onerror="this.style.display='none'" />
+              ) : (
+                <div class="w-full h-full bg-[#EFECE6] flex items-center justify-center">
+                  <span class="text-ink-lighter text-[9px] uppercase tracking-widest font-sans">{person.name.charAt(0)}</span>
+                </div>
+              )}
+            </div>
+          </div>
+          <div class="flex-grow pt-1">
+            <header class="mb-3">
+              <h2 class="text-[20px] font-medium text-ink mb-1">{person.name}</h2>
+              <div class="text-[11px] font-sans uppercase tracking-[0.1em] text-ink-light">{person.role}</div>
+            </header>
+            <p class="text-[16px] text-ink leading-[1.65] text-justify">
+              {person.content}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Layout>

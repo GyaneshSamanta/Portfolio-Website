@@ -1,0 +1,50 @@
+[
+  {
+    "id": "pegasus-spyware",
+    "category": "research",
+    "title": "Pegasus Spyware: An Attack System Artemis",
+    "subtitle": "IEEE ICECAA · Aug 2023",
+    "description": "Co-authored study examining the technical intricacies of Pegasus spyware. Explores propagation methods, zero-day vulnerability exploitation, and HTTPS command-and-control channels. Reveals the elusive nature of Pegasus and the minimal traces it leaves on infected systems.",
+    "coverImage": "/images/papers/pegasus-spyware.svg",
+    "tags": ["Cybersecurity", "Behavioral Analysis", "Research"],
+    "metrics": [
+      { "label": "Venue", "value": "IEEE" },
+      { "label": "Year", "value": "2023" }
+    ],
+    "links": [
+      { "label": "Read on IEEE", "url": "https://ieeexplore.ieee.org/document/10212163" }
+    ]
+  },
+  {
+    "id": "nft-modeling",
+    "category": "research",
+    "title": "NFT Analytical Modelling on Blockchain Data",
+    "subtitle": "IEEE ICNWC · May 2023",
+    "description": "ETL pipelines transforming EVM-node data into a centralized database for analytical modelling. Recommends potential uprising high-value NFTs via SparkSQL visualization and a cross-platform Flutter front-end.",
+    "coverImage": "/images/papers/nft-modeling.svg",
+    "tags": ["Web3", "NFT", "Data Science"],
+    "metrics": [
+      { "label": "Venue", "value": "IEEE" },
+      { "label": "Year", "value": "2023" }
+    ],
+    "links": [
+      { "label": "Read on IEEE", "url": "https://ieeexplore.ieee.org/document/10127294" }
+    ]
+  },
+  {
+    "id": "iot-network",
+    "category": "research",
+    "title": "Dynamic Network Architecture for IoT",
+    "subtitle": "IEEE ICICCS · Dec 2022",
+    "description": "Proposed an architecture for connecting 200+ IoT devices seamlessly without bandwidth degradation. Uses the Arduino Uno WiFi REV2 as a bridge between WiFi and Zigbee communication.",
+    "coverImage": "/images/papers/iot-network.svg",
+    "tags": ["IoT", "Network Architecture", "Research"],
+    "metrics": [
+      { "label": "Venue", "value": "IEEE" },
+      { "label": "Year", "value": "2022" }
+    ],
+    "links": [
+      { "label": "Read on IEEE", "url": "https://ieeexplore.ieee.org/document/9941235/" }
+    ]
+  }
+]

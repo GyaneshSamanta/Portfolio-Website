@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import blogData from '../data/blog.json';
+---
+<Layout title="Gyanesh on Product - Writings">
+  <section class="mt-4">
+    <header class="mb-10 flex flex-col sm:flex-row sm:items-center justify-between border-b border-border pb-6 gap-4">
+      <div>
+        <h1 class="text-2xl font-medium text-ink mb-1">Gyanesh on Product</h1>
+        <span class="text-[10px] uppercase tracking-widest font-sans text-ink-light">Newsletter & Selected Essays</span>
+      </div>
+      <a href="https://www.linkedin.com/newsletters/gyanesh-on-product-6979386586404651008/" target="_blank" class="px-5 py-2.5 border border-ink bg-ink text-white font-sans text-[11px] font-medium uppercase tracking-[0.1em] hover:bg-white hover:text-ink transition-colors rounded-sm shadow-sm inline-block text-center sm:text-left">
+        Subscribe
+      </a>
+    </header>
+    
+    <div class="space-y-8 no-underline-links">
+      {blogData.map((post) => (
+        <article class="group">
+          <a href={post.linkedinUrl} target="_blank" rel="noopener noreferrer" class="block border border-transparent hover:border-border hover:bg-white hover:shadow-sm p-4 -mx-4 rounded-sm transition-all">
+            <header class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+              <h3 class="text-[18px] font-medium text-ink leading-snug group-hover:text-blue-700 transition-colors">{post.title}</h3>
+              <time class="text-[11px] font-sans uppercase tracking-[0.1em] text-ink-light shrink-0 md:ml-4 mt-1 md:mt-0">{post.dateDisplay} &bull; {post.readTime}</time>
+            </header>
+            <p class="text-[15px] text-ink-light leading-[1.6] line-clamp-2">
+              {post.excerpt}
+            </p>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+</Layout>

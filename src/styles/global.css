@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Newsreader", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-paper: #FCFAF8;
+  --color-ink: #2D2D2D;
+  --color-ink-light: #595959;
+  --color-ink-lighter: #8C8C8C;
+  --color-border: #E5E1D8;
+}
+
+@layer base {
+  body {
+    @apply bg-[#EFECE6] text-ink font-serif antialiased;
+    font-feature-settings: "liga" 1, "kern" 1, "onum" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight text-ink;
+  }
+
+  p {
+    @apply leading-[1.65] text-[16px]; /* Increased from 15px for better accessibility */
+  }
+
+  a {
+    @apply text-ink underline decoration-border decoration-1 underline-offset-4 hover:decoration-ink transition-colors;
+  }
+}
+
+.no-underline-links a {
+  @apply no-underline hover:underline decoration-ink decoration-1 underline-offset-4;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border); 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-lighter); 
+}
