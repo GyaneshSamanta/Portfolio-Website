@@ -13,9 +13,9 @@ import workData from '../data/work.json';
       {workData.map((project) => (
         <article class="flex flex-col border border-border p-6 bg-white rounded-sm shadow-sm h-full">
           <div class="text-[10px] font-sans uppercase tracking-[0.1em] text-ink-light mb-2">{project.subtitle}</div>
-          <h3 class="text-[18px] font-medium text-ink leading-snug mb-3 flex-grow">{project.title}</h3>
+          <h3 class="text-[18px] font-medium text-ink leading-snug mb-3">{project.title}</h3>
           
-          <p class="text-[14px] text-ink-light leading-[1.65] text-justify mb-5">
+          <p class="text-[14px] text-ink-light leading-[1.65] text-justify mb-5 flex-grow">
             {project.description}
           </p>
           
